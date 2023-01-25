@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230125194833_InitialCreate")]
+    [Migration("20230125204138_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -855,7 +855,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TopicId")
+                    b.Property<int?>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId");
@@ -1129,9 +1129,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.Topic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TopicId");
 
                     b.Navigation("Topic");
                 });

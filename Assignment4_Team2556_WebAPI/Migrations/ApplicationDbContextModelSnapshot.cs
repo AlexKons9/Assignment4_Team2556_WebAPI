@@ -852,7 +852,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TopicId")
+                    b.Property<int?>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId");
@@ -1126,9 +1126,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.Topic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TopicId");
 
                     b.Navigation("Topic");
                 });

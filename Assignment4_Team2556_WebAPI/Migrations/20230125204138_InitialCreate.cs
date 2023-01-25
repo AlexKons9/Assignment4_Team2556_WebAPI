@@ -140,7 +140,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                     QuestionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DescriptionStem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TopicId = table.Column<int>(type: "int", nullable: false)
+                    TopicId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,8 +149,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         name: "FK_Questions_Topics_TopicId",
                         column: x => x.TopicId,
                         principalTable: "Topics",
-                        principalColumn: "TopicId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TopicId");
                 });
 
             migrationBuilder.CreateTable(

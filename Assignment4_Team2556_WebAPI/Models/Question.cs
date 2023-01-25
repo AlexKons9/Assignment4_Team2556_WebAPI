@@ -10,7 +10,7 @@ namespace Assignment4_Team2556_WebAPI.Models
         [DataType(DataType.MultilineText)]
    
         public string DescriptionStem { get; set; } //HTML
-        public int TopicId { get; set; }
+        public int? TopicId { get; set; }
         public Topic? Topic { get; set; }
         //public string CorrectAnswer { get; set; }
         public virtual IList<Option>? Options { get; set; }
