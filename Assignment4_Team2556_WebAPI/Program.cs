@@ -1,5 +1,9 @@
 using Assignment4_Team2556_WebAPI.Data;
+using Assignment4_Team2556_WebAPI.Data.Repositories;
+using Assignment4_Team2556_WebAPI.Models;
+using Assignment4_Team2556_WebAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Assignment4_Team2556_WebAPI
 {
@@ -11,7 +15,7 @@ namespace Assignment4_Team2556_WebAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -19,7 +23,22 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddRazorPages();
-            builder.Services.AddControllers();
+
+            builder.Services.AddScoped<ICandidateExamService, CandidateExamService>();
+            builder.Services.AddScoped<ICandidateExamRepository, CandidateExamRepository>();
+            builder.Services.AddScoped<ICandidateExamAnswerService, CandidateExamAnswerService>();
+            builder.Services.AddScoped<ICandidateExamAnswerRepository, CandidateExamAnswerRepository>();
+
+            builder.Services.AddScoped<IGenericRepository<Option>, OptionsRepository>();
+            builder.Services.AddScoped<IOptionsService, OptionsService>();
+            builder.Services.AddScoped<IGenericRepository<Question>, QuestionsRepository>();
+            builder.Services.AddScoped<IQuestionsService, QuestionsService>();
+            builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
+            builder.Services.AddScoped<ITopicsService, TopicsService>();
+
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); 
+            //builder.Services.AddControllers();
 
             var app = builder.Build();
 

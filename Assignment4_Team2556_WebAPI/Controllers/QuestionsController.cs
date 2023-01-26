@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
+using Assignment4_Team2556_WebAPI.Services;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -14,35 +15,42 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        private readonly IQuestionsService _questionsService;
+        private readonly ITopicsService _topicsService;
 
-        public QuestionsController(ApplicationDbContext context)
+        public QuestionsController(IQuestionsService questionsService, ITopicsService topicsService) //, ApplicationDbContext context
         {
-            _context = context;
+            //_context = context;
+            _questionsService = questionsService;
+            _topicsService = topicsService;
         }
 
         // GET: api/Questions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
-            return await _context.Questions.ToListAsync();
+            //return await _context.Questions.ToListAsync();
+            var questions = await _questionsService.GetAllAsync();
+            return Ok(questions);
         }
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
-            var question = await _context.Questions.FindAsync(id);
+            //var question = await _context.Questions.FindAsync(id);
+            var question = await _questionsService.GetAsync(id);
 
             if (question == null)
             {
                 return NotFound();
             }
 
-            return question;
+            return Ok(question);
         }
 
-        // PUT: api/Questions/5
+        // PUT: api/Questions/5  --> UPDATE
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion(int id, Question question)
@@ -52,11 +60,15 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(question).State = EntityState.Modified;
+            //_context.Entry(question).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
+                TopicsService tService = _topicsService as TopicsService;
+                var topic = await tService.GetAsync(question.TopicId);
+                question.Topic = topic;
+                await _questionsService.AddOrUpdateAsync(question);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,14 +85,19 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Questions
+
+        //FRONTEND --> Create Create FORM
+        //!!!!!CREATE A GET METHOD WHICH DISPLAYS A FORM TO BE USED TO FILL IN THE QUESTION OBJECT FOR THE HTTPPOST METHOD BELOW!!!!!
+
+
+        // POST: api/Questions --> CREATE
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Question>> PostQuestion(Question question)
         {
-            _context.Questions.Add(question);
-            await _context.SaveChangesAsync();
-
+            TopicsService tservice = _topicsService as TopicsService;
+            question.Topic = await tservice.GetAsync(question.TopicId);
+            await _questionsService.AddOrUpdateAsync(question);
             return CreatedAtAction("GetQuestion", new { id = question.QuestionId }, question);
         }
 
@@ -88,21 +105,29 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
-            var question = await _context.Questions.FindAsync(id);
+            //var question = await _context.Questions.FindAsync(id);
+            var question = await _questionsService.GetAsync(id);
             if (question == null)
             {
                 return NotFound();
             }
 
-            _context.Questions.Remove(question);
-            await _context.SaveChangesAsync();
+            //_context.Questions.Remove(question);
+            //await _context.SaveChangesAsync();
+            await _questionsService.RemoveAsync(question);
 
             return NoContent();
         }
 
         private bool QuestionExists(int id)
         {
-            return _context.Questions.Any(e => e.QuestionId == id);
+            //return _context.Questions.Any(e => e.QuestionId == id);
+            if (_questionsService.GetAsync(id) != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
