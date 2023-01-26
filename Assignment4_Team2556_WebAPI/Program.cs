@@ -37,8 +37,19 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<ITopicsService, TopicsService>();
 
             builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); 
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             //builder.Services.AddControllers();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader();
+                    });
+            });
 
             var app = builder.Build();
 
@@ -53,6 +64,7 @@ namespace Assignment4_Team2556_WebAPI
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
 
