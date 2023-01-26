@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import { Link } from "react-router-dom";
+import CreateQuestion from "./CreateQuestionForm";
 
 function QuestionsList() {
     const [questions, setQuestions] = useState([]);
@@ -17,14 +19,15 @@ function QuestionsList() {
         fetchData();
     }, []);
 
-
+    console.log(questions);
 
     return (
         <>
             <h1>Index</h1>
 
             <p>
-                <button className='btn btn-primary'>Create New</button>
+                {/* <button className='btn btn-primary'>Create New</button> */}
+                <Link className='btn btn-primary' to="CreateQuestionForm">Create New</Link>
             </p>
             <table className="table">
                 <thead>
