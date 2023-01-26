@@ -1,13 +1,15 @@
 // import logo from './logo.svg';
 import './App.css';
-import QuestionsList from './components/QuestionsList';
+import NavBar from './components/NavBar';
+import AdminUI from './components/AdminUI';
 
 function App() {
-  return (
-    <div>
-      <QuestionsList />
-    </div>
-  );
+    return (
+        <div>
+            <NavBar/>
+            <AdminUI />
+        </div>
+    );
 }
 
 export default App;
