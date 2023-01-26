@@ -2,58 +2,6 @@
 import axios from "axios";
 
 function CreateQuestionForm() {
-    // const [question, setQuestion] = useState({ descriptionStem: "", topicId: "" });
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         console.log(question)
-    //         await axios.post("https://localhost:7015/api/Questions", question);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setQuestion({ ...question, [name]: value });
-    //     //setQuestion({ ...question, [e.target.name]: e.target.value });
-    //     //console.log(question);
-    // }
-
-    // const [topics, setTopics] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get("https://localhost:7015/api/Topics");
-    //             setTopics(response.data);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-
-    // console.log(topics);
-
-    // return (
-    //     <>
-    //         <form onSubmit={handleSubmit}>
-    //             <label>Description:</label>
-    //             <input type="text" name="descriptionStem" value={question.descriptionStem} onChange={handleChange} />
-    //             <label>Topics:</label>
-    //             <select type="text" name="topicId" value={question.topicId} onChange={handleChange}>
-    //             {topics.map(topic => (
-    //                 <option key={topic.topicId} value={topic.topicId}>{topic.topicDescription}</option>
-    //             ))}
-    //             </select>
-
-    //             <button type="submit">Create</button>
-    //         </form>
-    //         <p>Hello</p>
-    //     </>
-    // );
     const [question, setQuestion] = useState({ descriptionStem: "", topicId: "" });
     const [topics, setTopics] = useState([]);
     useEffect(() => {
