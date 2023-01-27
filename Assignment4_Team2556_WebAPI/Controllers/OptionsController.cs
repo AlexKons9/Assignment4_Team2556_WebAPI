@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
+using Assignment4_Team2556_WebAPI.Services;
+using Assignment4_Team2556_WebAPI.Models.DTOModels;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -15,32 +17,36 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     public class OptionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IOptionsService _optionsService;
+        private readonly IQuestionsService _questionsService;
 
-        public OptionsController(ApplicationDbContext context)
+        public OptionsController(IOptionsService serviceOptions, IQuestionsService questionsService,ApplicationDbContext context)
         {
-            _context = context;
+            _context=context;
+            _optionsService = serviceOptions;
+            _questionsService = questionsService;
         }
 
-        // GET: api/Options
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Option>>> GetOptions()
-        {
-            return await _context.Options.ToListAsync();
-        }
+        //// GET: api/Options
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Option>>> GetOptions()
+        //{
+        //    return await _context.Options.ToListAsync();
+        //}
 
-        // GET: api/Options/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Option>> GetOption(int id)
-        {
-            var option = await _context.Options.FindAsync(id);
+        //// GET: api/Options/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Option>> GetOption(int id)
+        //{
+        //    var option = await _context.Options.FindAsync(id);
 
-            if (option == null)
-            {
-                return NotFound();
-            }
+        //    if (option == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return option;
-        }
+        //    return option;
+        //}
 
         // PUT: api/Options/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -76,12 +82,30 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/Options
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Option>> PostOption(Option option)
+        public async Task<ActionResult<OptionListDTO>> PostOption(OptionListDTO options)
         {
-            _context.Options.Add(option);
-            await _context.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                var question = await _questionsService.GetAsync(options.QuestionId);
+                //await _context.Entry(question).Reference( x => x.Topic).LoadAsync(); 
 
-            return CreatedAtAction("GetOption", new { id = option.OptionId }, option);
+                IList<Option> newlistOfOptions = new List<Option>()
+                {
+                new Option {},
+                new Option {},
+                new Option {},
+                new Option {}
+                };
+
+                var service = _optionsService as OptionsService;
+                // This method takes all values from dto and passes it to List<Option>
+                var listOfOptions = service.GetOptionsValuesFromDTOModel(options, newlistOfOptions, question);
+                await service.AddOrUpdateAsync(listOfOptions);
+
+                return  CreatedAtAction("GetQuestion", new {});
+            }
+
+            return Ok();
         }
 
         // DELETE: api/Options/5

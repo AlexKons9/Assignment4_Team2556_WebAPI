@@ -23,7 +23,7 @@ function QuestionsList() {
 
     return (
         <>
-            <h1>Index</h1>
+            <h1>Question List</h1>
 
             <p>
                 {/* <button className='btn btn-primary'>Create New</button> */}
