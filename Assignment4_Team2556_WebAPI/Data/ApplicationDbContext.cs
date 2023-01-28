@@ -1,10 +1,11 @@
 ﻿using Assignment4_Team2556_WebAPI.Data.ConfigurationSeed;
 using Assignment4_Team2556_WebAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment4_Team2556_WebAPI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions options)
            : base(options)
@@ -42,6 +43,7 @@ namespace Assignment4_Team2556_WebAPI.Data
             modelBuilder.ApplyConfiguration(new QuestionsSeed());
             modelBuilder.ApplyConfiguration(new OptionsSeed());
             modelBuilder.ApplyConfiguration(new ExamQuestionsSeed());
+            modelBuilder.ApplyConfiguration(new RoleSeed());
 
             base.OnModelCreating(modelBuilder);
         }

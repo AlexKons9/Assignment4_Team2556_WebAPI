@@ -23,6 +23,7 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddRazorPages();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.AddScoped<ICandidateExamService, CandidateExamService>();
             builder.Services.AddScoped<ICandidateExamRepository, CandidateExamRepository>();
@@ -35,10 +36,7 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IQuestionsService, QuestionsService>();
             builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
             builder.Services.AddScoped<ITopicsService, TopicsService>();
-
-            builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-            //builder.Services.AddControllers();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             builder.Services.AddCors(options =>
             {
@@ -50,6 +48,15 @@ namespace Assignment4_Team2556_WebAPI
                         .AllowAnyHeader();
                     });
             });
+
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
+
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            //builder.Services.AddControllers();
+
+
 
             var app = builder.Build();
 
