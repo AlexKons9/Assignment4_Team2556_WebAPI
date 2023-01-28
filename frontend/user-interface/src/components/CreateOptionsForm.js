@@ -1,21 +1,29 @@
 ﻿import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CreateOptionsForm()
 { 
+    // function that takes questionId from CreateQuestionsForm and stores it
+    // to the optionsDTO.questionId
+    const location = useLocation();
+    // function that navigate to another js view (used in handleSubmit function)
+    const navigate = useNavigate(); 
     const [optionDTO, setOptionDTO] = useState
-        ({ questionId: useParams(), description1: "", description2: "", description3: "", description4: "", correctAnswer: "" });
+        ({ questionId: location.state.questionId , description1: "", description2: "", description3: "", description4: "", correctAnswer: "" });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setOptionDTO({ ...optionDTO, [name]: value });
     };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             await axios.post("https://localhost:7015/api/Options", optionDTO);
+            // console.log(optionDTO);
             alert("Options created successfully!");
+            navigate('/AdminUI');
         } catch (error) {
             console.error(error);
             alert("Error creating options");
@@ -23,7 +31,7 @@ function CreateOptionsForm()
     };
         return (
             <>
-            <form>
+            <form onSubmit={handleSubmit}>
                     <input type="hidden" name="questionId" value={optionDTO.questionId} />
                 <div className="form-group">
                     <label>Option 1</label>
@@ -44,6 +52,7 @@ function CreateOptionsForm()
                 <div className="form-group">
                     <label>Correct Answer</label>
                     <select className="form-control" name="correctAnswer" value={optionDTO.correctAnswer} onChange={handleChange}>
+                        <option value="" disabled>Select Correct Answer</option>
                         <option value={1}>Option 1</option>
                         <option value={2}>Option 2</option>
                         <option value={3}>Option 3</option>

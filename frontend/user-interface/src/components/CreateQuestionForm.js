@@ -1,9 +1,12 @@
 ﻿import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CreateQuestionForm() {
-    const [question, setQuestion] = useState({ descriptionStem: "", topicId: "" });
+    const [question, setQuestion] = useState({descriptionStem: "", topicId: "" });
     const [topics, setTopics] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchTopics = async () => {
             try {
@@ -15,17 +18,22 @@ function CreateQuestionForm() {
         };
         fetchTopics();
     }, []);
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setQuestion({ ...question, [name]: value });
     };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log(question)
-            await axios.post("https://localhost:7015/api/Questions", question);
+            const response = await axios.post("https://localhost:7015/api/Questions", question);
             alert("Question created successfully!");
-        } catch (error) {
+            const questionId = response.data.questionId;
+            // console.log(questionId);
+            navigate('/AdminUI/CreateOptionsForm', {state: { questionId: questionId}});
+        } 
+        catch (error) {
             console.error(error);
             alert("Error creating question");
         }

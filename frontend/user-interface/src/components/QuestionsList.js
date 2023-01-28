@@ -19,7 +19,6 @@ function QuestionsList() {
         fetchData();
     }, []);
 
-    console.log(questions);
 
     return (
         <>
