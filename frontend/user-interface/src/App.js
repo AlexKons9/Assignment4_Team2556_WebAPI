@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import CreateQuestionForm from './components/CreateQuestionForm';
+import CreateOptionsForm from './components/CreateOptionsForm';
 
 import './App.css';
 import NavBar from './components/NavBar';
@@ -18,6 +19,7 @@ function App() {
                     <Route path="Home" element={<Home/> } />
                     <Route exact path="AdminUI" element={<AdminUI/>} />
                     <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm/>} />
+                    <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm/>} />
                 </Routes>
             </main>
         </BrowserRouter>
