@@ -22,6 +22,9 @@ function NavBar() {
                             <li className="nav-item">
                                 <a className="nav-link text-light">Candidate UI</a>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link text-light" to="Register" >Register</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

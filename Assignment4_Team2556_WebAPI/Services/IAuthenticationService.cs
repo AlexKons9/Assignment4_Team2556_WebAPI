@@ -6,5 +6,7 @@ namespace Assignment4_Team2556_WebAPI.Services
     public interface IAuthenticationService
     {
         Task<IdentityResult> RegisterUser(UserForRegistrationDTO userForRegistration);
+        Task<bool> ValidateUser(UserForAuthenticationDTO userForAuth);
+        Task<string> CreateToken();
     }
 }

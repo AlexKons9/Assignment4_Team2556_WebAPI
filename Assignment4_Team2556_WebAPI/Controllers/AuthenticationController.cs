@@ -33,6 +33,19 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return StatusCode(201);
         }
 
+        [HttpPost("login")]
+
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDTO user)
+        {
+            if(!await _service.ValidateUser(user))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new { Token = await _service.CreateToken() });
+        }
+
+
         //[HttpPost("login")]
         ////[ServiceFilter(typeof(ValidationFilterAttribute))]
         //public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
