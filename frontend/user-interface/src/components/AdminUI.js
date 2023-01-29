@@ -1,4 +1,4 @@
-﻿import QuestionsList from './QuestionsList';
+﻿import QuestionsList from './Question/QuestionsList';
 
 function AdminUI() {
     return (

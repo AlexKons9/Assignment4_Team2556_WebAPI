@@ -1,8 +1,10 @@
 // import logo from './logo.svg';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import CreateQuestionForm from './components/CreateQuestionForm';
-import CreateOptionsForm from './components/CreateOptionsForm';
-import DetailsQuestion from './components/DetailsQuestion';
+import CreateQuestionForm from './components/Question/CreateQuestionForm';
+import EditQuestionForm from './components/Question/EditQuestionForm';
+import DetailsQuestion from './components/Question/DetailsQuestion';
+import CreateOptionsForm from './components/Option/CreateOptionsForm';
+import EditOptionsForm from './components/Option/EditOptionsForm';
 import './App.css';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -19,8 +21,10 @@ function App() {
                     <Route path="Home" element={<Home/> } />
                     <Route exact path="AdminUI" element={<AdminUI/>} />
                     <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm/>} />
+                    <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm/>} />
                     <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion/>} />
                     <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm/>} />
+                    <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm/>} />
                 </Routes>
             </main>
         </BrowserRouter>

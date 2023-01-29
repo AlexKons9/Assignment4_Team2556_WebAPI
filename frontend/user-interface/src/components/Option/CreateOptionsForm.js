@@ -32,7 +32,7 @@ function CreateOptionsForm()
         return (
             <>
             <form onSubmit={handleSubmit}>
-                    <input type="hidden" name="questionId" value={optionDTO.questionId} />
+                <input type="hidden" name="questionId" value={optionDTO.questionId} />
                 <div className="form-group">
                     <label>Option 1</label>
                     <input className="form-control" type="text" name="description1" value={optionDTO.description1} onChange={handleChange} />

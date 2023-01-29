@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import CreateQuestion from "./CreateQuestionForm";
 import DeleteQuestion from "./DeleteQuestion";
 
 function QuestionsList() {
@@ -56,6 +55,18 @@ function QuestionsList() {
         }
     }
 
+    const handleEdit = async (questionId) =>  {
+        try {
+            const response = await axios.get(`https://localhost:7015/api/Questions/${questionId}`);
+            const question = response.data;
+            console.log(question);
+            navigate('/AdminUI/EditQuestionForm', {state: { question: question}});
+        } catch (error) {
+            console.error(error);
+            alert("Error the Question requested doesn't exist.");
+        }
+    }
+
 
     return (
         <>
@@ -88,12 +99,9 @@ function QuestionsList() {
                                 {(question).descriptionStem}
                             </td>
                             <td>
-                                <button className='btn btn-secondary' >Edit</button> | 
+                                <button className='btn btn-secondary' onClick={() => handleEdit(question.questionId)}>Edit</button> | 
                                 <button className='btn btn-success' onClick={() => handleDetails(question.questionId)}>Details</button> | 
-                                <button className='btn btn-danger' >Delete</button>
-                                <button className='btn btn-secondary'>Edit</button> | 
-                                <button className='btn btn-success' >Details</button> | 
-                                <button className='btn btn-danger' onClick={()=>{showConfirmPopupHandler(question.questionId);}} >Delete</button>
+                                <button className='btn btn-danger' onClick={()=>{showConfirmPopupHandler(question.questionId)}} >Delete</button>
                             </td>
                         </tr>
                     ))} 

@@ -1,11 +1,12 @@
-﻿import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import {  useEffect, useState } from "react";
 import axios from "axios";
 
-function CreateQuestionForm() {
-    const [question, setQuestion] = useState({descriptionStem: "", topicId: "" });
-    const [topics, setTopics] = useState([]);
+function EditQuestionForm() {
+    const location = useLocation();
     const navigate = useNavigate();
+    const [topics, setTopics] = useState([]);
+    const [question, setQuestion] = useState({questionId: location.state.question.questionId, descriptionStem: location.state.question.descriptionStem, topicId: location.state.question.topicId});
 
     useEffect(() => {
         const fetchTopics = async () => {
@@ -27,20 +28,21 @@ function CreateQuestionForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("https://localhost:7015/api/Questions", question);
+            console.log(question);
+            const response = await axios.put(`https://localhost:7015/api/Questions/${question.questionId}`, question);
             alert("Question created successfully!");
-            const questionId = response.data.questionId;
-            // console.log(questionId);
-            navigate('/AdminUI/CreateOptionsForm', {state: { questionId: questionId}});
+            navigate('/AdminUI/EditOptionsForm', {state: { questionId: question.questionId}});
         } 
         catch (error) {
             console.error(error);
-            alert("Error creating question");
+            alert("Error editing question");
         }
     };
+
     return (
         <>
             <form onSubmit={handleSubmit}>
+                <input type="hidden" name="questionId" value={question.questionId} />
                 <div className="form-group">
                     <label htmlFor="descriptionStem">Description Stem</label>
                     <input
@@ -66,7 +68,8 @@ function CreateQuestionForm() {
                     </select>
                 </div>
                 <button type="submit" className="btn btn-primary">Create</button></form>
-        </>);
+        </>
+    );
 }
 
-export default CreateQuestionForm;
+export default EditQuestionForm;

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 function DetailsQuestion() {
   var count = 1;
@@ -35,6 +35,10 @@ function DetailsQuestion() {
             <dd>
                 Option {correctAnswerIndex + 1}
             </dd>
+          </div>
+
+          <div>
+            <Link className='btn btn-secondary' to="../AdminUI">Back to List</Link>
           </div>
 
       </div>
