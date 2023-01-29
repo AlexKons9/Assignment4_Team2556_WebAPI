@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import CreateQuestionForm from './components/CreateQuestionForm';
 import CreateOptionsForm from './components/CreateOptionsForm';
 import Register from './components/Register'
+import Login from './components/Login'
 
 import './App.css';
 import NavBar from './components/NavBar';
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm/>} />
                     <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm/>} />
                     <Route exact path="Register" element={<Register/>} />
+                    <Route exact path="Login" element={<Login/>} />
                 </Routes>
             </main>
         </BrowserRouter>

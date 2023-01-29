@@ -29,7 +29,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Questions
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
             //return await _context.Questions.ToListAsync();
