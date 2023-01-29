@@ -3,9 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CreateQuestion from "./CreateQuestionForm";
+import DeleteQuestion from "./DeleteQuestion";
 
 function QuestionsList() {
     const [questions, setQuestions] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,9 +22,37 @@ function QuestionsList() {
         fetchData();
     }, []);
 
+    const showConfirmPopupHandler=(id) =>{
+        setShowModal(true);
+        setItemToDelete(id);
+        console.log(id);
+        
+    }
+    const closeConfirmPopupHandler = ()=>
+    {
+        setShowModal(false);
+        setItemToDelete(0);
+    }
+
+    const deleteConfirmHandler = async() => 
+    {
+        await axios.delete(`https://localhost:7015/api/Questions/${itemToDelete}`)
+        .then((response)=>{
+            setQuestions((existingData)=> {return existingData.filter(_=>_.questionId !==itemToDelete)});  
+            setItemToDelete(0);
+            setShowModal(false);
+        });
+    }
 
     return (
         <>
+        <DeleteQuestion showModal={showModal}
+        title ="Delete Confirmation!"
+        body ="Are you sure to delete this Question?"
+        closeConfirmPopupHandler ={closeConfirmPopupHandler}
+        deleteConfirmHandler ={deleteConfirmHandler}
+        >
+        </DeleteQuestion>
             <h1>Question List</h1>
 
             <p>
@@ -46,10 +77,10 @@ function QuestionsList() {
                             <td>
                                 <button className='btn btn-secondary'>Edit</button> | 
                                 <button className='btn btn-success' >Details</button> | 
-                                <button className='btn btn-danger' >Delete</button>
+                                <button className='btn btn-danger' onClick={()=>{showConfirmPopupHandler(question.questionId);}} >Delete</button>
                             </td>
                         </tr>
-                    ))}
+                    ))} 
                 </tbody>
             </table>
         </>

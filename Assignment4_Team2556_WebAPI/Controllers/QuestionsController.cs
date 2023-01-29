@@ -116,7 +116,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             //await _context.SaveChangesAsync();
             await _questionsService.RemoveAsync(question);
 
-            return NoContent();
+            return Ok();
         }
 
         private bool QuestionExists(int id)

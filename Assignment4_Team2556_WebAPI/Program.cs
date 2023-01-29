@@ -47,6 +47,7 @@ namespace Assignment4_Team2556_WebAPI
                     {
                         policy
                         .AllowAnyOrigin()
+                        .AllowAnyMethod()
                         .AllowAnyHeader();
                     });
             });
