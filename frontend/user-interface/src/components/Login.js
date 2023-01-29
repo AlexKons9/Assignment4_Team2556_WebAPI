@@ -1,18 +1,22 @@
 import axios from 'axios';
-import { useRef, useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect } from 'react';
+import useAuth from '../hooks/useAuth'
+import { Link, useNavigate,  useLocation} from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -35,13 +39,14 @@ const Login = () => {
             //console.log(JSON.stringify(response?.data.token));
             const accessToken = response?.data?.token;
             var decoded = jwt_decode(accessToken);
-            const roles = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+            const roles = []
+            roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
             console.log(roles);
 
             setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
-            setSuccess(true);
+            navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
