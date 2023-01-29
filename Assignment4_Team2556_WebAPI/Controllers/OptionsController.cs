@@ -108,21 +108,21 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok();
         }
 
-        // DELETE: api/Options/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOption(int id)
-        {
-            var option = await _context.Options.FindAsync(id);
-            if (option == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Options/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteOption(int id)
+        //{
+        //    var option = await _context.Options.FindAsync(id);
+        //    if (option == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Options.Remove(option);
-            await _context.SaveChangesAsync();
+        //    _context.Options.Remove(option);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         private bool OptionExists(int id)
         {
