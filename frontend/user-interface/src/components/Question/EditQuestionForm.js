@@ -28,10 +28,12 @@ function EditQuestionForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log(question);
-            const response = await axios.put(`https://localhost:7015/api/Questions/${question.questionId}`, question);
-            alert("Question created successfully!");
-            navigate('/AdminUI/EditOptionsForm', {state: { questionId: question.questionId}});
+            await axios.put(`https://localhost:7015/api/Questions/${question.questionId}`, question);
+            alert("Question edited successfully!");
+            var response = await axios.get(`https://localhost:7015/api/Options/${question.questionId}`);
+            var options = response.data;
+            console.log(options);
+            navigate('/AdminUI/EditOptionsForm', {state: { options: options}});
         } 
         catch (error) {
             console.error(error);
@@ -67,7 +69,7 @@ function EditQuestionForm() {
                         {topics.map((topic) => (<option key={topic.topicId} value={topic.topicId}>{topic.topicDescription}</option>))}
                     </select>
                 </div>
-                <button type="submit" className="btn btn-primary">Create</button></form>
+                <button type="submit" className="btn btn-primary">Edit</button></form>
         </>
     );
 }

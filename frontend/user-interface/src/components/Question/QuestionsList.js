@@ -59,7 +59,6 @@ function QuestionsList() {
         try {
             const response = await axios.get(`https://localhost:7015/api/Questions/${questionId}`);
             const question = response.data;
-            console.log(question);
             navigate('/AdminUI/EditQuestionForm', {state: { question: question}});
         } catch (error) {
             console.error(error);

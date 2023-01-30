@@ -16,68 +16,43 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     [ApiController]
     public class OptionsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IOptionsService _optionsService;
         private readonly IQuestionsService _questionsService;
 
-        public OptionsController(IOptionsService serviceOptions, IQuestionsService questionsService,ApplicationDbContext context)
+        public OptionsController(IOptionsService serviceOptions, IQuestionsService questionsService)
         {
-            _context=context;
             _optionsService = serviceOptions;
             _questionsService = questionsService;
         }
 
-        //// GET: api/Options
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Option>>> GetOptions()
-        //{
-        //    return await _context.Options.ToListAsync();
-        //}
-
-        //// GET: api/Options/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Option>> GetOption(int id)
-        //{
-        //    var option = await _context.Options.FindAsync(id);
-
-        //    if (option == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return option;
-        //}
-
-        // PUT: api/Options/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOption(int id, Option option)
+        // GET: api/Options
+        [HttpGet]
+        public async Task<IList<Option>> GetAllOptions()
         {
-            if (id != option.OptionId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(option).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OptionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return await _optionsService.GetAllAsync();
         }
+
+        // GET: api/Options/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IList <Option>>> GetQuestionsOptions(int id)
+        {
+            var service = _optionsService as OptionsService;
+
+            if (id == null || _optionsService.GetAllAsync == null)
+            {
+                return NotFound();
+            }
+
+            List<Option> options = await service.GetAllQuestionOptionsAsync(id) as List<Option>;
+
+            if (options == null)
+            {
+                return NotFound();
+            }
+
+            return options;
+        }
+
 
         // POST: api/Options
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -102,31 +77,53 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 var listOfOptions = service.GetOptionsValuesFromDTOModel(options, newlistOfOptions, question);
                 await service.AddOrUpdateAsync(listOfOptions);
 
-                return  CreatedAtAction("GetQuestion", new {});
+                return CreatedAtAction("GetQuestion", new { });
             }
 
             return Ok();
         }
 
-        // DELETE: api/Options/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOption(int id)
+
+        // PUT: api/Options/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut]
+        public async Task<IActionResult> PutOptions(OptionListDTO optionsDTO)
         {
-            var option = await _context.Options.FindAsync(id);
-            if (option == null)
+            if(ModelState.IsValid)
             {
-                return NotFound();
+                try
+                {
+                    var options = await _optionsService.GetAllQuestionOptionsAsync(optionsDTO.QuestionId);
+                    var question = await _questionsService.GetAsync(optionsDTO.QuestionId);
+                    var service = _optionsService as OptionsService;
+                    var listOfOptions = service.GetOptionsValuesFromDTOModel(optionsDTO, options, question);
+                    await service.AddOrUpdateAsync(listOfOptions);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await OptionsExists(optionsDTO.QuestionId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return NoContent();
             }
-
-            _context.Options.Remove(option);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok();
         }
 
-        private bool OptionExists(int id)
+
+        private async Task<bool> OptionsExists(int id)
         {
-            return _context.Options.Any(e => e.OptionId == id);
+            var options = await _optionsService.GetAllQuestionOptionsAsync(id);
+            if (options != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

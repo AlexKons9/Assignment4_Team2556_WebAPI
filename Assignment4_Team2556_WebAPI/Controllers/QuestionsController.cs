@@ -82,7 +82,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(question);
         }
 
 
