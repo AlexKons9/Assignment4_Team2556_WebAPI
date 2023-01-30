@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import React from 'react';
+import htmlParse from 'html-react-parser';
 
 function DetailsQuestion() {
   var count = 1;
@@ -17,7 +18,7 @@ function DetailsQuestion() {
         <hr />
         <dl className="row">
           <dt className="col-sm-2">Description Stem</dt>
-          <dd className="col-sm-10"><React.Fragment>{question.descriptionStem}</React.Fragment></dd>
+          <dd className="col-sm-10">{htmlParse(question.descriptionStem)}</dd>
           <dt className="col-sm-2">Topic</dt>
           <dd className="col-sm-10">{question.topic.topicDescription}</dd>
         </dl>
@@ -27,7 +28,7 @@ function DetailsQuestion() {
         {question.options.map((option) => (
             <div key={option.optionId}>
               <dt>Option {count++}</dt>
-              <dd>{option.description}</dd>
+              <dd>{htmlParse(option.description)}</dd>
             </div>
         ))}
 
