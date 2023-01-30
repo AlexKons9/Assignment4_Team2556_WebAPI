@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import {  useEffect, useState } from "react";
 import axios from "axios";
+import MyCKEditor from '../MyCKEditor';
 
 function EditQuestionForm() {
     const location = useLocation();
@@ -25,6 +26,11 @@ function EditQuestionForm() {
         setQuestion({ ...question, [name]: value });
     };
 
+    const myCKEditorHandleChange = (event,editor) => {
+        const data = editor.getData();
+        setQuestion({ ...question, descriptionStem: data });
+      };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -47,13 +53,13 @@ function EditQuestionForm() {
                 <input type="hidden" name="questionId" value={question.questionId} />
                 <div className="form-group">
                     <label htmlFor="descriptionStem">Description Stem</label>
-                    <input
+                    <MyCKEditor
                         type="text"
                         className="form-control"
                         id="descriptionStem"
                         name="descriptionStem"
                         value={question.descriptionStem}
-                        onChange={handleChange}
+                        onChange={myCKEditorHandleChange}
                         required />
                 </div>
                 <div className="form-group">

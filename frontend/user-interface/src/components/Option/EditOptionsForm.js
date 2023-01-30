@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import MyCKEditor from '../MyCKEditor';
 
 function EditOptionsForm() {
   const location = useLocation();
@@ -32,6 +33,27 @@ function EditOptionsForm() {
     setOptionDTO({ ...optionDTO, [name]: value });
 };
 
+const editorHandleChangeDesc1 = (event,editor) => {
+  const data = editor.getData();
+  setOptionDTO({ ...optionDTO, description1: data });
+};
+
+const editorHandleChangeDesc2 = (event,editor) => {
+  const data = editor.getData();
+  setOptionDTO({ ...optionDTO, description2: data });
+};
+
+
+const editorHandleChangeDesc3 = (event,editor) => {
+  const data = editor.getData();
+  setOptionDTO({ ...optionDTO, description3: data });
+};
+
+const editorHandleChangeDesc4 = (event,editor) => {
+  const data = editor.getData();
+  setOptionDTO({ ...optionDTO, description4: data });
+};
+
 const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -51,42 +73,42 @@ const handleSubmit = async (event) => {
         <input type="hidden" name="questionId" value={optionDTO.questionId} />
         <div className="form-group">
           <label>Option 1</label>
-          <input
+          <MyCKEditor
             className="form-control"
             type="text"
             name="description1"
             value={optionDTO.description1}
-            onChange={handleChange}
+            onChange={editorHandleChangeDesc1}
           />
         </div>
         <div className="form-group">
           <label>Option 2</label>
-          <input
+          <MyCKEditor
             className="form-control"
             type="text"
             name="description2"
             value={optionDTO.description2}
-            onChange={handleChange}
+            onChange={editorHandleChangeDesc2}
           />
         </div>
         <div className="form-group">
           <label>Option 3</label>
-          <input
+          <MyCKEditor
             className="form-control"
             type="text"
             name="description3"
             value={optionDTO.description3}
-            onChange={handleChange}
+            onChange={editorHandleChangeDesc3}
           />
         </div>
         <div className="form-group">
           <label>Option 4</label>
-          <input
+          <MyCKEditor
             className="form-control"
             type="text"
             name="description4"
             value={optionDTO.description4}
-            onChange={handleChange}
+            onChange={editorHandleChangeDesc4}
           />
         </div>
         <div className="form-group">
