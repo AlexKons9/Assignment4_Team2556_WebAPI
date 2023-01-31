@@ -3,6 +3,7 @@ using Assignment4_Team2556_WebAPI.Data.Repositories;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Security;
 using Assignment4_Team2556_WebAPI.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -61,7 +62,7 @@ namespace Assignment4_Team2556_WebAPI
 
 
 
-            builder.Services.AddAuthentication();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             builder.Services.ConfigureIdentity();
             builder.Services.ConfigureJWT(builder.Configuration);
 

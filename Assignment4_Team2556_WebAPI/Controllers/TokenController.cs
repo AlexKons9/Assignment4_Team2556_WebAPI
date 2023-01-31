@@ -31,7 +31,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 //refreshToken = Request.Cookies["Refresh-Token"];
                 var tokenDtoToReturn = await _service.RefreshToken(accessToken, refreshToken); //tokenDto
                 //refreshToken = tokenDtoToReturn.RefreshToken;
-                Response.Cookies.Append("Refresh-Token", tokenDtoToReturn.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None });
+                Response.Cookies.Append("Refresh-Token", tokenDtoToReturn.RefreshToken, new CookieOptions() { Secure = true, HttpOnly = true, SameSite = SameSiteMode.None });
                 return Ok(tokenDtoToReturn.AccessToken);
             }
 

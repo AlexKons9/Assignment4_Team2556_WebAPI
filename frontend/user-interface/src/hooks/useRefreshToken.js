@@ -6,9 +6,6 @@ const useRefreshToken = () => {
     const { auth, setAuth } = useAuth();
 
     const refresh = async () => {
-        //var accessToken = auth.accessToken
-        //console.log(auth.accessToken);
-        //console.log(auth.refreshToken);
         const credentials = JSON.stringify(auth.accessToken)
         console.log(credentials);
         
@@ -18,15 +15,13 @@ const useRefreshToken = () => {
         });
         setAuth(prev => {
             console.log(JSON.stringify(prev));
-            console.log(response.data.accessToken);
-            var decoded = jwt_decode(response.data.accessToken);
+            var decoded = jwt_decode(response.data);
             const roles = []
             roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
             return {
                 ...prev,
                 roles: roles,
-                accessToken: response.data.accessToken,
-                // refreshToken: response.data.refreshToken
+                accessToken: response.data,
             }
         });
         return response.data;
