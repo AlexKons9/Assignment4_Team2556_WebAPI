@@ -2,6 +2,8 @@
 using Assignment4_Team2556_WebAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Security.Policy;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -18,16 +20,21 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         [HttpPost("refresh")]
         //[ServiceFilter(typeof(ValidationFilterAttribute))] 
-        public async Task<IActionResult> Refresh([FromBody] TokenDTO tokenDto)
+        public async Task<IActionResult> Refresh([FromBody] string accessToken)
         {
-            //if (!(Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
-            //    return BadRequest();
-            //tokenDto.RefreshToken = refreshToken;
-            var cookie = Request.Cookies.TryGetValue("Refresh-Token", out var refreshToken);
-            Console.WriteLine(cookie);
+            var refreshToken = Request.Cookies["Refresh-Token"];
+            if (refreshToken == null) {
+                return BadRequest();
+            }
+            else
+            {
+                //refreshToken = Request.Cookies["Refresh-Token"];
+                var tokenDtoToReturn = await _service.RefreshToken(accessToken, refreshToken); //tokenDto
+                //refreshToken = tokenDtoToReturn.RefreshToken;
+                Response.Cookies.Append("Refresh-Token", tokenDtoToReturn.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None });
+                return Ok(tokenDtoToReturn.AccessToken);
+            }
 
-            var tokenDtoToReturn = await _service.RefreshToken(tokenDto);
-            return Ok(tokenDtoToReturn);
         }
 
 

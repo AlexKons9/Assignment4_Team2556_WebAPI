@@ -115,12 +115,12 @@ namespace Assignment4_Team2556_WebAPI.Services
             }
         }
 
-        public async Task<TokenDTO> RefreshToken(TokenDTO tokenDTO)
+        public async Task<TokenDTO> RefreshToken(string accessToken, string refreshToken) //TokenDTO tokenDTO
         {
-            var principal = GetPrincipalFromExpiredToken(tokenDTO.AccessToken);
+            var principal = GetPrincipalFromExpiredToken(accessToken);
 
             var user = await _userManager.FindByNameAsync(principal.Identity.Name);
-            if (user == null || user.RefreshToken != tokenDTO.RefreshToken ||
+            if (user == null || user.RefreshToken != refreshToken ||
                 user.RefreshTokenExpiryTime <= DateTime.Now)
                 throw new RefreshTokenBadRequest();
 

@@ -33,11 +33,11 @@ const Login = () => {
             const response = await axios.post("https://localhost:7015/api/authentication/login", JSON.stringify({ username: user, password: pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    withCredentials: true,
                 }
             );
             console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data;
             // const refreshToken = response?.data?.refreshToken;
             var decoded = jwt_decode(accessToken);
             const roles = []

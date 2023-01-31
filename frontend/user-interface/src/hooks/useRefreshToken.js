@@ -6,10 +6,12 @@ const useRefreshToken = () => {
     const { auth, setAuth } = useAuth();
 
     const refresh = async () => {
-        //accessToken = auth.accessToken
-        console.log(auth.accessToken);
-        console.log(auth.refreshToken);
-        const credentials = JSON.stringify({accessToken: auth.accessToken, refreshToken: auth.refreshToken})
+        //var accessToken = auth.accessToken
+        //console.log(auth.accessToken);
+        //console.log(auth.refreshToken);
+        const credentials = JSON.stringify(auth.accessToken)
+        console.log(credentials);
+        
         const response = await axios.post('/api/token/refresh', credentials, {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
@@ -27,7 +29,7 @@ const useRefreshToken = () => {
                 // refreshToken: response.data.refreshToken
             }
         });
-        return response.data.accessToken;
+        return response.data;
     }
     return refresh;
 };

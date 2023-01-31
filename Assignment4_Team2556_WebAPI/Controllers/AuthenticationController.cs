@@ -44,8 +44,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             }
 
             var tokenDTO = await _service.CreateToken(populateExp: true);
-            Response.Cookies.Append("Refresh-Token", tokenDTO.RefreshToken, new CookieOptions() { HttpOnly = true}); //, SameSite = SameSiteMode.Strict
-            return Ok(tokenDTO);
+            //var accessTokenDTO = tokenDTO.AccessToken;
+            Response.Cookies.Append("Refresh-Token", tokenDTO.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None }); //, SameSite = SameSiteMode.Strict
+            return Ok(tokenDTO.AccessToken);
         }
     }
 }
