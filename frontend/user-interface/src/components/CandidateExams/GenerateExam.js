@@ -12,32 +12,15 @@ function GenerateExam()
         questions: location.state.questionList,
         chosenOptionsId:[]
     });
-
-    // const handleOptionSelection = (event) => {
-    //     const { name, value } = event.target;
-    //     const chosenOptionId = { [name]: value };
-    //     setExamForm({
-    //         ...examForm,
-    //         chosenOptionsId: [...examForm.chosenOptionsId, chosenOptionId]
-    //     });
-    // };
     
-
-    const handleOptionSelection = (event) => {
-        const { name, value } = event.target;
-        setExamForm({ ...examForm, [name]: value  });
+    const handleOptionSelection  = (i, optionId) => {
+        //const { name, value } = event.target;
+        const updatedChosenOptionsId = [...examForm.chosenOptionsId];
+        updatedChosenOptionsId[i] = optionId;
+        setExamForm({ ...examForm, chosenOptionsId: updatedChosenOptionsId  });
         console.log(examForm);
     };
 
-    // const handleOptionSelection = (questionId, optionId) => {
-    //     setExamForm({ ...examForm, [questionId]: optionId });
-    //     console.log(examForm);
-    // };
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setQuestion({ ...question, [name]: value });
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -68,7 +51,7 @@ function GenerateExam()
                                     type="radio"
                                     name={`chosenOptionsId[${i}]`}
                                     value={option.optionId}
-                                    onChange={handleOptionSelection} //() => handleOptionSelection(question.questionId, option.optionId)
+                                    onChange={() => handleOptionSelection(i, option.optionId)} //handleOptionSelection
                                 />
                                 {option.description}
                             </div>
