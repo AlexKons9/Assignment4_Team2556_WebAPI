@@ -39,13 +39,13 @@ function CandidateUI() {
                 "https://localhost:7015/api/CandidateExams/ExamForm",
                 examDetailsDTO
             );
-            //console.log(response.data);
+            console.log(response.data);
             const candidateExamId = response.data.candidateExamId;
             const questionsList = response.data.questions;
             navigate("/CandidateUI/GenerateExam",
                 {
-                    state: { candidateExamId: candidateExamId },
-                    state: { questionList: questionsList }
+                    state: { candidateExamId: candidateExamId, questionList: questionsList }
+
             });
         } catch (error) {
             console.error(error);

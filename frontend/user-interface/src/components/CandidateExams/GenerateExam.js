@@ -10,16 +10,39 @@ function GenerateExam()
     const [examForm, setExamForm] = useState({
         candidateExamId: location.state.candidateExamId,
         questions: location.state.questionList,
-        chosenOptionsId:'',
+        chosenOptionsId:[]
     });
-    const handleOptionSelection = (questionId, optionId) => {
-        setExamForm({ ...examForm, [questionId]: optionId });
+
+    // const handleOptionSelection = (event) => {
+    //     const { name, value } = event.target;
+    //     const chosenOptionId = { [name]: value };
+    //     setExamForm({
+    //         ...examForm,
+    //         chosenOptionsId: [...examForm.chosenOptionsId, chosenOptionId]
+    //     });
+    // };
+    
+
+    const handleOptionSelection = (event) => {
+        const { name, value } = event.target;
+        setExamForm({ ...examForm, [name]: value  });
+        console.log(examForm);
     };
+
+    // const handleOptionSelection = (questionId, optionId) => {
+    //     setExamForm({ ...examForm, [questionId]: optionId });
+    //     console.log(examForm);
+    // };
+
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setQuestion({ ...question, [name]: value });
+    // };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            
-            console.log(examForm);
+        console.log(examForm);
+        try {      
             const response = await axios.post(
                 "https://localhost:7015/api/CandidateExams",
                 examForm
@@ -40,12 +63,12 @@ function GenerateExam()
                     <div key={question.questionId}>
                         <p>{question.descriptionStem}</p>
                         {question.options.map((option, j) => (
-                            <div key={option.optionsId}>
+                            <div key={option.optionId}>
                                 <input
                                     type="radio"
-                                    name={`examForm.ChosenOptionsId[${i}]`}
+                                    name={`chosenOptionsId[${i}]`}
                                     value={option.optionId}
-                                    onChange={() => handleOptionSelection(question.questionId, option.optionsId)}
+                                    onChange={handleOptionSelection} //() => handleOptionSelection(question.questionId, option.optionId)
                                 />
                                 {option.description}
                             </div>
