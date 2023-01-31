@@ -5,10 +5,12 @@ import EditQuestionForm from './components/Question/EditQuestionForm';
 import DetailsQuestion from './components/Question/DetailsQuestion';
 import CreateOptionsForm from './components/Option/CreateOptionsForm';
 import EditOptionsForm from './components/Option/EditOptionsForm';
+import GenerateExam from './components/CandidateExams/GenerateExam';
 import './App.css';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import AdminUI from './components/AdminUI';
+import CandidateUI from './components/CandidateUI';
 
 
 
@@ -20,6 +22,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/> } />
                     <Route path="Home" element={<Home/> } />
+                    <Route exact path="CandidateUI" element={<CandidateUI />} />
+                    <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
                     <Route exact path="AdminUI" element={<AdminUI/>} />
                     <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm/>} />
                     <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm/>} />
