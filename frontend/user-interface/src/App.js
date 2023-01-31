@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Layout from './components/Layout'
 import Register from './components/Register'
 import Unauthorized from './components/Unauthorized';
+import PersistLogin from './components/PersistLogin';
 
 //Admin components
 import CreateQuestionForm from './components/CreateQuestionForm';
@@ -39,18 +40,23 @@ function App() {
                 <Route path="unauthorized" element={<Unauthorized />} />
 
 
-                {/* Admin Routes */}
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}/>}>
-                    <Route path="AdminUI" element={<AdminUI />} />
-                    <Route path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
-                    <Route path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
-                    <Route path="Users" element={<Users />}/>
+                {/* PROTECTED Routes */}
+                <Route element={<PersistLogin />}>
+
+                    {/* Admin Routes */}
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                        <Route path="AdminUI" element={<AdminUI />} />
+                        <Route path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
+                        <Route path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
+                        <Route path="Users" element={<Users />} />
+
+                    </Route>
+
+                    {/* Candidate Routes */}
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+
+                    </Route>
                     
-                </Route>
-
-                {/* Candidate Routes */}
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}/>}>
-
                 </Route>
 
 
@@ -58,7 +64,7 @@ function App() {
 
 
                 {/* TESTING */}
-                
+
             </Route>
         </Routes>
     );

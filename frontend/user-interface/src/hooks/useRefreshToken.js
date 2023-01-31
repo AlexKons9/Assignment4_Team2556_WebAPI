@@ -14,7 +14,8 @@ const useRefreshToken = () => {
             withCredentials: true
         });
         setAuth(prev => {
-            console.log(JSON.stringify(prev));
+            //console.log("previous: " +  JSON.stringify(prev.accessToken));
+            console.log(response.data);
             var decoded = jwt_decode(response.data);
             const roles = []
             roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
@@ -26,6 +27,7 @@ const useRefreshToken = () => {
         });
         return response.data;
     }
+    //console.log("Current " + auth.accessToken)
     return refresh;
 };
 

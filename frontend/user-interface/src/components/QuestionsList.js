@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from "axios";
+//import axios from "axios";
+import useAxiosPrivate from "../hooks/userAxiosPrivate"
 import { Link } from "react-router-dom";
 import CreateQuestion from "./CreateQuestionForm";
 
 function QuestionsList() {
     const [questions, setQuestions] = useState([]);
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://localhost:7015/api/Questions");
+                const response = await axiosPrivate.get("/api/Questions");
                 setQuestions(response.data);
             } catch (error) {
                 console.error(error);
