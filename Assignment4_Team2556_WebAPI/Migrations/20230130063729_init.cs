@@ -34,6 +34,8 @@ namespace Assignment4Team2556WebAPI.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -394,8 +396,8 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a5b959f0-f3c8-4526-9114-06453e0ce86a", "5b028528-b023-4d8f-98ee-024c99e0f9be", "Admin", "ADMIN" },
-                    { "bb798a2c-ed19-4b25-90f1-2789ab589c27", "cac97f2c-9f78-444b-b833-a23190f5bd96", "Candidate", "CANDIDATE" }
+                    { "7dd11f69-d904-4e23-9854-6e07c39c1a62", "d1e819f2-f56b-4932-8563-93a2718714e8", "Admin", "ADMIN" },
+                    { "b785db06-407a-4ce0-a450-6a5bb958f554", "faac27ea-dec0-4125-b7b9-e56a8ce6ccc2", "Candidate", "CANDIDATE" }
                 });
 
             migrationBuilder.InsertData(

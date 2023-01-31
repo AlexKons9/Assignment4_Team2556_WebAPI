@@ -2,6 +2,7 @@
 using Assignment4_Team2556_WebAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -42,22 +43,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return Unauthorized();
             }
 
-            return Ok(new { Token = await _service.CreateToken() });
+            var tokenDTO = await _service.CreateToken(populateExp: true);
+            Response.Cookies.Append("Refresh-Token", tokenDTO.RefreshToken, new CookieOptions() { HttpOnly = true}); //, SameSite = SameSiteMode.Strict
+            return Ok(tokenDTO);
         }
-
-
-        //[HttpPost("login")]
-        ////[ServiceFilter(typeof(ValidationFilterAttribute))]
-        //public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
-        //{
-        //    if (!await _service.AuthenticationService.ValidateUser(user))
-        //        return Unauthorized();
-
-        //    return Ok(new
-        //    {
-        //        Token = await _service
-        //        .AuthenticationService.CreateToken()
-        //    });
-        //}
     }
 }

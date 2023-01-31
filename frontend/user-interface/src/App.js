@@ -15,13 +15,17 @@ import CreateQuestionForm from './components/CreateQuestionForm';
 import CreateOptionsForm from './components/CreateOptionsForm';
 import AdminUI from './components/AdminUI';
 
+//Candidate components
+
+
+//TESTing components
+import Users from './components/Users';
+
+
 const ROLES = {
     'Admin': 'Admin',
     'Candidate': 'Candidate'
 }
-
-//Candidate components
-
 
 function App() {
     return (
@@ -40,15 +44,21 @@ function App() {
                     <Route path="AdminUI" element={<AdminUI />} />
                     <Route path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
                     <Route path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
+                    <Route path="Users" element={<Users />}/>
+                    
                 </Route>
 
                 {/* Candidate Routes */}
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}/>}>
-                    
+
                 </Route>
 
 
                 {/* Catch all */}
+
+
+                {/* TESTING */}
+                
             </Route>
         </Routes>
     );

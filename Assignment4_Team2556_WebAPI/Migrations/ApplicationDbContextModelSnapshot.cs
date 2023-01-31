@@ -1082,6 +1082,12 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -1134,15 +1140,15 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a5b959f0-f3c8-4526-9114-06453e0ce86a",
-                            ConcurrencyStamp = "5b028528-b023-4d8f-98ee-024c99e0f9be",
+                            Id = "7dd11f69-d904-4e23-9854-6e07c39c1a62",
+                            ConcurrencyStamp = "d1e819f2-f56b-4932-8563-93a2718714e8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bb798a2c-ed19-4b25-90f1-2789ab589c27",
-                            ConcurrencyStamp = "cac97f2c-9f78-444b-b833-a23190f5bd96",
+                            Id = "b785db06-407a-4ce0-a450-6a5bb958f554",
+                            ConcurrencyStamp = "faac27ea-dec0-4125-b7b9-e56a8ce6ccc2",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         });

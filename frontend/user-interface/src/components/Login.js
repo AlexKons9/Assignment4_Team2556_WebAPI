@@ -33,17 +33,18 @@ const Login = () => {
             const response = await axios.post("https://localhost:7015/api/authentication/login", JSON.stringify({ username: user, password: pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    //withCredentials: true
+                    withCredentials: true
                 }
             );
-            //console.log(JSON.stringify(response?.data.token));
-            const accessToken = response?.data?.token;
+            console.log(JSON.stringify(response?.data));
+            const accessToken = response?.data?.accessToken;
+            // const refreshToken = response?.data?.refreshToken;
             var decoded = jwt_decode(accessToken);
             const roles = []
             roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
             console.log(roles);
 
-            setAuth({ user, pwd, roles, accessToken });
+            setAuth({ user, pwd, roles, accessToken }); //, refreshToken
             setUser('');
             setPwd('');
             navigate(from, { replace: true });

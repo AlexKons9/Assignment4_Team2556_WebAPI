@@ -39,16 +39,27 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<ITopicsService, TopicsService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        policy =>
+            //        {
+            //            policy
+            //            .AllowAnyOrigin()
+            //            .AllowAnyHeader();
+            //        });
+            //});
+
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll",
-                    policy =>
-                    {
-                        policy
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader();
-                    });
+                options.AddPolicy("CorsPolicy", builder =>
+                builder.WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             });
+
+
 
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
@@ -73,7 +84,7 @@ namespace Assignment4_Team2556_WebAPI
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseCors("AllowAll");
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 
