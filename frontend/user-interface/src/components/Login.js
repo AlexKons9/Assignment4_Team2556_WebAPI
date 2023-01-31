@@ -40,7 +40,7 @@ const Login = () => {
             const accessToken = response?.data;
             // const refreshToken = response?.data?.refreshToken;
             var decoded = jwt_decode(accessToken);
-            const roles = []
+            const roles = [];
             roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
             console.log(roles);
 

@@ -142,7 +142,8 @@ namespace Assignment4_Team2556_WebAPI.Services
                 ValidateLifetime = true, 
                 ValidIssuer = jwtSettings["validIssuer"],
                 ValidAudience = jwtSettings["validAudience"] }; 
-            var tokenHandler = new JwtSecurityTokenHandler(); SecurityToken securityToken;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken; 
             if (jwtSecurityToken == null || 

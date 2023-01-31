@@ -9,7 +9,7 @@ const RequireAuth = ({ allowedRoles }) => {
         // if the auth has a user, then return Outlet, otherwise redirect to login page (remember where they came from)
         auth?.roles?.find(role => allowedRoles?.includes(role))
             ? <Outlet />
-            : auth?.user 
+            : auth?.accessToken  
                 ? <Navigate to="/unauthorized" state={{ from: location }} replace />
                 : <Navigate to="/login" state={{ from: location }} replace />
     );

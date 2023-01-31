@@ -6,10 +6,10 @@ const useRefreshToken = () => {
     const { auth, setAuth } = useAuth();
 
     const refresh = async () => {
-        const credentials = JSON.stringify(auth.accessToken)
+        const credentials = JSON.stringify(auth.accessToken);
         console.log(credentials);
         
-        const response = await axios.post('/api/token/refresh', credentials, {
+        const response = await axios.get('/api/token/refresh', {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
         });
@@ -17,7 +17,7 @@ const useRefreshToken = () => {
             //console.log("previous: " +  JSON.stringify(prev.accessToken));
             console.log(response.data);
             var decoded = jwt_decode(response.data);
-            const roles = []
+            const roles = [];
             roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
             return {
                 ...prev,
