@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useAxiosPrivate from "../hooks/userAxiosPrivate";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useRefreshToken from "../hooks/useRefreshToken";
 //import { useNavigate, useLocation } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const Users = () => {
                 isMounted && setUsers(response.data);
             } catch (err) {
                 console.error(err);
+                //refresh();
                 //navigate('/login', { state: { from: location }, replace: true });
             }
         }
