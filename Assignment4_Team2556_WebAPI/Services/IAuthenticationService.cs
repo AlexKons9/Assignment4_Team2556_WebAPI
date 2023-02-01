@@ -9,6 +9,7 @@ namespace Assignment4_Team2556_WebAPI.Services
         Task<bool> ValidateUser(UserForAuthenticationDTO userForAuth);
         Task<TokenDTO> CreateToken(bool populateExp);
         Task<TokenDTO> RefreshToken(string accessToken, string refreshToken);
+        Task RemoveRefreshToken(string? username);
 
     }
 }

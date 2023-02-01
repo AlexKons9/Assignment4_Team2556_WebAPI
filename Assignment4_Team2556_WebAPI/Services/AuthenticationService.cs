@@ -153,5 +153,15 @@ namespace Assignment4_Team2556_WebAPI.Services
             } 
             return principal; 
         }
+
+        public async Task RemoveRefreshToken(string? username)
+        {
+            _user = await _userManager.FindByNameAsync(username);
+            _user.RefreshToken = null;
+            _user.RefreshTokenExpiryTime = DateTime.UtcNow;
+            await _userManager.UpdateAsync(_user);
+
+
+        }
     }
 }

@@ -8,7 +8,7 @@ function AdminUI() {
 
     const signOut = async() => {
         await logout();
-        navigate('/linkpage');
+        navigate('/');
     }
 
     return (
