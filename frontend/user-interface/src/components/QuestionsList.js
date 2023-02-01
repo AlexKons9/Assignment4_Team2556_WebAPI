@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import axios from "axios";
-import useAxiosPrivate from "../hooks/userAxiosPrivate"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import { Link } from "react-router-dom";
 import CreateQuestion from "./CreateQuestionForm";
+import useRefreshToken from "../hooks/useRefreshToken";
 
 function QuestionsList() {
     const [questions, setQuestions] = useState([]);
     const axiosPrivate = useAxiosPrivate();
+    const refresh = useRefreshToken();
 
     useEffect(() => {
+        
         const fetchData = async () => {
             try {
                 const response = await axiosPrivate.get("/api/Questions");
+                console.log(response)
+                console.log("data" + response.data)
                 setQuestions(response.data);
+
+                if(response === null) {
+                    console.log("is null")
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -28,7 +37,6 @@ function QuestionsList() {
             <h1>Question List</h1>
 
             <p>
-                {/* <button className='btn btn-primary'>Create New</button> */}
                 <Link className='btn btn-primary' to="CreateQuestionForm">Create New</Link>
             </p>
             <table className="table">

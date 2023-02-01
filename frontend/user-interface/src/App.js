@@ -53,7 +53,7 @@ function App() {
                     </Route>
 
                     {/* Candidate Routes */}
-                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
 
                     </Route>
                     

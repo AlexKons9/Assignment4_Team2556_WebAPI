@@ -56,7 +56,8 @@ namespace Assignment4_Team2556_WebAPI.Services
 
             if(populateExp)
             {
-                _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                //_user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                _user.RefreshTokenExpiryTime = DateTime.UtcNow.AddSeconds(30);
             }
 
             await _userManager.UpdateAsync(_user);
@@ -98,7 +99,9 @@ namespace Assignment4_Team2556_WebAPI.Services
                 issuer: jwtSettings["validIssuer"],
                 audience: jwtSettings["validAudience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                //expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.UtcNow.AddSeconds(Convert.ToDouble(jwtSettings["expires"])),
+                //expires: DateTime.Now.AddSeconds(60),
                 signingCredentials: signingCredentials
             );
 
@@ -121,7 +124,7 @@ namespace Assignment4_Team2556_WebAPI.Services
 
             var user = await _userManager.FindByNameAsync(principal.Identity.Name);
             if (user == null || user.RefreshToken != refreshToken ||
-                user.RefreshTokenExpiryTime <= DateTime.Now)
+                user.RefreshTokenExpiryTime <= DateTime.UtcNow)
                 throw new RefreshTokenBadRequest();
 
             _user = user;
