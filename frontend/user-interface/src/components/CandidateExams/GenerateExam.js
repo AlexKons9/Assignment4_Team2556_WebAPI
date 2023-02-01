@@ -18,19 +18,17 @@ function GenerateExam()
         const updatedChosenOptionsId = [...examForm.chosenOptionsId];
         updatedChosenOptionsId[i] = optionId;
         setExamForm({ ...examForm, chosenOptionsId: updatedChosenOptionsId  });
-        console.log(examForm);
     };
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(examForm);
         try {      
-            const response = await axios.post(
-                "https://localhost:7015/api/CandidateExams",
-                examForm
-            );
-            navigate('/CandidateUI');
+            await axios.post("https://localhost:7015/api/CandidateExams",examForm);
+            const response = await axios.get(`https://localhost:7015/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
+            const examResults = response.data;
+            navigate('/CandidateUI/CandidateExamResults', { state: { results: examResults } });
+
         } catch (error) {
             console.error(error);
             alert("Error on Submit");

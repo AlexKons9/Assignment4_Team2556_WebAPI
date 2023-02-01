@@ -17,6 +17,13 @@ namespace Assignment4_Team2556_WebAPI.Services
         }
 
         //
+        //Summary: Gets the Answered Questions of the certain given Exam
+        public async Task<IList<CandidateExamAnswer>> GetListOfCandidateExamAnswersById(int id)
+        {
+            return await _repository.GetListOfCandidateExamAnswersById(id);
+        }
+
+        //
         //Summary: Saves the chosen answers of the candidate to the database
         public async Task SaveExamAnswers(ExamForm examForm)
         {

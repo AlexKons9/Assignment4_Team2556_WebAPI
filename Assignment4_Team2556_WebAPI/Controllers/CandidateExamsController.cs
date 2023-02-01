@@ -34,7 +34,21 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetActiveCertificateList();
         }
 
-        //// GET: api/CandidateExams
+        //// GET: api/CandidateExams/ExamResults/5
+        [HttpGet("ExamResults/{id}")]
+        public async Task<ActionResult<CandidateExamResultsDTO>> GetCandidateExamResults(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            CandidateExamResultsDTO candidateExamResults = await _candidateExamService.GetMarksOfTheSubmitedExam(id);
+            //ExamForm examForm = await _candidateExamService.GenerateExamForm(examDetailsDTO.CandidateId, examDetailsDTO.CertificateId);
+
+            return Ok(candidateExamResults);
+        }
+
+        //// GET: api/CandidateExams/ExamForm
         [HttpPost("ExamForm")]
         public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
         {

@@ -13,6 +13,21 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
+        //Summary: Gets the Answered Questions of the certain given Exam
+        public async Task<IList<CandidateExamAnswer>> GetListOfCandidateExamAnswersById(int id)
+        {
+            var examAnswers = await _context.CandidateExamAnswers.Where(x => x.CandidateExamId == id).ToListAsync();
+
+            // load elements we need
+            foreach (var answer in examAnswers)
+            {
+                await _context.Entry(answer).Reference(x => x.Option).LoadAsync();
+            }
+
+            return examAnswers;
+        }
+
+        //
         //Summary: Saves a List of Candidate Exam Answers to the Database
         public async Task AddSaveChanges(IList<CandidateExamAnswer> candidateExamAnswers)
         {

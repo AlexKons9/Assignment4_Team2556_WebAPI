@@ -43,7 +43,6 @@ function CreateOptionsForm()
         event.preventDefault();
         try {
             await axios.post("https://localhost:7015/api/Options", optionDTO);
-            // console.log(optionDTO);
             alert("Options created successfully!");
             navigate('/AdminUI');
         } catch (error) {

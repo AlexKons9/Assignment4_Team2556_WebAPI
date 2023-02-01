@@ -33,6 +33,15 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
+        //Summary: Returns a Candidate Exam that has been submited for marking 
+        public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)
+        {
+            var candidateExam = await _context.CandidateExams.Where(c => c.CandidateExamId == id).FirstAsync();
+            await _context.Entry(candidateExam).Reference(x => x.Exam).LoadAsync();
+            return candidateExam;   
+        }
+
+        //
         //Summary: Returns a List of ExamQuestions, associated with a certain Exam
         public async Task<IList<ExamQuestion>> GetAllExamQuestionsByExamId(int examId)
         {
@@ -43,7 +52,8 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         //Summary: Saves a Candidate Exam to the database
         public async Task AddSaveChanges(CandidateExam candidateExam)
         {
-            _context.Add(candidateExam);
+            // Update here Works As AddOrUpdate
+            _context.Update(candidateExam);
             await _context.SaveChangesAsync();
         }
     }
