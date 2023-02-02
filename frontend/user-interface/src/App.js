@@ -1,26 +1,21 @@
-// import logo from './logo.svg';
-import { Routes, Route } from 'react-router-dom';
 import RequireAuth from './components/RequireAuth';
 
 //Public components
 import './App.css';
 import Home from './components/Home';
-import Login from './components/Login'
+import Login from './components/Security/Login'
 import Layout from './components/Layout'
 import Register from './components/Register'
-import Unauthorized from './components/Unauthorized';
-import PersistLogin from './components/PersistLogin';
+import Unauthorized from './components/Security/Unauthorized';
+import PersistLogin from './components/Security/PersistLogin';
 
-//Admin components
-import CreateQuestionForm from './components/CreateQuestionForm';
-import CreateOptionsForm from './components/CreateOptionsForm';
 import AdminUI from './components/AdminUI';
 
 //Candidate components
 
 
 //TESTing components
-import Users from './components/Users';
+import Users from './components/Security/Users';
 
 
 const ROLES = {
