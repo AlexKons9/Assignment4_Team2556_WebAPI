@@ -25,7 +25,6 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Topics
         [HttpGet]
-        [Authorize(Roles = "Candidate")]
         public async Task<ActionResult<IEnumerable<Topic>>> GetTopics()
         {
             return await _context.Topics.ToListAsync();

@@ -98,8 +98,8 @@ namespace Assignment4_Team2556_WebAPI.Services
                 issuer: jwtSettings["validIssuer"],
                 audience: jwtSettings["validAudience"],
                 claims: claims,
-                //expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
-                expires: DateTime.UtcNow.AddSeconds(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                //expires: DateTime.UtcNow.AddSeconds(Convert.ToDouble(jwtSettings["expires"])),
                 //expires: DateTime.Now.AddSeconds(60),
                 signingCredentials: signingCredentials
             );
