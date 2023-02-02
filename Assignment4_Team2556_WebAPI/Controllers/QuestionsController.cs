@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Questions
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
         {
             //return await _context.Questions.ToListAsync();

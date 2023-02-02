@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {

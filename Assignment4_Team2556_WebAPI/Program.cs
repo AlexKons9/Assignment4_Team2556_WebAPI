@@ -1,7 +1,9 @@
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Data.Repositories;
 using Assignment4_Team2556_WebAPI.Models;
+using Assignment4_Team2556_WebAPI.Security;
 using Assignment4_Team2556_WebAPI.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -23,6 +25,7 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddRazorPages();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.AddScoped<ICandidateExamService, CandidateExamService>();
             builder.Services.AddScoped<ICandidateExamRepository, CandidateExamRepository>();
@@ -35,22 +38,39 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IQuestionsService, QuestionsService>();
             builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
             builder.Services.AddScoped<ITopicsService, TopicsService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        policy =>
+            //        {
+            //            policy
+            //            .AllowAnyOrigin()
+            //            .AllowAnyHeader();
+            //        });
+            //});
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                builder.WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
+
+
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            builder.Services.ConfigureIdentity();
+            builder.Services.ConfigureJWT(builder.Configuration);
 
             builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             //builder.Services.AddControllers();
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                    policy =>
-                    {
-                        policy
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                    });
-            });
+
 
             var app = builder.Build();
 
@@ -65,7 +85,7 @@ namespace Assignment4_Team2556_WebAPI
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseCors("AllowAll");
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 
