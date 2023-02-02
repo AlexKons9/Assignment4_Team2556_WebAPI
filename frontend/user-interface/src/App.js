@@ -34,7 +34,9 @@ import Users from './components/Security/Users';
 
 const ROLES = {
     'Admin': 'Admin',
-    'Candidate': 'Candidate'
+    'Candidate': 'Candidate',
+    'Marker': 'Marker',
+    'QualityControl': 'QualityControl'
 }
 
 function App() {
@@ -52,7 +54,7 @@ function App() {
                     <Route path="Login" element={<Login />} />
                     <Route path="unauthorized" element={<Unauthorized />} />
 
-                    {/* Admin Routes */}
+                    {/* ONLY Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route exact path="AdminUI" element={<AdminUI />} />
                         <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
@@ -62,12 +64,22 @@ function App() {
                         <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
                     </Route>
 
+                    {/* Marker Routes */}
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Marker, ROLES.Admin]} />}>
+
+                    </Route>
+
+                    {/* QualityControl Routes */}
+                    <Route element={<RequireAuth allowedRoles={[ROLES.QualityControl, ROLES.Admin]} />}>
+
+                    </Route>         
+
                     {/* Candidate Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
                         <Route exact path="CandidateUI" element={<CandidateUI />} />
                         <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
                         <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />} />
-                    </Route>
+                    </Route>           
 
                 </Route>
 

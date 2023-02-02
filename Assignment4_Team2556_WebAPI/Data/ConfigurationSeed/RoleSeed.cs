@@ -10,7 +10,9 @@ namespace Assignment4_Team2556_WebAPI.Data.ConfigurationSeed
         {
             builder.HasData(
                 new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" }, 
-                new IdentityRole { Name = "Candidate", NormalizedName = "CANDIDATE" });
+                new IdentityRole { Name = "Candidate", NormalizedName = "CANDIDATE" },
+                new IdentityRole { Name = "Marker", NormalizedName = "MARKER" },
+                new IdentityRole { Name = "QualityControl", NormalizedName = "QUALITYCONTROL" });
         }
     }
 }

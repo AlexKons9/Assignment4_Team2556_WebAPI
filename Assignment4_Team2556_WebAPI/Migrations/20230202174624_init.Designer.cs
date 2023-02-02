@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230130063729_init")]
+    [Migration("20230202174624_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -1143,17 +1143,31 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7dd11f69-d904-4e23-9854-6e07c39c1a62",
-                            ConcurrencyStamp = "d1e819f2-f56b-4932-8563-93a2718714e8",
+                            Id = "3d6bed2c-16b4-49ee-a1a1-f3394e6e38d2",
+                            ConcurrencyStamp = "4c391347-434e-4eb4-ab94-8c09d0703f77",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b785db06-407a-4ce0-a450-6a5bb958f554",
-                            ConcurrencyStamp = "faac27ea-dec0-4125-b7b9-e56a8ce6ccc2",
+                            Id = "291d605c-35c8-4eeb-8b54-59500e14b0c2",
+                            ConcurrencyStamp = "c36c6357-fd1f-4e4e-a9d3-79a90663683e",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
+                        },
+                        new
+                        {
+                            Id = "671f0e36-5036-47ca-ba01-81ec02590db6",
+                            ConcurrencyStamp = "de6a5f6b-0d14-4ec1-ae60-2031732e84ea",
+                            Name = "Marker",
+                            NormalizedName = "MARKER"
+                        },
+                        new
+                        {
+                            Id = "aebc73eb-3939-45f9-a9bf-ea987047d76e",
+                            ConcurrencyStamp = "0f961985-2141-4f59-b09d-cb94f5d4bcc4",
+                            Name = "QualityControl",
+                            NormalizedName = "QUALITYCONTROL"
                         });
                 });
 
