@@ -56,8 +56,7 @@ namespace Assignment4_Team2556_WebAPI.Services
 
             if(populateExp)
             {
-                //_user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-                _user.RefreshTokenExpiryTime = DateTime.UtcNow.AddSeconds(30);
+                _user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             }
 
             await _userManager.UpdateAsync(_user);

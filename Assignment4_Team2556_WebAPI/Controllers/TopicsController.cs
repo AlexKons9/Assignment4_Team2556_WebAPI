@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -23,6 +25,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Topics
         [HttpGet]
+        [Authorize(Roles = "Candidate")]
         public async Task<ActionResult<IEnumerable<Topic>>> GetTopics()
         {
             return await _context.Topics.ToListAsync();

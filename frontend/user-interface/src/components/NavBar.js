@@ -41,9 +41,9 @@ function NavBar() {
             {/*        </div>*/}
             {/*    </div>*/}
             {/*</nav>*/}
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                    <ul class="navbar-nav me-auto">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul className="navbar-nav me-auto">
                         <li className="nav-item">
                             <Link className="nav-link text-light" to="Home" >Home</Link>
                         </li>
@@ -58,19 +58,19 @@ function NavBar() {
                         </li>
                     </ul>
                 </div>
-                <div class="mx-auto order-0">
-                    <a class="navbar-brand mx-auto">Assignment_4A_Team2556</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
-                        <span class="navbar-toggler-icon"></span>
+                <div className="mx-auto order-0">
+                    <a className="navbar-brand mx-auto">Assignment_4A_Team2556</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                {auth?.accessToken ? (
-                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <p className="nav-link text-light">Logged in as {auth.user}</p>
+                {auth?.user ? (
+                    <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                        <ul className="navbar-nav ms-auto">
+                            <li className="nav-item">
+                                <p className="nav-link text-light">Welcome {auth.user} (role:{auth.roles})</p>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <Link className="nav-link text-light" onClick={() => logout()}>Logout</Link>
                             </li>
                         </ul>
@@ -78,12 +78,12 @@ function NavBar() {
 
                 ) : (
 
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item">
                             <Link className="nav-link text-light" to="Register" >Register</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link text-light" to="Login" >Login</Link>
                         </li>
                     </ul>

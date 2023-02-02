@@ -34,27 +34,27 @@ function App() {
             <Route path="/" element={<Layout />}>
 
                 {/* Public Routes */}
-                <Route path="/" element={<Home />} />
                 <Route path="Register" element={<Register />} />
-                <Route path="Login" element={<Login />} />
-                <Route path="unauthorized" element={<Unauthorized />} />
 
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="Login" element={<Login />} />
+                    <Route path="unauthorized" element={<Unauthorized />} />
 
                     {/* Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route path="AdminUI" element={<AdminUI />} />
                         <Route path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
                         <Route path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
-                        <Route path="Users" element={<Users />} />
+                        
 
                     </Route>
 
                     {/* Candidate Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
-
+                        <Route path="Users" element={<Users />} />
                     </Route>
                     
                 </Route>
