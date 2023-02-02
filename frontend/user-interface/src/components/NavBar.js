@@ -44,15 +44,18 @@ function NavBar() {
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul class="navbar-nav me-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link text-light" to="Home" >Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link text-light">Candidate UI</a>
-                            </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-light" to="Home" >Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-light">Candidate UI</a>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-light" to="Users" >Users</Link>
+                        </li>
                     </ul>
                 </div>
                 <div class="mx-auto order-0">
@@ -61,27 +64,32 @@ function NavBar() {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                {auth?.accessToken?  (
+                {auth?.accessToken ? (
                     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                      
-                        <button class="nav-link ms-auto btn btn-dark text-light" type="button" onClick={() => logout()} >
-                            Sign Out
-                        </button>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <p className="nav-link text-light">Logged in as {auth.user}</p>
+                            </li>
+                            <li class="nav-item">
+                                <Link className="nav-link text-light" onClick={() => logout()}>Logout</Link>
+                            </li>
+                        </ul>
                     </div>
+
                 ) : (
-                     
-                            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                                <ul class="navbar-nav ms-auto">
-                                    <li class="nav-item">
-                                        <Link className="nav-link text-light" to="Register" >Register</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link className="nav-link text-light" to="Login" >Login</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        
-                        )}
+
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <Link className="nav-link text-light" to="Register" >Register</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link className="nav-link text-light" to="Login" >Login</Link>
+                        </li>
+                    </ul>
+                </div>
+
+                )}
             </nav>
         </>
 
