@@ -43,7 +43,6 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
             CandidateExamResultsDTO candidateExamResults = await _candidateExamService.GetMarksOfTheSubmitedExam(id);
-            //ExamForm examForm = await _candidateExamService.GenerateExamForm(examDetailsDTO.CandidateId, examDetailsDTO.CertificateId);
 
             return Ok(candidateExamResults);
         }
