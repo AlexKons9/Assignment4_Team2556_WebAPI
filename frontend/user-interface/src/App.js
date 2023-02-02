@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 //import { Routes, Route } from 'react-router-dom';
-import RequireAuth from './components/RequireAuth';
+import RequireAuth from './components/Security/RequireAuth';
 
 //Public components
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -12,11 +12,11 @@ import EditOptionsForm from './components/Option/EditOptionsForm';
 import GenerateExam from './components/CandidateExams/GenerateExam';
 import './App.css';
 import Home from './components/Home';
-import Login from './components/Login'
+import Login from './components/Security/Login'
 import Layout from './components/Layout'
-import Register from './components/Register'
-import Unauthorized from './components/Unauthorized';
-import PersistLogin from './components/PersistLogin';
+import Register from './components/Security/Register'
+import Unauthorized from './components/Security/Unauthorized';
+import PersistLogin from './components/Security/PersistLogin';
 
 //Admin components
 //import CreateQuestionForm from './components/CreateQuestionForm';
@@ -29,7 +29,7 @@ import CandidateExamResults from './components/CandidateExams/CandidateExamResul
 
 
 //TESTing components
-import Users from './components/Users';
+import Users from './components/Security/Users';
 
 
 const ROLES = {

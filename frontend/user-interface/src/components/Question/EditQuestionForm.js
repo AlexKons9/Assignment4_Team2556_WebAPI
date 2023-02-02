@@ -2,17 +2,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {  useEffect, useState } from "react";
 import axios from "axios";
 import MyCKEditor from '../MyCKEditor';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function EditQuestionForm() {
     const location = useLocation();
     const navigate = useNavigate();
     const [topics, setTopics] = useState([]);
     const [question, setQuestion] = useState({questionId: location.state.question.questionId, descriptionStem: location.state.question.descriptionStem, topicId: location.state.question.topicId});
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const fetchTopics = async () => {
             try {
-                const response = await axios.get("https://localhost:7015/api/Topics");
+                const response = await axiosPrivate.get("/api/Topics");
                 setTopics(response.data);
             } catch (error) {
                 console.error(error);
@@ -34,9 +36,9 @@ function EditQuestionForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.put(`https://localhost:7015/api/Questions/${question.questionId}`, question);
+            await axiosPrivate.put(`/api/Questions/${question.questionId}`, question);
             alert("Question edited successfully!");
-            var response = await axios.get(`https://localhost:7015/api/Options/${question.questionId}`);
+            var response = await axiosPrivate.get(`/api/Options/${question.questionId}`);
             var options = response.data;
             console.log(options);
             navigate('/AdminUI/EditOptionsForm', {state: { options: options}});

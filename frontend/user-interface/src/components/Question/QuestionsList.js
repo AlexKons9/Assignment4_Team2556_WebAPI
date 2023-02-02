@@ -41,7 +41,7 @@ function QuestionsList() {
 
     const deleteConfirmHandler = async() => 
     {
-        await axios.delete(`https://localhost:7015/api/Questions/${itemToDelete}`)
+        await axiosPrivate.delete(`/api/Questions/${itemToDelete}`)
         .then((response)=>{
             setQuestions((existingData)=> {return existingData.filter(_=>_.questionId !==itemToDelete)});  
             setItemToDelete(0);
@@ -51,7 +51,7 @@ function QuestionsList() {
 
     const handleDetails = async (questionId) =>  {
         try {
-            const response = await axios.get(`https://localhost:7015/api/Questions/${questionId}`);
+            const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
             const questionDetails = response.data;
             navigate('/AdminUI/DetailsQuestion', {state: { questionDetails: questionDetails}});
         } catch (error) {
@@ -62,7 +62,7 @@ function QuestionsList() {
 
     const handleEdit = async (questionId) =>  {
         try {
-            const response = await axios.get(`https://localhost:7015/api/Questions/${questionId}`);
+            const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
             const question = response.data;
             navigate('/AdminUI/EditQuestionForm', {state: { question: question}});
         } catch (error) {

@@ -39,6 +39,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
             //var question = await _context.Questions.FindAsync(id);
@@ -55,6 +56,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // PUT: api/Questions/5  --> UPDATE
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutQuestion(int id, Question question)
         {
             if (id != question.QuestionId)
@@ -95,6 +97,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/Questions --> CREATE
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Question>> PostQuestion(Question question)
         {
             TopicsService tservice = _topicsService as TopicsService;
@@ -105,6 +108,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
             //var question = await _context.Questions.FindAsync(id);

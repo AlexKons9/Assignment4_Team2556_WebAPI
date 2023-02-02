@@ -9,6 +9,8 @@ using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Services;
 using Assignment4_Team2556_WebAPI.Models.DTOModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -27,6 +29,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Options
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IList<Option>> GetAllOptions()
         {
             return await _optionsService.GetAllAsync();
@@ -34,6 +37,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Options/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IList <Option>>> GetQuestionsOptions(int id)
         {
             var service = _optionsService as OptionsService;
@@ -57,6 +61,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/Options
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<OptionListDTO>> PostOption(OptionListDTO options)
         {
             if (ModelState.IsValid)
@@ -87,6 +92,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // PUT: api/Options/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutOptions(OptionListDTO optionsDTO)
         {
             if(ModelState.IsValid)

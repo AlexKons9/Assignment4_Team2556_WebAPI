@@ -9,6 +9,8 @@ using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Services;
 using Assignment4_Team2556_WebAPI.Models.DTOModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -36,6 +38,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         //// GET: api/CandidateExams/ExamResults/5
         [HttpGet("ExamResults/{id}")]
+        [Authorize(Roles = "Candidate,Admin")]
         public async Task<ActionResult<CandidateExamResultsDTO>> GetCandidateExamResults(int id)
         {
             if (!ModelState.IsValid)
@@ -95,6 +98,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/CandidateExams
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Candidate")]
         public async Task<ActionResult<ExamForm>> PostCandidateExam(ExamForm examForm)
         {
             if (!ModelState.IsValid) // Validate the exam form

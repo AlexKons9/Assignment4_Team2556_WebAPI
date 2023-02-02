@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import MyCKEditor from '../MyCKEditor';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function EditOptionsForm() {
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
 
   var count = 0;
   var correctAnswerIndex = 0;
@@ -57,7 +59,7 @@ const editorHandleChangeDesc4 = (event,editor) => {
 const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const response = await axios.put(`https://localhost:7015/api/Options`, optionDTO);
+        const response = await axiosPrivate.put(`/api/Options`, optionDTO);
         alert("Options edited successfully!");
         navigate('/AdminUI');
     } 

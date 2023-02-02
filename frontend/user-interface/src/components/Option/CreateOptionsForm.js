@@ -2,9 +2,11 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import MyCKEditor from '../MyCKEditor';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function CreateOptionsForm()
 { 
+    const axiosPrivate = useAxiosPrivate();
     // function that takes questionId from CreateQuestionsForm and stores it
     // to the optionsDTO.questionId
     const location = useLocation();
@@ -42,7 +44,7 @@ function CreateOptionsForm()
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("https://localhost:7015/api/Options", optionDTO);
+            await axiosPrivate.post("/api/Options", optionDTO);
             alert("Options created successfully!");
             navigate('/AdminUI');
         } catch (error) {

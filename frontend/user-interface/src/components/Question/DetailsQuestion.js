@@ -7,7 +7,8 @@ function DetailsQuestion() {
   const location = useLocation();
   const question = location.state.questionDetails;
   const correctAnswerIndex = question.options.findIndex((option) => option.isCorrect === true);
-//   console.log(question);
+ 
+  //   console.log(question);
 
   return (
     <div>

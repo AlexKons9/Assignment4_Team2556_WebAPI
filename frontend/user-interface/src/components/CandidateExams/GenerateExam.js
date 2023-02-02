@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function GenerateExam()
 {
@@ -12,6 +13,7 @@ function GenerateExam()
         questions: location.state.questionList,
         chosenOptionsId:[]
     });
+    const axiosPrivate = useAxiosPrivate();
     
     const handleOptionSelection  = (i, optionId) => {
         //const { name, value } = event.target;
@@ -24,8 +26,10 @@ function GenerateExam()
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {      
-            await axios.post("https://localhost:7015/api/CandidateExams",examForm);
-            const response = await axios.get(`https://localhost:7015/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
+            //await axios.post("https://localhost:7015/api/CandidateExams",examForm);
+            await axiosPrivate.post("/api/CandidateExams",examForm);
+            //const response = await axios.get(`https://localhost:7015/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
+            const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
             const examResults = response.data;
             navigate('/CandidateUI/CandidateExamResults', { state: { results: examResults } });
 

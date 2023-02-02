@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MyCKEditor from '../MyCKEditor';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function CreateQuestionForm() {
   const [question, setQuestion] = useState({
@@ -10,11 +11,12 @@ function CreateQuestionForm() {
   });
   const [topics, setTopics] = useState([]);
   const navigate = useNavigate();
+   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get("https://localhost:7015/api/Topics");
+        const response = await axiosPrivate.get("/api/Topics");
         setTopics(response.data);
       } catch (error) {
         console.error(error);
@@ -37,8 +39,8 @@ function CreateQuestionForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "https://localhost:7015/api/Questions",
+      const response = await axiosPrivate.post(
+        "/api/Questions",
         question
       );
       alert("Question created successfully!");
