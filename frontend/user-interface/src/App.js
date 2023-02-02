@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { Routes, Route } from 'react-router-dom';
+//import { Routes, Route } from 'react-router-dom';
 import RequireAuth from './components/RequireAuth';
 
 //Public components
@@ -19,8 +19,8 @@ import Unauthorized from './components/Unauthorized';
 import PersistLogin from './components/PersistLogin';
 
 //Admin components
-import CreateQuestionForm from './components/CreateQuestionForm';
-import CreateOptionsForm from './components/CreateOptionsForm';
+//import CreateQuestionForm from './components/CreateQuestionForm';
+//import CreateOptionsForm from './components/CreateOptionsForm';
 import AdminUI from './components/AdminUI';
 
 //Candidate components
@@ -44,7 +44,7 @@ function App() {
 
                 {/* Public Routes */}
                 <Route path="Register" element={<Register />} />
-
+                <Route path="Home" element={<Home />} />
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
@@ -54,18 +54,21 @@ function App() {
 
                     {/* Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                        <Route path="AdminUI" element={<AdminUI />} />
-                        <Route path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
-                        <Route path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
-                        
-
+                        <Route exact path="AdminUI" element={<AdminUI />} />
+                        <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
+                        <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm />} />
+                        <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} />
+                        <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
+                        <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
                     </Route>
 
                     {/* Candidate Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
-                        <Route path="Users" element={<Users />} />
+                        <Route exact path="CandidateUI" element={<CandidateUI />} />
+                        <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
+                        <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />} />
                     </Route>
-                    
+
                 </Route>
 
 
@@ -73,27 +76,16 @@ function App() {
 
 
                 {/* TESTING */}
+                <Route path="/" element={<Home />} />
+
+
 
             </Route>
         </Routes>
-        <BrowserRouter>
-            <main>
-                <NavBar/>
-                <Routes>
-                    <Route path="/" element={<Home/> } />
-                    <Route path="Home" element={<Home/> } />
-                    <Route exact path="CandidateUI" element={<CandidateUI />} />
-                    <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
-                    <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />} />
-                    <Route exact path="AdminUI" element={<AdminUI/>} />
-                    <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm/>} />
-                    <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm/>} />
-                    <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion/>} />
-                    <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm/>} />
-                    <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm/>} />
-                </Routes>
-            </main>
-        </BrowserRouter>
+
+
+
+
     );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { Link, useNavigate } from "react-router-dom";
 import htmlParse from 'html-react-parser';
 
@@ -11,11 +12,13 @@ function QuestionsList() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(0);
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://localhost:7015/api/Questions");
+                //const response = await axios.get("https://localhost:7015/api/Questions");
+                const response = await axiosPrivate.get("/api/Questions");
                 setQuestions(response.data);
             } catch (error) {
                 console.error(error);

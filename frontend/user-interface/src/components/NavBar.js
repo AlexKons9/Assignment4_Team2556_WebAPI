@@ -51,10 +51,7 @@ function NavBar() {
                             <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-light">Candidate UI</a>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-light" to="Users" >Users</Link>
+                            <Link className="nav-link text-light" to="CandidateUI" >Candidate UI</Link>
                         </li>
                     </ul>
                 </div>
