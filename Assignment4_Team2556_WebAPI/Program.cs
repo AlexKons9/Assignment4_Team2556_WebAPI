@@ -13,6 +13,7 @@ namespace Assignment4_Team2556_WebAPI
     {
         public static void Main(string[] args)
         {
+            //Candidate candidate = new Candidate();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

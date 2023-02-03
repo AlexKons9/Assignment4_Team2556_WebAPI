@@ -21,7 +21,7 @@ function GenerateExam()
         updatedChosenOptionsId[i] = optionId;
         setExamForm({ ...examForm, chosenOptionsId: updatedChosenOptionsId  });
     };
-
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();

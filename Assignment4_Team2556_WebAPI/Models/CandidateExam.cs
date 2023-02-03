@@ -10,8 +10,8 @@ namespace Assignment4_Team2556_WebAPI.Models
         public int CandidateExamId { get; set; }
         public int ExamId { get; set; }
         public Exam? Exam { get; set; }
-        public int CandidateId { get; set; }
-        public Candidate? Candidate { get; set; }
+        public string UserId { get; set; }
+        public User? User { get; set; }
         public DateTime ExamDate { get; set; }
         public virtual ICollection<CandidateExamAnswer>? QA { get; set; }
         public string? AssessmentTestCode { get; set; }

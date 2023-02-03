@@ -63,7 +63,7 @@ namespace Assignment4_Team2556_WebAPI.Services
 
         //
         //Summary: Returns the ExamForm DTO
-        public async Task<ExamForm> GenerateExamForm(int candidateId, int certificateId)
+        public async Task<ExamForm> GenerateExamForm(string userId, int certificateId)
         {
             //Create list of Exams associated with a certificate
             IList<Exam> exams = await _candidateExamRepository.GetAllExamsByCertificateId(certificateId);
@@ -85,7 +85,7 @@ namespace Assignment4_Team2556_WebAPI.Services
             CandidateExam candidateExam = new CandidateExam()
             {
                 ExamId = randomlySelectedExam.ExamId,
-                CandidateId = candidateId,
+                UserId = userId,
                 ExamDate = DateTime.Now,
                 AssessmentTestCode = "Some Code"
             };

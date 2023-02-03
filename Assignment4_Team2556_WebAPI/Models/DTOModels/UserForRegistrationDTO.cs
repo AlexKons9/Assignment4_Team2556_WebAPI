@@ -13,5 +13,8 @@ namespace Assignment4_Team2556_WebAPI.Models.DTOModels
         public string? Email { get; init; }
         public string? PhoneNumber { get; init; }
         public ICollection<string>? Roles { get; init; }
+
+
+
     }
 }

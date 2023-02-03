@@ -33,12 +33,27 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NativeLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhotoIdType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoIdNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoIssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CountryOfResidence = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LandlineNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -54,36 +69,6 @@ namespace Assignment4Team2556WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Candidates",
-                columns: table => new
-                {
-                    CandidateId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NativeLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PhotoIdType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoIdNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoIssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryOfResidence = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LandlineNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Candidates", x => x.CandidateId);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,7 +239,8 @@ namespace Assignment4Team2556WebAPI.Migrations
                     CandidateExamId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    CandidateId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AssessmentTestCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExaminationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -269,11 +255,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_CandidateExams", x => x.CandidateExamId);
                     table.ForeignKey(
-                        name: "FK_CandidateExams_Candidates_CandidateId",
-                        column: x => x.CandidateId,
-                        principalTable: "Candidates",
-                        principalColumn: "CandidateId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_CandidateExams_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CandidateExams_Exams_ExamId",
                         column: x => x.ExamId,
@@ -396,21 +381,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "291d605c-35c8-4eeb-8b54-59500e14b0c2", "c36c6357-fd1f-4e4e-a9d3-79a90663683e", "Candidate", "CANDIDATE" },
-                    { "3d6bed2c-16b4-49ee-a1a1-f3394e6e38d2", "4c391347-434e-4eb4-ab94-8c09d0703f77", "Admin", "ADMIN" },
-                    { "671f0e36-5036-47ca-ba01-81ec02590db6", "de6a5f6b-0d14-4ec1-ae60-2031732e84ea", "Marker", "MARKER" },
-                    { "aebc73eb-3939-45f9-a9bf-ea987047d76e", "0f961985-2141-4f59-b09d-cb94f5d4bcc4", "QualityControl", "QUALITYCONTROL" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Candidates",
-                columns: new[] { "CandidateId", "AddressLine", "AddressLine2", "BirthDate", "City", "CountryOfResidence", "Email", "FirstName", "Gender", "LandlineNumber", "LastName", "MiddleName", "MobileNumber", "NativeLanguage", "PhotoIdNumber", "PhotoIdType", "PhotoIssueDate", "PostalCode", "Province" },
-                values: new object[,]
-                {
-                    { 1, "Korai 5", "2nd Floor", new DateTime(1992, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athens", "Greece", "alex@alex.com", "Alexandros", "Male", "+302109090999", "Lepeniotis", "Nikolaos", "+306912345678", "Greek", "AA 123456", "National Id", new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "12345", "Attiki" },
-                    { 2, "Axeloou 7", "Ground Floor", new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kalamaria", "Greece", "mpa@mpampis.com", "Mpampis", "Male", "+30231009090", "Papadimitriou", null, "+306912345678", "Greek", "AB 999999", "National Id", new DateTime(2015, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "12345", "Thessaloniki" },
-                    { 3, "Pentelis 2", "4th Floor", new DateTime(1980, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athens", "Greece", "kostas@kostopoulos.com", "Kostas", "Male", "+302108888888", "Kostopoulos", null, "+306945454545", "Greek", "AH 111111", "National Id", new DateTime(2015, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "54321", "Attiki" },
-                    { 4, "Markou Mpotsari 67", "1st Floor", new DateTime(1972, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athens", "Greece", "maria-eleni@papadopoulou.com", "Maria", "Female", "+3021000000", "Papadopoulou", "Eleni", "+306989898809", "Greek", "AHQ4567FG", "Passport", new DateTime(2022, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "23456", "Attiki" }
+                    { "6fe720b2-def5-495a-b570-d10e50ca0902", "1242fe63-89d0-4e4a-91aa-9167372895cd", "Candidate", "CANDIDATE" },
+                    { "b07776db-f60e-477e-b762-d58fb5cb8057", "b3c32aa7-e121-4c9b-ad58-da3fd0245ca1", "Admin", "ADMIN" },
+                    { "dba27a80-f786-409b-bf16-0f262fc8d804", "46dc4f73-b352-493a-b12f-51a3f0c37fef", "Marker", "MARKER" },
+                    { "e09989bf-3aa7-447f-b18f-6414cfe6d625", "9f58dcd0-9e8c-448a-8100-4abbfa20fb2a", "QualityControl", "QUALITYCONTROL" }
                 });
 
             migrationBuilder.InsertData(
@@ -605,14 +579,14 @@ namespace Assignment4Team2556WebAPI.Migrations
                 column: "OptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CandidateExams_CandidateId",
-                table: "CandidateExams",
-                column: "CandidateId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CandidateExams_ExamId",
                 table: "CandidateExams",
                 column: "ExamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CandidateExams_UserId1",
+                table: "CandidateExams",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamQuestions_ExamId",
@@ -671,16 +645,13 @@ namespace Assignment4Team2556WebAPI.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "CandidateExams");
 
             migrationBuilder.DropTable(
                 name: "Options");
 
             migrationBuilder.DropTable(
-                name: "Candidates");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Exams");

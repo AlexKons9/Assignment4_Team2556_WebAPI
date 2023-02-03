@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230203142643_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,15 +81,17 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("TestResult")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CandidateExamId");
 
                     b.HasIndex("ExamId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("CandidateExams");
                 });
@@ -1014,29 +1019,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "46a031a9-b93f-484c-9e94-6e97090aad00",
-                            ConcurrencyStamp = "d0e5f658-4ab8-4923-b2d6-c6fb031e4775",
+                            Id = "6d15e1ce-07bb-4c2c-8d3f-79e23e72b7bb",
+                            ConcurrencyStamp = "e6c6b9b3-3139-4d43-9761-72352c95e6a0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "02406a2b-2643-4525-88aa-95e64255210c",
-                            ConcurrencyStamp = "67a5054e-30f3-4656-ac79-628a5605004a",
+                            Id = "cca6788d-fd12-46bf-b5dd-ed1af91ef6dd",
+                            ConcurrencyStamp = "a513d3eb-fcf5-4f0a-a45b-dbcf87d92d2a",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "83e680c6-9791-4041-8f4a-2961cc0fad7a",
-                            ConcurrencyStamp = "491862b5-2d1d-4adf-9749-41fce033ff41",
+                            Id = "8fb9c0e1-727a-49b1-b16a-da86d5ea0d29",
+                            ConcurrencyStamp = "be4f0933-ff31-4ac4-9e52-2817fc350ed0",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "fec39825-185c-47c7-a1b7-083ef29b36b3",
-                            ConcurrencyStamp = "b62188a1-1443-4dce-9338-6cd0fc980745",
+                            Id = "1a1da1ac-8a83-4b97-8d88-f1a4dbdb61cd",
+                            ConcurrencyStamp = "3eb6de33-75a6-4ac0-9716-bc64e3e71c78",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
@@ -1169,9 +1174,7 @@ namespace Assignment4Team2556WebAPI.Migrations
 
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Exam");
 

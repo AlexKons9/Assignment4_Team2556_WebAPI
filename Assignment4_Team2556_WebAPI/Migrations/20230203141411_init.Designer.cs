@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230203141411_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,15 +81,17 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("TestResult")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CandidateExamId");
 
                     b.HasIndex("ExamId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("CandidateExams");
                 });
@@ -872,15 +877,18 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AddressLine")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AddressLine2")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -888,9 +896,11 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryOfResidence")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -898,15 +908,19 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LandlineNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -919,9 +933,11 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobileNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NativeLanguage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -942,24 +958,28 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PhotoIdNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoIdType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("PhotoIssueDate")
+                    b.Property<DateTime>("PhotoIssueDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Province")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
@@ -1014,29 +1034,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "46a031a9-b93f-484c-9e94-6e97090aad00",
-                            ConcurrencyStamp = "d0e5f658-4ab8-4923-b2d6-c6fb031e4775",
+                            Id = "b07776db-f60e-477e-b762-d58fb5cb8057",
+                            ConcurrencyStamp = "b3c32aa7-e121-4c9b-ad58-da3fd0245ca1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "02406a2b-2643-4525-88aa-95e64255210c",
-                            ConcurrencyStamp = "67a5054e-30f3-4656-ac79-628a5605004a",
+                            Id = "6fe720b2-def5-495a-b570-d10e50ca0902",
+                            ConcurrencyStamp = "1242fe63-89d0-4e4a-91aa-9167372895cd",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "83e680c6-9791-4041-8f4a-2961cc0fad7a",
-                            ConcurrencyStamp = "491862b5-2d1d-4adf-9749-41fce033ff41",
+                            Id = "dba27a80-f786-409b-bf16-0f262fc8d804",
+                            ConcurrencyStamp = "46dc4f73-b352-493a-b12f-51a3f0c37fef",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "fec39825-185c-47c7-a1b7-083ef29b36b3",
-                            ConcurrencyStamp = "b62188a1-1443-4dce-9338-6cd0fc980745",
+                            Id = "e09989bf-3aa7-447f-b18f-6414cfe6d625",
+                            ConcurrencyStamp = "9f58dcd0-9e8c-448a-8100-4abbfa20fb2a",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
@@ -1169,9 +1189,7 @@ namespace Assignment4Team2556WebAPI.Migrations
 
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Exam");
 

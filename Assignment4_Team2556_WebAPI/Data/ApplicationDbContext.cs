@@ -11,7 +11,7 @@ namespace Assignment4_Team2556_WebAPI.Data
            : base(options)
         {
         }
-        public virtual DbSet<Candidate> Candidates { get; set; }
+        //public virtual DbSet<Candidate> Candidates { get; set; }
         public virtual DbSet<CandidateCertificate> CandidateCertificates { get; set; }
         public virtual DbSet<CandidateExam> CandidateExams { get; set; }
         public virtual DbSet<CandidateExamAnswer> CandidateExamAnswers { get; set; }
@@ -36,7 +36,7 @@ namespace Assignment4_Team2556_WebAPI.Data
                 .WithMany()
                 .HasForeignKey(eq => eq.ExamId);
 
-            modelBuilder.ApplyConfiguration(new CandidatesSeed());
+            //modelBuilder.ApplyConfiguration(new CandidatesSeed());
             modelBuilder.ApplyConfiguration(new CertificatesSeed());
             modelBuilder.ApplyConfiguration(new TopicsSeed());
             modelBuilder.ApplyConfiguration(new ExamsSeed());
