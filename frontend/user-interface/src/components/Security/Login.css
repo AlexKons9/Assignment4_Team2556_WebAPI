@@ -1,0 +1,17 @@
+.container {
+    width: 40%;
+}
+
+h1 {
+    margin: auto;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-weight:600;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+button {
+    margin-bottom: 1rem;
+}

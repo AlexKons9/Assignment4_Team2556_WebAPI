@@ -1,4 +1,5 @@
 ﻿import 'bootstrap/dist/css/bootstrap.min.css';
+import './NavBar.css';
 import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout"
 import useRefreshToken from '../hooks/useRefreshToken';
@@ -12,7 +13,7 @@ function NavBar() {
 
     return (
 
-        <>
+        <div id='main-nav'>
             {/*<nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">*/}
             {/*    <div className="container-fluid">*/}
             {/*        <a className="navbar-brand" >Assignment_4A_Team2556</a>*/}
@@ -88,7 +89,7 @@ function NavBar() {
 
                 )}
             </nav>
-        </>
+        </div>
 
     );
 }

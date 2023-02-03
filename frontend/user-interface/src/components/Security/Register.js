@@ -26,31 +26,31 @@ function Register() {
                     <div className="col-md-4 col-md-offset-4">
                         <form onSubmit={handleSubmit(onSubmit)} className="registrationForm">
                             <h2>Registration form</h2>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="firstname">First Name</label>
-                                <input {...register("firstname")} />
+                                <input className="form-control" {...register("firstname")} />
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="lastname">Last Name</label>
-                                <input {...register("lastname")} />
+                                <input className="form-control" {...register("lastname")} />
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="username">User Name</label>
-                                <input {...register("username")} />
+                                <input className="form-control" {...register("username")} />
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="password">Password</label>
-                                <input {...register("password")} />
+                                <input className="form-control" {...register("password")} />
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="email">Email</label>
-                                <input {...register("email")} />
+                                <input className="form-control" {...register("email")} />
                             </div>
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor="phonenumber">Phone Number</label>
-                                <input {...register("phonenumber")} />
+                                <input className="form-control" {...register("phonenumber")} />
                             </div>
-                            <input type="submit" />
+                            <input type="submit" className="btn btn-primary" />
                         </form>
                     </div>
                 </div>
