@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230203153854_third")]
-    partial class third
+    [Migration("20230203161622_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1017,29 +1017,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "46a031a9-b93f-484c-9e94-6e97090aad00",
-                            ConcurrencyStamp = "d0e5f658-4ab8-4923-b2d6-c6fb031e4775",
+                            Id = "d6ff4524-be9d-41eb-a89e-d95b14983934",
+                            ConcurrencyStamp = "7d3650f4-5ec3-4f0f-8059-6fad1532d144",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "02406a2b-2643-4525-88aa-95e64255210c",
-                            ConcurrencyStamp = "67a5054e-30f3-4656-ac79-628a5605004a",
+                            Id = "29c468e6-283f-4f7a-9d08-888606379736",
+                            ConcurrencyStamp = "4f3655c7-3d36-4552-8da7-7fca8899dd0f",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "83e680c6-9791-4041-8f4a-2961cc0fad7a",
-                            ConcurrencyStamp = "491862b5-2d1d-4adf-9749-41fce033ff41",
+                            Id = "f666b326-3895-40ef-bf19-8c504a342406",
+                            ConcurrencyStamp = "058f21ef-4fed-40db-83d5-750a63b47835",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "fec39825-185c-47c7-a1b7-083ef29b36b3",
-                            ConcurrencyStamp = "b62188a1-1443-4dce-9338-6cd0fc980745",
+                            Id = "4e62bc99-6d9a-4caf-beb2-9002ca2c9b4e",
+                            ConcurrencyStamp = "a22a99bf-e27b-4568-915b-cca5100e9c92",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });

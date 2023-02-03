@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,28 +32,28 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NativeLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PhotoIdType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoIdNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoIssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountryOfResidence = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LandlineNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NativeLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PhotoIdType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhotoIdNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhotoIssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryOfResidence = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LandlineNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -239,8 +239,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                     CandidateExamId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AssessmentTestCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExaminationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -255,10 +254,11 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_CandidateExams", x => x.CandidateExamId);
                     table.ForeignKey(
-                        name: "FK_CandidateExams_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_CandidateExams_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CandidateExams_Exams_ExamId",
                         column: x => x.ExamId,
@@ -381,10 +381,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6fe720b2-def5-495a-b570-d10e50ca0902", "1242fe63-89d0-4e4a-91aa-9167372895cd", "Candidate", "CANDIDATE" },
-                    { "b07776db-f60e-477e-b762-d58fb5cb8057", "b3c32aa7-e121-4c9b-ad58-da3fd0245ca1", "Admin", "ADMIN" },
-                    { "dba27a80-f786-409b-bf16-0f262fc8d804", "46dc4f73-b352-493a-b12f-51a3f0c37fef", "Marker", "MARKER" },
-                    { "e09989bf-3aa7-447f-b18f-6414cfe6d625", "9f58dcd0-9e8c-448a-8100-4abbfa20fb2a", "QualityControl", "QUALITYCONTROL" }
+                    { "29c468e6-283f-4f7a-9d08-888606379736", "4f3655c7-3d36-4552-8da7-7fca8899dd0f", "Candidate", "CANDIDATE" },
+                    { "4e62bc99-6d9a-4caf-beb2-9002ca2c9b4e", "a22a99bf-e27b-4568-915b-cca5100e9c92", "QualityControl", "QUALITYCONTROL" },
+                    { "d6ff4524-be9d-41eb-a89e-d95b14983934", "7d3650f4-5ec3-4f0f-8059-6fad1532d144", "Admin", "ADMIN" },
+                    { "f666b326-3895-40ef-bf19-8c504a342406", "058f21ef-4fed-40db-83d5-750a63b47835", "Marker", "MARKER" }
                 });
 
             migrationBuilder.InsertData(
@@ -584,9 +584,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                 column: "ExamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CandidateExams_UserId1",
+                name: "IX_CandidateExams_UserId",
                 table: "CandidateExams",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamQuestions_ExamId",
