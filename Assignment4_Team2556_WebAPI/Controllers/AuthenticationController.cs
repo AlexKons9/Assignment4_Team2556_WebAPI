@@ -35,7 +35,6 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         [HttpPost("login")]
-
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDTO user)
         {
             if(!await _service.ValidateUser(user))

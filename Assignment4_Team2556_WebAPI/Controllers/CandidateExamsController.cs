@@ -11,6 +11,7 @@ using Assignment4_Team2556_WebAPI.Services;
 using Assignment4_Team2556_WebAPI.Models.DTOModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -21,12 +22,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ICandidateExamService _candidateExamService;
         private readonly ICandidateExamAnswerService _candidateExamAnswerService;
+        private readonly UserManager<User> _userManager;
 
-        public CandidateExamsController(ApplicationDbContext context, ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService)
+        public CandidateExamsController(ApplicationDbContext context, ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, UserManager<User> userManager)
         {
             _context = context;
             _candidateExamService = candidateExamService;
             _candidateExamAnswerService = candidateExamAnswerService;
+            _userManager = userManager;
         }
 
         // GET: api/CandidateExams
@@ -59,7 +62,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            ExamForm examForm = await _candidateExamService.GenerateExamForm(examDetailsDTO.CandidateId, examDetailsDTO.CertificateId);
+            User user = await _userManager.FindByNameAsync(examDetailsDTO.User);
+
+            ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
 
             return Ok(examForm);
         }

@@ -3,19 +3,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import useAuth from '../hooks/useAuth';
 
 function CandidateUI() {
-    const [examDetailsDTO, setExamDetailsDTO] = useState({
-        certificateId: "",
-        candidateId: "",
-    });
-    //const [examForm, setExamForm] = useState({
-    //    candidateExamId: "",
-    //    questions: [],
-    //    chosenOptionsId:[]
-    //});
     const [certificates, setCertificates] = useState([]);
     const navigate = useNavigate();
+    const { auth } = useAuth();
+
+    const [examDetailsDTO, setExamDetailsDTO] = useState({
+        certificateId: "",
+        user: auth.user,
+    });
+
+    
     useEffect(() => {
         const fetchCertificates = async () => {
             try {
@@ -35,6 +35,7 @@ function CandidateUI() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            console.log(examDetailsDTO.user);
             const response = await axios.post(
                 "https://localhost:7015/api/CandidateExams/ExamForm",
                 examDetailsDTO
@@ -57,7 +58,7 @@ function CandidateUI() {
             <h3>Welcome Candidate, insert id and certificate to start your Exam :</h3>
             <form onSubmit={handleSubmit}>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor="candidateId">Candidate ID:</label>
                     <input
                         type="text"
@@ -68,7 +69,7 @@ function CandidateUI() {
                         onChange={handleChange}
                         required
                     />
-                </div>
+                </div> */}
 
                 <div className="form-group">
                     <label htmlFor="certificateId">Certificates:</label>

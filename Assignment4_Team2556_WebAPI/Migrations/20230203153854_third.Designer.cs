@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202174624_init")]
-    partial class init
+    [Migration("20230203153854_third")]
+    partial class third
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,176 +24,6 @@ namespace Assignment4Team2556WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Assignment4_Team2556_WebAPI.Models.Candidate", b =>
-                {
-                    b.Property<int>("CandidateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateId"));
-
-                    b.Property<string>("AddressLine")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CountryOfResidence")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LandlineNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MobileNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NativeLanguage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoIdNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoIdType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PhotoIssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Province")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CandidateId");
-
-                    b.ToTable("Candidates");
-
-                    b.HasData(
-                        new
-                        {
-                            CandidateId = 1,
-                            AddressLine = "Korai 5",
-                            AddressLine2 = "2nd Floor",
-                            BirthDate = new DateTime(1992, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Athens",
-                            CountryOfResidence = "Greece",
-                            Email = "alex@alex.com",
-                            FirstName = "Alexandros",
-                            Gender = "Male",
-                            LandlineNumber = "+302109090999",
-                            LastName = "Lepeniotis",
-                            MiddleName = "Nikolaos",
-                            MobileNumber = "+306912345678",
-                            NativeLanguage = "Greek",
-                            PhotoIdNumber = "AA 123456",
-                            PhotoIdType = "National Id",
-                            PhotoIssueDate = new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostalCode = "12345",
-                            Province = "Attiki"
-                        },
-                        new
-                        {
-                            CandidateId = 2,
-                            AddressLine = "Axeloou 7",
-                            AddressLine2 = "Ground Floor",
-                            BirthDate = new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Kalamaria",
-                            CountryOfResidence = "Greece",
-                            Email = "mpa@mpampis.com",
-                            FirstName = "Mpampis",
-                            Gender = "Male",
-                            LandlineNumber = "+30231009090",
-                            LastName = "Papadimitriou",
-                            MobileNumber = "+306912345678",
-                            NativeLanguage = "Greek",
-                            PhotoIdNumber = "AB 999999",
-                            PhotoIdType = "National Id",
-                            PhotoIssueDate = new DateTime(2015, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostalCode = "12345",
-                            Province = "Thessaloniki"
-                        },
-                        new
-                        {
-                            CandidateId = 3,
-                            AddressLine = "Pentelis 2",
-                            AddressLine2 = "4th Floor",
-                            BirthDate = new DateTime(1980, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Athens",
-                            CountryOfResidence = "Greece",
-                            Email = "kostas@kostopoulos.com",
-                            FirstName = "Kostas",
-                            Gender = "Male",
-                            LandlineNumber = "+302108888888",
-                            LastName = "Kostopoulos",
-                            MobileNumber = "+306945454545",
-                            NativeLanguage = "Greek",
-                            PhotoIdNumber = "AH 111111",
-                            PhotoIdType = "National Id",
-                            PhotoIssueDate = new DateTime(2015, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostalCode = "54321",
-                            Province = "Attiki"
-                        },
-                        new
-                        {
-                            CandidateId = 4,
-                            AddressLine = "Markou Mpotsari 67",
-                            AddressLine2 = "1st Floor",
-                            BirthDate = new DateTime(1972, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Athens",
-                            CountryOfResidence = "Greece",
-                            Email = "maria-eleni@papadopoulou.com",
-                            FirstName = "Maria",
-                            Gender = "Female",
-                            LandlineNumber = "+3021000000",
-                            LastName = "Papadopoulou",
-                            MiddleName = "Eleni",
-                            MobileNumber = "+306989898809",
-                            NativeLanguage = "Greek",
-                            PhotoIdNumber = "AHQ4567FG",
-                            PhotoIdType = "Passport",
-                            PhotoIssueDate = new DateTime(2022, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostalCode = "23456",
-                            Province = "Attiki"
-                        });
-                });
 
             modelBuilder.Entity("Assignment4_Team2556_WebAPI.Models.CandidateCertificate", b =>
                 {
@@ -224,9 +54,6 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("AssessmentTestCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ExamDate")
                         .HasColumnType("datetime2");
 
@@ -254,11 +81,15 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("TestResult")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("CandidateExamId");
 
-                    b.HasIndex("CandidateId");
-
                     b.HasIndex("ExamId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CandidateExams");
                 });
@@ -1043,8 +874,23 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AddressLine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryOfResidence")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -1055,11 +901,15 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LandlineNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -1067,6 +917,15 @@ namespace Assignment4Team2556WebAPI.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NativeLanguage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -1085,10 +944,25 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhotoIdNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoIdType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PhotoIssueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
@@ -1143,29 +1017,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d6bed2c-16b4-49ee-a1a1-f3394e6e38d2",
-                            ConcurrencyStamp = "4c391347-434e-4eb4-ab94-8c09d0703f77",
+                            Id = "46a031a9-b93f-484c-9e94-6e97090aad00",
+                            ConcurrencyStamp = "d0e5f658-4ab8-4923-b2d6-c6fb031e4775",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "291d605c-35c8-4eeb-8b54-59500e14b0c2",
-                            ConcurrencyStamp = "c36c6357-fd1f-4e4e-a9d3-79a90663683e",
+                            Id = "02406a2b-2643-4525-88aa-95e64255210c",
+                            ConcurrencyStamp = "67a5054e-30f3-4656-ac79-628a5605004a",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "671f0e36-5036-47ca-ba01-81ec02590db6",
-                            ConcurrencyStamp = "de6a5f6b-0d14-4ec1-ae60-2031732e84ea",
+                            Id = "83e680c6-9791-4041-8f4a-2961cc0fad7a",
+                            ConcurrencyStamp = "491862b5-2d1d-4adf-9749-41fce033ff41",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "aebc73eb-3939-45f9-a9bf-ea987047d76e",
-                            ConcurrencyStamp = "0f961985-2141-4f59-b09d-cb94f5d4bcc4",
+                            Id = "fec39825-185c-47c7-a1b7-083ef29b36b3",
+                            ConcurrencyStamp = "b62188a1-1443-4dce-9338-6cd0fc980745",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
@@ -1290,21 +1164,21 @@ namespace Assignment4Team2556WebAPI.Migrations
 
             modelBuilder.Entity("Assignment4_Team2556_WebAPI.Models.CandidateExam", b =>
                 {
-                    b.HasOne("Assignment4_Team2556_WebAPI.Models.Candidate", "Candidate")
-                        .WithMany()
-                        .HasForeignKey("CandidateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.Exam", "Exam")
                         .WithMany()
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidate");
+                    b.HasOne("Assignment4_Team2556_WebAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Exam");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Assignment4_Team2556_WebAPI.Models.CandidateExamAnswer", b =>
