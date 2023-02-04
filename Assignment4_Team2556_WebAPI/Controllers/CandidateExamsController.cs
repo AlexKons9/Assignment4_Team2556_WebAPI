@@ -62,7 +62,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = await _userManager.FindByNameAsync(examDetailsDTO.User);
+            User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
 
             ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
 

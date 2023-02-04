@@ -18,14 +18,14 @@ const useRefreshToken = () => {
             setAuth(prev => {
                 console.log(`${response.data}`);
                 var decoded = jwt_decode(response.data);
-                var user = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+                var userName = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
                 const roles = [];
                 roles.push(decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
                 return {
                     ...prev,
                     roles: roles,
                     accessToken: response.data,
-                    user: user,
+                    userName: userName,
                 }
             });
             

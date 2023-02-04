@@ -12,7 +12,7 @@ function CandidateUI() {
 
   const [examDetailsDTO, setExamDetailsDTO] = useState({
     certificateId: "",
-    user: auth.user,
+    userName: auth.userName,
   });
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function CandidateUI() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(examDetailsDTO.user);
+      console.log(`password: ${auth.pwd}`);
       const response = await axios.post(
         "https://localhost:7015/api/CandidateExams/ExamForm",
         examDetailsDTO

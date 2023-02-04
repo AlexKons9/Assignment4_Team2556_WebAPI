@@ -3,6 +3,6 @@
     public class ExamDetailsDTO
     {
         public int CertificateId { get; set; }
-        public string? User { get; set; }
+        public string? UserName { get; set; }
     }
 }

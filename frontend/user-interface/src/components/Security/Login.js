@@ -13,20 +13,20 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const userRef = useRef();
+  const userNameRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [userName, setUserName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    userRef.current.focus();
+    userNameRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [userName, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         "https://localhost:7015/api/authentication/login",
-        JSON.stringify({ username: user, password: pwd }),
+        JSON.stringify({ username: userName, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -50,8 +50,8 @@ const Login = () => {
       );
       console.log(roles);
 
-      setAuth({ user, pwd, roles, accessToken }); //, refreshToken
-      setUser("");
+      setAuth({ userName, pwd, roles, accessToken }); //, refreshToken
+      setUserName("");
       setPwd("");
       navigate(from, { replace: true });
     } catch (err) {
@@ -85,10 +85,10 @@ const Login = () => {
             className="form-control"
             type="text"
             id="username"
-            ref={userRef}
+            ref={userNameRef}
             autoComplete="off"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            onChange={(e) => setUserName(e.target.value)}
+            value={userName}
             required
           />
         </div>
