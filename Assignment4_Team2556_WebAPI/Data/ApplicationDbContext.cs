@@ -21,6 +21,7 @@ namespace Assignment4_Team2556_WebAPI.Data
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Option> Options { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ExamQuestion>()

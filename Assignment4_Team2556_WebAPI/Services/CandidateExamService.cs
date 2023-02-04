@@ -85,7 +85,7 @@ namespace Assignment4_Team2556_WebAPI.Services
             CandidateExam candidateExam = new CandidateExam()
             {
                 ExamId = randomlySelectedExam.ExamId,
-                UserId = userId,
+                CandidateId = userId,
                 ExamDate = DateTime.Now,
                 AssessmentTestCode = "Some Code"
             };
