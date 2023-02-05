@@ -56,7 +56,7 @@ function CandidateUI() {
   };
   return (
     <div className="container">
-      <h3>Welcome Candidate, insert id and certificate to start your Exam :</h3>
+      <h3>Welcome Candidate, select the certificate to start your Exam :</h3>
       <form onSubmit={handleSubmit}>
         {/* <div className="form-group">
                     <label htmlFor="candidateId">Candidate ID:</label>

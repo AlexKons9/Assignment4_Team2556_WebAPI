@@ -10,6 +10,8 @@ import DetailsQuestion from './components/Question/DetailsQuestion';
 import CreateOptionsForm from './components/Option/CreateOptionsForm';
 import EditOptionsForm from './components/Option/EditOptionsForm';
 import GenerateExam from './components/CandidateExams/GenerateExam';
+import MyCertificatesList from './components/CandidateCertificates/MyCertificatesList';
+import CertificateDetails from './components/CandidateCertificates/CertificateDetails';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -78,7 +80,10 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
                         <Route exact path="CandidateUI" element={<CandidateUI />} />
                         <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
-                        <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />} />
+                        <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />}/>
+                        <Route exact path="MyCertificatesList" element={<MyCertificatesList/>}/>
+                        <Route exact path="MyCertificatesList/CertificateDetails" element={<CertificateDetails/>}/>
+
                     </Route>           
 
                 </Route>

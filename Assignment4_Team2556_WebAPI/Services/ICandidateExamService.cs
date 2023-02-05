@@ -7,10 +7,8 @@ namespace Assignment4_Team2556_WebAPI.Services
     {
         Task<IList<Certificate>> GetActiveCertificateList();
         Task<CandidateExam> GetSubmitedCandidateExamById(int id);
+        Task<IList<CandidateExam>> GetAccomplishedExamsByCandidateId(string candidateId);
         Task<CandidateExamResultsDTO> GetMarksOfTheSubmitedExam(int candidateExamId);
         Task<ExamForm> GenerateExamForm(string userId, int certificateId);
-
-
-
     }
 }

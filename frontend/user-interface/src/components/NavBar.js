@@ -15,7 +15,7 @@ function NavBar() {
     return (
 
         <div id='main-nav'>
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
@@ -32,9 +32,19 @@ function NavBar() {
 
                         {/* CANDIDATE NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("Candidate"))
-                            ? <li className="nav-item">
-                                <Link className="nav-link text-light" to="CandidateUI" >Candidate UI</Link>
-                            </li>
+                            ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
+                                <ul className="navbar-nav ms-auto">
+                                    <li  className="nav-item">
+                                    <Link className="nav-link text-light" to="" >E-Shop</Link>
+                                    </li>
+                                    <li  className="nav-item">
+                                    <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
+                                    </li>
+                                    <li  className="nav-item">
+                                    <Link className="nav-link text-light" to="MyCertificatesList" >My Certificates</Link>
+                                    </li>
+                                </ul>  
+                              </div>
                             : <li></li>
                         }
                     </ul>

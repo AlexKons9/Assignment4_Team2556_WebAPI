@@ -3,6 +3,7 @@ using Assignment4_Team2556_WebAPI.Data.Repositories;
 using Assignment4_Team2556_WebAPI.Models.DTOModels;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using NuGet.Packaging.Signing;
 
 namespace Assignment4_Team2556_WebAPI.Services
 {
@@ -37,6 +38,13 @@ namespace Assignment4_Team2556_WebAPI.Services
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)
         {
             return await _candidateExamRepository.GetSubmitedCandidateExamById(id);
+        }
+
+        //
+        //Summary: Returns a Candidate Exam that has been completed successfully
+        public async Task<IList<CandidateExam>> GetAccomplishedExamsByCandidateId(string candidateId)
+        {
+            return await _candidateExamRepository.GetAccomplishedExamsByCandidateId(candidateId);
         }
 
 
@@ -81,13 +89,21 @@ namespace Assignment4_Team2556_WebAPI.Services
                 questions.Add(examQuestion.Question);
             }
 
+
+            
+            //
+            // Splits the certificate Title into two parts (for example: Java Foundation,
+            // into array, certDetails[0] = "Java", certDetails[1] = "Fountation" )
+            string certificateTitle = exams[0].Certificate.Title;
+            var certDetails = certificateTitle.Split(' ');
+
             //Create the CandidateExam object and save to database
             CandidateExam candidateExam = new CandidateExam()
             {
                 ExamId = randomlySelectedExam.ExamId,
                 CandidateId = userId,
                 ExamDate = DateTime.Now,
-                AssessmentTestCode = "Some Code"
+                AssessmentTestCode = GenerateString(certDetails[0], certDetails[1])
             };
             await _candidateExamRepository.AddSaveChanges(candidateExam);
 
@@ -197,6 +213,45 @@ namespace Assignment4_Team2556_WebAPI.Services
             examResults.ResultsPerTopic = answersPerTopic;
 
             return examResults;
+        }
+
+        //
+        //Summary: Generates Fully Random Assessment Code
+        public string GenerateString(string certificateName, string certificationLevel)
+        {
+            string startName = "";
+
+            // Empty Char Array
+            var availableCharacters = new char[3];
+
+            // Get first char of certificateName
+            availableCharacters[0] = certificateName[0];
+            // Get second char of certificateName
+            availableCharacters[1] = certificateName[1];
+            // Get first char of certificationLevel
+            availableCharacters[2] = certificationLevel[0];
+
+            // Adds Char into a variable (First Letters of Certificate)
+            for (var i = 0; i < availableCharacters.Length; i++)
+            {
+                startName += availableCharacters[i];
+            }
+
+            // Gets randomly 10 alpharithmetic chars
+            var code = RandomString(10);
+            string result = startName.ToUpper() + "-" + code;
+
+            return result;
+        }
+
+        //
+        //Summary: Produces Random Alpharithmetic Generated String (lenght depends on the input inserted)
+        public string RandomString(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

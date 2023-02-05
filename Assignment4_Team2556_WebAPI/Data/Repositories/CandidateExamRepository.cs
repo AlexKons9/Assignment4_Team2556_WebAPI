@@ -21,7 +21,9 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         //Summary: Returns a List of Exams, associated with a certificate
         public async Task<IList<Exam>> GetAllExamsByCertificateId(int certificateId)
         {
-            return await _context.Exams.Where(i => i.CertificateId == certificateId).ToListAsync();
+            var exams = await _context.Exams.Where(i => i.CertificateId == certificateId).ToListAsync();
+            await _context.Entry(exams[0]).Reference(x => x.Certificate).LoadAsync();
+            return exams;
 
         }
 
@@ -30,6 +32,14 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         public async Task<IList<Certificate>> GetActiveCertificateList() 
         {
             return await _context.Certificates.Where(v => v.IsActive == true).ToListAsync();
+        }
+
+        //
+        //Summary: Returns a Candidate Exam that has been completed successfully
+        public async Task<IList<CandidateExam>> GetAccomplishedExamsByCandidateId(string candidateId)
+        {
+            var listOfCandidateExams = await _context.CandidateExams.Where(c => c.CandidateId == candidateId && c.ExamScore>=c.Exam.PassMark).ToListAsync();
+            return listOfCandidateExams;
         }
 
         //

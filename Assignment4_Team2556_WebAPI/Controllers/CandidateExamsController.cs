@@ -19,14 +19,12 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     [ApiController]
     public class CandidateExamsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly ICandidateExamService _candidateExamService;
         private readonly ICandidateExamAnswerService _candidateExamAnswerService;
         private readonly UserManager<User> _userManager;
 
-        public CandidateExamsController(ApplicationDbContext context, ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, UserManager<User> userManager)
+        public CandidateExamsController(ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, UserManager<User> userManager)
         {
-            _context = context;
             _candidateExamService = candidateExamService;
             _candidateExamAnswerService = candidateExamAnswerService;
             _userManager = userManager;
@@ -38,6 +36,17 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         {
             return await _candidateExamService.GetActiveCertificateList();
         }
+
+
+        // GET: api/CandidateExams/Certificates
+        // Gets all the passed exams of a candidate
+        [HttpGet("Certificates")]
+        public async Task<IList<CandidateExam>> GetCandidatePassedExams(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            return await _candidateExamService.GetAccomplishedExamsByCandidateId(user.Id);
+        }
+
 
         //// GET: api/CandidateExams/ExamResults/5
         [HttpGet("ExamResults/{id}")]
