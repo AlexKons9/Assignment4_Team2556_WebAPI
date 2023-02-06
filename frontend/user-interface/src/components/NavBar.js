@@ -31,6 +31,9 @@ function NavBar() {
                                 </li>
                                 <li className="nav-item">
                                 <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
+                                </li>                                
+                                <li className="nav-item">
+                                <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
                                 </li>
                             </ul>
                             : <li></li>

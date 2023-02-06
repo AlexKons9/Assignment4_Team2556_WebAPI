@@ -25,6 +25,9 @@ import AdminUI from './components/AdminUI';
 import CandidateList from './components/Candidates/CandidatesList';
 import DetailsCandidate from './components/Candidates/DetailsCandidate';
 import EditCandidate from './components/Candidates/EditCandidate';
+import ExamsList from './components/Exams/ExamsList';
+import DetailsExam from './components/Exams/DetailsExam';
+import CreateExam from './components/Exams/CreateExams';
 
 //Candidate components
 import CandidateUI from './components/CandidateUI';
@@ -60,15 +63,17 @@ function App() {
                     {/* ONLY Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route exact path="AdminUI" element={<AdminUI />} />
-                        <Route exact path="AdminUI/Candidates" element={<CandidateList />} />
                         <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
                         <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm />} />
                         <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} />
                         <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
                         <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
+                        <Route exact path="AdminUI/Candidates" element={<CandidateList />} />
                         <Route exact path="AdminUI/Candidates/Register" element={<Register />} />
                         <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} />
                         <Route exact path="AdminUI/Candidates/Edit" element={<EditCandidate />} />
+                        <Route exact path="AdminUI/Exams" element={<ExamsList />} />
+                        <Route exact path="AdminUI/Exams/Create" element={<CreateExam />} />
                     </Route>
 
                     {/* Marker Routes */}

@@ -15,16 +15,11 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     [ApiController]
     public class CandidateController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly ApplicationDbContext _context;
         private readonly ICandidateService _candidateService;
 
-        public CandidateController(ICandidateService candidateService ,UserManager<User> userManager, ApplicationDbContext context) //, ApplicationDbContext context
+        public CandidateController(ICandidateService candidateService) 
         {
-            _userManager = userManager;
-            _context = context;
             _candidateService = candidateService;
-
         }
         // GET: api/Candidate
         [HttpGet]
@@ -86,7 +81,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
 
 
-        //// DELETE: api/Questions/5
+        // DELETE: api/Candidate/{username}
         [HttpDelete("{username}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteQuestion(string username)
@@ -101,10 +96,10 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok();
         }
 
-        //private bool QuestionExists(int id)
+        //private bool CandidateExists(string? username)
         //{
         //    //return _context.Questions.Any(e => e.QuestionId == id);
-        //    if (_questionsService.GetAsync(id) != null)
+        //    if (_candidateService.GetAsync(username) != null)
         //    {
         //        return true;
         //    }
