@@ -32,6 +32,12 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _candidateExamRepository.GetActiveCertificateList();
         }
 
+        // Summary: Returns a list of all candidate exams
+        public async Task<IList<CandidateExam>> GetAllCandidateExams()
+        {
+            return await _candidateExamRepository.GetAllCandidateExams();
+        }
+
 
         //Summary: Returns a Candidate Exam that has been submited for marking 
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)

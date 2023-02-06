@@ -9,5 +9,6 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         Task<IList<Exam>> GetAllExamsByCertificateId(int certificateId);
         Task<IList<ExamQuestion>> GetAllExamQuestionsByExamId(int examId);
         Task AddSaveChanges(CandidateExam candidateExam);
+        Task<IList<CandidateExam>> GetAllCandidateExams();
     }
 }

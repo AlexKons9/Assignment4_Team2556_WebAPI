@@ -22,6 +22,7 @@ import PersistLogin from './components/Security/PersistLogin';
 //import CreateQuestionForm from './components/CreateQuestionForm';
 //import CreateOptionsForm from './components/CreateOptionsForm';
 import AdminUI from './components/AdminUI';
+import AssignMarker from './components/Admin/AssignMarker'
 
 //Candidate components
 import CandidateUI from './components/CandidateUI';
@@ -46,7 +47,7 @@ function App() {
 
                 {/* Public Routes */}
                 <Route path="Register" element={<Register />} />
-                <Route path="Home" element={<Home />} />
+                {/* <Route path="Home" element={<Home />} /> */}
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
@@ -62,6 +63,7 @@ function App() {
                         <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} />
                         <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
                         <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
+                        <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                     </Route>
 
                     {/* Marker Routes */}

@@ -32,6 +32,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             _userManager = userManager;
         }
 
+        // GET: api/CandidateExams/List
+        [HttpGet("List")]
+        public async Task<IList<CandidateExam>> GetAllCandidateExams()
+        {
+            return await _candidateExamService.GetAllCandidateExams();
+        }
+
+
         // GET: api/CandidateExams
         [HttpGet]
         public async Task<IList<Certificate>> GetCandidateExams()
@@ -69,36 +77,36 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok(examForm);
         }
 
-        //// PUT: api/CandidateExams/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCandidateExam(int id, CandidateExam candidateExam)
-        //{
-        //    if (id != candidateExam.CandidateExamId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/CandidateExams/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCandidateExam(int id, CandidateExam candidateExam)
+        {
+            if (id != candidateExam.CandidateExamId)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(candidateExam).State = EntityState.Modified;
+            _context.Entry(candidateExam).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CandidateExamExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CandidateExamExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         // POST: api/CandidateExams
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -137,9 +145,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         //    return NoContent();
         //}
 
-        //private bool CandidateExamExists(int id)
-        //{
-        //    return _context.CandidateExams.Any(e => e.CandidateExamId == id);
-        //}
+        private bool CandidateExamExists(int id)
+        {
+            return _context.CandidateExams.Any(e => e.CandidateExamId == id);
+        }
     }
 }
