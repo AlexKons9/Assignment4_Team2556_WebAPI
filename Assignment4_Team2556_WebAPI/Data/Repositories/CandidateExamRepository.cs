@@ -44,6 +44,18 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
+        //Summary: Returns a List of all candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllCandidateExamsByMarker(string markerId)
+        {
+            return await _context.CandidateExams
+                .Where(ce => ce.MarkerId == markerId)
+                .Include(m => m.Marker)
+                .Include(c => c.Candidate)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
         //Summary: Returns a Candidate Exam that has been submited for marking 
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)
         {

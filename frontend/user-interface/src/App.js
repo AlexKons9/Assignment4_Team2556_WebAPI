@@ -28,6 +28,9 @@ import AssignMarker from './components/Admin/AssignMarker'
 import CandidateUI from './components/CandidateUI';
 import CandidateExamResults from './components/CandidateExams/CandidateExamResults';
 
+//Marker components
+import MarkerCandidateExamList from './components/Marker/MarkerCandidateExamList'
+
 
 //TESTing components
 import Users from './components/Security/Users';
@@ -68,6 +71,7 @@ function App() {
 
                     {/* Marker Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Marker, ROLES.Admin]} />}>
+                        <Route exact path="MarkerUI/MarkerCandidateExamList" element={<MarkerCandidateExamList />} />
 
                     </Route>
 

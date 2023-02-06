@@ -10,6 +10,7 @@ namespace Assignment4_Team2556_WebAPI.Services
         Task<CandidateExamResultsDTO> GetMarksOfTheSubmitedExam(int candidateExamId);
         Task<ExamForm> GenerateExamForm(string userId, int certificateId);
         Task<IList<CandidateExam>> GetAllCandidateExams();
+        Task<IList<CandidateExam>> GetAllCandidateExamsByMarker(string markerId);
 
 
 

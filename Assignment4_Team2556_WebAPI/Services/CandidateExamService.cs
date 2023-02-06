@@ -38,6 +38,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _candidateExamRepository.GetAllCandidateExams();
         }
 
+        //
+        //Summary: Returns a List of all candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllCandidateExamsByMarker(string markerId)
+        {
+            return await _candidateExamRepository.GetAllCandidateExamsByMarker(markerId);
+        }
+
 
         //Summary: Returns a Candidate Exam that has been submited for marking 
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)

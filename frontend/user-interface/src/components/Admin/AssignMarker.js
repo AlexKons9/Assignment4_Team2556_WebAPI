@@ -61,6 +61,7 @@ const CandidateExamsList = () => {
                         <th style={{ whiteSpace: "nowrap" }}>Exam Date</th>
                         <th style={{ whiteSpace: "nowrap" }}>Marked?</th>
                         <th style={{ whiteSpace: "nowrap" }}>Assigned to marker</th>
+                        <th style={{ whiteSpace: "nowrap" }}>Select/Change Marker</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,7 @@ const CandidateExamsList = () => {
                             <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidate.lastName}</td>
                             <td style={{ whiteSpace: "nowrap" }}>{candidateExam.examDate.toLocaleString()}</td>
                             <td style={{ whiteSpace: "nowrap" }}>{candidateExam.isMarked.toString()}</td>
+                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.markerId}</td>
                             <td style={{ whiteSpace: "nowrap" }}>
                                 <select onChange={handleMarkerSelect}>
                                     <option value="">Select a marker</option>

@@ -47,6 +47,16 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetActiveCertificateList();
         }
 
+
+        // GET: api/CandidateExams BY MARKER
+        [HttpGet("ByMarker/{username}")]
+        public async Task<IList<CandidateExam>> GetCandidateExamsByMarker(string username)
+        {
+            User marker = await _userManager.FindByNameAsync(username);
+            return await _candidateExamService.GetAllCandidateExamsByMarker(marker.Id);
+        }
+
+
         //// GET: api/CandidateExams/ExamResults/5
         [HttpGet("ExamResults/{id}")]
         [Authorize(Roles = "Candidate,Admin")]
