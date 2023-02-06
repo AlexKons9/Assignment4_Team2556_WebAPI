@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
+import DeleteQuestion from "../Question/DeleteQuestion"
 
 function CandidatesList() { 
     const [candidateList, setCandidateList] = useState([]);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
-
+    const [showModal, setShowModal] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -45,9 +47,37 @@ function CandidatesList() {
           alert("Error the Candidate requested doesn't exist.");
         }
       };
+      const showConfirmPopupHandler = (userName) => {
+        setShowModal(true);
+        setItemToDelete(userName);
+        console.log(userName);
+      };
+      const closeConfirmPopupHandler = () => {
+        setShowModal(false);
+        setItemToDelete(0);
+      };
+    
+      const deleteConfirmHandler = async () => {
+        await axiosPrivate
+          .delete(`/api/Candidate/${itemToDelete}`)
+          .then((response) => {
+            setCandidateList((existingData) => {
+              return existingData.filter((_) => _.userName !== itemToDelete);
+            });
+            setItemToDelete(0);
+            setShowModal(false);
+          });
+      };    
 
     return(
     <div>
+      <DeleteQuestion
+        showModal={showModal}
+        title="Delete Confirmation!"
+        body="Are you sure to delete this Candidate?"
+        closeConfirmPopupHandler={closeConfirmPopupHandler}
+        deleteConfirmHandler={deleteConfirmHandler}
+      ></DeleteQuestion>
     <h1>Candidates List</h1>
     <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
@@ -85,7 +115,8 @@ function CandidatesList() {
                 |
                 <button
                   className="btn btn-danger"
-                  //onClick={""}
+                  onClick={() => {
+                    showConfirmPopupHandler(candidateList[i].userName)}}
                 >
                   Delete
                 </button>

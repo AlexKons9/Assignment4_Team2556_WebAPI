@@ -19,11 +19,11 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
 
-        public async Task<User> AddOrUpdateAsync(User entity)
+        public async Task<User> AddOrUpdateAsync(User user)
         {
-            _context.Update(entity);
+            _context.Update(user);
             await _context.SaveChangesAsync();
-            return entity;
+            return user;
         }
 
         public async Task<User> GetAsync(string? username)
