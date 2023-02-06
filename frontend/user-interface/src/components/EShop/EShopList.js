@@ -33,22 +33,25 @@ function EShopList() {
     <h1 id='header-eshop'>Available Certificates</h1>
       <div className="container-fluid d-flex justify-content-center">
       <div className='row'>
+        {certificates.map((certificate) => (
         <CertificateCard
+            key={certificate.certificateId}
             imgSrc={Java}
-            title="1"//{certificates[0].title}
+            title={certificate.title}
             textBody='Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                       sed do eiusmod tempor incididunt ut labore et dolore 
                       magna aliqua. Ut etiam sit amet nisl purus in. 
                       Quis viverra nibh cras pulvinar.'
           ></CertificateCard>
-          <CertificateCard
+        ))}
+          {/* <CertificateCard
             imgSrc={Java}
-            title="2"//{certificates[1].title}
+            title={certificates[1].title}
             textBody='Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                       sed do eiusmod tempor incididunt ut labore et dolore 
                       magna aliqua. Ut etiam sit amet nisl purus in. 
                       Quis viverra nibh cras pulvinar.'
-          ></CertificateCard>
+          ></CertificateCard> */}
       </div>
     </div>
     </>
