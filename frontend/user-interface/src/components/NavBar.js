@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout"
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from '../hooks/useAuth';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
 
@@ -19,13 +20,13 @@ function NavBar() {
                 <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <Link className="nav-link text-light" to="Home" >Home</Link>
+                            <Link className="nav-link" to="Home" >Home</Link>
                         </li>
 
                         {/* ADMIN NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles.includes("Admin"))
                             ? <li className="nav-item">
-                                <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                                <Link className="nav-link" to="AdminUI" >Admin UI</Link>
                             </li>
                             : <li></li>
                         }
@@ -35,13 +36,25 @@ function NavBar() {
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
                                     <li  className="nav-item">
-                                    <Link className="nav-link text-light" to="" >E-Shop</Link>
+                                    <Link className="nav-link" to="EShopList" >E-Shop</Link>
                                     </li>
-                                    <li  className="nav-item">
+                                    {/* <li  className="nav-item">
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
-                                    </li>
+                                    </li> */}
+                                    <NavDropdown title="Exams" id="navbarScrollingDropdown">
+                                        <Link className="nav-link text-light" to="CandidateUI" >
+                                            <div className='dropdown-item' >Oncoming Exams</div>
+                                        </Link>
+                                        <Link className="nav-link text-light" to="" >
+                                            <div className='dropdown-item'>Schedule your next exam!</div>
+                                        </Link>
+                                        <NavDropdown.Divider />
+                                        <Link className="nav-link text-light" to="" >
+                                            <div className='dropdown-item'>Vouchers</div>
+                                        </Link>
+                                    </NavDropdown>
                                     <li  className="nav-item">
-                                    <Link className="nav-link text-light" to="MyCertificatesList" >My Certificates</Link>
+                                    <Link className="nav-link " to="MyCertificatesList" >My Certificates</Link>
                                     </li>
                                 </ul>  
                               </div>

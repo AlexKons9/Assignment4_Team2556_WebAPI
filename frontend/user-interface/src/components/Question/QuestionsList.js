@@ -18,7 +18,6 @@ function QuestionsList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //const response = await axios.get("https://localhost:7015/api/Questions");
         const response = await axiosPrivate.get("/api/Questions");
         setQuestions(response.data);
       } catch (error) {

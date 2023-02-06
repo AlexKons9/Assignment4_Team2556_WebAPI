@@ -2,12 +2,14 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../Modals/SuccessModal";
 
 function GenerateExam()
 {
     const location = useLocation();
     // function that navigate to another js view (used in handleSubmit function)
     const navigate = useNavigate();
+    const [modalSuccess, setModalSuccess] = useState(false);
     const [examForm, setExamForm] = useState({
         candidateExamId: location.state.candidateExamId,
         questions: location.state.questionList,
@@ -21,13 +23,22 @@ function GenerateExam()
         updatedChosenOptionsId[i] = optionId;
         setExamForm({ ...examForm, chosenOptionsId: updatedChosenOptionsId  });
     };
+
+    const showModalHandler = () => {
+        setModalSuccess(true);
+    }
+
+    const closeModalHandler = () => {
+        setModalSuccess(false);
+    }
     
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {      
             //await axios.post("https://localhost:7015/api/CandidateExams",examForm);
-            await axiosPrivate.post("/api/CandidateExams",examForm);
+            await axiosPrivate.post("/api/CandidateExams",examForm)
+            showModalHandler();
             //const response = await axios.get(`https://localhost:7015/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
             const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examForm.candidateExamId}`)
             const examResults = response.data;
@@ -41,6 +52,11 @@ function GenerateExam()
 
     return (
         <>
+            <SuccessModal
+            show={modalSuccess}
+            body="Your answers submitted correctly!"
+            closeModalHandler={closeModalHandler}
+            ></SuccessModal>
             <h2>Exam Time</h2>
             <form onSubmit={handleSubmit}>
                 <input type="hidden" name="candidateExamId" value={examForm.candidateExamId} />

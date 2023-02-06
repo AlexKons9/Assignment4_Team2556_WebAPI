@@ -12,6 +12,7 @@ import EditOptionsForm from './components/Option/EditOptionsForm';
 import GenerateExam from './components/CandidateExams/GenerateExam';
 import MyCertificatesList from './components/CandidateCertificates/MyCertificatesList';
 import CertificateDetails from './components/CandidateCertificates/CertificateDetails';
+import EShopList from './components/EShop/EShopList';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -83,7 +84,7 @@ function App() {
                         <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />}/>
                         <Route exact path="MyCertificatesList" element={<MyCertificatesList/>}/>
                         <Route exact path="MyCertificatesList/CertificateDetails" element={<CertificateDetails/>}/>
-
+                        <Route exact path="EShopList" element={<EShopList/>}/>
                     </Route>           
 
                 </Route>

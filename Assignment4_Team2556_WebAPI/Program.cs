@@ -39,18 +39,9 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IQuestionsService, QuestionsService>();
             builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
             builder.Services.AddScoped<ITopicsService, TopicsService>();
+            builder.Services.AddScoped<IGenericRepository<Certificate>, CertificateRepository>();
+            builder.Services.AddScoped<ICertificateService, CertificateService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowAll",
-            //        policy =>
-            //        {
-            //            policy
-            //            .AllowAnyOrigin()
-            //            .AllowAnyHeader();
-            //        });
-            //});
 
             builder.Services.AddCors(options =>
             {
