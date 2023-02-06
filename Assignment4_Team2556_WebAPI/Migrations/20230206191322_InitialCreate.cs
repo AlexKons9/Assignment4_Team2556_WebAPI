@@ -233,13 +233,40 @@ namespace Assignment4Team2556WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Vouchers",
+                columns: table => new
+                {
+                    VoucherId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CertificateId = table.Column<int>(type: "int", nullable: false),
+                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vouchers", x => x.VoucherId);
+                    table.ForeignKey(
+                        name: "FK_Vouchers_AspNetUsers_CandidateId",
+                        column: x => x.CandidateId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Vouchers_Certificates_CertificateId",
+                        column: x => x.CertificateId,
+                        principalTable: "Certificates",
+                        principalColumn: "CertificateId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CandidateExams",
                 columns: table => new
                 {
                     CandidateExamId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MarkerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AssessmentTestCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExaminationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -248,17 +275,23 @@ namespace Assignment4Team2556WebAPI.Migrations
                     PercentageScore = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TestResult = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumberOfAwardedMarks = table.Column<int>(type: "int", nullable: true),
-                    NumberOfPossibleMakrs = table.Column<int>(type: "int", nullable: true)
+                    NumberOfPossibleMakrs = table.Column<int>(type: "int", nullable: true),
+                    IsMarked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CandidateExams", x => x.CandidateExamId);
                     table.ForeignKey(
-                        name: "FK_CandidateExams_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_CandidateExams_AspNetUsers_CandidateId",
+                        column: x => x.CandidateId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CandidateExams_AspNetUsers_MarkerId",
+                        column: x => x.MarkerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CandidateExams_Exams_ExamId",
                         column: x => x.ExamId,
@@ -381,10 +414,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "29c468e6-283f-4f7a-9d08-888606379736", "4f3655c7-3d36-4552-8da7-7fca8899dd0f", "Candidate", "CANDIDATE" },
-                    { "4e62bc99-6d9a-4caf-beb2-9002ca2c9b4e", "a22a99bf-e27b-4568-915b-cca5100e9c92", "QualityControl", "QUALITYCONTROL" },
-                    { "d6ff4524-be9d-41eb-a89e-d95b14983934", "7d3650f4-5ec3-4f0f-8059-6fad1532d144", "Admin", "ADMIN" },
-                    { "f666b326-3895-40ef-bf19-8c504a342406", "058f21ef-4fed-40db-83d5-750a63b47835", "Marker", "MARKER" }
+                    { "794cb763-4866-4c82-a42e-3cad3733e9f5", "e7049f7b-d6d4-4c5b-add5-dba05897e18e", "Candidate", "CANDIDATE" },
+                    { "9d2043cf-7c93-4afb-97d1-1437fb6df25f", "a58b556b-1195-43d6-91b4-ea512fca8a64", "QualityControl", "QUALITYCONTROL" },
+                    { "bf78f445-8f20-4b20-8e5c-ad1135a75729", "322f2617-4be6-4034-a06d-73b6c7749591", "Admin", "ADMIN" },
+                    { "d00a2c6b-b8df-4ee3-8200-f613b1480a36", "254a512a-3a82-4991-86f3-d547e8cbfa13", "Marker", "MARKER" }
                 });
 
             migrationBuilder.InsertData(
@@ -579,14 +612,19 @@ namespace Assignment4Team2556WebAPI.Migrations
                 column: "OptionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CandidateExams_CandidateId",
+                table: "CandidateExams",
+                column: "CandidateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CandidateExams_ExamId",
                 table: "CandidateExams",
                 column: "ExamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CandidateExams_UserId",
+                name: "IX_CandidateExams_MarkerId",
                 table: "CandidateExams",
-                column: "UserId");
+                column: "MarkerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamQuestions_ExamId",
@@ -611,6 +649,16 @@ namespace Assignment4Team2556WebAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Topics_CertificateId",
                 table: "Topics",
+                column: "CertificateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vouchers_CandidateId",
+                table: "Vouchers",
+                column: "CandidateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vouchers_CertificateId",
+                table: "Vouchers",
                 column: "CertificateId");
         }
 
@@ -640,6 +688,9 @@ namespace Assignment4Team2556WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExamQuestions");
+
+            migrationBuilder.DropTable(
+                name: "Vouchers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

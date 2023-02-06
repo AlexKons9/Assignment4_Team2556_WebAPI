@@ -6,7 +6,7 @@
         public string? Description { get; set; }
         public int CertificateId { get; set; }
         public Certificate? Certificate { get; set; }
-        public string CandidateId { get; set; }
+        public string? CandidateId { get; set; }
         public User? Candidate { get; set; }
     }
 }
