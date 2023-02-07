@@ -47,7 +47,9 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IGenericRepository<Voucher>, VouchersRepository>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
-            builder.Services.AddScoped<ICandidateService, CandidateService>();
+            builder.Services.AddScoped<ICandidateService, CandidateService>();            
+            builder.Services.AddScoped<IGenericRepository<Exam>, ExamRepository>();
+            builder.Services.AddScoped<IGenericService<Exam>, ExamService>();
 
 
             builder.Services.AddCors(options =>

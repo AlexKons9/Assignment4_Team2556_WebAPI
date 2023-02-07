@@ -47,79 +47,79 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // PUT: api/ExamQuestions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutExamQuestion(int id, ExamQuestion examQuestion)
-        {
-            if (id != examQuestion.QuestionId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutExamQuestion(int id, ExamQuestion examQuestion)
+        //{
+        //    if (id != examQuestion.QuestionId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(examQuestion).State = EntityState.Modified;
+        //    _context.Entry(examQuestion).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ExamQuestionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ExamQuestionExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/ExamQuestions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ExamQuestion>> PostExamQuestion(ExamQuestion examQuestion)
-        {
-            _context.ExamQuestions.Add(examQuestion);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ExamQuestionExists(examQuestion.QuestionId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //// POST: api/ExamQuestions
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<ExamQuestion>> PostExamQuestion(ExamQuestion examQuestion)
+        //{
+        //    _context.ExamQuestions.Add(examQuestion);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (ExamQuestionExists(examQuestion.QuestionId))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtAction("GetExamQuestion", new { id = examQuestion.QuestionId }, examQuestion);
-        }
+        //    return CreatedAtAction("GetExamQuestion", new { id = examQuestion.QuestionId }, examQuestion);
+        //}
 
-        // DELETE: api/ExamQuestions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExamQuestion(int id)
-        {
-            var examQuestion = await _context.ExamQuestions.FindAsync(id);
-            if (examQuestion == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/ExamQuestions/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteExamQuestion(int id)
+        //{
+        //    var examQuestion = await _context.ExamQuestions.FindAsync(id);
+        //    if (examQuestion == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.ExamQuestions.Remove(examQuestion);
-            await _context.SaveChangesAsync();
+        //    _context.ExamQuestions.Remove(examQuestion);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        private bool ExamQuestionExists(int id)
-        {
-            return _context.ExamQuestions.Any(e => e.QuestionId == id);
-        }
+        //private bool ExamQuestionExists(int id)
+        //{
+        //    return _context.ExamQuestions.Any(e => e.QuestionId == id);
+        //}
     }
 }
