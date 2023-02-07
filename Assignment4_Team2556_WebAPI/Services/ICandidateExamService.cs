@@ -10,5 +10,13 @@ namespace Assignment4_Team2556_WebAPI.Services
         Task<IList<CandidateExam>> GetAccomplishedExamsByCandidateId(string candidateId);
         Task<CandidateExamResultsDTO> GetMarksOfTheSubmitedExam(int candidateExamId);
         Task<ExamForm> GenerateExamForm(string userId, int certificateId);
+        Task<IList<CandidateExam>> GetAllCandidateExams();
+        Task<IList<CandidateExam>> GetAllMarkedCandidateExamsByMarker(string markerId);
+        Task<IList<CandidateExam>> GetAllUnMarkedCandidateExamsByMarker(string markerId);
+        Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId);
+        Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams();
+        Task AddSaveChanges(CandidateExam candidateExam);
+
+
     }
 }

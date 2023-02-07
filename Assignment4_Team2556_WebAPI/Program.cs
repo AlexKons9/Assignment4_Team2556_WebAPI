@@ -36,7 +36,9 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IGenericRepository<Option>, OptionsRepository>();
             builder.Services.AddScoped<IOptionsService, OptionsService>();
             builder.Services.AddScoped<IGenericRepository<Question>, QuestionsRepository>();
-            builder.Services.AddScoped<IQuestionsService, QuestionsService>();            
+            builder.Services.AddScoped<IGenericRepository<CandidateCertificate>, CandidateCertificateRepository>();
+            builder.Services.AddScoped<ICandidateCertificateService, CandidateCertificateService>();
+            builder.Services.AddScoped<IQuestionsService, QuestionsService>();
             builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
             builder.Services.AddScoped<ITopicsService, TopicsService>();
             builder.Services.AddScoped<IGenericRepository<Certificate>, CertificateRepository>();

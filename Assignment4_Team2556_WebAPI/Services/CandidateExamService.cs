@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Models.DTOModels;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using NuGet.Packaging.Signing;
+using System.Runtime.InteropServices;
 
 namespace Assignment4_Team2556_WebAPI.Services
 {
@@ -31,6 +32,42 @@ namespace Assignment4_Team2556_WebAPI.Services
         public async Task<IList<Certificate>> GetActiveCertificateList()
         {
             return await _candidateExamRepository.GetActiveCertificateList();
+        }
+
+        //
+        // Summary: Returns a list of all candidate exams
+        public async Task<IList<CandidateExam>> GetAllCandidateExams()
+        {
+            return await _candidateExamRepository.GetAllCandidateExams();
+        }
+
+        //
+        // Summary: Returns a list of all unmarked candidate exams
+        public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
+        {
+            return await _candidateExamRepository.GetAllUnmarkedCandidateExams();
+        }
+
+        //
+        // Summary: Returns a candidate exam by id
+        public async Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId)
+        {
+            return await _candidateExamRepository.GetCandidateExam(candidateExamId);
+        }
+  
+
+        //
+        //Summary: Returns a List of all MARKED candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllMarkedCandidateExamsByMarker(string markerId)
+        {
+            return await _candidateExamRepository.GetAllMarkedCandidateExamsByMarker(markerId);
+        }
+
+        //
+        //Summary: Returns a List of all UNMARKED candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllUnMarkedCandidateExamsByMarker(string markerId)
+        {
+            return await _candidateExamRepository.GetAllUnMarkedCandidateExamsByMarker(markerId);
         }
 
 
@@ -242,6 +279,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             string result = startName.ToUpper() + "-" + code;
 
             return result;
+        }
+
+        //
+        //Summary: Update candidate exam
+        public async Task AddSaveChanges(CandidateExam candidateExam)
+        {
+            await _candidateExamRepository.UpdateAsync(candidateExam);
         }
 
         //

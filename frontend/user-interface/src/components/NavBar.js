@@ -11,7 +11,7 @@ function NavBar() {
     /*    const { loginWithRedirect, isAuthenticated } = useAuth0();*/
     const logout = useLogout();
     const { auth } = useAuth();
-    
+
 
     return (
 
@@ -26,17 +26,18 @@ function NavBar() {
                         {/* ADMIN NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles.includes("Admin"))
                             ? 
-                            <ul className="navbar-nav ms-auto">
-                                <li className="nav-item">
-                                <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
-                                </li>
-                                <li className="nav-item">
-                                <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
-                                </li>                                
-                                <li className="nav-item">
-                                <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
-                                </li>
-                            </ul>
+                                <ul className="navbar-nav ms-auto">
+                                    <li className="nav-item">
+                                        <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
+                                    </li>
+                                    <li className="nav-item"><Link className="nav-link text-light" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
+                                </ul>                            
                             : <li></li>
                         }
 
@@ -44,8 +45,8 @@ function NavBar() {
                         {auth?.roles?.find(roles => roles?.includes("Candidate"))
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
-                                    <li  className="nav-item">
-                                    <Link className="nav-link" to="EShopList" >E-Shop</Link>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="EShopList" >E-Shop</Link>
                                     </li>
                                     {/* <li  className="nav-item">
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
@@ -62,11 +63,20 @@ function NavBar() {
                                             <div className='dropdown-item'>Vouchers</div>
                                         </Link>
                                     </NavDropdown>
-                                    <li  className="nav-item">
-                                    <Link className="nav-link " to="MyCertificatesList" >My Certificates</Link>
+                                    <li className="nav-item">
+                                        <Link className="nav-link " to="MyCertificatesList" >My Certificates</Link>
                                     </li>
-                                </ul>  
-                              </div>
+                                </ul>
+                            </div>
+                            : <li></li>
+                        }
+
+                        {/* MARKER NAVBAR TABS*/}
+                        {auth?.roles?.find(roles => roles?.includes("Marker"))
+                            ? <>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >View Unmarked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >View Marked Exams</Link></li>
+                            </>
                             : <li></li>
                         }
                     </ul>
@@ -77,8 +87,8 @@ function NavBar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                
-                 {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
+
+                {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
                 {auth?.userName ? (
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                         <ul className="navbar-nav ms-auto">

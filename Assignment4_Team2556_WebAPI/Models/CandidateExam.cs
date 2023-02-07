@@ -10,7 +10,7 @@ namespace Assignment4_Team2556_WebAPI.Models
         public int CandidateExamId { get; set; }
         public int ExamId { get; set; }
         public Exam? Exam { get; set; }
-        public string CandidateId { get; set; }
+        public string? CandidateId { get; set; }
         public User? Candidate { get; set; }
         public string? MarkerId { get; set; }
         public User? Marker { get; set; }

@@ -11,8 +11,8 @@ namespace Assignment4_Team2556_WebAPI.Models
     {
         [Key]
         public int CandidateCertificateId { get; set; }
-        [Required]
-        public CandidateExam CandidateExam { get; set; }  //CandidateExam
+        public int? CandidateExamId { get; set; }  //CandidateExam
+        public CandidateExam? CandidateExam { get; set; }  //CandidateExam
         
     }
 }

@@ -10,5 +10,11 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         Task<IList<Exam>> GetAllExamsByCertificateId(int certificateId);
         Task<IList<ExamQuestion>> GetAllExamQuestionsByExamId(int examId);
         Task AddSaveChanges(CandidateExam candidateExam);
+        Task<IList<CandidateExam>> GetAllCandidateExams();
+        Task<IList<CandidateExam>> GetAllMarkedCandidateExamsByMarker(string markerId);
+        Task<IList<CandidateExam>> GetAllUnMarkedCandidateExamsByMarker(string markerId);
+        Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId);
+        Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams();
+        Task UpdateAsync(CandidateExam candidateExam);
     }
 }
