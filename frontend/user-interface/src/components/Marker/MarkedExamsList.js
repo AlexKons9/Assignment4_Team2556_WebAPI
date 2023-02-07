@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Button, Container, Table } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const MarkedExamsList = () => {
-    const [candidateExams, setCandidateExams] = useState([]);
-    const { auth } = useAuth();
-    const navigate = useNavigate();
-    const axiosPrivate = useAxiosPrivate();
+    const [candidateExams, setCandidateExams] = useState([]); //set marked exam array state
+    const { auth } = useAuth(); //retrieve logged in user's data
+    const navigate = useNavigate(); //navigate function to automatically redirect page
+    const axiosPrivate = useAxiosPrivate(); //custom axios function with user credentials in header
 
 
+    //
+    //Summary: Get all marked exams by logged-in marker
     useEffect(() => {
         const fetchData = async () => {
             const response = await axiosPrivate.get(`/api/CandidateExams/markedexams/${auth.userName}`);
@@ -21,6 +22,9 @@ const MarkedExamsList = () => {
         fetchData();
     }, []);
 
+
+    //
+    //Summary: Redirect to Candidate Exam Details page with chosen candidate exam
     const handleReview = async (candidateExamId) => {
         try {
             const response = await axiosPrivate.get(`/api/CandidateExams/${candidateExamId}`);

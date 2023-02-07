@@ -32,7 +32,11 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             _userManager = userManager;
         }
 
+
+        //
         // GET: api/CandidateExams/List
+        //
+        // Summary: Get list of all candidate exams
         [HttpGet("List")]
         [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetAllCandidateExams()
@@ -40,7 +44,11 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetAllCandidateExams();
         }
 
+
+        //
         // GET: api/CandidateExams/Unmarked
+        //
+        // Summary: Get list of all Unmarked candidate exams
         [HttpGet("Unmarked")]
         [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
@@ -49,14 +57,20 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
 
+        //
         // GET: api/CandidateExams
+        //
+        // Summary: Get List of all active certificates
         [HttpGet]
         public async Task<IList<Certificate>> GetCandidateExams()
         {
             return await _candidateExamService.GetActiveCertificateList();
         }
 
-        // GET: api/CandidateExams by CandidateExam Id
+        //
+        // GET: api/CandidateExams
+        //
+        // Summary: Get a candidate exam by id
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetCandidateExam(int id)
@@ -65,7 +79,10 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
 
-        // GET: api/CandidateExams BY MARKER
+        //
+        // GET: api/MarkedExams/{Marker's username}
+        //
+        // Summary: Get list of all marked exams associated with a particular marker
         [HttpGet("MarkedExams/{username}")]
         [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetMarkedCandidateExamsByMarker(string username)
@@ -74,7 +91,10 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetAllMarkedCandidateExamsByMarker(marker.Id);
         }
 
-        // GET: api/CandidateExams BY MARKER
+        //
+        // GET: api/UnmarkedExams//{Marker's username}
+        //
+        // Summary: Get list of unmarked exams that have been assigned to a particular marker
         [HttpGet("unmarkedexams/{username}")]
         [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetUnMarkedCandidateExamsByMarker(string username)

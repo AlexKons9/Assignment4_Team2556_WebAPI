@@ -6,16 +6,17 @@ import useAuth from '../../hooks/useAuth'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const UnMarkedExamsList = () => {
-    const [candidateExams, setCandidateExams] = useState([]);
-    const { auth } = useAuth();
-    const navigate = useNavigate();
-    const axiosPrivate = useAxiosPrivate();
+    const [candidateExams, setCandidateExams] = useState([]); //set marked exam array state
+    const { auth } = useAuth(); //retrieve logged in user's data
+    const navigate = useNavigate(); //navigate function to automatically redirect page
+    const axiosPrivate = useAxiosPrivate(); //custom axios function with user credentials in header
 
 
+    //
+    //Summary: Get and set state of all unmarked exams assigned to logged-in marker
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log(auth.userName)
                 const response = await axiosPrivate.get(`/api/CandidateExams/unmarkedexams/${auth.userName}`);
                 setCandidateExams(response.data);
             } catch (error) {
@@ -26,6 +27,9 @@ const UnMarkedExamsList = () => {
         fetchData();
     }, []);
 
+
+    //
+    //Summary: Redirect to Candidate Exam Review page with chosen candidate exam
     const handleReview = async (candidateExamId) => {
         try {
             const response = await axiosPrivate.get(`/api/CandidateExams/${candidateExamId}`);

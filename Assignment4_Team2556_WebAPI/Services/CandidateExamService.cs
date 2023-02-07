@@ -32,19 +32,22 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _candidateExamRepository.GetActiveCertificateList();
         }
 
+        //
         // Summary: Returns a list of all candidate exams
         public async Task<IList<CandidateExam>> GetAllCandidateExams()
         {
             return await _candidateExamRepository.GetAllCandidateExams();
         }
 
+        //
         // Summary: Returns a list of all unmarked candidate exams
         public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
         {
             return await _candidateExamRepository.GetAllUnmarkedCandidateExams();
         }
 
-        // Summary: Returns a list of candidate exam by id
+        //
+        // Summary: Returns a candidate exam by id
         public async Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId)
         {
             return await _candidateExamRepository.GetCandidateExam(candidateExamId);

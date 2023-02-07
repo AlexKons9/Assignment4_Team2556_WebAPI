@@ -6,18 +6,21 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function MarkerCandidateExamReview() {
     const location = useLocation();
-    const[candidateExam, setCandidateExam] = useState(location.state.candidateExam[0]);
-    const[candidateCertificate, setCandidateCertificate] = useState({candidateExamId: candidateExam.candidateExamId});
-    const navigate = useNavigate();
-    const axiosPrivate = useAxiosPrivate();
+    const[candidateExam, setCandidateExam] = useState(location.state.candidateExam[0]);  //set candidate exam which is passed from previous page using the location method
+    const[candidateCertificate, setCandidateCertificate] = useState({candidateExamId: candidateExam.candidateExamId});  //set state of candidate certificate
+    const navigate = useNavigate(); //navigate function to automatically redirect page
+    const axiosPrivate = useAxiosPrivate(); //custom axios function with user credentials in header
 
+
+    //
+    //Summary: Update candidate exam as marked, with date marked.  If candidate passed exam, create a candidate certificate
     const approveExam = async () => {
         try {
-            candidateExam.isMarked = true;
-            candidateExam.scoreReportDate = new Date();
-            console.log(JSON.stringify(candidateExam));
-            await axiosPrivate.put(`/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);
+            candidateExam.isMarked = true;  //set candidate exam as marked
+            candidateExam.scoreReportDate = new Date();  //set the date marked as the date and time now
+            await axiosPrivate.put(`/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);  //update candidate exam in db as marked with date
 
+            //If candidate passed exam, create certificate and save to db
             if(candidateExam.testResult == "PASS") {
                 setCandidateCertificate({...candidateCertificate, candidateExamId: candidateExam.candidateExamId})
                 console.log(JSON.stringify(candidateCertificate));

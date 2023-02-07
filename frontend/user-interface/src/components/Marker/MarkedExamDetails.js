@@ -1,36 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, Link } from 'react-router-dom'
 import { Button, Container, Table } from 'react-bootstrap';
-import axios from 'axios';
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function MarkedExamDetails() {
+    //transfer state of candidate exam from previous page
     const location = useLocation();
-    //const candidateExam = ;
-    const[candidateExam, setCandidateExam] = useState(location.state.candidateExam[0]);
-    const[candidateCertificate, setCandidateCertificate] = useState({candidateExamId: candidateExam.candidateExamId});
-    const axiosPrivate = useAxiosPrivate();
-    //console.log(candidateExam);
-
-    const approveExam = async () => {
-        try {
-            //setCandidateExam({...candidateExam, isMarked: true});
-            candidateExam.isMarked = true;
-            candidateExam.scoreReportDate = new Date();
-            console.log(JSON.stringify(candidateExam));
-            await axiosPrivate.put(`/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);
-
-            if(candidateExam.testResult == "PASS") {
-                setCandidateCertificate({...candidateCertificate, candidateExamId: candidateExam.candidateExamId})
-                console.log(JSON.stringify(candidateCertificate));
-                const response = await axiosPrivate.post(`/api/CandidateCertificates`, candidateCertificate);
-            }
-            alert("Exam Approved!")
-        }
-        catch(error) {
-            console.error(error);
-        }
-    }
+    const[candidateExam] = useState(location.state.candidateExam[0]);
 
     return (
         <div>
