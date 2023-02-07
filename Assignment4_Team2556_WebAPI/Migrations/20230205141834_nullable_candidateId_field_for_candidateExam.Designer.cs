@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230205141834_nullable_candidateId_field_for_candidateExam")]
+    partial class nullablecandidateIdfieldforcandidateExam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Assignment4Team2556WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateCertificateId"));
 
-                    b.Property<int?>("CandidateExamId")
+                    b.Property<int>("CandidateExamId")
                         .HasColumnType("int");
 
                     b.HasKey("CandidateCertificateId");
@@ -133,6 +136,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CertificateId");
@@ -1000,6 +1004,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VoucherId"));
 
                     b.Property<string>("CandidateId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CertificateId")
@@ -1046,29 +1051,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bf78f445-8f20-4b20-8e5c-ad1135a75729",
-                            ConcurrencyStamp = "322f2617-4be6-4034-a06d-73b6c7749591",
+                            Id = "4a1ee3ce-417f-48ef-8b02-1c1d7de22d6b",
+                            ConcurrencyStamp = "42487519-7a97-47c7-b921-c94e730ffd7d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "794cb763-4866-4c82-a42e-3cad3733e9f5",
-                            ConcurrencyStamp = "e7049f7b-d6d4-4c5b-add5-dba05897e18e",
+                            Id = "77c3cd60-c381-4cd3-a508-5f959e4455ab",
+                            ConcurrencyStamp = "38e733ab-9374-4512-86d7-28ea697834e5",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "d00a2c6b-b8df-4ee3-8200-f613b1480a36",
-                            ConcurrencyStamp = "254a512a-3a82-4991-86f3-d547e8cbfa13",
+                            Id = "434f783a-43ac-4580-bb80-8ea1c7b680cb",
+                            ConcurrencyStamp = "52068be5-e013-4144-9601-a885b1c46edf",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "9d2043cf-7c93-4afb-97d1-1437fb6df25f",
-                            ConcurrencyStamp = "a58b556b-1195-43d6-91b4-ea512fca8a64",
+                            Id = "1196b0cd-6103-4074-a2d9-b4674a7c2f53",
+                            ConcurrencyStamp = "aa8a4a69-c635-4251-8d65-015b52e53afb",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
@@ -1184,7 +1189,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.CandidateExam", "CandidateExam")
                         .WithMany()
-                        .HasForeignKey("CandidateExamId");
+                        .HasForeignKey("CandidateExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CandidateExam");
                 });
@@ -1296,7 +1303,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.User", "Candidate")
                         .WithMany()
-                        .HasForeignKey("CandidateId");
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.Certificate", "Certificate")
                         .WithMany()

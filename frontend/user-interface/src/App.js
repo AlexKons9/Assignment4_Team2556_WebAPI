@@ -26,6 +26,7 @@ import PersistLogin from './components/Security/PersistLogin';
 //import CreateQuestionForm from './components/CreateQuestionForm';
 //import CreateOptionsForm from './components/CreateOptionsForm';
 import AdminUI from './components/AdminUI';
+import AssignMarker from './components/Admin/AssignMarker'
 import CandidateList from './components/Candidates/CandidatesList';
 import DetailsCandidate from './components/Candidates/DetailsCandidate';
 import EditCandidate from './components/Candidates/EditCandidate';
@@ -37,6 +38,11 @@ import CreateExam from './components/Exams/CreateExams';
 import CandidateUI from './components/CandidateUI';
 import CandidateExamResults from './components/CandidateExams/CandidateExamResults';
 
+//Marker components
+import MarkerCandidateExamReview from './components/Marker/MarkerCandidateExamReview';
+import UnMarkedExamsList from './components/Marker/UnMarkedExamsList';
+import MarkedExamsList from './components/Marker/MarkedExamsList';
+import MarkedExamDetails from './components/Marker/MarkedExamDetails';
 
 //TESTing components
 import Users from './components/Security/Users';
@@ -56,7 +62,7 @@ function App() {
 
                 {/* Public Routes */}
                 <Route path="Register" element={<Register />} />
-                <Route path="Home" element={<Home />} />
+                {/* <Route path="Home" element={<Home />} /> */}
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
@@ -78,10 +84,15 @@ function App() {
                         <Route exact path="AdminUI/Candidates/Edit" element={<EditCandidate />} />
                         <Route exact path="AdminUI/Exams" element={<ExamsList />} />
                         <Route exact path="AdminUI/Exams/Create" element={<CreateExam />} />
+                        <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                     </Route>
 
                     {/* Marker Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Marker, ROLES.Admin]} />}>
+                        <Route exact path="MarkerUI/UnmarkedExamList" element={<UnMarkedExamsList />} />
+                        <Route exact path="MarkerUI/MarkedExamsList" element={<MarkedExamsList />} />
+                        <Route exact path="MarkerUI/MarkerCandidateExamReview" element={<MarkerCandidateExamReview />} />
+                        <Route exact path="MarkerUI/MarkedExamDetails" element={<MarkedExamDetails />} />
 
                     </Route>
 

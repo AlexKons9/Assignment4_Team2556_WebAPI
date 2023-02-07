@@ -30,7 +30,35 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             _userManager = userManager;
         }
 
+
+        //
+        // GET: api/CandidateExams/List
+        //
+        // Summary: Get list of all candidate exams
+        [HttpGet("List")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetAllCandidateExams()
+        {
+            return await _candidateExamService.GetAllCandidateExams();
+        }
+
+
+        //
+        // GET: api/CandidateExams/Unmarked
+        //
+        // Summary: Get list of all Unmarked candidate exams
+        [HttpGet("Unmarked")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
+        {
+            return await _candidateExamService.GetAllUnmarkedCandidateExams();
+        }
+
+
+        //
         // GET: api/CandidateExams
+        //
+        // Summary: Get List of all active certificates
         [HttpGet]
         public async Task<IList<Certificate>> GetCandidateExams()
         {
@@ -45,6 +73,43 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         {
             User user = await _userManager.FindByNameAsync(userName);
             return await _candidateExamService.GetAccomplishedExamsByCandidateId(user.Id);
+        }
+
+
+        //
+        // GET: api/CandidateExams
+        //
+        // Summary: Get a candidate exam by id
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetCandidateExam(int id)
+        {
+            return await _candidateExamService.GetCandidateExam(id);
+        }
+
+
+        //
+        // GET: api/MarkedExams/{Marker's username}
+        //
+        // Summary: Get list of all marked exams associated with a particular marker
+        [HttpGet("MarkedExams/{username}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetMarkedCandidateExamsByMarker(string username)
+        {
+            User marker = await _userManager.FindByNameAsync(username);
+            return await _candidateExamService.GetAllMarkedCandidateExamsByMarker(marker.Id);
+        }
+
+        //
+        // GET: api/UnmarkedExams//{Marker's username}
+        //
+        // Summary: Get list of unmarked exams that have been assigned to a particular marker
+        [HttpGet("unmarkedexams/{username}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetUnMarkedCandidateExamsByMarker(string username)
+        {
+            User marker = await _userManager.FindByNameAsync(username);
+            return await _candidateExamService.GetAllUnMarkedCandidateExamsByMarker(marker.Id);
         }
 
 
@@ -78,36 +143,37 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok(examForm);
         }
 
-        //// PUT: api/CandidateExams/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCandidateExam(int id, CandidateExam candidateExam)
-        //{
-        //    if (id != candidateExam.CandidateExamId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/CandidateExams/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IActionResult> PutCandidateExam(int id, CandidateExam candidateExam)
+        {
+            if (id != candidateExam.CandidateExamId)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(candidateExam).State = EntityState.Modified;
+            _context.Entry(candidateExam).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CandidateExamExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CandidateExamExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return Ok();
+        }
 
         // POST: api/CandidateExams
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -146,9 +212,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         //    return NoContent();
         //}
 
-        //private bool CandidateExamExists(int id)
-        //{
-        //    return _context.CandidateExams.Any(e => e.CandidateExamId == id);
-        //}
+        private bool CandidateExamExists(int id)
+        {
+            return _context.CandidateExams.Any(e => e.CandidateExamId == id);
+        }
     }
 }

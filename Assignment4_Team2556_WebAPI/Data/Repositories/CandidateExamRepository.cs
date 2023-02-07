@@ -43,6 +43,65 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
+        //Summary: Returns a List of all candidate exams
+        public async Task<IList<CandidateExam>> GetAllCandidateExams()
+        {
+            return await _context.CandidateExams
+                .Include(m => m.Marker)
+                .Include(c => c.Candidate)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
+        //Summary: Returns a List of all unmarked candidate exams
+        public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
+        {
+            return await _context.CandidateExams
+                .Where(ce => ce.IsMarked == false)
+                .Include(m => m.Marker)
+                .Include(c => c.Candidate)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
+        //Summary: Returns a Candidate Exam by Id
+        public async Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId)
+        {
+            return await _context.CandidateExams
+                .Where(ce => ce.CandidateExamId == candidateExamId)
+                .Include(m => m.Marker)
+                .Include(c => c.Candidate)
+                .Include(c => c.QA).ThenInclude(qa => qa.Option).ThenInclude(o => o.Question)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
+        //Summary: Returns a List of all MARKED candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllMarkedCandidateExamsByMarker(string markerId)
+        {
+            return await _context.CandidateExams
+                .Where(ce => ce.MarkerId == markerId && ce.IsMarked == true)
+                .Include(m => m.Marker)
+                .Include(c => c.Candidate)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
+        //Summary: Returns a List of all UNMARKED candidate exams By Marker
+        public async Task<IList<CandidateExam>> GetAllUnMarkedCandidateExamsByMarker(string markerId)
+        {
+            return await _context.CandidateExams
+                .Where(ce => (ce.MarkerId == markerId && ce.IsMarked == false))
+                .Include(c => c.Candidate)
+                .Include(e => e.Exam).ThenInclude(c => c.Certificate)
+                .ToListAsync();
+        }
+
+        //
         //Summary: Returns a Candidate Exam that has been submited for marking 
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)
         {

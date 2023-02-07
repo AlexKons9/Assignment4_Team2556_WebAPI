@@ -11,7 +11,7 @@ function NavBar() {
     /*    const { loginWithRedirect, isAuthenticated } = useAuth0();*/
     const logout = useLogout();
     const { auth } = useAuth();
-    
+
 
     return (
 
@@ -25,6 +25,10 @@ function NavBar() {
 
                         {/* ADMIN NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles.includes("Admin"))
+                            ? <>
+                                <li className="nav-item"><Link className="nav-link text-light" to="AdminUI" >Admin UI</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
+                              </>
                             ? 
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
@@ -69,6 +73,15 @@ function NavBar() {
                               </div>
                             : <li></li>
                         }
+
+                        {/* MARKER NAVBAR TABS*/}
+                        {auth?.roles?.find(roles => roles?.includes("Marker"))
+                            ? <>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >View Unmarked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >View Marked Exams</Link></li>
+                              </>
+                            : <li></li>
+                        }
                     </ul>
                 </div>
                 <div className="mx-auto order-0">
@@ -77,8 +90,8 @@ function NavBar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                
-                 {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
+
+                {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
                 {auth?.userName ? (
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                         <ul className="navbar-nav ms-auto">
