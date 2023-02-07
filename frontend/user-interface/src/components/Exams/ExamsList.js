@@ -8,11 +8,11 @@ import DeleteQuestion from "../Question/DeleteQuestion";
 
 
 function ExamsList() {
-    const [exams, setExams] = useState([]);
-//   const navigate = useNavigate();
-   const [showModal, setShowModal] = useState(false);
-   const [itemToDelete, setItemToDelete] = useState(0);
-    const axiosPrivate = useAxiosPrivate();
+  const [exams, setExams] = useState([]);
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(0);
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,20 +50,22 @@ function ExamsList() {
       });
   };
 
-//   const handleDetails = async (questionId) => {
-//     try {
-//       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-//       const questionDetails = response.data;
-//       navigate("/AdminUI/DetailsQuestion", {
-//         state: { questionDetails: questionDetails },
-//       });
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error the Question requested doesn't exist.");
-//     }
-//   };
+  const handleDetails = async (examId) => {
+    console.log(examId);
+    try {
+      const response = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
+      console.log(response.data);
+      const examQuestionDetails = response.data;
+      navigate("/AdminUI/Exams/Details", {
+        state: { examQuestionDetails: examQuestionDetails },
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Error the Question requested doesn't exist.");
+    }
+  };
 
-//   const handleEdit = async (questionId) => {
+//   const handleEdit = async (examId) => {
 //     try {
 //       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
 //       const question = response.data;
@@ -106,14 +108,14 @@ return (
               <td>
                 <button
                   className="btn btn-secondary"
-                //   onClick={() => handleEdit(question.questionId)}
+                //   onClick={() => handleEdit(exam.examId)}
                 >
                   Edit
                 </button>{" "}
                 |
                 <button
                   className="btn btn-success"
-                //   onClick={() => handleDetails(question.questionId)}
+                onClick={() => handleDetails(exam.examId)}
                 >
                   Details
                 </button>{" "}

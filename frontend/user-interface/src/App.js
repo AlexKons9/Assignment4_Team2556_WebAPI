@@ -78,6 +78,7 @@ function App() {
                         <Route exact path="AdminUI/Candidates/Edit" element={<EditCandidate />} />
                         <Route exact path="AdminUI/Exams" element={<ExamsList />} />
                         <Route exact path="AdminUI/Exams/Create" element={<CreateExam />} />
+                        <Route exact path="AdminUI/Exams/Details" element={<DetailsExam />} />
                     </Route>
 
                     {/* Marker Routes */}
