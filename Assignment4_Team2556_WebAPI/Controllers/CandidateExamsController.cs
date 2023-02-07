@@ -154,11 +154,9 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(candidateExam).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _candidateExamService.AddSaveChanges(candidateExam);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -214,7 +212,13 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         private bool CandidateExamExists(int id)
         {
-            return _context.CandidateExams.Any(e => e.CandidateExamId == id);
+            //return _context.CandidateExams.Any(e => e.CandidateExamId == id);
+            if (_candidateExamService.GetCandidateExam(id) != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -125,5 +125,14 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             _context.Update(candidateExam);
             await _context.SaveChangesAsync();
         }
+
+        //
+        //Summary: Updates Candidate Exam to the database
+        public async Task UpdateAsync(CandidateExam candidateExam)
+        {
+            _context.Entry(candidateExam).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

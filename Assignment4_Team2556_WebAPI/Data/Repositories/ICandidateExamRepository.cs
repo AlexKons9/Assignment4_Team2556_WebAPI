@@ -15,5 +15,6 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         Task<IList<CandidateExam>> GetAllUnMarkedCandidateExamsByMarker(string markerId);
         Task<IList<CandidateExam>> GetCandidateExam(int candidateExamId);
         Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams();
+        Task UpdateAsync(CandidateExam candidateExam);
     }
 }

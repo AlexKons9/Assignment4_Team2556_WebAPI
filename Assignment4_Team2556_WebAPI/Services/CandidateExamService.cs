@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Models.DTOModels;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using NuGet.Packaging.Signing;
+using System.Runtime.InteropServices;
 
 namespace Assignment4_Team2556_WebAPI.Services
 {
@@ -278,6 +279,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             string result = startName.ToUpper() + "-" + code;
 
             return result;
+        }
+
+        //
+        //Summary: Update candidate exam
+        public async Task AddSaveChanges(CandidateExam candidateExam)
+        {
+            await _candidateExamRepository.UpdateAsync(candidateExam);
         }
 
         //
