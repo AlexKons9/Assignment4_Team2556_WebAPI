@@ -36,7 +36,7 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IGenericRepository<Option>, OptionsRepository>();
             builder.Services.AddScoped<IOptionsService, OptionsService>();
             builder.Services.AddScoped<IGenericRepository<Question>, QuestionsRepository>();
-            builder.Services.AddScoped<IQuestionsService, QuestionsService>();
+            builder.Services.AddScoped<IQuestionsService, QuestionsService>();            
             builder.Services.AddScoped<IGenericRepository<Topic>, TopicsRepository>();
             builder.Services.AddScoped<ITopicsService, TopicsService>();
             builder.Services.AddScoped<IGenericRepository<Certificate>, CertificateRepository>();
@@ -44,6 +44,8 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<IGenericService<Voucher>, VouchersService>();
             builder.Services.AddScoped<IGenericRepository<Voucher>, VouchersRepository>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+            builder.Services.AddScoped<ICandidateService, CandidateService>();
 
 
             builder.Services.AddCors(options =>

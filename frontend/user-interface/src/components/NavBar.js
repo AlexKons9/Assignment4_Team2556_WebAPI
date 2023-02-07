@@ -25,9 +25,18 @@ function NavBar() {
 
                         {/* ADMIN NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles.includes("Admin"))
-                            ? <li className="nav-item">
-                                <Link className="nav-link" to="AdminUI" >Admin UI</Link>
-                            </li>
+                            ? 
+                            <ul className="navbar-nav ms-auto">
+                                <li className="nav-item">
+                                <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
+                                </li>                                
+                                <li className="nav-item">
+                                <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
+                                </li>
+                            </ul>
                             : <li></li>
                         }
 
