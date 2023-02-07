@@ -6,8 +6,7 @@ import DetailsQuestion from "../Question/DetailsQuestion";
 function DetailsExam() {
 
 return(
-<DetailsQuestion>
-</DetailsQuestion>
+<h1></h1>
 );    
 
 }
