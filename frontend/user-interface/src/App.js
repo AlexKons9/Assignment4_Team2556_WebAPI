@@ -13,6 +13,7 @@ import GenerateExam from './components/CandidateExams/GenerateExam';
 import MyCertificatesList from './components/CandidateCertificates/MyCertificatesList';
 import CertificateDetails from './components/CandidateCertificates/CertificateDetails';
 import EShopList from './components/EShop/EShopList';
+import VouchersList from './components/Exams/VouchersList';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -85,6 +86,7 @@ function App() {
                         <Route exact path="MyCertificatesList" element={<MyCertificatesList/>}/>
                         <Route exact path="MyCertificatesList/CertificateDetails" element={<CertificateDetails/>}/>
                         <Route exact path="EShopList" element={<EShopList/>}/>
+                        <Route exact path="Exams/VouchersList" element={<VouchersList/>}/>
                     </Route>           
 
                 </Route>

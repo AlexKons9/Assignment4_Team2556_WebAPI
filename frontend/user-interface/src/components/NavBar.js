@@ -49,7 +49,7 @@ function NavBar() {
                                             <div className='dropdown-item'>Schedule your next exam!</div>
                                         </Link>
                                         <NavDropdown.Divider />
-                                        <Link className="nav-link text-light" to="" >
+                                        <Link className="nav-link text-light" to="Exams/VouchersList" >
                                             <div className='dropdown-item'>Vouchers</div>
                                         </Link>
                                     </NavDropdown>
