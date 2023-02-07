@@ -29,8 +29,10 @@ import CandidateUI from './components/CandidateUI';
 import CandidateExamResults from './components/CandidateExams/CandidateExamResults';
 
 //Marker components
-import MarkerCandidateExamList from './components/Marker/MarkerCandidateExamList'
-
+import MarkerCandidateExamReview from './components/Marker/MarkerCandidateExamReview';
+import UnMarkedExamsList from './components/Marker/UnMarkedExamsList';
+import MarkedExamsList from './components/Marker/MarkedExamsList';
+import MarkedExamDetails from './components/Marker/MarkedExamDetails';
 
 //TESTing components
 import Users from './components/Security/Users';
@@ -71,7 +73,10 @@ function App() {
 
                     {/* Marker Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Marker, ROLES.Admin]} />}>
-                        <Route exact path="MarkerUI/MarkerCandidateExamList" element={<MarkerCandidateExamList />} />
+                        <Route exact path="MarkerUI/UnmarkedExamList" element={<UnMarkedExamsList />} />
+                        <Route exact path="MarkerUI/MarkedExamsList" element={<MarkedExamsList />} />
+                        <Route exact path="MarkerUI/MarkerCandidateExamReview" element={<MarkerCandidateExamReview />} />
+                        <Route exact path="MarkerUI/MarkedExamDetails" element={<MarkedExamDetails />} />
 
                     </Route>
 

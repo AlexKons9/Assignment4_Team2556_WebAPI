@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Table, Button } from 'react-bootstrap';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const CandidateExamsList = () => {
-    const [candidateExams, setCandidateExams] = useState([]);
-    const [markers, setMarkers] = useState([]);
-    const [selectedMarker, setSelectedMarker] = useState(null);
+    const [candidateExams, setCandidateExams] = useState([]);  //set state of unmarked candidate exams array
+    const [markers, setMarkers] = useState([]); //set state of markers array
+    const [selectedMarker, setSelectedMarker] = useState(null); //set state of selected marker
+    const axiosPrivate = useAxiosPrivate();
 
+    //retrieve all unmarked candidate exams
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('https://localhost:7015/api/CandidateExams/List');
+            const result = await axiosPrivate.get('/api/CandidateExams/unmarked');
             setCandidateExams(result.data);
-            console.log(result.data)
+            //console.log(result.data)
         };
 
         fetchData();
@@ -19,7 +22,7 @@ const CandidateExamsList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('https://localhost:7015/api/Users/GetAllMarkers');
+            const result = await axiosPrivate.get('/api/Users/GetAllMarkers');
             setMarkers(result.data);
             console.log(result.data)
         };
@@ -35,7 +38,7 @@ const CandidateExamsList = () => {
     const assignMarker = async (candidateExam) => {
         candidateExam.markerId = selectedMarker;
         console.log(candidateExam)
-        await axios.put(`https://localhost:7015/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);
+        await axiosPrivate.put(`/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);
         alert("Marker has been updated!")
 
         const updatedCandidateExams = candidateExams.map(ce => {
@@ -50,7 +53,11 @@ const CandidateExamsList = () => {
 
 
     return (
-        <Container style={{ textAlign: "center" }}>
+        <Container>
+                    <h1>Assign Markers</h1>
+                    <h3>Unmarked Candidate Exams List</h3>
+            <hr />
+            {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
             <Table>
                 <thead>
                     <tr>
@@ -90,7 +97,7 @@ const CandidateExamsList = () => {
                         </tr>
                     ))}
                 </tbody>
-            </Table>
+            </Table>}
         </Container>
     );
 };

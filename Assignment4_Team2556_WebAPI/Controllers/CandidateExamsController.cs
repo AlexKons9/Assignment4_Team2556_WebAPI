@@ -34,9 +34,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/CandidateExams/List
         [HttpGet("List")]
+        [Authorize(Roles = "Admin,Marker")]
         public async Task<IList<CandidateExam>> GetAllCandidateExams()
         {
             return await _candidateExamService.GetAllCandidateExams();
+        }
+
+        // GET: api/CandidateExams/Unmarked
+        [HttpGet("Unmarked")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
+        {
+            return await _candidateExamService.GetAllUnmarkedCandidateExams();
         }
 
 
@@ -47,13 +56,31 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetActiveCertificateList();
         }
 
+        // GET: api/CandidateExams by CandidateExam Id
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetCandidateExam(int id)
+        {
+            return await _candidateExamService.GetCandidateExam(id);
+        }
+
 
         // GET: api/CandidateExams BY MARKER
-        [HttpGet("ByMarker/{username}")]
-        public async Task<IList<CandidateExam>> GetCandidateExamsByMarker(string username)
+        [HttpGet("MarkedExams/{username}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetMarkedCandidateExamsByMarker(string username)
         {
             User marker = await _userManager.FindByNameAsync(username);
-            return await _candidateExamService.GetAllCandidateExamsByMarker(marker.Id);
+            return await _candidateExamService.GetAllMarkedCandidateExamsByMarker(marker.Id);
+        }
+
+        // GET: api/CandidateExams BY MARKER
+        [HttpGet("unmarkedexams/{username}")]
+        [Authorize(Roles = "Admin,Marker")]
+        public async Task<IList<CandidateExam>> GetUnMarkedCandidateExamsByMarker(string username)
+        {
+            User marker = await _userManager.FindByNameAsync(username);
+            return await _candidateExamService.GetAllUnMarkedCandidateExamsByMarker(marker.Id);
         }
 
 
@@ -90,6 +117,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // PUT: api/CandidateExams/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Marker")]
         public async Task<IActionResult> PutCandidateExam(int id, CandidateExam candidateExam)
         {
             if (id != candidateExam.CandidateExamId)
@@ -115,7 +143,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/CandidateExams
