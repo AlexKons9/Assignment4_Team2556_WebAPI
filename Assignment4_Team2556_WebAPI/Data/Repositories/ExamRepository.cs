@@ -12,9 +12,11 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             _context = context;
         }
 
-        public Task<Exam> AddOrUpdateAsync(Exam entity)
+        public async Task<Exam> AddOrUpdateAsync(Exam exam)
         {
-            throw new NotImplementedException();
+            _context.Update(exam);
+            await _context.SaveChangesAsync();
+            return exam;
         }
 
         public async Task<IList<Exam>> GetAllAsync()

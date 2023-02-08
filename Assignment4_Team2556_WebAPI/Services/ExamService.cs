@@ -13,9 +13,9 @@ namespace Assignment4_Team2556_WebAPI.Services
             _repository = repository;
         }
 
-        public Task<Exam> AddOrUpdateAsync(Exam entity)
+        public async Task<Exam> AddOrUpdateAsync(Exam exam)
         {
-            throw new NotImplementedException();
+            return await _repository.AddOrUpdateAsync(exam);
         }
 
         public async Task<IList<Exam>> GetAllAsync()

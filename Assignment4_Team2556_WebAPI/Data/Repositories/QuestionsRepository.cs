@@ -32,7 +32,10 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
 
         public async Task<IList<Question>> GetAllAsync()
         {
-            return await _context.Questions.ToListAsync();
+            return await _context.Questions
+                .Include(t=>t.Topic)
+                .ThenInclude(c=>c.Certificate)
+                .ToListAsync();
         }
 
         public async Task<bool> RemoveAsync(Question question)

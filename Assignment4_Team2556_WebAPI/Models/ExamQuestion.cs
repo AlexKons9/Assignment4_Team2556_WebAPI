@@ -11,9 +11,9 @@ namespace Assignment4_Team2556_WebAPI.Models
     {
         //[Key, Column(Order = 0)]
         public int QuestionId { get; set; }
-        public Question Question  { get; set; }
+        public Question? Question  { get; set; }
         //[Key, Column(Order = 1)]
         public int ExamId { get; set; }
-        public Exam Exam { get; set; }
+        public Exam? Exam { get; set; }
     }
 }

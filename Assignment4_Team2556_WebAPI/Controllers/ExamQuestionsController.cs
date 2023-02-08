@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
+using Assignment4_Team2556_WebAPI.Models.DTOModels;
+using Microsoft.CodeAnalysis;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -78,13 +80,20 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         //// POST: api/ExamQuestions
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<ExamQuestion>> PostExamQuestion(ExamQuestion examQuestion)
-        //{
-        //    _context.ExamQuestions.Add(examQuestion);
+        [HttpPost]
+        public async Task<ActionResult<ExamQuestion>> PostExamQuestion(int examId,List<int> examQuestions)
+        {
+            ExamQuestion examQuestion = new();
+            
+            foreach (var question in examQuestions) 
+            {   
+                 examQuestion.ExamId = examId;
+                 examQuestion.QuestionId = question;
+                _context.ExamQuestions.Add(examQuestion);
+                await _context.SaveChangesAsync();
+            }
         //    try
         //    {
-        //        await _context.SaveChangesAsync();
         //    }
         //    catch (DbUpdateException)
         //    {
@@ -98,8 +107,8 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         //        }
         //    }
 
-        //    return CreatedAtAction("GetExamQuestion", new { id = examQuestion.QuestionId }, examQuestion);
-        //}
+            return CreatedAtAction("GetExamQuestion", new { id = examQuestion.QuestionId }, examQuestion);
+        }
 
         //// DELETE: api/ExamQuestions/5
         //[HttpDelete("{id}")]

@@ -13,7 +13,7 @@ namespace Assignment4_Team2556_WebAPI.Models
         public int ExamId { get; set; }
         [Required]
         public int CertificateId { get; set; }
-        public Certificate Certificate { get; set; }
+        public Certificate? Certificate { get; set; }
         public int MaximumScore { get; set; }
         public int PassMark { get; set; }
 

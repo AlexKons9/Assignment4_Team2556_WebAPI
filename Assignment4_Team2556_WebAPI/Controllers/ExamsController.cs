@@ -79,14 +79,15 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         //// POST: api/Exams
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Exam>> PostExam(Exam exam)
-        //{
-        //    _context.Exams.Add(exam);
-        //    await _context.SaveChangesAsync();
+        [HttpPost]
+        public async Task<ActionResult<Exam>> PostExam(Exam exam)
+        {
+            //_context.Exams.Add(exam);
+            //await _context.SaveChangesAsync();
+            await _service.AddOrUpdateAsync(exam);
 
-        //    return CreatedAtAction("GetExam", new { id = exam.ExamId }, exam);
-        //}
+            return CreatedAtAction("GetExam", new { id = exam.ExamId }, exam);
+        }
 
         // DELETE: api/Exams/5
         [HttpDelete("{id}")]
