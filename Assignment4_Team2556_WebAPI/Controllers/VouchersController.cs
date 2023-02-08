@@ -46,7 +46,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         // GET: api/Vouchers/GetVoucher
-        [HttpGet("GetVoucher")]
+        [HttpGet("GetVoucher/{voucherDescription}")]
         public async Task<ActionResult<Voucher>> GetVoucher(string? voucherDescription)
         {
             var serv = _service as IVoucherService;

@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function CandidateUI() {
-  const [voucherDescription, setVoucherDescription] = useState("");
+  const [voucherDescription, setVoucherDescription] = useState();
   const navigate = useNavigate();
   const { auth } = useAuth();
   const userName = auth.userName;
@@ -23,21 +23,21 @@ function CandidateUI() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const answer = await axiosPrivate.post("/api/Vouchers", voucherDescription );
+      //console.log(voucherDescription.voucher);
+      const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
       const voucher = answer.data;
-      console.log(voucher);
-      const response = await axiosPrivate.post(
-        `/api/CandidateExams/InsertVoucher?voucher=${voucher}&userName=${userName}`
-        // examDetailsDTO
-      );
+      //console.log(JSON.stringify(voucher));
+      const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}`, voucher);
       console.log(response.data);
+      const candidateExamId = response.data.candidateExamId;
+      const questionsList = response.data.questions;
       
-      // navigate("/CandidateUI/GenerateExam", {
-      //   state: {
-      //     candidateExamId: candidateExamId,
-      //     questionList: questionsList,
-      //   },
-      // });
+      navigate("/CandidateUI/GenerateExam", {
+        state: {
+          candidateExamId: candidateExamId,
+          questionList: questionsList,
+        },
+      });
     } catch (error) {
       console.error(error);
       alert("Error creating Exam");
@@ -50,7 +50,7 @@ function CandidateUI() {
 
         <div className="form-group ">
           <label className="form-label" htmlFor="voucher">Insert your Voucher:</label>
-          <input className="form-control" type="text" id="voucher" name="voucher"></input>
+          <input onChange={handleChange} className="form-control" type="text" id="voucher" name="voucher"></input>
         </div>
 
         <button type="submit" className="btn btn-primary">

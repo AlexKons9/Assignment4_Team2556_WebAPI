@@ -80,8 +80,8 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // This controller checks if the voucher belongs to the user and fetches the exam
         //// GET: api/CandidateExams/InsertVoucher
-        [HttpPost("InsertVoucher")]
-        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(Voucher voucher, string userName)
+        [HttpPost("InsertVoucher/{username}")]
+        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(string userName, Voucher voucher)
         {
             if (!ModelState.IsValid)
             {
