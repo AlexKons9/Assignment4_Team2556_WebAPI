@@ -25,7 +25,7 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         //Summary: Gets all vouchers of the specific Candidate
         public async Task<IList<Voucher>> GetAllCandidateVouchersAsync(string candidateId)
         {
-            var vouchers = await _context.Vouchers.Where(x => x.CandidateId == candidateId).ToListAsync();
+            var vouchers = await _context.Vouchers.Where(x => x.CandidateId == candidateId && x.IsClaimed == false).ToListAsync();
 
             foreach (var voucher in vouchers)
             {
@@ -66,7 +66,7 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         {
             if (voucherDescription != null)
             {
-                var voucher = await _context.Vouchers.Where(x => x.Description == voucherDescription).FirstAsync();
+                var voucher = await _context.Vouchers.Where(x => x.Description == voucherDescription && x.IsClaimed == false).FirstAsync();
                 await _context.Entry(voucher).Reference(x => x.Candidate).LoadAsync();
                 await _context.Entry(voucher).Reference(x => x.Certificate).LoadAsync();
                 return voucher;

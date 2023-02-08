@@ -15,7 +15,6 @@ import CertificateDetails from './components/CandidateCertificates/CertificateDe
 import EShopList from './components/EShop/EShopList';
 import VouchersList from './components/Exams/VouchersList';
 import SchedulerMenu from "./components/Exams/SchedulerMenu";
-import ScheduleYourNextExam from "./components/Exams/ScheduleYourNextExam";
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -90,7 +89,6 @@ function App() {
                         <Route exact path="EShopList" element={<EShopList/>}/>
                         <Route exact path="Exams/VouchersList" element={<VouchersList/>}/>
                         <Route exact path="Exams/SchedulerMenu" element={<SchedulerMenu/>}/>
-                        <Route exact path="Exams/SchedulerMenu/ScheduleYourNextExam" element={<ScheduleYourNextExam/>}/>
                     </Route>           
 
                 </Route>

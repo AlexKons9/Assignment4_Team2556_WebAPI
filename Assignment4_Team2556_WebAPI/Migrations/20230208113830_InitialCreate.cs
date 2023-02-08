@@ -77,7 +77,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     CertificateId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -240,7 +240,8 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CertificateId = table.Column<int>(type: "int", nullable: false),
-                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsClaimed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,10 +415,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "794cb763-4866-4c82-a42e-3cad3733e9f5", "e7049f7b-d6d4-4c5b-add5-dba05897e18e", "Candidate", "CANDIDATE" },
-                    { "9d2043cf-7c93-4afb-97d1-1437fb6df25f", "a58b556b-1195-43d6-91b4-ea512fca8a64", "QualityControl", "QUALITYCONTROL" },
-                    { "bf78f445-8f20-4b20-8e5c-ad1135a75729", "322f2617-4be6-4034-a06d-73b6c7749591", "Admin", "ADMIN" },
-                    { "d00a2c6b-b8df-4ee3-8200-f613b1480a36", "254a512a-3a82-4991-86f3-d547e8cbfa13", "Marker", "MARKER" }
+                    { "3fe10528-252e-4205-8247-5d9dd251bb98", "2fec73b6-edb1-43a0-8ced-af7fd1c5c26d", "QualityControl", "QUALITYCONTROL" },
+                    { "a0bb4cea-b320-457a-8743-01f2ab1ebea9", "5606c772-1ea1-499d-aa31-e859848ecb1c", "Marker", "MARKER" },
+                    { "c2bb237b-2d60-4d92-a0f9-2ee7ad4a6f45", "85a5076c-fa68-47e5-a057-1ad7d4f57ab0", "Candidate", "CANDIDATE" },
+                    { "db049375-5ce8-4bdc-b6b0-417769539105", "7294a98a-8daa-4ae7-a8ca-3caeacb8ec7d", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

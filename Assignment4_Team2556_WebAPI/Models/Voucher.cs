@@ -8,5 +8,11 @@
         public Certificate? Certificate { get; set; }
         public string? CandidateId { get; set; }
         public User? Candidate { get; set; }
+        public bool IsClaimed { get; set; }
+
+        public Voucher()
+        {
+            IsClaimed = false;
+        }
     }
 }

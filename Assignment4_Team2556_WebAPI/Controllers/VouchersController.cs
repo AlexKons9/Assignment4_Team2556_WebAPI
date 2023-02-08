@@ -87,41 +87,45 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return NoContent();
         }
 
-        //private bool VoucherExists(int id)
-        //{
-        //    return _context.Vouchers.Any(e => e.VoucherId == id);
-        //}
+        private async Task<bool> VoucherExists(int id)
+        {
+            var voucher = await _service.GetAsync(id);
+            if( voucher != null )
+            {
+                return true;
+            }
+            return false;
+        }
 
 
-        //// PUT: api/Vouchers/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
-        //{
-        //    if (id != voucher.VoucherId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Vouchers/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
+        {
+            if (id != voucher.VoucherId)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(voucher).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!VoucherExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _service.AddOrUpdateAsync(voucher);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (! await VoucherExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }

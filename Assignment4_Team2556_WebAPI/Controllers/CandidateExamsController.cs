@@ -21,12 +21,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     {
         private readonly ICandidateExamService _candidateExamService;
         private readonly ICandidateExamAnswerService _candidateExamAnswerService;
+        private readonly IGenericService<Voucher> _voucherService;
         private readonly UserManager<User> _userManager;
 
-        public CandidateExamsController(ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, UserManager<User> userManager)
+        public CandidateExamsController(ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, IGenericService<Voucher> voucherService, UserManager<User> userManager)
         {
             _candidateExamService = candidateExamService;
             _candidateExamAnswerService = candidateExamAnswerService;
+            _voucherService = voucherService;
             _userManager = userManager;
         }
 
@@ -72,8 +74,17 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             }
 
             User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
+            ExamForm examForm;
 
-            ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
+            if(examDetailsDTO.ExamDate == null)
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
+            }
+            else
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId, examDetailsDTO.ExamDate);
+            }
+
 
             return Ok(examForm);
         }
@@ -90,13 +101,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
             User user = await _userManager.FindByNameAsync(userName);
 
-            if(voucher.CandidateId != user.Id)
+            if(voucher.CandidateId != user.Id && voucher.IsClaimed == true)
             {
                 return BadRequest("The voucher is not valid! ");
             }
                
 
             ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId);
+
 
             return Ok(examForm);
         }

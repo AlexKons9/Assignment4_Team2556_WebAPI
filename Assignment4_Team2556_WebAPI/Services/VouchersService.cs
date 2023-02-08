@@ -19,10 +19,10 @@ namespace Assignment4_Team2556_WebAPI.Services
         }
 
 
-        // We dont Use This
-        public Task<Voucher> AddOrUpdateAsync(Voucher entity)
+        
+        public async Task<Voucher> AddOrUpdateAsync(Voucher entity)
         {
-            throw new NotImplementedException();
+            return await _repository.AddOrUpdateAsync(entity);
         }
 
 
