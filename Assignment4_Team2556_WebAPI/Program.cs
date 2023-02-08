@@ -41,7 +41,10 @@ namespace Assignment4_Team2556_WebAPI
             builder.Services.AddScoped<ITopicsService, TopicsService>();
             builder.Services.AddScoped<IGenericRepository<Certificate>, CertificateRepository>();
             builder.Services.AddScoped<ICertificateService, CertificateService>();
+            builder.Services.AddScoped<IGenericService<Voucher>, VouchersService>();
+            builder.Services.AddScoped<IGenericRepository<Voucher>, VouchersRepository>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
 
             builder.Services.AddCors(options =>
             {

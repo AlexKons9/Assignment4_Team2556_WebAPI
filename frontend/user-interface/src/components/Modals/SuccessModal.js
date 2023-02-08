@@ -5,20 +5,21 @@ import Button from 'react-bootstrap/Button';
 function SuccessModal(props) {
 
   return (
-    <>
+    <div className='col-md-4 container-fluid justify-content-center'>
       <Alert show={props.show} variant="success" >
         <Alert.Heading>Success</Alert.Heading>
+        <hr />
         <p>
           {props.body}
         </p>
-        <hr />
         <div className="d-flex justify-content-end">
-          <Button onClick={() => props.closeModalHandler()} variant="outline-success">
+          {props.buttonForModal}
+          <Button onClick={() => props.closeModalHandler()} variant="outline-secondary">
             Close
           </Button>
         </div>
       </Alert>
-    </>
+    </div>
   );
 }
 

@@ -42,14 +42,17 @@ function NavBar() {
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
                                     </li> */}
                                     <NavDropdown title="Exams" id="navbarScrollingDropdown">
-                                        <Link className="nav-link text-light" to="CandidateUI" >
-                                            <div className='dropdown-item' >Oncoming Exams</div>
-                                        </Link>
                                         <Link className="nav-link text-light" to="" >
-                                            <div className='dropdown-item'>Schedule your next exam!</div>
+                                            <div className='dropdown-item' >Upcoming Exams</div>
+                                        </Link>
+                                        <Link className="nav-link text-light" to="CandidateUI" >
+                                            <div className='dropdown-item'>Take your Exam Now!</div>
+                                        </Link>
+                                        <Link className="nav-link text-light" to="/Exams/SchedulerMenu" >
+                                            <div className='dropdown-item'>Schedule your Next Exam!</div>
                                         </Link>
                                         <NavDropdown.Divider />
-                                        <Link className="nav-link text-light" to="" >
+                                        <Link className="nav-link text-light" to="Exams/VouchersList" >
                                             <div className='dropdown-item'>Vouchers</div>
                                         </Link>
                                     </NavDropdown>
@@ -103,3 +106,7 @@ function NavBar() {
 }
 
 export default NavBar;
+
+
+
+

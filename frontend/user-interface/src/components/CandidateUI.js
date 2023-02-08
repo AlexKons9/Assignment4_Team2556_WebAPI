@@ -4,51 +4,40 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function CandidateUI() {
-  const [certificates, setCertificates] = useState([]);
+  const [voucherDescription, setVoucherDescription] = useState("");
   const navigate = useNavigate();
   const { auth } = useAuth();
+  const userName = auth.userName;
+  const axiosPrivate = useAxiosPrivate();
 
-  const [examDetailsDTO, setExamDetailsDTO] = useState({
-    certificateId: "",
-    userName: auth.userName,
-  });
 
-  useEffect(() => {
-    const fetchCertificates = async () => {
-      try {
-        const response = await axios.get(
-          "https://localhost:7015/api/CandidateExams"
-        );
-        setCertificates(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchCertificates();
-  }, []);
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setExamDetailsDTO({ ...examDetailsDTO, [name]: value });
+    setVoucherDescription({ ...voucherDescription, [name]: value });
   };
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(`password: ${auth.pwd}`);
-      const response = await axios.post(
-        "https://localhost:7015/api/CandidateExams/ExamForm",
-        examDetailsDTO
+      const answer = await axiosPrivate.post("/api/Vouchers", voucherDescription );
+      const voucher = answer.data;
+      console.log(voucher);
+      const response = await axiosPrivate.post(
+        `/api/CandidateExams/InsertVoucher?voucher=${voucher}&userName=${userName}`
+        // examDetailsDTO
       );
       console.log(response.data);
-      const candidateExamId = response.data.candidateExamId;
-      const questionsList = response.data.questions;
-      navigate("/CandidateUI/GenerateExam", {
-        state: {
-          candidateExamId: candidateExamId,
-          questionList: questionsList,
-        },
-      });
+      
+      // navigate("/CandidateUI/GenerateExam", {
+      //   state: {
+      //     candidateExamId: candidateExamId,
+      //     questionList: questionsList,
+      //   },
+      // });
     } catch (error) {
       console.error(error);
       alert("Error creating Exam");
@@ -56,43 +45,12 @@ function CandidateUI() {
   };
   return (
     <div className="container">
-      <h3>Welcome Candidate, select the certificate to start your Exam :</h3>
+      <h3>Welcome Candidate, Insert your Voucher to start your Exam:</h3>
       <form onSubmit={handleSubmit}>
-        {/* <div className="form-group">
-                    <label htmlFor="candidateId">Candidate ID:</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="candidateId"
-                        name="candidateId"
-                        value={examDetailsDTO.candidateId}
-                        onChange={handleChange}
-                        required
-                    />
-                </div> */}
 
         <div className="form-group ">
-          <label htmlFor="certificateId">Certificates:</label>
-          <select
-            className="form-control"
-            id="certificateId"
-            name="certificateId"
-            value={examDetailsDTO.certificateId}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              Select a Certificate
-            </option>
-            {certificates.map((certificate) => (
-              <option
-                key={certificate.certificateId}
-                value={certificate.certificateId}
-              >
-                {certificate.title}
-              </option>
-            ))}
-          </select>
+          <label className="form-label" htmlFor="voucher">Insert your Voucher:</label>
+          <input className="form-control" type="text" id="voucher" name="voucher"></input>
         </div>
 
         <button type="submit" className="btn btn-primary">
