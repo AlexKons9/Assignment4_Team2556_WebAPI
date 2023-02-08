@@ -19,7 +19,7 @@ function SchedulerMenu() {
     const onChangeHandlerVoucher = (event) => {
         const { name, value } = event.target;
         setVoucherDescription({ ...voucherDescription, [name]: value });
-    };
+      };
 
 
     const handleSubmit = async (event) => {
@@ -27,25 +27,26 @@ function SchedulerMenu() {
         try {
             console.log(voucherDescription.voucher);
 
-            const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
-            const voucher = answer.data;
+          const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
+          const voucher = answer.data;
             console.log(JSON.stringify(voucher));
-            const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}/examDate=${examDate.date}`, voucher);
+            const newDate = new Date(examDate.date);
+            const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}/examDate=${newDate}`, voucher);
             console.log(response.data);
-
-            const candidateExamId = response.data.candidateExamId;
-            const questionsList = response.data.questions;
-
-            voucher.isClaimed = true;
-            await axiosPrivate.put(`/api/Vouchers/${voucher.voucherId}`, voucher);
-
+    
+          const candidateExamId = response.data.candidateExamId;
+          const questionsList = response.data.questions;
+    
+          voucher.isClaimed = true;
+          await axiosPrivate.put(`/api/Vouchers/${voucher.voucherId}`, voucher);
+          
             //Navigate to exams scheduled for later list
             // navigate("/CandidateUI/");
         } catch (error) {
-            console.error(error);
-            alert("Error creating Exam");
+          console.error(error);
+          alert("Error creating Exam");
         }
-    };
+      };
 
 
     return (
