@@ -23,7 +23,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
         // GET: api/Candidate
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var candidates = await _candidateService.GetAllAsync();
@@ -32,7 +32,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
         //GET: api/Candidate/candidate
         [HttpGet("{username}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<User>> GetCandidate(string username)
         {
             //var question = await _context.Questions.FindAsync(id);
