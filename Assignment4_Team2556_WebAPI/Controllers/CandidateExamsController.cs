@@ -65,34 +65,34 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         //// GET: api/CandidateExams/ExamForm
-        [HttpPost("ExamForm")]
-        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPost("ExamForm")]
+        //public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
-            ExamForm examForm;
+        //    User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
+        //    ExamForm examForm;
 
-            if(examDetailsDTO.ExamDate == null)
-            {
-                examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
-            }
-            else
-            {
-                examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId, examDetailsDTO.ExamDate);
-            }
+        //    if(examDetailsDTO.ExamDate == null)
+        //    {
+        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
+        //    }
+        //    else
+        //    {
+        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId, examDetailsDTO.ExamDate);
+        //    }
 
 
-            return Ok(examForm);
-        }
+        //    return Ok(examForm);
+        //}
 
         // This controller checks if the voucher belongs to the user and fetches the exam
         //// GET: api/CandidateExams/InsertVoucher
         [HttpPost("InsertVoucher/{username}")]
-        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(string userName, Voucher voucher)
+        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(string userName, DateTime? examDate, Voucher voucher)
         {
             if (!ModelState.IsValid)
             {
@@ -105,9 +105,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             {
                 return BadRequest("The voucher is not valid! ");
             }
-               
 
-            ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId);
+
+            ExamForm examForm;
+
+            if (examDate == null)
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId);
+            }
+            else
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId, examDate);
+            }
 
 
             return Ok(examForm);
