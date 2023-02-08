@@ -65,6 +65,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _repository.GetAsync(id);
         }
 
+        public async Task<Voucher?> GetAsyncByDescription(string? voucherDescription)
+        {
+            var repo = _repository as VouchersRepository;
+            return await repo.GetAsyncByDescription(voucherDescription);
+        }
+
+
         public async Task<bool> RemoveAsync(Voucher entity)
         {
             return await _repository.RemoveAsync(entity);

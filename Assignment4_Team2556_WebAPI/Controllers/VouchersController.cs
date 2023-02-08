@@ -32,24 +32,25 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         // GET: api/Vouchers/Candidate
-        [HttpGet("Cadidate")]
-        public async Task<ActionResult<IEnumerable<Voucher>>> GetCandidateVouchers(string canidateUserName)
+        [HttpGet("Candidate")]
+        public async Task<ActionResult<IEnumerable<Voucher>>> GetCandidateVouchers(string candidateUserName)
         {
             var serv = _service as VouchersService;
-            var vouchers = await serv.GetAllCandidateVouchersAsync(canidateUserName);
+            var vouchers = await serv.GetAllCandidateVouchersAsync(candidateUserName);
 
-            if (canidateUserName == null)
+            if (candidateUserName == null)
             {
                 return NotFound();
             }
             return Ok(vouchers);
         }
 
-        // GET: api/Vouchers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Voucher>> GetVoucher(int id)
+        // GET: api/Vouchers/GetVoucher
+        [HttpGet("GetVoucher")]
+        public async Task<ActionResult<Voucher>> GetVoucher(string? voucherDescription)
         {
-            var voucher = await _service.GetAsync(id);
+            var serv = _service as IVoucherService;
+            var voucher = await serv.GetAsyncByDescription(voucherDescription);
 
             if (voucher == null)
             {
@@ -70,11 +71,12 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return CreatedAtAction("GetVoucher", new { id = voucher.VoucherId }, voucher);
         }
 
-        // DELETE: api/Vouchers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVoucher(int id)
+        // DELETE: api/Vouchers/Delete
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteVoucher(string voucherDescription)
         {
-            var voucher = await _service.GetAsync(id);
+            var serv = _service as IVoucherService;
+            var voucher = await serv.GetAsyncByDescription(voucherDescription);
             if (voucher == null)
             {
                 return NotFound();

@@ -60,6 +60,20 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             return null;
         }
 
+        //
+        //Summary: Gets A voucher and load its properties by descripton
+        public async Task<Voucher?> GetAsyncByDescription(string? voucherDescription)
+        {
+            if (voucherDescription != null)
+            {
+                var voucher = await _context.Vouchers.Where(x => x.Description == voucherDescription).FirstAsync();
+                await _context.Entry(voucher).Reference(x => x.Candidate).LoadAsync();
+                await _context.Entry(voucher).Reference(x => x.Certificate).LoadAsync();
+                return voucher;
+            }
+            return null;
+        }
+
 
         public async Task<bool> RemoveAsync(Voucher entity)
         {

@@ -78,6 +78,29 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok(examForm);
         }
 
+        // This controller checks if the voucher belongs to the user and fetches the exam
+        //// GET: api/CandidateExams/InsertVoucher
+        [HttpPost("InsertVoucher")]
+        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(Voucher voucher, string userName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            User user = await _userManager.FindByNameAsync(userName);
+
+            if(voucher.CandidateId != user.Id)
+            {
+                return BadRequest("The voucher is not valid! ");
+            }
+               
+
+            ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId);
+
+            return Ok(examForm);
+        }
+
         //// PUT: api/CandidateExams/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]
