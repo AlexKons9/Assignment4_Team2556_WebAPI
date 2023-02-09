@@ -266,11 +266,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                     CandidateExamId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CandidateId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     MarkerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExamDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AssessmentTestCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExaminationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ScoreReportDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ExamScore = table.Column<int>(type: "int", nullable: true),
                     PercentageScore = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -286,8 +285,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         name: "FK_CandidateExams_AspNetUsers_CandidateId",
                         column: x => x.CandidateId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CandidateExams_AspNetUsers_MarkerId",
                         column: x => x.MarkerId,
@@ -326,7 +324,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     CandidateCertificateId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CandidateExamId = table.Column<int>(type: "int", nullable: false)
+                    CandidateExamId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -335,8 +333,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         name: "FK_CandidateCertificates_CandidateExams_CandidateExamId",
                         column: x => x.CandidateExamId,
                         principalTable: "CandidateExams",
-                        principalColumn: "CandidateExamId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CandidateExamId");
                 });
 
             migrationBuilder.CreateTable(
@@ -415,10 +412,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3fe10528-252e-4205-8247-5d9dd251bb98", "2fec73b6-edb1-43a0-8ced-af7fd1c5c26d", "QualityControl", "QUALITYCONTROL" },
-                    { "a0bb4cea-b320-457a-8743-01f2ab1ebea9", "5606c772-1ea1-499d-aa31-e859848ecb1c", "Marker", "MARKER" },
-                    { "c2bb237b-2d60-4d92-a0f9-2ee7ad4a6f45", "85a5076c-fa68-47e5-a057-1ad7d4f57ab0", "Candidate", "CANDIDATE" },
-                    { "db049375-5ce8-4bdc-b6b0-417769539105", "7294a98a-8daa-4ae7-a8ca-3caeacb8ec7d", "Admin", "ADMIN" }
+                    { "2fde7b5b-71bf-40e3-b489-e3d8856553f1", "e6d1f485-3f8c-4895-9b19-d027e2735b51", "Marker", "MARKER" },
+                    { "546890c3-4e11-4692-ad12-22f758ae64f1", "4e233408-6f1f-477a-bd58-743f091e5e18", "Admin", "ADMIN" },
+                    { "95a50caf-7059-4f73-8030-a6b548b791c2", "e69a40b4-d76f-4906-a7b8-590f0395d44a", "QualityControl", "QUALITYCONTROL" },
+                    { "b038c471-5fad-4b9b-97cc-d9d6e08c6e4b", "1a83c5d9-b3db-46c1-98ad-b55b4d7ad269", "Candidate", "CANDIDATE" }
                 });
 
             migrationBuilder.InsertData(
