@@ -27,13 +27,13 @@ function MyCertificatesList() {
   }, []);
 
 
-  const handleDetails = async (examId) => {
+  const handleDetails = async (examId, certificateTitle) => {
     try {
         console.log(examId);
         //const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const examResults = response.data;
-        navigate('/MyCertificatesList/CertificateDetails', { state: { results: examResults } });
+        navigate('/MyCertificatesList/CertificateDetails', { state: { results: examResults, certificateTitle: certificateTitle } });
     } catch (error) {
       console.error(error);
       alert("Error the Certificate requested doesn't exist.");
@@ -69,7 +69,7 @@ function MyCertificatesList() {
               <td>
                 <button
                   className="btn btn-success"
-                  onClick={() => handleDetails(candidateCertificate.candidateExam.candidateExamId)}
+                  onClick={() => handleDetails(candidateCertificate.candidateExam.candidateExamId, candidateCertificate.candidateExam.exam.certificate.title)}
                 >
                   Details
                 </button>
