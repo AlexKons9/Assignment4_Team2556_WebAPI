@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230206191322_InitialCreate")]
+    [Migration("20230208113830_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -137,7 +137,6 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CertificateId");
@@ -1013,6 +1012,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsClaimed")
+                        .HasColumnType("bit");
+
                     b.HasKey("VoucherId");
 
                     b.HasIndex("CandidateId");
@@ -1051,29 +1053,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bf78f445-8f20-4b20-8e5c-ad1135a75729",
-                            ConcurrencyStamp = "322f2617-4be6-4034-a06d-73b6c7749591",
+                            Id = "db049375-5ce8-4bdc-b6b0-417769539105",
+                            ConcurrencyStamp = "7294a98a-8daa-4ae7-a8ca-3caeacb8ec7d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "794cb763-4866-4c82-a42e-3cad3733e9f5",
-                            ConcurrencyStamp = "e7049f7b-d6d4-4c5b-add5-dba05897e18e",
+                            Id = "c2bb237b-2d60-4d92-a0f9-2ee7ad4a6f45",
+                            ConcurrencyStamp = "85a5076c-fa68-47e5-a057-1ad7d4f57ab0",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "d00a2c6b-b8df-4ee3-8200-f613b1480a36",
-                            ConcurrencyStamp = "254a512a-3a82-4991-86f3-d547e8cbfa13",
+                            Id = "a0bb4cea-b320-457a-8743-01f2ab1ebea9",
+                            ConcurrencyStamp = "5606c772-1ea1-499d-aa31-e859848ecb1c",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "9d2043cf-7c93-4afb-97d1-1437fb6df25f",
-                            ConcurrencyStamp = "a58b556b-1195-43d6-91b4-ea512fca8a64",
+                            Id = "3fe10528-252e-4205-8247-5d9dd251bb98",
+                            ConcurrencyStamp = "2fec73b6-edb1-43a0-8ced-af7fd1c5c26d",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });

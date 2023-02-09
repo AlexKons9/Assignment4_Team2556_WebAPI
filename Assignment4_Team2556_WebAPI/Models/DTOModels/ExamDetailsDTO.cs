@@ -4,5 +4,6 @@
     {
         public int CertificateId { get; set; }
         public string? UserName { get; set; }
+        public DateTime? ExamDate { get; set; }
     }
 }

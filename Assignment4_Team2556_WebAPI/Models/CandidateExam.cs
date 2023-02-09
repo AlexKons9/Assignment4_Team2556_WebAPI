@@ -14,10 +14,9 @@ namespace Assignment4_Team2556_WebAPI.Models
         public User? Candidate { get; set; }
         public string? MarkerId { get; set; }
         public User? Marker { get; set; }
-        public DateTime ExamDate { get; set; }
+        public DateTime? ExamDate { get; set; }
         public virtual ICollection<CandidateExamAnswer>? QA { get; set; }
         public string? AssessmentTestCode { get; set; }
-        public DateTime? ExaminationDate { get; set; }
         public DateTime? ScoreReportDate { get; set; }
         public int? ExamScore { get; set;}
         public string? PercentageScore { get; set; }

@@ -4,6 +4,7 @@ using Assignment4_Team2556_WebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230208124849_ChangedExamDateToBeNullable")]
+    partial class ChangedExamDateToBeNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Assignment4Team2556WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidateCertificateId"));
 
-                    b.Property<int?>("CandidateExamId")
+                    b.Property<int>("CandidateExamId")
                         .HasColumnType("int");
 
                     b.HasKey("CandidateCertificateId");
@@ -52,6 +55,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CandidateId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ExamDate")
@@ -1184,7 +1188,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.CandidateExam", "CandidateExam")
                         .WithMany()
-                        .HasForeignKey("CandidateExamId");
+                        .HasForeignKey("CandidateExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CandidateExam");
                 });
@@ -1193,7 +1199,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                 {
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.User", "Candidate")
                         .WithMany()
-                        .HasForeignKey("CandidateId");
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Assignment4_Team2556_WebAPI.Models.Exam", "Exam")
                         .WithMany()

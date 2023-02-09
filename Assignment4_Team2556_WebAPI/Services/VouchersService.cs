@@ -19,10 +19,10 @@ namespace Assignment4_Team2556_WebAPI.Services
         }
 
 
-        // We dont Use This
-        public Task<Voucher> AddOrUpdateAsync(Voucher entity)
+        
+        public async Task<Voucher> AddOrUpdateAsync(Voucher entity)
         {
-            throw new NotImplementedException();
+            return await _repository.AddOrUpdateAsync(entity);
         }
 
 
@@ -64,6 +64,13 @@ namespace Assignment4_Team2556_WebAPI.Services
         {
             return await _repository.GetAsync(id);
         }
+
+        public async Task<Voucher?> GetAsyncByDescription(string? voucherDescription)
+        {
+            var repo = _repository as VouchersRepository;
+            return await repo.GetAsyncByDescription(voucherDescription);
+        }
+
 
         public async Task<bool> RemoveAsync(Voucher entity)
         {

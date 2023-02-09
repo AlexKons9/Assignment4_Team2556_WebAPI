@@ -32,24 +32,25 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         // GET: api/Vouchers/Candidate
-        [HttpGet("Cadidate")]
-        public async Task<ActionResult<IEnumerable<Voucher>>> GetCandidateVouchers(string canidateUserName)
+        [HttpGet("Candidate")]
+        public async Task<ActionResult<IEnumerable<Voucher>>> GetCandidateVouchers(string candidateUserName)
         {
             var serv = _service as VouchersService;
-            var vouchers = await serv.GetAllCandidateVouchersAsync(canidateUserName);
+            var vouchers = await serv.GetAllCandidateVouchersAsync(candidateUserName);
 
-            if (canidateUserName == null)
+            if (candidateUserName == null)
             {
                 return NotFound();
             }
             return Ok(vouchers);
         }
 
-        // GET: api/Vouchers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Voucher>> GetVoucher(int id)
+        // GET: api/Vouchers/GetVoucher
+        [HttpGet("GetVoucher/{voucherDescription}")]
+        public async Task<ActionResult<Voucher>> GetVoucher(string? voucherDescription)
         {
-            var voucher = await _service.GetAsync(id);
+            var serv = _service as IVoucherService;
+            var voucher = await serv.GetAsyncByDescription(voucherDescription);
 
             if (voucher == null)
             {
@@ -70,11 +71,12 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return CreatedAtAction("GetVoucher", new { id = voucher.VoucherId }, voucher);
         }
 
-        // DELETE: api/Vouchers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVoucher(int id)
+        // DELETE: api/Vouchers/Delete
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteVoucher(string voucherDescription)
         {
-            var voucher = await _service.GetAsync(id);
+            var serv = _service as IVoucherService;
+            var voucher = await serv.GetAsyncByDescription(voucherDescription);
             if (voucher == null)
             {
                 return NotFound();
@@ -85,41 +87,45 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return NoContent();
         }
 
-        //private bool VoucherExists(int id)
-        //{
-        //    return _context.Vouchers.Any(e => e.VoucherId == id);
-        //}
+        private async Task<bool> VoucherExists(int id)
+        {
+            var voucher = await _service.GetAsync(id);
+            if( voucher != null )
+            {
+                return true;
+            }
+            return false;
+        }
 
 
-        //// PUT: api/Vouchers/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
-        //{
-        //    if (id != voucher.VoucherId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Vouchers/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
+        {
+            if (id != voucher.VoucherId)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(voucher).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!VoucherExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _service.AddOrUpdateAsync(voucher);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (! await VoucherExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }

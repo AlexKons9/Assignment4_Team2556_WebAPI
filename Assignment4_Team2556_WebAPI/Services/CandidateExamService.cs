@@ -84,6 +84,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _candidateExamRepository.GetAccomplishedExamsByCandidateId(candidateId);
         }
 
+        //
+        //Summary: Returns a List of Scheduled Exams of a candidate
+        public async Task<IList<CandidateExam>> GetScheduledExamsByCandidateId(string candidateId)
+        {
+            return await _candidateExamRepository.GetScheduledExamsByCandidateId(candidateId);
+        }
+
 
         //
         //Summary: This method marks the given answers and pass the results in the CandidateExam
@@ -140,6 +147,53 @@ namespace Assignment4_Team2556_WebAPI.Services
                 ExamId = randomlySelectedExam.ExamId,
                 CandidateId = userId,
                 ExamDate = DateTime.Now,
+                AssessmentTestCode = GenerateString(certDetails[0], certDetails[1])
+            };
+            await _candidateExamRepository.AddSaveChanges(candidateExam);
+
+            //Create a new examForm object - DTO
+            ExamForm examForm = new ExamForm()
+            {
+                CandidateExamId = candidateExam.CandidateExamId,
+                Questions = questions
+            };
+
+            return examForm;
+        }
+
+
+        //
+        //Summary: Returns the ExamForm DTO
+        public async Task<ExamForm> GenerateExamForm(string userId, int certificateId, DateTime? examDate)
+        {
+            //Create list of Exams associated with a certificate
+            IList<Exam> exams = await _candidateExamRepository.GetAllExamsByCertificateId(certificateId);
+
+            //Randomly select an exam from Exam List above
+            Exam? randomlySelectedExam = exams.OrderBy(a => new Random().Next()).FirstOrDefault();
+
+            //Retrieve the ExamQuestions associated by the randomly Selected Exam
+            IList<ExamQuestion> examQuestions = await _candidateExamRepository.GetAllExamQuestionsByExamId(randomlySelectedExam.ExamId);
+
+            //Create a List of Questions, composed of the questions associated with the exam
+            List<Question> questions = new List<Question>();
+            foreach (var examQuestion in examQuestions)
+            {
+                questions.Add(examQuestion.Question);
+            }
+
+            //
+            // Splits the certificate Title into two parts (for example: Java Foundation,
+            // into array, certDetails[0] = "Java", certDetails[1] = "Fountation" )
+            string certificateTitle = exams[0].Certificate.Title;
+            var certDetails = certificateTitle.Split(' ');
+
+            //Create the CandidateExam object and save to database
+            CandidateExam candidateExam = new CandidateExam()
+            {
+                ExamId = randomlySelectedExam.ExamId,
+                CandidateId = userId,
+                ExamDate = examDate,
                 AssessmentTestCode = GenerateString(certDetails[0], certDetails[1])
             };
             await _candidateExamRepository.AddSaveChanges(candidateExam);

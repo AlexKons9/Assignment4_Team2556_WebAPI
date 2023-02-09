@@ -21,12 +21,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     {
         private readonly ICandidateExamService _candidateExamService;
         private readonly ICandidateExamAnswerService _candidateExamAnswerService;
+        private readonly IGenericService<Voucher> _voucherService;
         private readonly UserManager<User> _userManager;
 
-        public CandidateExamsController(ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, UserManager<User> userManager)
+        public CandidateExamsController(ICandidateExamService candidateExamService, ICandidateExamAnswerService candidateExamAnswerService, IGenericService<Voucher> voucherService, UserManager<User> userManager)
         {
             _candidateExamService = candidateExamService;
             _candidateExamAnswerService = candidateExamAnswerService;
+            _voucherService = voucherService;
             _userManager = userManager;
         }
 
@@ -73,6 +75,15 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         {
             User user = await _userManager.FindByNameAsync(userName);
             return await _candidateExamService.GetAccomplishedExamsByCandidateId(user.Id);
+        }
+
+        //
+        // GET: api/CandidateExams/ScheduledExams
+        [HttpGet("ScheduledExams")]
+        public async Task<IList<CandidateExam>> GetScheduledExamsOfCandidate(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            return await _candidateExamService.GetScheduledExamsByCandidateId(user.Id);
         }
 
 
@@ -128,17 +139,64 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         //// GET: api/CandidateExams/ExamForm
-        [HttpPost("ExamForm")]
-        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
+        //[HttpPost("ExamForm")]
+        //public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
+        //    ExamForm examForm;
+
+        //    if(examDetailsDTO.ExamDate == null)
+        //    {
+        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
+        //    }
+        //    else
+        //    {
+        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId, examDetailsDTO.ExamDate);
+        //    }
+
+
+        //    return Ok(examForm);
+        //}
+
+        // This controller checks if the voucher belongs to the user and fetches the exam
+        //// GET: api/CandidateExams/InsertVoucher
+        [HttpPost("InsertVoucher/{username}")]
+        public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExamWithVoucher(string userName, DateTime? examDate, Voucher voucher)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
+            User user = await _userManager.FindByNameAsync(userName);
 
-            ExamForm examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
+            if(voucher.CandidateId != user.Id && voucher.IsClaimed == true)
+            {
+                return BadRequest("The voucher is not valid! ");
+            }
+
+            if(examDate < DateTime.Now.Date)
+            {
+                return BadRequest("Invalid Date");
+            }
+
+
+            ExamForm examForm;
+
+            if (examDate == null)
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId);
+            }
+            else
+            {
+                examForm = await _candidateExamService.GenerateExamForm(user.Id, voucher.CertificateId, examDate);
+            }
+
 
             return Ok(examForm);
         }
