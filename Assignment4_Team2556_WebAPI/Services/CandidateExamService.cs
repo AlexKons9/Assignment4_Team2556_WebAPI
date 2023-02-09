@@ -47,6 +47,13 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _candidateExamRepository.GetAccomplishedExamsByCandidateId(candidateId);
         }
 
+        //
+        //Summary: Returns a List of Scheduled Exams of a candidate
+        public async Task<IList<CandidateExam>> GetScheduledExamsByCandidateId(string candidateId)
+        {
+            return await _candidateExamRepository.GetScheduledExamsByCandidateId(candidateId);
+        }
+
 
         //
         //Summary: This method marks the given answers and pass the results in the CandidateExam

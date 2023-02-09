@@ -1,13 +1,14 @@
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import React, { useState, useEffect, useNavigate } from "react";
+import SuccessModal from "../Modals/SuccessModal"
 
 
 function SchedulerMenu() {
     const { auth } = useAuth();
     const userName = auth.userName;
     const axiosPrivate = useAxiosPrivate();
-    //const navigate = useNavigate();
+    const [modalSuccess, setModalSuccess] = useState(false);
 
     const [examDate, setExamDate] = useState();
     const [voucherDescription, setVoucherDescription] = useState();
@@ -21,6 +22,14 @@ function SchedulerMenu() {
         setVoucherDescription({ ...voucherDescription, [name]: value });
       };
 
+    const showModalHandler = () => {
+        setModalSuccess(true);
+    }
+
+    const closeModalHandler = () => {
+        setModalSuccess(false);
+    }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,29 +38,33 @@ function SchedulerMenu() {
 
           const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
           const voucher = answer.data;
-            console.log(JSON.stringify(voucher));
-            const newDate = new Date(examDate.date);
-            const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}/examDate=${newDate}`, voucher);
-            console.log(response.data);
+          console.log(JSON.stringify(voucher));
+          const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}?examDate=${examDate.date}`, voucher);
+          console.log(response.data);
     
           const candidateExamId = response.data.candidateExamId;
           const questionsList = response.data.questions;
     
           voucher.isClaimed = true;
           await axiosPrivate.put(`/api/Vouchers/${voucher.voucherId}`, voucher);
-          
-            //Navigate to exams scheduled for later list
-            // navigate("/CandidateUI/");
+          showModalHandler();
+
         } catch (error) {
           console.error(error);
-          alert("Error creating Exam");
+          alert("Date or Voucher are incorrect!");
         }
       };
 
 
     return (
-        <div className="container">
+        <div className="">
             <h1>Exam Scheduler Menu</h1>
+            <SuccessModal
+            show={modalSuccess}
+            body={`You have scheduled the exam successfully!! 
+                  Go to "Exams/Upcoming Exams" to view your booked examinations!`}
+            closeModalHandler={closeModalHandler}
+            ></SuccessModal>
             <form onSubmit={handleSubmit}>
 
                 <div className="form-group ">

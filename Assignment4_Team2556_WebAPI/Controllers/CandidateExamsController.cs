@@ -49,6 +49,15 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return await _candidateExamService.GetAccomplishedExamsByCandidateId(user.Id);
         }
 
+        //
+        // GET: api/CandidateExams/ScheduledExams
+        [HttpGet("ScheduledExams")]
+        public async Task<IList<CandidateExam>> GetScheduledExamsOfCandidate(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            return await _candidateExamService.GetScheduledExamsByCandidateId(user.Id);
+        }
+
 
         //// GET: api/CandidateExams/ExamResults/5
         [HttpGet("ExamResults/{id}")]
@@ -104,6 +113,11 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             if(voucher.CandidateId != user.Id && voucher.IsClaimed == true)
             {
                 return BadRequest("The voucher is not valid! ");
+            }
+
+            if(examDate < DateTime.Now.Date)
+            {
+                return BadRequest("Invalid Date");
             }
 
 
