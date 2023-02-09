@@ -9,7 +9,7 @@ namespace Assignment4_Team2556_WebAPI.Data
         //Used to automatically map DTO with the Model class
         public MappingProfile()
         {
-            CreateMap<UserForRegistrationDTO, User>();
+            CreateMap<UserForRegistrationDTO, User>();  //creates a map to pass the data from the DTO to the User model
         }
     }
 }
