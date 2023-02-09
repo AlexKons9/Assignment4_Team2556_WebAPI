@@ -6,32 +6,38 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import './Login.css';
 
+
+//
+// Summary: Log in Form for users
 const Login = () => {
-  const { setAuth } = useAuth();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  const userNameRef = useRef();
-  const errRef = useRef();
+  const { setAuth } = useAuth(); // sets the user credentials in the state of the auth context
+  const navigate = useNavigate();  //used to redirect user to another page
+  const location = useLocation();  //used to determine the location of a user within the app
+  const userNameRef = useRef();  //used to create reference point for the username input
+  const errRef = useRef(); //used to create reference point for an error
 
   const [userName, setUserName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
+
   useEffect(() => {
-    userNameRef.current.focus();
+    userNameRef.current.focus(); //sets the focus, i.e. that the username is ready to receive input and it is the currently active element
   }, []);
 
+
   useEffect(() => {
-    setErrMsg("");
+    setErrMsg("");  //empties out the error message if the user reenter a new username and password
   }, [userName, pwd]);
 
+
+  //
+  //submits username and password to backend for authentication
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //stops page from refreshing upon clicking submit button
 
     try {
+      //send form data to backend for validation
       const response = await axios.post(
         "https://localhost:7015/api/authentication/login",
         JSON.stringify({ username: userName, password: pwd }),
@@ -40,20 +46,18 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data;
-      // const refreshToken = response?.data?.refreshToken;
-      var decoded = jwt_decode(accessToken);
-      const roles = [];
-      roles.push(
-        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-      );
-      console.log(roles);
 
-      setAuth({ userName, pwd, roles, accessToken }); //, refreshToken
-      setUserName("");
-      setPwd("");
-      navigate(from, { replace: true });
+      const accessToken = response?.data;  // if the http request is successful, it will return a response that is comprised of the accesstoken
+      var decoded = jwt_decode(accessToken); //decode access token
+      const roles = []; // create an empty array which will hold the user roles
+      roles.push(
+        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]  // add user roles to array
+      );
+
+      setAuth({ userName, pwd, roles, accessToken });  //set global state of user credentials
+      setUserName("");  //empties out username in form on successful submission
+      setPwd(""); //empties out password in form on successful submission
+      navigate("/", { replace: true });  //redirects the user to the home page
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -64,12 +68,13 @@ const Login = () => {
       } else {
         setErrMsg("Login Failed");
       }
-      errRef.current.focus();
+      errRef.current.focus();  //set focus on error
     }
   };
 
   return (
     <section className="container">
+    {/* sets the error message when it is in focus */}
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}
@@ -77,6 +82,8 @@ const Login = () => {
       >
         {errMsg}
       </p>
+
+      {/* Sign in Form */}
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -110,7 +117,6 @@ const Login = () => {
         Need an Account?
         <br />
         <span className="line">
-          {/*put router link here*/}
           <Link to="/Register">Sign Up</Link>
         </span>
       </p>
