@@ -55,6 +55,19 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
+        //Summary: Returns a Scheduled Exam of a candidate
+        public async Task<CandidateExam> GetScheduledExamById(int candidateExamId)
+        {
+            var scheduledCandidateExam = await _context.CandidateExams
+                .Where(c => c.CandidateExamId == candidateExamId && c.ExamScore == null)
+                .Include(c => c.Exam)
+                .ThenInclude(e => e.Certificate)
+                .FirstAsync();
+       
+            return scheduledCandidateExam;
+        }
+
+        //
         //Summary: Returns a Candidate Exam that has been submited for marking 
         public async Task<CandidateExam> GetSubmitedCandidateExamById(int id)
         {

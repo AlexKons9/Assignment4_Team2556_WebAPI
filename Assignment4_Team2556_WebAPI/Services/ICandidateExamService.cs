@@ -9,7 +9,9 @@ namespace Assignment4_Team2556_WebAPI.Services
         Task<CandidateExam> GetSubmitedCandidateExamById(int id);
         Task<IList<CandidateExam>> GetAccomplishedExamsByCandidateId(string candidateId);
         Task<IList<CandidateExam>> GetScheduledExamsByCandidateId(string candidateId);
+        Task<CandidateExam> GetScheduledExamById(int candidateExamId);
         Task<CandidateExamResultsDTO> GetMarksOfTheSubmitedExam(int candidateExamId);
+        Task<ExamForm> GetScheduledCandidateExamForm(CandidateExam candidateExam);
         Task<ExamForm> GenerateExamForm(string userId, int certificateId);
         Task<ExamForm> GenerateExamForm(string userId, int certificateId, DateTime? examDate);
     }

@@ -69,8 +69,7 @@ function MyCertificatesList() {
                 <button
                   className="btn btn-success"
                   onClick={() => handleDetails(exam.candidateExamId)}
-                >
-                  Details
+                >Details
                 </button>
               </td>
             </tr>

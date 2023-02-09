@@ -73,30 +73,14 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok(candidateExamResults);
         }
 
-        //// GET: api/CandidateExams/ExamForm
-        //[HttpPost("ExamForm")]
-        //public async Task<ActionResult<ExamDetailsDTO>> GetCandidateExam(ExamDetailsDTO examDetailsDTO)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    User user = await _userManager.FindByNameAsync(examDetailsDTO.UserName);
-        //    ExamForm examForm;
-
-        //    if(examDetailsDTO.ExamDate == null)
-        //    {
-        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId);
-        //    }
-        //    else
-        //    {
-        //        examForm = await _candidateExamService.GenerateExamForm(user.Id, examDetailsDTO.CertificateId, examDetailsDTO.ExamDate);
-        //    }
-
-
-        //    return Ok(examForm);
-        //}
+        // GET: api/CandidateExams/GetScheduledExamForm
+        [HttpGet("GetScheduledExamForm/{id}")]
+        public async Task<ActionResult<ExamForm>> GetScheduledCandidateExam(int id)
+        {
+            CandidateExam candidateExam = await _candidateExamService.GetScheduledExamById(id);
+            var examForm = await _candidateExamService.GetScheduledCandidateExamForm(candidateExam);
+            return Ok(examForm);
+        }
 
         // This controller checks if the voucher belongs to the user and fetches the exam
         //// GET: api/CandidateExams/InsertVoucher
