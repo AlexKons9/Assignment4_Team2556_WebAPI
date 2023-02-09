@@ -10,6 +10,7 @@ using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -19,10 +20,12 @@ namespace Assignment4_Team2556_WebAPI.Controllers
     {
         //private readonly ApplicationDbContext _context;
         private readonly ICandidateCertificateService _service;
+        private readonly UserManager<User> _userManager;
 
-        public CandidateCertificatesController(ICandidateCertificateService service)
+        public CandidateCertificatesController(ICandidateCertificateService service, UserManager<User> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
 
         // GET: api/CandidateCertificates
@@ -31,6 +34,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<CandidateCertificate>>> GetCandidateCertificates()
         {
             var candidateCertificates = await _service.GetAllAsync();
+            return Ok(candidateCertificates);
+        }
+
+        // GET: api/CandidateCertificates
+        //
+        // Summary: Get all candidate certificates of username
+        [HttpGet("ByUsername/{username}")]
+        [Authorize(Roles = "Admin,Candidate")]
+        public async Task<ActionResult<IEnumerable<CandidateCertificate>>> GetCandidateCertificatesByUser(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            var candidateCertificates = await _service.GetAllCandidateCertificatesByUserNameAsync(user.Id);
             return Ok(candidateCertificates);
         }
 

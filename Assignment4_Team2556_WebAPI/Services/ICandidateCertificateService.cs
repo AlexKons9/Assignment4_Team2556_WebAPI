@@ -8,6 +8,7 @@ namespace Assignment4_Team2556_WebAPI.Services
         Task<CandidateCertificate?> GetAsync(int id);
         Task<IList<CandidateCertificate>> GetAllAsync();
         Task<bool> RemoveAsync(CandidateCertificate candidateCertificate);
+        Task<IList<CandidateCertificate?>> GetAllCandidateCertificatesByUserNameAsync(string id);
 
     }
 }

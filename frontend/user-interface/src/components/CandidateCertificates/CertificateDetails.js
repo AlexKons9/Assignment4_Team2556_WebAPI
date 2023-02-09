@@ -10,7 +10,7 @@ function CertificateDetails() {
 
   return (
     <div className="container col-10">
-      <h1>Certificate</h1>
+      <h1>{examResults.certificate} Certificate</h1>
       <hr />
 
       <div>

@@ -33,5 +33,17 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IList<CandidateCertificate>> GetAllCandidateCertificatesByUserNameAsync(string id)
+        {
+            return await _context.CandidateCertificates
+                .Include(cc => cc.CandidateExam)
+                .ThenInclude(ce => ce.Candidate)
+                .Include(cc => cc.CandidateExam)
+                .ThenInclude(ce => ce.Exam)
+                .ThenInclude(e => e.Certificate)
+                .Where(cc => cc.CandidateExam.CandidateId == id)
+                .ToListAsync();
+        }
     }
 }
