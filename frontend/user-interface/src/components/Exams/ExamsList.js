@@ -65,16 +65,23 @@ function ExamsList() {
     }
   };
 
-//   const handleEdit = async (examId) => {
-//     try {
-//       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-//       const question = response.data;
-//       navigate("/AdminUI/EditQuestionForm", { state: { question: question } });
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error the Question requested doesn't exist.");
-//     }
-//   };
+  const handleEdit = async (examId) => {
+    try {
+     const response = await axiosPrivate.get(`/api/Exams/${examId}`);
+      const exam = response.data;
+      const response2 = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
+      
+      const examQuestions = response2.data.map(question => question.questionId);
+      console.log(examQuestions);
+      navigate("/AdminUI/Exams/Edit"
+       , { state: { exam: exam , examQuestions:examQuestions } }
+      );
+
+    } catch (error) {
+      console.error(error);
+      alert("Error the Exam requested doesn't exist.");
+    }
+  };
 
 return (
     <div>
@@ -108,7 +115,7 @@ return (
               <td>
                 <button
                   className="btn btn-secondary"
-                //   onClick={() => handleEdit(exam.examId)}
+                onClick={() => handleEdit(exam.examId)}
                 >
                   Edit
                 </button>{" "}

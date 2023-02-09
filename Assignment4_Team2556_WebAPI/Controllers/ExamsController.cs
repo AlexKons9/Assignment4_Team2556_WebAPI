@@ -33,18 +33,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         // GET: api/Exams/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Exam>> GetExam(int id)
-        //{
-        //    var exam = await _context.Exams.FindAsync(id);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Exam>> GetExam(int id)
+        {
+            //var exam = await _context.Exams.FindAsync(id);
+            var exam = await _service.GetAsync(id);
+            if (exam == null)
+            {
+                return NotFound();
+            }
 
-        //    if (exam == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return exam;
-        //}
+            return exam;
+        }
 
         //// PUT: api/Exams/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
