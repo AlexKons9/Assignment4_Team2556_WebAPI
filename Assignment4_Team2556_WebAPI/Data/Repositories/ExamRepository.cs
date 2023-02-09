@@ -29,9 +29,10 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             return exams;
         }
 
-        public Task<Exam?> GetAsync(int? id)
+        public async Task<Exam?> GetAsync(int? id)
         {
-            throw new NotImplementedException();
+            var exam = await _context.Exams.FindAsync(id);
+            return exam;
         }
 
         public async Task<bool> RemoveAsync(Exam exam)

@@ -23,9 +23,9 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _repository.GetAllAsync();
         }
 
-        public Task<Exam?> GetAsync(int? id)
+        public async Task<Exam?> GetAsync(int? id)
         {
-            throw new NotImplementedException();
+            return await _repository.GetAsync(id);
         }
 
         public async Task<bool> RemoveAsync(Exam exam)

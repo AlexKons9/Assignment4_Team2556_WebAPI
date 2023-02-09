@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import htmlParse from 'html-react-parser';
@@ -55,16 +55,15 @@ const handleSubmit = async (event) => {
     const response = await axiosPrivate.post("/api/Exams",exam);
      console.log(response.data);
     const examId = response.data.examId;
+    await axiosPrivate.post(`/api/ExamQuestions?examId=${examId}`,examQuestions);
     alert("Exam created successfully!");
-    await axiosPrivate.post("/api/ExamQuestions",{examId:examId,examQuestions:examQuestions});
     // console.log(questionId);
-    // navigate("/AdminUI/CreateOptionsForm");
+    navigate("/AdminUI");
   } catch (error) {
     console.error(error);
     alert("Error creating Exam");
   }
 };
-console.log(examQuestions);
  return(
      <>
     <h1>Create New Exam</h1>

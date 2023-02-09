@@ -99,7 +99,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
                 return NotFound();
             }
             await _service.RemoveAsync(exam);
-            return NoContent();
+            return Ok();
         }
 
         //private bool ExamExists(int id)

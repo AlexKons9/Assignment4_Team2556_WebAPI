@@ -84,10 +84,10 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         public async Task<ActionResult<ExamQuestion>> PostExamQuestion(int examId,List<int> examQuestions)
         {
             ExamQuestion examQuestion = new();
+            examQuestion.ExamId = examId;
             
             foreach (var question in examQuestions) 
             {   
-                 examQuestion.ExamId = examId;
                  examQuestion.QuestionId = question;
                 _context.ExamQuestions.Add(examQuestion);
                 await _context.SaveChangesAsync();

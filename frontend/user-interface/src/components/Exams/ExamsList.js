@@ -103,7 +103,7 @@ return (
         <tbody>
           {exams.map((exam,i) => (
             <tr key={exam.examId}>
-              <td><h5>Exam {[i+1]}</h5></td>
+              <td><h5>Exam {exam.examId}</h5></td>
               <td>{exam.certificate.title}</td>
               <td>
                 <button
