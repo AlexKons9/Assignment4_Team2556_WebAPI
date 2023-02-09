@@ -8,14 +8,11 @@ function EditExams() {
     const location = useLocation();
     const [count, setCount] = useState(0)
     const [exam, setExam] = useState(location.state.exam);    
-    const [examQuestions, setExamQuestions] = useState(location.state.examQuestions);
-    examQuestions.forEach(question => {
-        const checkbox = document.querySelector(`input[value="${question}"]`);
-        checkbox.checked = true;
-      });
+    const [examQuestions, setExamQuestions] = useState([]); //location.state.examQuestions
+    // const [selected, setSelected] = useState(Array(examQuestions.length).fill(false));
     const [questions, setQuestions] = useState([]);
     const [certificates, setCertificates] = useState([]);
-//     const navigate = useNavigate();
+    const navigate = useNavigate();
     const axiosPrivate = useAxiosPrivate();
     
       useEffect(() => {
@@ -42,32 +39,32 @@ const handleBoxChange =(event) => {
     setCount(count+1)
   } else {
     setExamQuestions(pre =>{
-      return[...pre.filter(skill=>skill!==value)]
+    return[...pre.filter(skill=>skill!==value)]
     });    
     setCount(count-1)
   }
 };
 
-// const handleSubmit = async (event) => {
-//   event.preventDefault();
-//   try {
-//     const response = await axiosPrivate.post("/api/Exams",exam);
-//      console.log(response.data);
-//     const examId = response.data.examId;
-//     await axiosPrivate.post(`/api/ExamQuestions?examId=${examId}`,examQuestions);
-//     alert("Exam created successfully!");
-//     // console.log(questionId);
-//     navigate("/AdminUI");
-//   } catch (error) {
-//     console.error(error);
-//     alert("Error creating Exam");
-//   }
-// };
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    const response = await axiosPrivate.post("/api/Exams",exam);
+    console.log(response.data);
+    const examId = response.data.examId;
+    await axiosPrivate.post(`/api/ExamQuestions/Edit/${examId}`,examQuestions);
+    alert("Exam Edited successfully!");
+    // console.log(questionId);
+    navigate("/AdminUI/Exams");
+  } catch (error) {
+    console.error(error);
+    alert("Error editing Exam");
+  }
+};
 console.log(examQuestions);
  return(
      <>
     <h1>Edit Exam</h1>
- <form onSubmit={""} className="row g-3 form-container">
+ <form onSubmit={handleSubmit} className="row g-3 form-container">
 
 
    <div className="form-group">
@@ -93,13 +90,13 @@ console.log(examQuestions);
     </select>
    </div>
   <div className="form-group">
-  <h3>Add Exam Questions:</h3>
+  <h3>Please select exam questions again:</h3>
    {questions.map((question, index) => (
     <div key={index}>
      {question.topic.certificateId==exam.certificateId && 
                   
     <div className="form-group">
-      <input type="checkbox" id="questionId" name="questionId" value={question.questionId} onChange={handleBoxChange}/>
+      <input type="checkbox" id="questionId" name="questionId"   value={question.questionId} onChange={handleBoxChange}/>
     <label for="questionId"> <hr/> &nbsp;{question.topic.topicDescription} :{htmlParse(question.descriptionStem)} </label>
     </div>               
       }
@@ -117,7 +114,7 @@ console.log(examQuestions);
   
    
    <button type="submit" className="btn btn-primary col-md-1 mx-auto">
-     Create
+     Edit
    </button>
  </form>
 </>

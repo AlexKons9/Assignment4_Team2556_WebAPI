@@ -9,6 +9,8 @@ using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Models.DTOModels;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -25,6 +27,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/ExamQuestions
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<ExamQuestion>>> GetExamQuestions()
         {
             return await _context.ExamQuestions.ToListAsync();
@@ -32,6 +35,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/ExamQuestions/5
         [HttpGet("{examid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<ExamQuestion>>> GetExamQuestion(int examid)
         {
             var examQuestions = await _context.ExamQuestions.Where(id => id.ExamId == examid)
@@ -49,38 +53,59 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // PUT: api/ExamQuestions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutExamQuestion(int id, ExamQuestion examQuestion)
-        //{
-        //    if (id != examQuestion.QuestionId)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPost("Edit/{examId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ExamQuestion>> PutExamQuestion(int examId, List<int> examQestions)
+        {
+            var prevExamQuestions = await _context.ExamQuestions.Where(eq => eq.ExamId == examId).ToListAsync();
+            if (prevExamQuestions !=null) { 
+            foreach (var prevQuestion in prevExamQuestions)
+            {
+                _context.ExamQuestions.Remove(prevQuestion);
+                _context.SaveChanges();
+            }
+            }
 
-        //    _context.Entry(examQuestion).State = EntityState.Modified;
+            ExamQuestion examQuestion = new();
+            examQuestion.ExamId = examId;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ExamQuestionExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            foreach (var question in examQestions)
+            {
+                examQuestion.QuestionId = question;
+                await _context.ExamQuestions.AddAsync(examQuestion);
+                await _context.SaveChangesAsync();
+            }
 
-        //    return NoContent();
-        //}
+            //if (id != examquestion.questionid)
+            //{
+            //    return badrequest();
+            //}
+
+            //_context.entry(examquestion).state = entitystate.modified;
+
+            //try
+            //{
+            //    await _context.savechangesasync();
+            //}
+            //catch (dbupdateconcurrencyexception)
+            //{
+            //    if (!examquestionexists(id))
+            //    {
+            //        return notfound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            return CreatedAtAction("GetExamQuestion", new { id = examQuestion.QuestionId }, examQuestion);
+        }
 
         //// POST: api/ExamQuestions
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ExamQuestion>> PostExamQuestion(int examId,List<int> examQuestions)
         {
             ExamQuestion examQuestion = new();
@@ -89,7 +114,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             foreach (var question in examQuestions) 
             {   
                  examQuestion.QuestionId = question;
-                _context.ExamQuestions.Add(examQuestion);
+                await _context.ExamQuestions.AddAsync(examQuestion);
                 await _context.SaveChangesAsync();
             }
         //    try

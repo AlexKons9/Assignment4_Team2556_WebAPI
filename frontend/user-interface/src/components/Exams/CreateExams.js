@@ -58,7 +58,7 @@ const handleSubmit = async (event) => {
     await axiosPrivate.post(`/api/ExamQuestions?examId=${examId}`,examQuestions);
     alert("Exam created successfully!");
     // console.log(questionId);
-    navigate("/AdminUI");
+    navigate("/AdminUI/Exams");
   } catch (error) {
     console.error(error);
     alert("Error creating Exam");

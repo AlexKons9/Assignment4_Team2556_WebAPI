@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Assignment4_Team2556_WebAPI.Data;
 using Assignment4_Team2556_WebAPI.Models;
 using Assignment4_Team2556_WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Assignment4_Team2556_WebAPI.Controllers
 {
@@ -26,6 +28,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Exams
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Exam>>> GetExams()
         {
             var exams = await _service.GetAllAsync();
@@ -34,6 +37,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Exams/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Exam>> GetExam(int id)
         {
             //var exam = await _context.Exams.FindAsync(id);
@@ -57,29 +61,30 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         //    }
 
         //    _context.Entry(exam).State = EntityState.Modified;
-
-        //    try
-        //    {
         //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ExamExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
 
-        //    return NoContent();
+        //    //try
+        //    //{
+        //    //}
+        //    //catch (DbUpdateConcurrencyException)
+        //    //{
+        //    //    if (!ExamExists(id))
+        //    //    {
+        //    //        return NotFound();
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        throw;
+        //    //    }
+        //    //}
+
+        //    return Ok();
         //}
 
         //// POST: api/Exams
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Exam>> PostExam(Exam exam)
         {
             //_context.Exams.Add(exam);
@@ -91,6 +96,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // DELETE: api/Exams/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteExam(int id)
         {
             var exam = await _service.GetAsync(id);
