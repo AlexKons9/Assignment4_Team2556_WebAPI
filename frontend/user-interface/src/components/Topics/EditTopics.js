@@ -5,8 +5,11 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 function EditTopics()
 { 
     const location = useLocation();
-    const [certificateId, setCertificateId] = useState(location.state.certificateId);
-    const [topics, setTopics] = useState([""]);
+    const certificateId = location.state.certificateId;
+    const [topics, setTopics] = useState(
+        [
+            
+        ]);
     const navigate = useNavigate();
     const axiosPrivate = useAxiosPrivate()
     const handleTopic = (event, index) => {
@@ -24,7 +27,7 @@ function EditTopics()
         values.splice(index, 1);
         setTopics(values);
       };
-      
+
       const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(topics);
