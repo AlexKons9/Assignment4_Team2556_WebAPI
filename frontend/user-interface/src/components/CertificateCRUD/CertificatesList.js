@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
+import DeleteCertificate from "./CertificateCrudDeleteModal"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
 import htmlParse from "html-react-parser";
@@ -37,17 +37,17 @@ function CertificatesList() {
     setItemToDelete(0);
   };
 
-  // const deleteConfirmHandler = async () => {
-  //   await axiosPrivate
-  //     .delete(`/api/Certificates/${itemToDelete}`)
-  //     .then((response) => {
-  //       setQuestions((existingData) => {
-  //         return existingData.filter((_) => _.certificateId !== itemToDelete);
-  //       });
-  //       setItemToDelete(0);
-  //       setShowModal(false);
-  //     });
-  // };
+  const deleteConfirmHandler = async () => {
+    await axiosPrivate
+      .delete(`/api/Certificates/${itemToDelete}`)
+      .then((response) => {
+        setCertificates((existingData) => {
+          return existingData.filter((_) => _.certificateId !== itemToDelete);
+        });
+        setItemToDelete(0);
+        setShowModal(false);
+      });
+  };
 
   const handleDetails = async (certificateId) => {
     try {
@@ -59,7 +59,7 @@ function CertificatesList() {
       });
     } catch (error) {
       console.error(error);
-      alert("Error the Question requested doesn't exist.");
+      alert("Error the Certificate requested doesn't exist.");
     }
   };
 
@@ -78,13 +78,14 @@ function CertificatesList() {
 
   return (
     <div>
-      {/* <DeleteQuestion
+      <DeleteCertificate
         showModal={showModal}
         title="Delete Confirmation!"
-        body="Are you sure to delete this Question?"
+        body="Are you sure to delete this Certificate?"
         closeConfirmPopupHandler={closeConfirmPopupHandler}
         deleteConfirmHandler={deleteConfirmHandler}
-      ></DeleteQuestion> */}
+      ></DeleteCertificate>
+
       <h1>Certificates List</h1>
 
       <p>
@@ -121,9 +122,9 @@ function CertificatesList() {
                 |
                 <button
                   className="btn btn-danger"
-                  // onClick={() => {
-                  //   showConfirmPopupHandler(certificate.certificateId);
-                  // }}
+                  onClick={() => {
+                    showConfirmPopupHandler(certificate.certificateId);
+                  }}
                 >
                   Delete
                 </button>

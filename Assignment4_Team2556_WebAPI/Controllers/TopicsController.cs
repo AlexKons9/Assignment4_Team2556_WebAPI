@@ -88,6 +88,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return CreatedAtAction("GetTopic", new { id = topic.TopicId }, topic);
         }
 
+
+        // POST: api/Topics/ListOfTopics
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("ListOfTopics/{certificateId}")]
+        public async Task<ActionResult<Topic>> PostListOfTopic(int certificateId, List<Topic> topics)
+        {
+            await _service.AddOrUpdateListOfTopicsAsync(topics, certificateId);
+
+            return CreatedAtAction("GetTopic", new { id = topics[0].CertificateId }, topics);
+        }
+
+
         // DELETE: api/Topics/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTopic(int id)
