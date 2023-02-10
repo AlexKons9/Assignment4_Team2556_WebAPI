@@ -137,18 +137,21 @@ namespace Assignment4_Team2556_WebAPI.Services
             }
         }
 
-        public async Task<TokenDTO> RefreshToken(string accessToken, string refreshToken) //TokenDTO tokenDTO
-        {
-            var principal = GetPrincipalFromExpiredToken(accessToken);
 
-            var user = await _userManager.FindByNameAsync(principal.Identity.Name);
+        //
+        // Summary: Uses existing refresh token in order to generate a new access and refresh token
+        public async Task<TokenDTO> RefreshToken(string accessToken, string refreshToken)
+        {
+            var principal = GetPrincipalFromExpiredToken(accessToken);  //get principal
+
+            var user = await _userManager.FindByNameAsync(principal.Identity.Name);  //get user based on principal
             if (user == null || user.RefreshToken != refreshToken ||
-                user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                user.RefreshTokenExpiryTime <= DateTime.UtcNow)  //if there is no user, or the refresh token is equal to the refresh token stored in the database, or if the refresh token has expired, then throw error
                 throw new RefreshTokenBadRequest();
 
             _user = user;
 
-            return await CreateToken(populateExp: false);
+            return await CreateToken(populateExp: false);  //return new access and refresh tokens
         }
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)

@@ -19,7 +19,6 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
 
         [HttpGet("refresh")]
-        //[ServiceFilter(typeof(ValidationFilterAttribute))] 
         public async Task<IActionResult> Refresh()
         {
             var refreshToken = Request.Cookies["Refresh-Token"];
@@ -29,9 +28,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             }
             else
             {
-                //refreshToken = Request.Cookies["Refresh-Token"];
-                var tokenDtoToReturn = await _service.RefreshToken(accessToken, refreshToken); //tokenDto
-                //refreshToken = tokenDtoToReturn.RefreshToken;
+                var tokenDtoToReturn = await _service.RefreshToken(accessToken, refreshToken);
                 Response.Cookies.Append("Refresh-Token", tokenDtoToReturn.RefreshToken, new CookieOptions() { Secure = true, HttpOnly = true, SameSite = SameSiteMode.None });
                 Response.Cookies.Append("Access-Token", tokenDtoToReturn.AccessToken, new CookieOptions() { Secure = true, HttpOnly = true, SameSite = SameSiteMode.None });
                 return Ok(tokenDtoToReturn.AccessToken);
