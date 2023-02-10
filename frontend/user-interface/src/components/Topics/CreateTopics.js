@@ -34,7 +34,6 @@ function CreateTopics()
             `/api/Topics/ListOfTopics?certificateId=${certificateId}`, topics            
           );
           alert("Certificate created successfully!");
-          console.log(response.data);
           navigate("/AdminUI/Certificates");
         } catch (error) {
           console.error(error);

@@ -49,6 +49,21 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return topic;
         }
 
+        // GET: api/Topics/CertificateTopics/5
+        [HttpGet("CertificateTopics/{certificateId}")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IList<Topic>> GetTopicOfCertificate(int certificateId)
+        {
+            var topics = await _service.GetAllTopicsOfCertificate(certificateId);
+
+            if (topics == null)
+            {
+                return (IList<Topic>)NotFound();
+            }
+
+            return topics;
+        }
+
         // PUT: api/Topics/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -95,7 +110,18 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         public async Task<ActionResult<Topic>> PostListOfTopic(int certificateId, List<string> topics)
         {
 
-            var listTopics =await _service.AddOrUpdateListOfTopicsAsync(topics, certificateId);
+            var listTopics =await _service.AddListOfTopicsAsync(topics, certificateId);
+
+            return CreatedAtAction("GetTopic", new { id = listTopics[0].CertificateId }, listTopics);
+        }
+
+        // PUT: api/Topics/UpdateTopics
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("UpdateTopics")]
+        public async Task<ActionResult<Topic>> UpdateListOfTopic(List<Topic> topics)
+        {
+
+            var listTopics = await _service.AddOrUpdateListOfTopicsAsync(topics);
 
             return CreatedAtAction("GetTopic", new { id = listTopics[0].CertificateId }, listTopics);
         }

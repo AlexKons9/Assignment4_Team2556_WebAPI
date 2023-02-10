@@ -22,7 +22,7 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             return entity;
         }
 
-        public async Task<Topic> AddOrUpdateListOfTopicsAsync(Topic topic)
+        public async Task<Topic> AddTopicAsync(Topic topic)
         {
            
             await _context.AddAsync(topic);
@@ -42,6 +42,12 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         public async Task<IList<Topic>> GetAllAsync()
         {
             return await _context.Topics.ToListAsync();
+        }
+
+        public async Task<IList<Topic>> GetAllTopicsOfCertificate(int certificateId)
+        {
+            var listOfTopics = await _context.Topics.Where(x => x.CertificateId == certificateId ).ToListAsync();
+            return listOfTopics;
         }
 
         public async Task<bool> RemoveAsync(Topic entity)
