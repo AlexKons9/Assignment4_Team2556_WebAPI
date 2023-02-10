@@ -91,12 +91,13 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // POST: api/Topics/ListOfTopics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("ListOfTopics/{certificateId}")]
-        public async Task<ActionResult<Topic>> PostListOfTopic(int certificateId, List<Topic> topics)
+        [HttpPost("ListOfTopics")]
+        public async Task<ActionResult<Topic>> PostListOfTopic(int certificateId, List<string> topics)
         {
-            await _service.AddOrUpdateListOfTopicsAsync(topics, certificateId);
 
-            return CreatedAtAction("GetTopic", new { id = topics[0].CertificateId }, topics);
+            var listTopics =await _service.AddOrUpdateListOfTopicsAsync(topics, certificateId);
+
+            return CreatedAtAction("GetTopic", new { id = listTopics[0].CertificateId }, listTopics);
         }
 
 

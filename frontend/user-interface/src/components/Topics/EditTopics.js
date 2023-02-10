@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-function CreateTopics()
+function EditTopics()
 { 
     const location = useLocation();
     const [certificateId, setCertificateId] = useState(location.state.certificateId);
@@ -25,6 +24,7 @@ function CreateTopics()
         values.splice(index, 1);
         setTopics(values);
       };
+      
       const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(topics);
@@ -68,4 +68,4 @@ function CreateTopics()
       );
 }
 
-export default CreateTopics;
+export default EditTopics;

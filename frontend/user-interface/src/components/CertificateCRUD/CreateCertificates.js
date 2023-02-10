@@ -35,7 +35,7 @@ function CreateCertificate() {
       });
     } catch (error) {
       console.error(error);
-      alert("Error creating question");
+      alert("Error creating certificate");
     }
   };
 console.log(certificate)

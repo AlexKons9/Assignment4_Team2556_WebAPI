@@ -6,7 +6,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 function EditCertificate() {
   const location = useLocation();
   const [certificate, setCertificate] = useState({
-    certificateId: location.state.certificateId,
+    certificateId: location.state.certificate.certificateId,
     title: location.state.certificate.title,
     isActive: location.state.certificate.isActive,
   });
@@ -30,8 +30,7 @@ function EditCertificate() {
       alert("Certificate created successfully!");
       console.log(response.data);
       const certificateId = response.data.certificateId;
-      // console.log(questionId);
-      navigate("/AdminUI/CreateTopics", {
+      navigate("/AdminUI/EditTopics", {
         state: { certificateId: certificateId },
       });
     } catch (error) {
