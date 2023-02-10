@@ -16,6 +16,7 @@ import EShopList from './components/EShop/EShopList';
 import VouchersList from './components/Exams/VouchersList';
 import SchedulerMenu from "./components/Exams/SchedulerMenu";
 import UpcomingExams from "./components/Exams/UpcomingExams";
+import CertificateCrudDetails from "./components/CertificateCRUD/CertificateCrudDetails";
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -94,6 +95,7 @@ function App() {
                         <Route exact path="AdminUI/Exams/Edit" element={<EditExam />} />
                         <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                         <Route exact path="AdminUI/Certificates" element={<CertificatesList />} />
+                        <Route exact path="AdminUI/Certificates/CertificateDetails" element={<CertificateCrudDetails />} />
                     </Route>
 
 

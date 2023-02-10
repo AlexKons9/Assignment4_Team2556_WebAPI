@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import React from 'react';
 import htmlParse from 'html-react-parser';
 

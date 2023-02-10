@@ -9,7 +9,7 @@ import htmlParse from "html-react-parser";
 
 function CertificatesList() {
   const [certificates, setCertificates] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(0);
   const axiosPrivate = useAxiosPrivate();
@@ -25,6 +25,7 @@ function CertificatesList() {
     };
     fetchData();
   }, []);
+
 
   const showConfirmPopupHandler = (id) => {
     setShowModal(true);
@@ -48,18 +49,21 @@ function CertificatesList() {
   //     });
   // };
 
-//   const handleDetails = async (questionId) => {
-//     try {
-//       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-//       const questionDetails = response.data;
-//       navigate("/AdminUI/DetailsQuestion", {
-//         state: { questionDetails: questionDetails },
-//       });
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error the Question requested doesn't exist.");
-//     }
-//   };
+  const handleDetails = async (certificateId) => {
+    try {
+      const response = await axiosPrivate.get(`/api/Certificates/${certificateId}`);
+      const certificateDetails = response.data;
+      console.log(certificateDetails);
+      navigate("CertificateDetails", {
+        state: { certificateDetails: certificateDetails },
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Error the Question requested doesn't exist.");
+    }
+  };
+
+
 
 //   const handleEdit = async (questionId) => {
 //     try {
@@ -110,7 +114,7 @@ function CertificatesList() {
                 |
                 <button
                   className="btn btn-success"
-                  // onClick={() => handleDetails(certificate.certificateId)}
+                  onClick={() => handleDetails(certificate.certificateId)}
                 >
                   Details
                 </button>{" "}

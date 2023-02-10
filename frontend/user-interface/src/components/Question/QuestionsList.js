@@ -32,6 +32,7 @@ function QuestionsList() {
     setItemToDelete(id);
     console.log(id);
   };
+  
   const closeConfirmPopupHandler = () => {
     setShowModal(false);
     setItemToDelete(0);
