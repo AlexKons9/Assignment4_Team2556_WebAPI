@@ -1,4 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
+import useAuth from '../../hooks/useAuth';
 
 
 function CertificateDetails() {
@@ -6,6 +7,7 @@ function CertificateDetails() {
     var count = 1;
     const location = useLocation();
     const certificates = location.state.certificateDetails;
+    const { auth } = useAuth();
 
 
     return (
@@ -34,7 +36,7 @@ function CertificateDetails() {
 
 
                 <div>
-                    <Link className='btn btn-secondary' to="../AdminUI/Certificates">Back to List</Link>
+                    <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/Certificates" : "/QualityControlUI/CertificateList"}>Back to List</Link>
                 </div>
 
             </div>

@@ -90,6 +90,7 @@ function NavBar() {
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
                                 <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidates</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >View Certificates</Link></li>
                               </>
                             : <li></li>
                         }

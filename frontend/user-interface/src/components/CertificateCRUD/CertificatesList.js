@@ -54,7 +54,7 @@ function CertificatesList() {
       const response = await axiosPrivate.get(`/api/Certificates/${certificateId}`);
       const certificateDetails = response.data;
       console.log(certificateDetails);
-      navigate("CertificateDetails", {
+      navigate("/Certificates/CertificateDetails", {
         state: { certificateDetails: certificateDetails },
       });
     } catch (error) {

@@ -56,6 +56,7 @@ import MarkedExamDetails from './components/Marker/MarkedExamDetails';
 
 //QualityControl components
 import CandidatesListQC from './components/QualityControl/CandidatesListQC';
+import CertificateListQC from './components/QualityControl/CertificateListQC'
 
 //TESTing components
 import Users from './components/Security/Users';
@@ -104,7 +105,7 @@ function App() {
                         <Route exact path="AdminUI/Certificates/Edit" element={<EditCertificate />} />
                         <Route exact path="AdminUI/CreateTopics" element={<CreateTopics />} />
                         <Route exact path="AdminUI/EditTopics" element={<EditTopics />} />
-                        <Route exact path="AdminUI/Certificates/CertificateDetails" element={<CertificateCrudDetails />} />
+                        {/* <Route exact path="AdminUI/Certificates/CertificateDetails" element={<CertificateCrudDetails />} /> */}
                     </Route>
 
 
@@ -122,6 +123,8 @@ function App() {
                     <Route element={<RequireAuth allowedRoles={[ROLES.QualityControl, ROLES.Admin]} />}>
                         <Route exact path="QualityControlUI/CandidateList" element={<CandidatesListQC />} />
                         <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} />
+                        <Route exact path="QualityControlUI/CertificateList" element={<CertificateListQC />} />
+                        <Route exact path="Certificates/CertificateDetails" element={<CertificateCrudDetails />} />
                     </Route>         
 
 
