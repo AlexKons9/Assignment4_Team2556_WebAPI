@@ -18,6 +18,12 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _repository.AddOrUpdateAsync(candidateCertificate);
         }
 
+        public async Task<IList<CandidateCertificate?>> GetAllCandidateCertificatesByUserNameAsync(string id)
+        {
+            var _repo = _repository as CandidateCertificateRepository;
+            return await _repo.GetAllCandidateCertificatesByUserNameAsync(id);
+        }
+
         public async Task<CandidateCertificate?> GetAsync(int id)
         {
             return await _repository.GetAsync(id);

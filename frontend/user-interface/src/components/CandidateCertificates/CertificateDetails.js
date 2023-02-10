@@ -6,11 +6,12 @@ function CertificateDetails() {
   const navigate = useNavigate();
 
   const examResults = location.state.results;
+  const certificateTitle = location.state.certificateTitle;
   console.log(examResults);
 
   return (
     <div className="container col-10">
-      <h1>Certificate</h1>
+      <h1>{certificateTitle} Certificate</h1>
       <hr />
 
       <div>

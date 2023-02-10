@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 
 function MyCertificatesList() {
-  const [candidateExams, setCandidateExams] = useState([]);
+  //const [candidateExams, setCandidateExams] = useState([]);
+  const [candidateCertificates, setCandidateCertificates] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const { auth } = useAuth();
@@ -14,11 +15,10 @@ function MyCertificatesList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosPrivate.get(
-          `/api/CandidateExams/Certificates?userName=${userName}` 
-        );
+        //const response = await axiosPrivate.get(`/api/CandidateExams/Certificates?userName=${userName}`);
+        const response = await axiosPrivate.get(`/api/CandidateCertificates/ByUsername/${userName}`);
         console.log(response.data);
-        setCandidateExams(response.data);
+        setCandidateCertificates(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -27,12 +27,13 @@ function MyCertificatesList() {
   }, []);
 
 
-  const handleDetails = async (examId) => {
+  const handleDetails = async (examId, certificateTitle) => {
     try {
         console.log(examId);
+        //const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const examResults = response.data;
-        navigate('/MyCertificatesList/CertificateDetails', { state: { results: examResults } });
+        navigate('/MyCertificatesList/CertificateDetails', { state: { results: examResults, certificateTitle: certificateTitle } });
     } catch (error) {
       console.error(error);
       alert("Error the Certificate requested doesn't exist.");
@@ -60,15 +61,15 @@ function MyCertificatesList() {
           </tr>
         </thead>
         <tbody>
-          {candidateExams.map((exam) => (
-            <tr key={exam.candidateExamId}>
-              <td>{}</td> {/* here we have to insert name of certificate after the marker approve the exam  */}
-              <td>{exam.assessmentTestCode}</td>
-              <td>{getDate(new Date(exam.examDate))}</td>
+          {candidateCertificates.map((candidateCertificate) => (
+            <tr key={candidateCertificate.candidateCertificateId}>
+              <td>{candidateCertificate.candidateExam.exam.certificate.title}</td>
+              <td>{candidateCertificate.candidateExam.assessmentTestCode}</td>
+              <td>{getDate(new Date(candidateCertificate.candidateExam.examDate))}</td>
               <td>
                 <button
                   className="btn btn-success"
-                  onClick={() => handleDetails(exam.candidateExamId)}
+                  onClick={() => handleDetails(candidateCertificate.candidateExam.candidateExamId, candidateCertificate.candidateExam.exam.certificate.title)}
                 >
                   Details
                 </button>
