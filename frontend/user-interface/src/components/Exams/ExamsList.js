@@ -56,7 +56,7 @@ function ExamsList() {
       const response = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
       console.log(response.data);
       const examQuestionDetails = response.data;
-      navigate("/AdminUI/Exams/Details", {
+      navigate("/Exams/Details", {
         state: { examQuestionDetails: examQuestionDetails },
       });
     } catch (error) {

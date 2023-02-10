@@ -28,7 +28,7 @@ function NavBar() {
                             ?
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                                    <Link className="nav-link text-light" to="AdminUI/QuestionList" >Questions</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
@@ -86,7 +86,8 @@ function NavBar() {
                         {/* QualityControl NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidates</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidate List</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >View Exam List</Link></li>
                               </>
                             : <li></li>
                         }
