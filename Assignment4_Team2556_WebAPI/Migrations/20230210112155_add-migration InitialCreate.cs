@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class addmigrationInitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -412,10 +412,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2fde7b5b-71bf-40e3-b489-e3d8856553f1", "e6d1f485-3f8c-4895-9b19-d027e2735b51", "Marker", "MARKER" },
-                    { "546890c3-4e11-4692-ad12-22f758ae64f1", "4e233408-6f1f-477a-bd58-743f091e5e18", "Admin", "ADMIN" },
-                    { "95a50caf-7059-4f73-8030-a6b548b791c2", "e69a40b4-d76f-4906-a7b8-590f0395d44a", "QualityControl", "QUALITYCONTROL" },
-                    { "b038c471-5fad-4b9b-97cc-d9d6e08c6e4b", "1a83c5d9-b3db-46c1-98ad-b55b4d7ad269", "Candidate", "CANDIDATE" }
+                    { "2c5a690b-ade8-46d7-86cd-5f8c2239a029", "dd8bc40a-bfb9-4d16-a040-e6e1884c40fe", "QualityControl", "QUALITYCONTROL" },
+                    { "6c521287-260f-4aee-b10b-deacb423ca05", "d2810e1d-f0e9-4ea0-ade9-f09f012bdb2a", "Admin", "ADMIN" },
+                    { "90cb6b93-a233-4181-96dc-07f7ed6e174b", "d3c7db8d-4c7c-43e1-84b7-1c892e1f0187", "Candidate", "CANDIDATE" },
+                    { "df33238f-bd32-418d-aaac-728184dda2f3", "fa85796d-3957-40ed-bd32-33fd7ff80501", "Marker", "MARKER" }
                 });
 
             migrationBuilder.InsertData(

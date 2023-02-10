@@ -9,7 +9,7 @@ import htmlParse from "html-react-parser";
 
 function CertificatesList() {
   const [certificates, setCertificates] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(0);
   const axiosPrivate = useAxiosPrivate();
@@ -61,16 +61,17 @@ function CertificatesList() {
 //     }
 //   };
 
-//   const handleEdit = async (questionId) => {
-//     try {
-//       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-//       const question = response.data;
-//       navigate("/AdminUI/EditQuestionForm", { state: { question: question } });
-//     } catch (error) {
-//       console.error(error);
-//       alert("Error the Question requested doesn't exist.");
-//     }
-//   };
+  const handleEdit = async (certificateId) => {
+    try {
+      const response = await axiosPrivate.get(`/api/Certificates/${certificateId}`);
+      const certificate = response.data;
+      console.log(certificate);
+      navigate("/AdminUI/Certificates/Edit", { state: { certificate: certificate } });
+    } catch (error) {
+      console.error(error);
+      alert("Error the Question requested doesn't exist.");
+    }
+  };
 
   return (
     <div>
@@ -85,8 +86,8 @@ function CertificatesList() {
 
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="CreateQuestionForm">
-          Create New
+        <Link className="btn btn-primary" to="Create">
+          Create New Certificate
         </Link>
       </p>
       <table className="table">
@@ -103,7 +104,7 @@ function CertificatesList() {
               <td>
                 <button
                   className="btn btn-secondary"
-                  // onClick={() => handleEdit(certificate.certificateId)}
+                  onClick={() => handleEdit(certificate.certificateId)}
                 >
                   Edit
                 </button>{" "}

@@ -14,6 +14,6 @@ namespace Assignment4_Team2556_WebAPI.Models
         public string TopicDescription { get; set; }
         [Required]
         public int CertificateId { get; set; }
-        public Certificate Certificate { get; set; }
+        public Certificate? Certificate { get; set; }
     }
 }

@@ -37,6 +37,9 @@ import DetailsExam from './components/Exams/DetailsExam';
 import CreateExam from './components/Exams/CreateExams';
 import EditExam from './components/Exams/EditExams';
 import CertificatesList from './components/CertificateCRUD/CertificatesList';
+import CreateCertificate from './components/CertificateCRUD/CreateCertificates';
+import EditCertificate from './components/CertificateCRUD/EditCertificates';
+import CreateTopics from './components/Topics/CreateTopics';
 
 //Candidate components
 import CandidateUI from './components/CandidateUI';
@@ -94,6 +97,9 @@ function App() {
                         <Route exact path="AdminUI/Exams/Edit" element={<EditExam />} />
                         <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                         <Route exact path="AdminUI/Certificates" element={<CertificatesList />} />
+                        <Route exact path="AdminUI/Certificates/Create" element={<CreateCertificate />} />
+                        <Route exact path="AdminUI/Certificates/Edit" element={<EditCertificate />} />
+                        <Route exact path="AdminUI/CreateTopics" element={<CreateTopics />} />
                     </Route>
 
 
