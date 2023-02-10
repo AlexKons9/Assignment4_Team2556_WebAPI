@@ -22,6 +22,16 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             return entity;
         }
 
+        public async Task<Topic> AddOrUpdateListOfTopicsAsync(Topic topics, int certificateId)
+        {
+            topics.CertificateId = certificateId;
+            _context.Update(topics);
+            await _context.SaveChangesAsync();
+            return topics;
+        }
+
+
+
         public async Task<Topic?> GetAsync(int? id)
         {
             var topic = await _context.Topics.FirstAsync(c => c.TopicId == id);

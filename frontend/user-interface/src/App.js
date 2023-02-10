@@ -16,6 +16,7 @@ import EShopList from './components/EShop/EShopList';
 import VouchersList from './components/Exams/VouchersList';
 import SchedulerMenu from "./components/Exams/SchedulerMenu";
 import UpcomingExams from "./components/Exams/UpcomingExams";
+import CertificateCrudDetails from "./components/CertificateCRUD/CertificateCrudDetails";
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Security/Login'
@@ -100,6 +101,7 @@ function App() {
                         <Route exact path="AdminUI/Certificates/Create" element={<CreateCertificate />} />
                         <Route exact path="AdminUI/Certificates/Edit" element={<EditCertificate />} />
                         <Route exact path="AdminUI/CreateTopics" element={<CreateTopics />} />
+                        <Route exact path="AdminUI/Certificates/CertificateDetails" element={<CertificateCrudDetails />} />
                     </Route>
 
 

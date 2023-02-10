@@ -19,6 +19,16 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _repository.AddOrUpdateAsync(topic);
         }
 
+        public async Task<List<Topic>> AddOrUpdateListOfTopicsAsync (List<Topic> topics, int certificateId)
+        {
+            var repo = _repository as TopicsRepository;
+            foreach (var topic in topics)
+            {
+                await repo.AddOrUpdateListOfTopicsAsync(topic,certificateId);
+            }
+            return topics;
+        }
+
         public async Task<Topic?> GetAsync(int? id)
         {
             return await _repository.GetAsync(id);
