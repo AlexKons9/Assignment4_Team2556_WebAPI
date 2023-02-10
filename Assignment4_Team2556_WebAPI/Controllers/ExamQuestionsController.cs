@@ -27,7 +27,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/ExamQuestions
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<IEnumerable<ExamQuestion>>> GetExamQuestions()
         {
             return await _context.ExamQuestions.ToListAsync();
@@ -35,7 +35,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/ExamQuestions/5
         [HttpGet("{examid}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<IEnumerable<ExamQuestion>>> GetExamQuestion(int examid)
         {
             var examQuestions = await _context.ExamQuestions.Where(id => id.ExamId == examid)
