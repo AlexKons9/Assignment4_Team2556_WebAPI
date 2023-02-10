@@ -30,7 +30,7 @@ namespace Assignment4_Team2556_WebAPI.Services
 
         public async Task<bool> RemoveAsync(Certificate? entity)
         {
-            return !await _repository.RemoveAsync(entity);
+            return await _repository.RemoveAsync(entity);
         }
     }
 }

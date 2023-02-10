@@ -19,7 +19,7 @@ namespace Assignment4_Team2556_WebAPI.Services
             return await _repository.AddOrUpdateAsync(topic);
         }
 
-        public async Task<Topic> GetAsync(int? id)
+        public async Task<Topic?> GetAsync(int? id)
         {
             return await _repository.GetAsync(id);
         }

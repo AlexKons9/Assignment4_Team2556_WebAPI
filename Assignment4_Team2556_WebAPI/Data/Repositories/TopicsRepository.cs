@@ -22,7 +22,7 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
             return entity;
         }
 
-        public async Task<Topic> GetAsync(int? id)
+        public async Task<Topic?> GetAsync(int? id)
         {
             var topic = await _context.Topics.FirstAsync(c => c.TopicId == id);
             await _context.Entry(topic).Reference(x => x.Certificate).LoadAsync();
