@@ -31,10 +31,13 @@ function NavBar() {
                                     <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
+                                </li>    
+                                <li className="nav-item">
                                     <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
+                                    <Link className="nav-link text-light" to="AdminUI/Certificates" >Certificates</Link>
                                 </li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
                             </ul>
