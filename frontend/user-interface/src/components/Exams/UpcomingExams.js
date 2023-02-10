@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function UpcomingExams () {
   const [upcomingExams, setUpcomingExams] = useState([]);
   const { auth } = useAuth();
   const userName = auth.userName;
+  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
@@ -19,6 +21,30 @@ function UpcomingExams () {
     };  
     fetchData();
   }, []);
+
+
+  const takeExamHandler = async (examId) => {
+    try {
+      const response = await axiosPrivate.get(`api/CandidateExams/GetScheduledExamForm/${examId}`);
+      console.log(response.data);
+
+      const candidateExamId = response.data.candidateExamId;
+      const questionsList = response.data.questions;
+      
+      
+      navigate("/CandidateUI/GenerateExam", {
+        state: {
+          candidateExamId: candidateExamId,
+          questionList: questionsList
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Error");
+    }
+  };
+
+
 
   // Gets the date in D/M/YYYY
   function getRemainingDays(examDate) {
@@ -49,7 +75,7 @@ function UpcomingExams () {
             <td>{new Date(upcomingExam.examDate).toDateString()}</td>
             <td>{getRemainingDays(upcomingExam.examDate)}</td>
             <td>
-              <button className="btn btn-success" disabled={getRemainingDays(upcomingExam.examDate) > 0}>Take the Exam!</button>
+              <button className="btn btn-success" onClick={() => takeExamHandler(upcomingExam.candidateExamId)} disabled={getRemainingDays(upcomingExam.examDate) > 0}>Take the Exam!</button>
             </td>
           </tr>
         ))}

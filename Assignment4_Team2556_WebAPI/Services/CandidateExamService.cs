@@ -85,6 +85,13 @@ namespace Assignment4_Team2556_WebAPI.Services
         }
 
         //
+        //Summary: Returns a Scheduled Exam of a candidate
+        public async Task<CandidateExam> GetScheduledExamById(int candidateExamId)
+        {
+            return await _candidateExamRepository.GetScheduledExamById(candidateExamId);
+        }
+
+        //
         //Summary: Returns a List of Scheduled Exams of a candidate
         public async Task<IList<CandidateExam>> GetScheduledExamsByCandidateId(string candidateId)
         {
@@ -150,6 +157,32 @@ namespace Assignment4_Team2556_WebAPI.Services
                 AssessmentTestCode = GenerateString(certDetails[0], certDetails[1])
             };
             await _candidateExamRepository.AddSaveChanges(candidateExam);
+
+            //Create a new examForm object - DTO
+            ExamForm examForm = new ExamForm()
+            {
+                CandidateExamId = candidateExam.CandidateExamId,
+                Questions = questions
+            };
+
+            return examForm;
+        }
+
+
+        //
+        //Summary: Returns the ExamForm DTO from a scheduled Exam
+        public async Task<ExamForm> GetScheduledCandidateExamForm(CandidateExam candidateExam)
+        {
+
+            //Retrieve the ExamQuestions associated by the randomly Selected Exam
+            IList<ExamQuestion> examQuestions = await _candidateExamRepository.GetAllExamQuestionsByExamId(candidateExam.ExamId);
+
+            //Create a List of Questions, composed of the questions associated with the exam
+            List<Question> questions = new List<Question>();
+            foreach (var examQuestion in examQuestions)
+            {
+                questions.Add(examQuestion.Question);
+            }
 
             //Create a new examForm object - DTO
             ExamForm examForm = new ExamForm()
