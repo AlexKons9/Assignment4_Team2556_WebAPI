@@ -47,6 +47,9 @@ import UnMarkedExamsList from './components/Marker/UnMarkedExamsList';
 import MarkedExamsList from './components/Marker/MarkedExamsList';
 import MarkedExamDetails from './components/Marker/MarkedExamDetails';
 
+//QualityControl components
+import CandidatesListQC from './components/QualityControl/CandidatesListQC';
+
 //TESTing components
 import Users from './components/Security/Users';
 
@@ -83,7 +86,6 @@ function App() {
                         <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
                         <Route exact path="AdminUI/Candidates" element={<CandidateList />} />
                         <Route exact path="AdminUI/Candidates/Register" element={<Register />} />
-                        <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} />
                         <Route exact path="AdminUI/Candidates/Edit" element={<EditCandidate />} />
                         <Route exact path="AdminUI/Exams" element={<ExamsList />} />
                         <Route exact path="AdminUI/Exams/Create" element={<CreateExam />} />
@@ -91,6 +93,7 @@ function App() {
                         <Route exact path="AdminUI/Exams/Edit" element={<EditExam />} />
                         <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                     </Route>
+
 
                     {/* Marker Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Marker, ROLES.Admin]} />}>
@@ -101,10 +104,13 @@ function App() {
 
                     </Route>
 
+
                     {/* QualityControl Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.QualityControl, ROLES.Admin]} />}>
-
+                        <Route exact path="QualityControlUI/CandidateList" element={<CandidatesListQC />} />
+                        <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} />
                     </Route>         
+
 
                     {/* Candidate Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>

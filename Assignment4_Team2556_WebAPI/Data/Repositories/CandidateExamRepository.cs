@@ -43,10 +43,11 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
-        //Summary: Returns a List of all candidate exams
+        //Summary: Returns a List of all submitted candidate exams
         public async Task<IList<CandidateExam>> GetAllCandidateExams()
         {
             return await _context.CandidateExams
+                .Where(ce => ce.ExamScore != null)
                 .Include(m => m.Marker)
                 .Include(c => c.Candidate)
                 .Include(e => e.Exam).ThenInclude(c => c.Certificate)
@@ -54,11 +55,11 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
         }
 
         //
-        //Summary: Returns a List of all unmarked candidate exams
+        //Summary: Returns a List of all unmarked submitted candidate exams
         public async Task<IList<CandidateExam>> GetAllUnmarkedCandidateExams()
         {
             return await _context.CandidateExams
-                .Where(ce => ce.IsMarked == false)
+                .Where(ce => ce.IsMarked == false && ce.ExamScore != null)
                 .Include(m => m.Marker)
                 .Include(c => c.Candidate)
                 .Include(e => e.Exam).ThenInclude(c => c.Certificate)

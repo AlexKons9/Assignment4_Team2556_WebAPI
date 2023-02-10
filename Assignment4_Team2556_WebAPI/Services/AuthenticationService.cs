@@ -25,9 +25,12 @@ namespace Assignment4_Team2556_WebAPI.Services
             _configuration = configuration;
         }
 
+
+        //
+        // Summary: Register user service method.  Handles the data transfer from DTO to user object and calls the userManager methods for data insertion into database
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDTO userForRegistration)
         {
-            var user = _mapper.Map<User>(userForRegistration); //maps the 'userForRegistrationDTO' to the 'User'' model
+            var user = _mapper.Map<User>(userForRegistration); //transfers the data from 'userForRegistrationDTO' to the 'User' object
             var result = await _userManager.CreateAsync(user, userForRegistration.Password); //adds new user to the 'User' table in database
             if (result.Succeeded)
             {
@@ -37,14 +40,20 @@ namespace Assignment4_Team2556_WebAPI.Services
             return result;
         }
 
+
+        //
+        // Summary: Validates user by checking whether the username and password sent to the endpoint match the username and password held in the database
         public async Task<bool> ValidateUser(UserForAuthenticationDTO userForAuth)
         {
-            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            _user = await _userManager.FindByNameAsync(userForAuth.UserName); //get User by username
 
-            var result = (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
+            var result = (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));  //validates if password is correct
             return result;
         }
 
+
+        //
+        // Summary: Creates and returns both an access token and a refresh token
         public async Task<TokenDTO> CreateToken(bool populateExp)
         {
             var signingCredentials = GetSigningCredentials();
@@ -66,7 +75,10 @@ namespace Assignment4_Team2556_WebAPI.Services
 
             return new TokenDTO(accessToken, refreshToken); //
         }
-        
+
+
+        //
+        // Summary: Returns a secret key as a byte array with the security algorithm.  Called by the Create Token method above.
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
@@ -75,6 +87,10 @@ namespace Assignment4_Team2556_WebAPI.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
+
+        //
+        // Summary: Creates a list of claims with the username and the user roles.  Called by the Create Token method above.
+        //          In the front end, the access token is decoded in order to retrieve this information.
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>
@@ -89,6 +105,9 @@ namespace Assignment4_Team2556_WebAPI.Services
             return claims;
         }
 
+
+        //
+        // Summary: Creates JWT token object with the required options.  Called by the Create Token method above.
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
@@ -99,14 +118,15 @@ namespace Assignment4_Team2556_WebAPI.Services
                 audience: jwtSettings["validAudience"],
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
-                //expires: DateTime.UtcNow.AddSeconds(Convert.ToDouble(jwtSettings["expires"])),
-                //expires: DateTime.Now.AddSeconds(60),
                 signingCredentials: signingCredentials
             );
 
             return tokenOptions;
         }
 
+
+        //
+        // Summary: Generates a refresh token, using the random number generator to spawn a cryptographic random number
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
@@ -117,18 +137,21 @@ namespace Assignment4_Team2556_WebAPI.Services
             }
         }
 
-        public async Task<TokenDTO> RefreshToken(string accessToken, string refreshToken) //TokenDTO tokenDTO
-        {
-            var principal = GetPrincipalFromExpiredToken(accessToken);
 
-            var user = await _userManager.FindByNameAsync(principal.Identity.Name);
+        //
+        // Summary: Uses existing refresh token in order to generate a new access and refresh token
+        public async Task<TokenDTO> RefreshToken(string accessToken, string refreshToken)
+        {
+            var principal = GetPrincipalFromExpiredToken(accessToken);  //get principal
+
+            var user = await _userManager.FindByNameAsync(principal.Identity.Name);  //get user based on principal
             if (user == null || user.RefreshToken != refreshToken ||
-                user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                user.RefreshTokenExpiryTime <= DateTime.UtcNow)  //if there is no user, or the refresh token is equal to the refresh token stored in the database, or if the refresh token has expired, then throw error
                 throw new RefreshTokenBadRequest();
 
             _user = user;
 
-            return await CreateToken(populateExp: false);
+            return await CreateToken(populateExp: false);  //return new access and refresh tokens
         }
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
@@ -162,8 +185,6 @@ namespace Assignment4_Team2556_WebAPI.Services
             _user.RefreshToken = null;
             _user.RefreshTokenExpiryTime = DateTime.UtcNow;
             await _userManager.UpdateAsync(_user);
-
-
         }
     }
 }

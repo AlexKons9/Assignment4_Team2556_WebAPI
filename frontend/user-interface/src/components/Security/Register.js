@@ -3,19 +3,19 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from "react-hook-form";
 
-
+//
+// Summary: sends data from the form to the backend for Candidate registration only
 function Register() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();  //react library that collects the inputs from the form and calls the submit function
 
+    //handles the submit trigger by passing in the candidate data and sends it to the backend for processing
     const onSubmit = async (data, e) => {
         try {
-            data.roles = ["Candidate"];
-            console.log(data);
+            data.roles = ["Candidate"];  //assigns the Candidate role to all users registering with this form
             await axios.post("https://localhost:7015/api/authentication", data);
             alert("User registered successfully!");
         } catch (error) {
             console.error(error);
-            alert("Error registering user");
         }
     };
 

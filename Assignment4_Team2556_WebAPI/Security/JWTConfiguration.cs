@@ -6,10 +6,12 @@ namespace Assignment4_Team2556_WebAPI.Security
 {
     public static class JWTConfiguration
     {
+        //
+        // Summary: Configuration of the Json Web Token (JWT), which is used as the access token for authorization validation of protected endpoints.
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwtSettings = configuration.GetSection("JwtSettings");
-            var secretKey = Environment.GetEnvironmentVariable("SECRET");
+            var jwtSettings = configuration.GetSection("JwtSettings");  //retrieves data from the appsettings.json file under the header of 'jwtsettings'
+            var secretKey = Environment.GetEnvironmentVariable("SECRET"); //retrieves the secret password which is stored locally in the system environment variables
 
             services.AddAuthentication(opt =>
             {
@@ -18,7 +20,7 @@ namespace Assignment4_Team2556_WebAPI.Security
             })
             .AddJwtBearer(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters  // token is valid is the below criteria are met
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
