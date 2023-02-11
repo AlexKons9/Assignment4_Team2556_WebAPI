@@ -11,7 +11,7 @@ function EditExams() {
   const location = useLocation();
   const [count, setCount] = useState(0);
   const [exam, setExam] = useState(location.state.exam);
-  const [examQuestions, setExamQuestions] = useState([]); 
+  const [examQuestions, setExamQuestions] = useState(location.state.examQuestions); 
   const [questions, setQuestions] = useState([]);
   const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
@@ -38,18 +38,18 @@ function EditExams() {
   };
 
 
-  const handleBoxChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setExamQuestions((pre) => [...pre, value]);
-      setCount(count + 1);
-    } else {
-      setExamQuestions((pre) => {
-        return [...pre.filter((skill) => skill !== value)];
-      });
-      setCount(count - 1);
-    }
-  };
+  // const handleBoxChange = (event) => {
+  //   const { value, checked } = event.target;
+  //   if (checked) {
+  //     setExamQuestions((pre) => [...pre, value]);
+  //     setCount(count + 1);
+  //   } else {
+  //     setExamQuestions((pre) => {
+  //       return [...pre.filter((skill) => skill !== value)];
+  //     });
+  //     setCount(count - 1);
+  //   }
+  // };
 
 
 
@@ -79,6 +79,19 @@ function EditExams() {
       filteredQuestions.push(question);
     }
   };
+
+  // const selectedQuestions = [];
+  // function getSelectedQuestions() {
+  //   for (let i = 0; i < filteredQuestions.length; i++) {
+  //     for (let j = 0; j < examQuestions.length; j++)
+  //     {
+  //       if (filteredQuestions[i].questionId === examQuestions[j]) {
+  //         selectedQuestions.push(filteredQuestions[i]);
+  //       }
+  //     }
+  //   };
+  // }
+  
 
 
   console.log(examQuestions);
@@ -111,17 +124,7 @@ function EditExams() {
         </div>
         <div className="form-group">
           <h3>Please select exam questions again:</h3>
-          {/* {questions.map((question, index) => (
-    <div key={index}>
-     {question.topic.certificateId==exam.certificateId && 
-                  
-    <div className="form-group">
-      <input type="checkbox" id="questionId" name="questionId"   value={question.questionId} onChange={handleBoxChange}/>
-    <label for="questionId"> <hr/> &nbsp;{question.topic.topicDescription} :{htmlParse(question.descriptionStem)} </label>
-    </div>               
-      }
-    </div>
-    ))} */}
+          
           <DualListBox
             options={filteredQuestions.map((question) => ({
               value: question.questionId,
