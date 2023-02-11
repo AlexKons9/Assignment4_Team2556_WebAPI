@@ -21,8 +21,8 @@ function DetailsQuestion() {
         <table className="table table-bordered">
           <tbody>
             <tr>
-              <th>Description Stem</th>
-              <td>{htmlParse(question.descriptionStem)}</td>
+              <th className="col-6">Description Stem</th>
+              <td className="col-6">{htmlParse(question.descriptionStem)}</td>
             </tr>
             <tr>
               <th>Topic</th>
@@ -42,13 +42,13 @@ function DetailsQuestion() {
           <tbody>
             {question.options.map((option) => (
               <tr key={option.optionId}>
-                <th>Option {count++}</th>
-                <td>{htmlParse(option.description)}</td>
+                <th className="col-6">Option {count++}</th>
+                <td className="col-6">{htmlParse(option.description)}</td>
               </tr>
             ))}
             <tr>
-              <th>Correct Answer</th>
-              <td>
+              <th className="col-6">Correct Answer</th>
+              <td className="col-6">
                 Option {correctAnswerIndex + 1}
               </td>
             </tr>
