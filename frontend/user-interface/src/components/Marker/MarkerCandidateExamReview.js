@@ -34,6 +34,26 @@ function MarkerCandidateExamReview() {
         }
     }
 
+        //
+    //Summary: Update candidate exam as marked, with date marked.  If candidate passed exam, create a candidate certificate
+    const disqualifyExam = async () => {
+        try {
+            candidateExam.isMarked = true;  //set candidate exam as marked
+            candidateExam.scoreReportDate = new Date();  //set the date marked as the date and time now
+            candidateExam.testResult = "Failed due to disqualification."
+            candidateExam.examScore = 0
+            candidateExam.percentageScore = `0/${candidateExam.qa.count}`
+            //candidate.Exam
+            await axiosPrivate.put(`/api/CandidateExams/${candidateExam.candidateExamId}`, candidateExam);  //update candidate exam in db as marked with date
+
+            alert("Exam Disqualified!");
+            navigate("/MarkerUI/MarkedExamsList");
+        }
+        catch(error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div>
             <h1>Exam Marking Review</h1>
@@ -64,6 +84,10 @@ function MarkerCandidateExamReview() {
                     </dl>
                 ))}
                 <Button className="btn btn-success" onClick={() => approveExam()}>Approve Exam Result</Button>
+                <Button className="btn btn-danger" onClick={() => disqualifyExam()}>*Disqualify Exam</Button> 
+                <p></p>
+                <p><strong>*Disqualification disclaimer:</strong> A disqualified exam will result in an automatic failure of the exam with a score of zero.</p>
+                <p><strong>*The conditions </strong>for disqualification include plagarism, cheating, and/or any type of external assistance via physical or electronic communication.</p>
             </div>
         </div>
     )

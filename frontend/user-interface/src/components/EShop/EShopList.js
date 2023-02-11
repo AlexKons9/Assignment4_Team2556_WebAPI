@@ -59,11 +59,17 @@ function EShopList() {
     try {
       console.log(certificateId);
       console.log( userName);
-      const response = await axiosPrivate.post(`api/Vouchers?certificateId=${certificateId}&userName=${userName}`);
-      setModalSuccess(true);
-      const voucher = response.data;
-      console.log(voucher);
-      // navigate("/");
+      if(auth?.roles) {
+        const response = await axiosPrivate.post(`api/Vouchers?certificateId=${certificateId}&userName=${userName}`);
+        setModalSuccess(true);
+        const voucher = response.data;
+        console.log(voucher);
+        // navigate("/");
+      }
+      else {
+        navigate("/login")
+      }
+
     } catch (error) {
       console.error(error);
       alert("Error the Certificate requested doesn't exist.");

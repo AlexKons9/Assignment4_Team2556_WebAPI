@@ -6,6 +6,7 @@ function MarkedExamDetails() {
     //transfer state of candidate exam from previous page
     const location = useLocation();
     const[candidateExam] = useState(location.state.candidateExam[0]);
+    console.log(candidateExam.testResult)
 
     return (
         <div>
@@ -33,7 +34,7 @@ function MarkedExamDetails() {
                         <dt className="col-sm-2">Correct Answer: </dt>
                         <dd className="col-sm-10">{questionanswer.option.isCorrect ? "Yes" : "No"}</dd>
                         <dt className="col-sm-2">Points awarded: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.isCorrect ? 1 : 0}</dd>
+                        <dd className="col-sm-10">{candidateExam.testResult == "Failed due to disqualification." ? "0 due to disqualification." : questionanswer.option.isCorrect ? 1 : 0}</dd>
                     </dl>
                 ))}
             </div>

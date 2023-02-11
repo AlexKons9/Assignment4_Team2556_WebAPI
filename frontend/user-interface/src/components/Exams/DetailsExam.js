@@ -2,6 +2,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import React from 'react';
 import htmlParse from 'html-react-parser';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
 
 function DetailsExam() {
       var count = 1;
@@ -9,11 +10,12 @@ function DetailsExam() {
       const examQuestions = location.state.examQuestionDetails;
       const axiosPrivate = useAxiosPrivate();
       const navigate = useNavigate();
+      const { auth } = useAuth();
     const handleDetails = async (questionId) => {
         try {
           const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
           const questionDetails = response.data;
-          navigate("/AdminUI/DetailsQuestion", {
+          navigate("/DetailsQuestion", {
             state: { questionDetails: questionDetails },
           });
         } catch (error) {
@@ -48,7 +50,7 @@ function DetailsExam() {
             <hr />
     
               <div>
-                <Link className='btn btn-secondary' to="../AdminUI/Exams">Back to List</Link>
+                <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/Exams" : "../QualityControlUI/ExamList"}>Back to List</Link>
               </div>
     
           </div>

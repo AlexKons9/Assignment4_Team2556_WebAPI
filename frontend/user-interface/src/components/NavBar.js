@@ -19,22 +19,42 @@ function NavBar() {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="Home" >Home</Link>
-                        </li>
+
+                        {/* Not Logged in TABS*/}
+                        {(!auth?.roles)
+                            ?
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="Home" >Home</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="EShopList" >EShop</Link>
+                                </li>
+                            </>
+                            :
+                            <li></li>
+
+                        }
+
 
                         {/* ADMIN NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles.includes("Admin"))
                             ?
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI" >Admin UI</Link>
+                                    <Link className="nav-link" to="Home" >Home</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-light" to="AdminUI/QuestionList" >Questions</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
+                                    <Link className="nav-link text-light" to="AdminUI/Certificates" >Certificates</Link>
                                 </li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
                             </ul>
@@ -45,6 +65,9 @@ function NavBar() {
                         {auth?.roles?.find(roles => roles?.includes("Candidate"))
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="Home" >Home</Link>
+                                    </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="EShopList" >E-Shop</Link>
                                     </li>
@@ -77,6 +100,7 @@ function NavBar() {
                         {/* MARKER NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("Marker"))
                             ? <>
+                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >View Unmarked Exams</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >View Marked Exams</Link></li>
                             </>
@@ -86,8 +110,12 @@ function NavBar() {
                         {/* QualityControl NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
+                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidate List</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >View Exam List</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidates</Link></li>
-                              </>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >View Certificates</Link></li>
+                            </>
                             : <li></li>
                         }
                     </ul>

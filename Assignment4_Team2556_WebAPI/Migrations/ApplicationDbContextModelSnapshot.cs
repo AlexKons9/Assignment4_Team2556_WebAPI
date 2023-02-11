@@ -1056,22 +1056,22 @@ namespace Assignment4Team2556WebAPI.Migrations
                         },
                         new
                         {
-                            Id = "7ef8d740-36d6-4b00-9787-22af8bd8985f",
-                            ConcurrencyStamp = "75ac5818-f574-4b57-9e85-cd70d9f98a8c",
+                            Id = "70cd9d25-35a7-44b5-9e28-885e0ec4633c",
+                            ConcurrencyStamp = "ff610dff-b0b2-4e4d-9e09-f319b546d09d",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "9bbb595c-4f58-423f-bd25-ab4ce193624c",
-                            ConcurrencyStamp = "025d2d26-6e07-478d-a28f-aa21b63f0dca",
+                            Id = "9cf8df9b-ac9e-4613-bea7-9c9b59a2bb6b",
+                            ConcurrencyStamp = "151dad53-b933-410d-b020-e3238a796dc9",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "ea8cc1c9-9f63-4e7b-a403-25aef3cb62fa",
-                            ConcurrencyStamp = "be765c49-dc69-40a8-a5cb-b08a21eb910e",
+                            Id = "5a3c13af-2106-4514-87fa-bc58f5e3e399",
+                            ConcurrencyStamp = "33992766-eceb-42c0-aafb-023da93acf2a",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
