@@ -81,17 +81,24 @@ function EditExams() {
     }
   };
 
-  // const selectedQuestions = [];
-  // function getSelectedQuestions() {
-  //   for (let i = 0; i < filteredQuestions.length; i++) {
-  //     for (let j = 0; j < examQuestions.length; j++)
-  //     {
-  //       if (filteredQuestions[i].questionId === examQuestions[j]) {
-  //         selectedQuestions.push(filteredQuestions[i]);
-  //       }
-  //     }
-  //   };
-  // }
+  // create an object with topics as keys and arrays of questions as values
+  const groupedQuestions = filteredQuestions.reduce((acc, question) => {
+    const { topicDescription } = question.topic;
+    if (!acc[topicDescription]) {
+      acc[topicDescription] = [];
+    }
+    acc[topicDescription].push(question);
+    return acc;
+    }, {});
+  
+    const options = Object.keys(groupedQuestions).map((topic) => {
+      const topicQuestions = groupedQuestions[topic];
+      const topicOptions = topicQuestions.map((question) => ({
+        value: question.questionId,
+        label: htmlParse(question.descriptionStem),
+      }));
+      return { label: topic, options: topicOptions };
+    });
   
 
 
@@ -127,12 +134,7 @@ function EditExams() {
           <h3>Please select exam questions again:</h3>
           
           <DualListBox
-            options={filteredQuestions.map((question) => ({
-              value: question.questionId,
-              label: `${question.topic.topicDescription} : ${htmlParse(
-                question.descriptionStem
-              )}`,
-            }))}
+            options={options}
             selected={examQuestions}
             onChange={(value) => {
               setExamQuestions(value);
