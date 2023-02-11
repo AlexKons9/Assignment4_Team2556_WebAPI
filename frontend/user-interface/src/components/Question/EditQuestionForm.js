@@ -8,6 +8,8 @@ function EditQuestionForm() {
     const location = useLocation();
     const navigate = useNavigate();
     const [topics, setTopics] = useState([]);
+    const [certificates, setCertificates] = useState([]);
+    const [selectedCertificate, setSelectedCertificate] = useState({certificateId:location.state.question.topic.certificateId});
     const [question, setQuestion] = useState({questionId: location.state.question.questionId, descriptionStem: location.state.question.descriptionStem, topicId: location.state.question.topicId});
     const axiosPrivate = useAxiosPrivate();
 
@@ -16,6 +18,8 @@ function EditQuestionForm() {
             try {
                 const response = await axiosPrivate.get("/api/Topics");
                 setTopics(response.data);
+                const response2 = await axiosPrivate.get("/api/Certificates");
+                setCertificates(response2.data);
             } catch (error) {
                 console.error(error);
             }
@@ -27,6 +31,11 @@ function EditQuestionForm() {
         const { name, value } = event.target;
         setQuestion({ ...question, [name]: value });
     };
+    const handleCertificateChange = (event) => {
+        const { name, value } = event.target;
+        setSelectedCertificate({[name]: value });
+    
+      };
 
     const myCKEditorHandleChange = (event,editor) => {
         const data = editor.getData();
@@ -48,6 +57,7 @@ function EditQuestionForm() {
             alert("Error editing question");
         }
     };
+    console.log(question)
 
     return (
         <>
@@ -65,18 +75,47 @@ function EditQuestionForm() {
                         required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="topicId">Topic</label>
-                    <select
-                        className="form-control"
-                        id="topicId"
-                        name="topicId"
-                        value={question.topicId}
-                        onChange={handleChange}
-                        required>
-                        <option value="" disabled>Select a topic</option>
-                        {topics.map((topic) => (<option key={topic.topicId} value={topic.topicId}>{topic.topicDescription}</option>))}
-                    </select>
-                </div>
+          <label htmlFor="certificateId">Certificate</label>
+          <select
+            className="form-control"
+            id="certificateId"
+            name="certificateId"
+            value={selectedCertificate.certificateId}
+            onChange={handleCertificateChange}
+            required
+          >
+            <option value="" disabled>
+              Select a certificate
+            </option>
+            {certificates.map((certificate) => (
+              <option key={certificate.certificateId} value={certificate.certificateId}>
+                {certificate.title}
+              </option>
+            ))}
+          </select>
+        </div>        
+        <div className="form-group">
+          <label htmlFor="topicId">Topic</label>
+          <select
+            className="form-control"
+            id="topicId"
+            name="topicId"
+            value={question.topicId}
+            onChange={handleChange}
+            required
+            >
+            <option value="" disabled>
+              Select a topic
+            </option>
+            {topics.map((topic) => (
+            (topic.certificateId==selectedCertificate.certificateId  &&
+                <option key={topic.topicId} value={topic.topicId}>
+                {topic.topicDescription}
+                </option>
+            )
+          ))}
+          </select>
+        </div>
                 <button type="submit" className="btn btn-primary">Edit</button></form>
         </>
     );
