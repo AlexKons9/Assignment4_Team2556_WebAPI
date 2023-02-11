@@ -1,8 +1,10 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import React from 'react';
 function DetailsCandidate() {
     const location = useLocation();
     const candidate = location.state.candidateDetails;
+    const { auth } = useAuth();
    
   
     return (
@@ -52,7 +54,7 @@ function DetailsCandidate() {
           </dl>  
           <hr />  
             <div>
-              <Link className='btn btn-secondary' to="../AdminUI/Candidates">Back to List</Link>
+              <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/Candidates" : "../QualityControlUI/CandidateList"}>Back to List</Link>
             </div>
   
         </div>

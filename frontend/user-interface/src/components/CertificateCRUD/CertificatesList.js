@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./QuestionsList.css";
-import axios from "axios";
+import DeleteCertificate from "./CertificateCrudDeleteModal"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
 import htmlParse from "html-react-parser";
 
-import DeleteQuestion from "./DeleteQuestion";
+// import DeleteQuestion from "./DeleteQuestion";
 
-function QuestionsList() {
-  const [questions, setQuestions] = useState([]);
+function CertificatesList() {
+  const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(0);
@@ -18,8 +17,8 @@ function QuestionsList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosPrivate.get("/api/Questions");
-        setQuestions(response.data);
+        const response = await axiosPrivate.get("/api/Certificates");
+        setCertificates(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -27,12 +26,12 @@ function QuestionsList() {
     fetchData();
   }, []);
 
+
   const showConfirmPopupHandler = (id) => {
     setShowModal(true);
     setItemToDelete(id);
     console.log(id);
   };
-  
   const closeConfirmPopupHandler = () => {
     setShowModal(false);
     setItemToDelete(0);
@@ -40,34 +39,38 @@ function QuestionsList() {
 
   const deleteConfirmHandler = async () => {
     await axiosPrivate
-      .delete(`/api/Questions/${itemToDelete}`)
+      .delete(`/api/Certificates/${itemToDelete}`)
       .then((response) => {
-        setQuestions((existingData) => {
-          return existingData.filter((_) => _.questionId !== itemToDelete);
+        setCertificates((existingData) => {
+          return existingData.filter((_) => _.certificateId !== itemToDelete);
         });
         setItemToDelete(0);
         setShowModal(false);
       });
   };
 
-  const handleDetails = async (questionId) => {
+  const handleDetails = async (certificateId) => {
     try {
-      const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-      const questionDetails = response.data;
-      navigate("/DetailsQuestion", {
-        state: { questionDetails: questionDetails },
+      const response = await axiosPrivate.get(`/api/Certificates/${certificateId}`);
+      const certificateDetails = response.data;
+      console.log(certificateDetails);
+      navigate("/Certificates/CertificateDetails", {
+        state: { certificateDetails: certificateDetails },
       });
     } catch (error) {
       console.error(error);
-      alert("Error the Question requested doesn't exist.");
+      alert("Error the Certificate requested doesn't exist.");
     }
   };
 
-  const handleEdit = async (questionId) => {
+
+
+  const handleEdit = async (certificateId) => {
     try {
-      const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
-      const question = response.data;
-      navigate("/AdminUI/EditQuestionForm", { state: { question: question } });
+      const response = await axiosPrivate.get(`/api/Certificates/${certificateId}`);
+      const certificate = response.data;
+      console.log(certificate);
+      navigate("/AdminUI/Certificates/Edit", { state: { certificate: certificate } });
     } catch (error) {
       console.error(error);
       alert("Error the Question requested doesn't exist.");
@@ -76,19 +79,20 @@ function QuestionsList() {
 
   return (
     <div>
-      <DeleteQuestion
+      <DeleteCertificate
         showModal={showModal}
         title="Delete Confirmation!"
-        body="Are you sure to delete this Question?"
+        body="Are you sure to delete this Certificate?"
         closeConfirmPopupHandler={closeConfirmPopupHandler}
         deleteConfirmHandler={deleteConfirmHandler}
-      ></DeleteQuestion>
-      <h1>Question List</h1>
+      ></DeleteCertificate>
+
+      <h1>Certificates List</h1>
 
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="CreateQuestionForm">
-          Create New
+        <Link className="btn btn-primary" to="Create">
+          Create New Certificate
         </Link>
       </p>
       <table className="table">
@@ -99,20 +103,20 @@ function QuestionsList() {
           </tr>
         </thead>
         <tbody>
-          {questions.map((question) => (
-            <tr key={question.questionId}>
-              <td>{htmlParse(question.descriptionStem)}</td>
+          {certificates.map((certificate) => (
+            <tr key={certificate.certificateId}>
+              <td>{htmlParse(certificate.title)}</td>
               <td>
                 <button
                   className="btn btn-secondary"
-                  onClick={() => handleEdit(question.questionId)}
+                  onClick={() => handleEdit(certificate.certificateId)}
                 >
                   Edit
                 </button>{" "}
                 |
                 <button
                   className="btn btn-success"
-                  onClick={() => handleDetails(question.questionId)}
+                  onClick={() => handleDetails(certificate.certificateId)}
                 >
                   Details
                 </button>{" "}
@@ -120,7 +124,7 @@ function QuestionsList() {
                 <button
                   className="btn btn-danger"
                   onClick={() => {
-                    showConfirmPopupHandler(question.questionId);
+                    showConfirmPopupHandler(certificate.certificateId);
                   }}
                 >
                   Delete
@@ -134,4 +138,4 @@ function QuestionsList() {
   );
 }
 
-export default QuestionsList;
+export default CertificatesList;

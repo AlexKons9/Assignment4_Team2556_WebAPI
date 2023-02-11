@@ -32,5 +32,12 @@ namespace Assignment4_Team2556_WebAPI.Controllers
             return Ok(markers);
         }
 
+        [HttpGet("GetCandidateCredits/{username}")]
+        public async Task<ActionResult> GetCandidateCredits(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            int? credits = user.Credits;
+            return Ok(credits);
+        }
     }
 }

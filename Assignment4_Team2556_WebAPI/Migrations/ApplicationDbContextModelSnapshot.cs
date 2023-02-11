@@ -893,6 +893,9 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.Property<string>("CountryOfResidence")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Credits")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -1046,29 +1049,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b170deed-1f71-448a-919d-8ccb4fa6b1c9",
-                            ConcurrencyStamp = "7839be74-a700-4c7d-b993-91c83ff21143",
+                            Id = "d9e0a3a2-2094-419b-8f86-e159960b53ca",
+                            ConcurrencyStamp = "f9d7e8f8-564a-472a-9b6c-e0633c172eed",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "70cd9d25-35a7-44b5-9e28-885e0ec4633c",
-                            ConcurrencyStamp = "ff610dff-b0b2-4e4d-9e09-f319b546d09d",
+                            Id = "7eafda6d-a18f-4d2d-bbd2-52481db61406",
+                            ConcurrencyStamp = "9fd4f42b-8f6f-4ebe-98c5-136fb17bb16b",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "9cf8df9b-ac9e-4613-bea7-9c9b59a2bb6b",
-                            ConcurrencyStamp = "151dad53-b933-410d-b020-e3238a796dc9",
+                            Id = "9acffdb8-c580-49d2-9c8e-5450e26ebe92",
+                            ConcurrencyStamp = "000f03fa-8b56-4f2a-9697-85a66e3bfc70",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "5a3c13af-2106-4514-87fa-bc58f5e3e399",
-                            ConcurrencyStamp = "33992766-eceb-42c0-aafb-023da93acf2a",
+                            Id = "3770b9d4-19eb-4f99-a51e-fd5798537ba3",
+                            ConcurrencyStamp = "4f6fb8ff-e3db-4750-8a13-61b021cf4cd9",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });

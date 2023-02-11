@@ -26,7 +26,7 @@ function CandidatesList() {
             console.log(candidateList[i]);
           const response = await axiosPrivate.get(`/api/Candidate/${candidateList[i].userName}`);
           const candidateDetails = response.data;
-          navigate("/AdminUI/Candidates/Details", {
+          navigate("/Candidates/Details", {
             state: { candidateDetails: candidateDetails },
           });
         } catch (error) {

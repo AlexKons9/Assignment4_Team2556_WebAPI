@@ -1,13 +1,14 @@
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import React from 'react';
 import htmlParse from 'html-react-parser';
+import useAuth from "../../hooks/useAuth";
 
 function DetailsQuestion() {
   var count = 1;
   const location = useLocation();
   const question = location.state.questionDetails;
   const correctAnswerIndex = question.options.findIndex((option) => option.isCorrect === true);
- 
+  const { auth } = useAuth();
   //   console.log(question);
 
   return (
@@ -41,7 +42,7 @@ function DetailsQuestion() {
           </div>
 
           <div>
-            <Link className='btn btn-secondary' to="../AdminUI">Back to List</Link>
+            <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/QuestionList" : "../QualityControlUI/ExamList"}>Back to List</Link>
           </div>
 
       </div>

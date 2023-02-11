@@ -32,7 +32,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         }
         //GET: api/Candidate/candidate
         [HttpGet("{username}")]
-        [Authorize(Roles = "Admin,QualityControl")]
+        [Authorize(Roles = "Admin,QualityControl,Candidate")]
         public async Task<ActionResult<User>> GetCandidate(string username)
         {
             //var question = await _context.Questions.FindAsync(id);
@@ -49,7 +49,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         //// PUT: api/Candidate/candidate  --> UPDATE
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{username}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Candidate")]
         public async Task<IActionResult> PutUser(User user)
         {
             //if username != user.UserName)

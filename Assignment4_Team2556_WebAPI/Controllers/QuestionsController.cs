@@ -39,7 +39,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
             //var question = await _context.Questions.FindAsync(id);
