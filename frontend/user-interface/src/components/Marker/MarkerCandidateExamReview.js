@@ -56,39 +56,42 @@ function MarkerCandidateExamReview() {
 
     return (
         <div>
+        <div className="container">
             <h1>Exam Marking Review</h1>
-            <hr />
+            
             <div>
-            <h4>Preliminary Exam Result</h4>
-                <dl className="row">
-                        <dt className="col-sm-2">Candidate: </dt>
-                        <dd className="col-sm-10">{candidateExam.candidate.firstName} {candidateExam.candidate.lastName}</dd>
-                        <dt className="col-sm-2">Exam given for Certificate: </dt>
-                        <dd className="col-sm-10">{candidateExam.exam.certificate.title}</dd>
-                        <dt className="col-sm-2">Overall Score</dt>
-                        <dd className="col-sm-10">{candidateExam.examScore} out of {candidateExam.exam.maximumScore}</dd>
-                        <dt className="col-sm-2">Exam Result: </dt>
-                        <dd className="col-sm-10">{candidateExam.testResult}</dd>
+            <h4>Preliminary Exam Result:</h4>
+                <dl className="row mt-3">
+                        <dt className="col-6 text-end">Candidate: </dt>
+                        <dd className="col-6 text-start">{candidateExam.candidate.firstName} {candidateExam.candidate.lastName}</dd>
+                        <dt className="col-6 text-end">Exam: </dt>
+                        <dd className="col-6 text-start">{candidateExam.exam.certificate.title}</dd>
+                        <dt className="col-6 text-end">Overall Score</dt>
+                        <dd className="col-6 text-start">{candidateExam.examScore} out of {candidateExam.exam.maximumScore}</dd>
+                        <dt className="col-6 text-end">Exam Result: </dt>
+                        <dd className="col-6 text-start">{candidateExam.testResult}</dd>
                     </dl>
+                    <hr />
                 <h4>Exam Details</h4>
                 {candidateExam.qa.map((questionanswer) => (
-                    <dl className="row">
-                        <dt className="col-sm-2">Question: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.question.descriptionStem}</dd>
-                        <dt className="col-sm-2">Option Selected: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.description}</dd>
-                        <dt className="col-sm-2">Correct Answer: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.isCorrect ? "Yes" : "No"}</dd>
-                        <dt className="col-sm-2">Points awarded: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.isCorrect ? 1 : 0}</dd>
+                    <dl className="row mt-4">
+                        <dt className="col-6 text-end">Question: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.question.descriptionStem}</dd>
+                        <dt className="col-6 text-end">Option Selected: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.description}</dd>
+                        <dt className="col-6 text-end">Correct Answer: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.isCorrect ? "Yes" : "No"}</dd>
+                        <dt className="col-6 text-end">Points awarded: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.isCorrect ? 1 : 0}</dd>
                     </dl>
                 ))}
-                <Button className="btn btn-success" onClick={() => approveExam()}>Approve Exam Result</Button>
-                <Button className="btn btn-danger" onClick={() => disqualifyExam()}>*Disqualify Exam</Button> 
+                <button className="btn btn-outline-success mx-1" onClick={() => approveExam()}>Approve Exam Result</button>
+                <button className="btn btn-outline-danger" onClick={() => disqualifyExam()}>*Disqualify Exam</button> 
+            </div>
+        </div>
                 <p></p>
                 <p><strong>*Disqualification disclaimer:</strong> A disqualified exam will result in an automatic failure of the exam with a score of zero.</p>
                 <p><strong>*The conditions </strong>for disqualification include plagarism, cheating, and/or any type of external assistance via physical or electronic communication.</p>
-            </div>
         </div>
     )
 }

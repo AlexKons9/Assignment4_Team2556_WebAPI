@@ -9,32 +9,32 @@ function MarkedExamDetails() {
     console.log(candidateExam.testResult)
 
     return (
-        <div>
+        <div className="container">
             <h1>Exam Details</h1>
             <hr />
             <div>
             <h4>Final Exam Result</h4>
-                <dl className="row">
-                        <dt className="col-sm-2">Candidate: </dt>
-                        <dd className="col-sm-10">{candidateExam.candidate.firstName} {candidateExam.candidate.lastName}</dd>
-                        <dt className="col-sm-2">Exam given for Certificate: </dt>
-                        <dd className="col-sm-10">{candidateExam.exam.certificate.title}</dd>
-                        <dt className="col-sm-2">Overall Score</dt>
-                        <dd className="col-sm-10">{candidateExam.examScore} out of {candidateExam.exam.maximumScore}</dd>
-                        <dt className="col-sm-2">Exam Result: </dt>
-                        <dd className="col-sm-10">{candidateExam.testResult}</dd>
+                <dl className="row mt-3">
+                        <dt className="col-6 text-end">Candidate: </dt>
+                        <dd className="col-6 text-start">{candidateExam.candidate.firstName} {candidateExam.candidate.lastName}</dd>
+                        <dt className="col-6 text-end">Exam: </dt>
+                        <dd className="col-6 text-start">{candidateExam.exam.certificate.title}</dd>
+                        <dt className="col-6 text-end">Overall Score</dt>
+                        <dd className="col-6 text-start">{candidateExam.examScore} out of {candidateExam.exam.maximumScore}</dd>
+                        <dt className="col-6 text-end">Exam Result: </dt>
+                        <dd className="col-6 text-start">{candidateExam.testResult}</dd>
                     </dl>
                 <h4>Exam Details</h4>
                 {candidateExam.qa.map((questionanswer) => (
-                    <dl className="row">
-                        <dt className="col-sm-2">Question: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.question.descriptionStem}</dd>
-                        <dt className="col-sm-2">Option Selected: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.description}</dd>
-                        <dt className="col-sm-2">Correct Answer: </dt>
-                        <dd className="col-sm-10">{questionanswer.option.isCorrect ? "Yes" : "No"}</dd>
-                        <dt className="col-sm-2">Points awarded: </dt>
-                        <dd className="col-sm-10">{candidateExam.testResult == "Failed due to disqualification." ? "0 due to disqualification." : questionanswer.option.isCorrect ? 1 : 0}</dd>
+                    <dl className="row mt-4">
+                        <dt className="col-6 text-end">Question: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.question.descriptionStem}</dd>
+                        <dt className="col-6 text-end">Option Selected: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.description}</dd>
+                        <dt className="col-6 text-end">Correct Answer: </dt>
+                        <dd className="col-6 text-start">{questionanswer.option.isCorrect ? "Yes" : "No"}</dd>
+                        <dt className="col-6 text-end">Points awarded: </dt>
+                        <dd className="col-6 text-start">{candidateExam.testResult == "Failed due to disqualification." ? "0 due to disqualification." : questionanswer.option.isCorrect ? 1 : 0}</dd>
                     </dl>
                 ))}
             </div>

@@ -36,7 +36,7 @@ function EditTopics() {
       alert("Error deleting topic");
     }
   };
-  
+
 
 
   const handleRemoveTopic = (index) => {
@@ -45,8 +45,8 @@ function EditTopics() {
     setTopics(values);
     handleDeleteTopic(index);
   };
-  
-  
+
+
 
 
   const handleSubmit = async (event) => {
@@ -64,44 +64,46 @@ function EditTopics() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      {" "}
-      <h1>Edit Topics of Certificate</h1>{" "}
-      <input type="hidden" value={certificateId} />{" "}
-      <div>
+    <div className="container w-25">
+      <form onSubmit={handleSubmit}>
         {" "}
-        {topics.map((topic, index) => (
-          <div key={index}>
-            {" "}
-            <label>
-              {" "}
-              Topic {index + 1}:
-              <input
-                type="text"
-                value={topic.topicDescription}
-                onChange={(e) => handleTopic(e, index)}
-              />{" "}
-            </label>{" "}
-            <button type="button" onClick={() => handleRemoveTopic(index)}>
-              {" "}
-              Remove Topic
-            </button>{" "}
-          </div>
-        ))}
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={handleAddTopic}
-        >
+        <h1>Edit Certificate Topics</h1>{" "}
+        <input type="hidden" value={certificateId} />{" "}
+        <div>
           {" "}
-          Add Topic
+          {topics.map((topic, index) => (
+            <div className="input-group-sm mb-4" key={index}>
+              <label>
+                Topic {index + 1}:
+              </label>
+              <div className="row">
+                <input
+                  type="text"
+                  className="form-control mb-1"
+                  value={topic.topicDescription}
+                  onChange={(e) => handleTopic(e, index)}
+                />
+                <p className="btn btn-outline-danger" type="button" onClick={() => handleRemoveTopic(index)}>
+                  Remove Topic
+                </p>
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            className="btn btn-outline-success"
+            onClick={handleAddTopic}
+          >
+            {" "}
+            Add Topic
+          </button>{" "}
+        </div>{" "}
+        <button type="submit" className="btn btn-primary">
+          {" "}
+          Update Certificate
         </button>{" "}
-      </div>{" "}
-      <button type="submit" className="btn btn-primary">
-        {" "}
-        Update Certificate
-      </button>{" "}
-    </form>
+      </form>
+    </div>
   );
 }
 export default EditTopics;
