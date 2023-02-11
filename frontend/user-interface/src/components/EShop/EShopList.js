@@ -21,6 +21,8 @@ function EShopList() {
                                  variant="outline-success" style= {{ marginRight: 5}}>My Vouchers
                          </Button>
 
+//
+// Summary: Fetch the active certificates
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,17 +36,23 @@ function EShopList() {
     fetchData();
   }, []);
 
+
+//
+// Summary: Fetch the initial Candidate Credits
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosPrivate.get(`/api/Users/GetCandidateCredits/${auth.userName}`);
+        
         console.log(response.data);
         setCredits(response.data);
       } catch (error) {
         console.error(error);
       }
     };  
-    fetchData();
+    if(auth?.roles) {
+      fetchData();
+    }
   }, []);
 
   const navToMyVouchersHandler = () => {
@@ -55,21 +63,29 @@ function EShopList() {
     setModalSuccess(false);
   }
 
+//
+// Summary: Handles the purchase of a certificate
   const purchaseConfirmHandler = async (certificateId, userName) => {
     try {
-      console.log(certificateId);
-      console.log( userName);
-      if(auth?.roles) {
-        const response = await axiosPrivate.post(`api/Vouchers?certificateId=${certificateId}&userName=${userName}`);
-        setModalSuccess(true);
-        const voucher = response.data;
-        console.log(voucher);
-        // navigate("/");
+      if(auth?.roles) { //if a user is logged in
+        if(credits >=10) { // AND if a user has more than 10 credits, then proceed with purchase of voucher
+          const voucherResponse = await axiosPrivate.post(`api/Vouchers?certificateId=${certificateId}&userName=${userName}`); //fetch voucher
+          const voucher = voucherResponse.data;
+          const candidateResponse = await axiosPrivate.get(`api/Candidate/${auth.userName}`); //fetch the candidate
+          const candidate = candidateResponse.data;
+          const newCredits = credits - 10;  //deduct 10 credits for resetting the state of the credits
+          candidate.credits = credits - 10;  //deduct 10 credits for resetting the credits in the database
+          setCredits(newCredits);  //reset the credits in the state after the deduction
+          await axiosPrivate.put(`api/Candidate/${auth.userName}`, candidate);  //reset the credits in the database after the deduction
+          setModalSuccess(true); //trigger success modal
+        }
+        else{ //if user is logged in, but doesn't have enough credits
+          alert("You do no have enough credits!")
+        }
       }
-      else {
+      else { //if user is not logged in, then redirect to login page
         navigate("/login")
       }
-
     } catch (error) {
       console.error(error);
       alert("Error the Certificate requested doesn't exist.");
@@ -89,7 +105,7 @@ function EShopList() {
             buttonForModal = {buttonForModal}
     ></SuccessModal>
     <h1 id='header-eshop'>Available Certificates</h1>
-      <h5><strong>Remaining Credits: {credits}</strong></h5>
+      {auth?.roles ? <h5><strong>Remaining Credits: {credits}</strong></h5> : <p></p>}
       <div className="container-fluid d-flex justify-content-center">
       <div className='row'>
       {certificates.map((certificate) => (

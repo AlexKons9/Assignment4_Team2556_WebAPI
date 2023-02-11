@@ -16,7 +16,7 @@ function CertificateCard (props) {
             {props.textBody}
         </Card.Text>
         <button className="btn btn-outline-success" onClick={()=>{props.purchaseConfirmHandler(props.candidateId, props.userName)}}>
-        {auth?.roles ? "Purchase" : "Login to Purchase"}
+        {auth?.roles ? "Purchase: 10 Credits" : "Login to Purchase"}
         </button>
       </Card.Body>
     </Card>
