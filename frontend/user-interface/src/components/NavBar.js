@@ -1,10 +1,10 @@
-﻿import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavBar.css';
+﻿import './NavBar.css';
 import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout"
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from '../hooks/useAuth';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function NavBar() {
 
@@ -16,7 +16,7 @@ function NavBar() {
     return (
 
         <div id='main-nav'>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul className="navbar-nav me-auto">
 
@@ -25,7 +25,7 @@ function NavBar() {
                             ?
                             <>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="Home" >Home</Link>
+                                    <Link className="nav-link" to="/" >Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="EShopList" >EShop</Link>
@@ -42,7 +42,7 @@ function NavBar() {
                             ?
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="Home" >Home</Link>
+                                    <Link className="nav-link" to="/" >Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link text-light" to="AdminUI/QuestionList" >Questions</Link>
@@ -66,7 +66,7 @@ function NavBar() {
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="Home" >Home</Link>
+                                        <Link className="nav-link text-light" to="/" >Home</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="EShopList" >E-Shop</Link>
@@ -100,7 +100,7 @@ function NavBar() {
                         {/* MARKER NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("Marker"))
                             ? <>
-                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/" >Home</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >Unmarked Exams</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >Marked Exams</Link></li>
                             </>
@@ -110,7 +110,7 @@ function NavBar() {
                         {/* QualityControl NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
-                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/" >Home</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >Candidates</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >Exams</Link></li>
                                 <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >Certificates</Link></li>

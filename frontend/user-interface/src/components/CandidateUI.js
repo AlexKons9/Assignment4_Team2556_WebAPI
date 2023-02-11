@@ -1,8 +1,9 @@
-﻿import "bootstrap/dist/css/bootstrap.min.css";
+﻿
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
 
 function CandidateUI() {
   const [voucherDescription, setVoucherDescription] = useState();

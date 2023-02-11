@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./QuestionsList.css";
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
 import htmlParse from "html-react-parser";
-
 import DeleteQuestion from "./DeleteQuestion";
+import "./QuestionsList.css";
 
 function QuestionsList() {
   const [questions, setQuestions] = useState([]);
@@ -75,7 +74,7 @@ function QuestionsList() {
   };
 
   return (
-    <div>
+    <div className="container">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
@@ -87,38 +86,38 @@ function QuestionsList() {
 
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="CreateQuestionForm">
+        <Link className="btn btn-outline-primary" to="CreateQuestionForm">
           Create New
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Description</th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {questions.map((question) => (
-            <tr key={question.questionId}>
-              <td>{htmlParse(question.descriptionStem)}</td>
+            <tr id="tableRow" key={question.questionId}>
+              <td id="description" >{htmlParse(question.descriptionStem)}</td>
               <td>
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-outline-secondary"
                   onClick={() => handleEdit(question.questionId)}
                 >
                   Edit
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(question.questionId)}
                 >
                   Details
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     showConfirmPopupHandler(question.questionId);
                   }}
