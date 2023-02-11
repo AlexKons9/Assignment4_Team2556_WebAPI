@@ -2,6 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import React from 'react';
 import htmlParse from 'html-react-parser';
 import useAuth from "../../hooks/useAuth";
+import './DetailsQuestion.css';
 
 function DetailsQuestion() {
   var count = 1;
@@ -16,7 +17,7 @@ function DetailsQuestion() {
       <h1>Details</h1>
 
       <div>
-        <h4 className="mt-5">Question</h4>
+        <h5 id="headers" className="mt-5">Question</h5>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -36,7 +37,7 @@ function DetailsQuestion() {
           </dl> */}
         </table>
 
-        <h4 className="mt-5">Options:</h4>
+        <h5 id="headers" className="mt-5">Options</h5>
         <table className="table table-bordered">
           <tbody>
             {question.options.map((option) => (
