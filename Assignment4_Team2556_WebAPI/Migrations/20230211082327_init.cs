@@ -49,6 +49,7 @@ namespace Assignment4Team2556WebAPI.Migrations
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LandlineNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Credits = table.Column<int>(type: "int", nullable: true),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -412,10 +413,10 @@ namespace Assignment4Team2556WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5a3c13af-2106-4514-87fa-bc58f5e3e399", "33992766-eceb-42c0-aafb-023da93acf2a", "QualityControl", "QUALITYCONTROL" },
-                    { "70cd9d25-35a7-44b5-9e28-885e0ec4633c", "ff610dff-b0b2-4e4d-9e09-f319b546d09d", "Candidate", "CANDIDATE" },
-                    { "9cf8df9b-ac9e-4613-bea7-9c9b59a2bb6b", "151dad53-b933-410d-b020-e3238a796dc9", "Marker", "MARKER" },
-                    { "b170deed-1f71-448a-919d-8ccb4fa6b1c9", "7839be74-a700-4c7d-b993-91c83ff21143", "Admin", "ADMIN" }
+                    { "7ef8d740-36d6-4b00-9787-22af8bd8985f", "75ac5818-f574-4b57-9e85-cd70d9f98a8c", "Candidate", "CANDIDATE" },
+                    { "9bbb595c-4f58-423f-bd25-ab4ce193624c", "025d2d26-6e07-478d-a28f-aa21b63f0dca", "Marker", "MARKER" },
+                    { "db838bd8-85e4-4733-ad96-7341ecbb435e", "31962e5b-c17d-4582-ac90-648008533c5b", "Admin", "ADMIN" },
+                    { "ea8cc1c9-9f63-4e7b-a403-25aef3cb62fa", "be765c49-dc69-40a8-a5cb-b08a21eb910e", "QualityControl", "QUALITYCONTROL" }
                 });
 
             migrationBuilder.InsertData(

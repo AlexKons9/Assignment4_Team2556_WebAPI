@@ -12,7 +12,7 @@ function CertificateCard (props) {
         <Card.Text>
             {props.textBody}
         </Card.Text>
-        <button className="btn btn-outline-success" onClick={()=>{props.purchaseConfirmHandler(props.candidateId, props.userName)}}>Purchase</button>
+        <button className="btn btn-outline-success" onClick={()=>{props.purchaseConfirmHandler(props.candidateId, props.userName)}}>Purchase: 10 Credits</button>
       </Card.Body>
     </Card>
   );

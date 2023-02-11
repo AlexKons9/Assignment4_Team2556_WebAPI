@@ -15,6 +15,7 @@ function EShopList() {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
   const [modalSuccess, setModalSuccess] = useState(false);
+  const [credits, setCredits] = useState(0);
 
   const buttonForModal = <Button onClick={() => navToMyVouchersHandler()} 
                                  variant="outline-success" style= {{ marginRight: 5}}>My Vouchers
@@ -26,6 +27,19 @@ function EShopList() {
         const response = await axiosPrivate.get("/api/Certificates/Active");
         console.log(response.data);
         setCertificates(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };  
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosPrivate.get(`/api/Users/GetCandidateCredits/${auth.userName}`);
+        console.log(response.data);
+        setCredits(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -57,6 +71,7 @@ function EShopList() {
   }
   
   
+  
 
   return (
     <>
@@ -68,6 +83,7 @@ function EShopList() {
             buttonForModal = {buttonForModal}
     ></SuccessModal>
     <h1 id='header-eshop'>Available Certificates</h1>
+      <h5><strong>Remaining Credits: {credits}</strong></h5>
       <div className="container-fluid d-flex justify-content-center">
       <div className='row'>
       {certificates.map((certificate) => (

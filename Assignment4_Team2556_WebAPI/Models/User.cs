@@ -25,7 +25,13 @@ namespace Assignment4_Team2556_WebAPI.Models
         public string? PostalCode { get; set; }
         public string? LandlineNumber { get; set; }
         public string? MobileNumber { get; set; }
+        public int? Credits { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
+
+        public User()
+        {
+            Credits = 100;
+        }
     }
 }
