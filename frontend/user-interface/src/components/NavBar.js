@@ -78,11 +78,11 @@ function NavBar() {
                                         <Link className="nav-link text-light" to="/Exams/UpcomingExams" >
                                             <div className='dropdown-item' >Upcoming Exams</div>
                                         </Link>
-                                        <Link className="nav-link text-light" to="CandidateUI" >
+                                        {/* <Link className="nav-link text-light" to="CandidateUI" >
                                             <div className='dropdown-item'>Take your Exam Now!</div>
-                                        </Link>
+                                        </Link> */}
                                         <Link className="nav-link text-light" to="/Exams/SchedulerMenu" >
-                                            <div className='dropdown-item'>Schedule your Next Exam!</div>
+                                            <div className='dropdown-item'>Schedule your Exam!</div>
                                         </Link>
                                         <NavDropdown.Divider />
                                         <Link className="nav-link text-light" to="/Exams/VouchersList" >

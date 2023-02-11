@@ -10,6 +10,8 @@ function CreateQuestionForm() {
     topicId: "",
   });
   const [topics, setTopics] = useState([]);
+  const [certificates, setCertificates] = useState([]);
+  const [selectedCertificate, setSelectedCertificate] = useState({certificateId:""});
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
@@ -17,7 +19,9 @@ function CreateQuestionForm() {
     const fetchTopics = async () => {
       try {
         const response = await axiosPrivate.get("/api/Topics");
-        setTopics(response.data);
+        setTopics(response.data);     
+        const response2 = await axiosPrivate.get("/api/Certificates");
+        setCertificates(response2.data);
       } catch (error) {
         console.error(error);
       }
@@ -28,6 +32,11 @@ function CreateQuestionForm() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setQuestion({ ...question, [name]: value });
+
+  };  
+  const handleCertificateChange = (event) => {
+    const { name, value } = event.target;
+    setSelectedCertificate({[name]: value });
 
   };
 
@@ -55,6 +64,8 @@ function CreateQuestionForm() {
       alert("Error creating question");
     }
   };
+  console.log(certificates);
+  console.log(topics);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -73,6 +84,26 @@ function CreateQuestionForm() {
         </div>
 
         <div className="form-group">
+          <label htmlFor="certificateId">Certificate</label>
+          <select
+            className="form-control"
+            id="certificateId"
+            name="certificateId"
+            value={selectedCertificate.certificateId}
+            onChange={handleCertificateChange}
+            required
+          >
+            <option value="" disabled>
+              Select a certificate
+            </option>
+            {certificates.map((certificate) => (
+              <option key={certificate.certificateId} value={certificate.certificateId}>
+                {certificate.title}
+              </option>
+            ))}
+          </select>
+        </div>        
+        <div className="form-group">
           <label htmlFor="topicId">Topic</label>
           <select
             className="form-control"
@@ -81,15 +112,17 @@ function CreateQuestionForm() {
             value={question.topicId}
             onChange={handleChange}
             required
-          >
+            >
             <option value="" disabled>
               Select a topic
             </option>
             {topics.map((topic) => (
-              <option key={topic.topicId} value={topic.topicId}>
+            (topic.certificateId==selectedCertificate.certificateId  &&
+                <option key={topic.topicId} value={topic.topicId}>
                 {topic.topicDescription}
-              </option>
-            ))}
+                </option>
+            )
+          ))}
           </select>
         </div>
         

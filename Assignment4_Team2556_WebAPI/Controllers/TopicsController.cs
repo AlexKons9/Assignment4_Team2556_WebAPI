@@ -51,7 +51,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Topics/CertificateTopics/5
         [HttpGet("CertificateTopics/{certificateId}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IList<Topic>> GetTopicOfCertificate(int certificateId)
         {
             var topics = await _service.GetAllTopicsOfCertificate(certificateId);
@@ -67,6 +67,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // PUT: api/Topics/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutTopic(int id, Topic topic)
         {
             if (id != topic.TopicId)
@@ -96,6 +97,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/Topics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Topic>> PostTopic(Topic topic)
         {
             await _service.AddOrUpdateAsync(topic);
@@ -107,6 +109,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // POST: api/Topics/ListOfTopics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("ListOfTopics")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Topic>> PostListOfTopic(int certificateId, List<string> topics)
         {
 
@@ -118,6 +121,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
         // PUT: api/Topics/UpdateTopics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("UpdateTopics")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Topic>> UpdateListOfTopic(List<Topic> topics)
         {
 
@@ -129,6 +133,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // DELETE: api/Topics/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTopic(int id)
         {
             var topic = await _service.GetAsync(id);
