@@ -18,7 +18,7 @@ function DetailsQuestion() {
 
       <div>
         <h5 id="headers" className="mt-5">Question</h5>
-        <table className="table table-bordered">
+        <table className="table table-bordered ">
           <tbody>
             <tr>
               <th className="col-6">Description Stem</th>
@@ -38,7 +38,7 @@ function DetailsQuestion() {
         </table>
 
         <h5 id="headers" className="mt-5">Options</h5>
-        <table className="table table-bordered">
+        <table className="table table-bordered ">
           <tbody>
             {question.options.map((option) => (
               <tr key={option.optionId}>
