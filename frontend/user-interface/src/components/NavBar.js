@@ -49,7 +49,7 @@ function NavBar() {
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="EShopList" >E-Shop</Link>
+                                        <Link className="nav-link" to="EShopList" >Certifications</Link>
                                     </li>
                                     {/* <li  className="nav-item">
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
@@ -58,11 +58,11 @@ function NavBar() {
                                         <Link className="nav-link text-light" to="/Exams/UpcomingExams" >
                                             <div className='dropdown-item' >Upcoming Exams</div>
                                         </Link>
-                                        <Link className="nav-link text-light" to="CandidateUI" >
+                                        {/* <Link className="nav-link text-light" to="CandidateUI" >
                                             <div className='dropdown-item'>Take your Exam Now!</div>
-                                        </Link>
+                                        </Link> */}
                                         <Link className="nav-link text-light" to="/Exams/SchedulerMenu" >
-                                            <div className='dropdown-item'>Schedule your Next Exam!</div>
+                                            <div className='dropdown-item'>Schedule your Exam!</div>
                                         </Link>
                                         <NavDropdown.Divider />
                                         <Link className="nav-link text-light" to="/Exams/VouchersList" >
