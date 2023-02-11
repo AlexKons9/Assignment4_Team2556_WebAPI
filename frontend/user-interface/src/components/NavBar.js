@@ -101,8 +101,8 @@ function NavBar() {
                         {auth?.roles?.find(roles => roles?.includes("Marker"))
                             ? <>
                                 <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >View Unmarked Exams</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >View Marked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >Unmarked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >Marked Exams</Link></li>
                             </>
                             : <li></li>
                         }
@@ -111,10 +111,9 @@ function NavBar() {
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
                                 <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidate List</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >View Exam List</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >View Candidates</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >View Certificates</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >Candidates</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >Certificates</Link></li>
                             </>
                             : <li></li>
                         }
