@@ -37,6 +37,12 @@ import ExamsList from './components/Exams/ExamsList';
 import DetailsExam from './components/Exams/DetailsExam';
 import CreateExam from './components/Exams/CreateExams';
 import EditExam from './components/Exams/EditExams';
+import QuestionsList from './components/Question/QuestionsList'
+import CertificatesList from './components/CertificateCRUD/CertificatesList'
+import CreateCertificate from './components/CertificateCRUD/CreateCertificates'
+import EditCertificate from './components/CertificateCRUD/EditCertificates'
+import CreateTopics from './components/Topics/CreateTopics'
+import EditTopics from './components/Topics/EditTopics'
 
 
 //Candidate components
@@ -79,10 +85,11 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="Login" element={<Login />} />
                     <Route path="unauthorized" element={<Unauthorized />} />
+                    <Route exact path="EShopList" element={<EShopList />} />
 
                     {/* ONLY Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                        <Route exact path="AdminUI/QuestionList" element={<QuestionList />} />
+                        <Route exact path="AdminUI/QuestionList" element={<QuestionsList />} />
                         <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
                         <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm />} />
                         {/* <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} /> */}
@@ -126,22 +133,21 @@ function App() {
                         <Route exact path="QualityControlUI/ExamList" element={<ExamsListQC />} />
                         <Route exact path="Exams/Details" element={<DetailsExam />} />
                         <Route exact path="DetailsQuestion" element={<DetailsQuestion />} />
-                    </Route>         
+                    </Route>
 
 
                     {/* Candidate Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Candidate]} />}>
                         <Route exact path="CandidateUI" element={<CandidateUI />} />
                         <Route exact path="CandidateUI/GenerateExam" element={<GenerateExam />} />
-                        <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />}/>
-                        <Route exact path="MyCertificatesList" element={<MyCertificatesList/>}/>
-                        <Route exact path="MyCertificatesList/CertificateDetails" element={<CertificateDetails/>}/>
-                        <Route exact path="EShopList" element={<EShopList/>}/>
-                        <Route exact path="Exams/VouchersList" element={<VouchersList/>}/>
-                        <Route exact path="Exams/SchedulerMenu" element={<SchedulerMenu/>}/>
-                        <Route exact path="Exams/UpcomingExams" element={<UpcomingExams/>}/>
+                        <Route exact path="CandidateUI/CandidateExamResults" element={<CandidateExamResults />} />
+                        <Route exact path="MyCertificatesList" element={<MyCertificatesList />} />
+                        <Route exact path="MyCertificatesList/CertificateDetails" element={<CertificateDetails />} />
+                        <Route exact path="Exams/VouchersList" element={<VouchersList />} />
+                        <Route exact path="Exams/SchedulerMenu" element={<SchedulerMenu />} />
+                        <Route exact path="Exams/UpcomingExams" element={<UpcomingExams />} />
 
-                    </Route>           
+                    </Route>
 
                 </Route>
 

@@ -1046,29 +1046,29 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6c521287-260f-4aee-b10b-deacb423ca05",
-                            ConcurrencyStamp = "d2810e1d-f0e9-4ea0-ade9-f09f012bdb2a",
+                            Id = "1fa107f6-f318-42c3-8e77-0703d942d521",
+                            ConcurrencyStamp = "6fd48aea-d919-4f1b-84d2-620432f49f8e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "90cb6b93-a233-4181-96dc-07f7ed6e174b",
-                            ConcurrencyStamp = "d3c7db8d-4c7c-43e1-84b7-1c892e1f0187",
+                            Id = "ddf01a88-31f2-4629-b07a-bc79217105a9",
+                            ConcurrencyStamp = "e9687a15-4e1f-49e1-b418-e4f5a4dbdd83",
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
-                            Id = "df33238f-bd32-418d-aaac-728184dda2f3",
-                            ConcurrencyStamp = "fa85796d-3957-40ed-bd32-33fd7ff80501",
+                            Id = "fd66fcf1-4372-4ba3-ab17-bbe6434fa2a5",
+                            ConcurrencyStamp = "71b3a911-19ab-4478-b9e9-f9747eb481e0",
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
-                            Id = "2c5a690b-ade8-46d7-86cd-5f8c2239a029",
-                            ConcurrencyStamp = "dd8bc40a-bfb9-4d16-a040-e6e1884c40fe",
+                            Id = "c990522a-62dd-4559-a518-2894cdc570de",
+                            ConcurrencyStamp = "4343451e-8f63-4a4d-915e-4922076cea52",
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });
