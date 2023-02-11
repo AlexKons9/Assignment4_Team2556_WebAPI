@@ -55,6 +55,7 @@ function EditExams() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    exam.maximumScore = examQuestions.length;
     try {
       const response = await axiosPrivate.post("/api/Exams", exam);
       console.log(response.data);
@@ -233,8 +234,8 @@ function EditExams() {
             name="maximumScore"
             type="number"
             className="form-control"
-            value={exam.maximumScore}
-            onChange={handleChange}
+            value={examQuestions.length}
+            //onChange={handleChange}
           ></input>
         </div>
 

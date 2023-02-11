@@ -36,6 +36,8 @@ function CreateExams() {
   }, []);
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log("NAME: " +  name)
+    console.log("value: " +  value)
     setExam({ ...exam, [name]: value });
   };
   const handleBoxChange = (event) => {
@@ -53,6 +55,9 @@ function CreateExams() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    //setExam({ ...exam, [maximumScore]: examQuestions.length });
+    exam.maximumScore = examQuestions.length;
+    console.log(exam)
     try {
       const response = await axiosPrivate.post("/api/Exams", exam);
       console.log(response.data);
@@ -78,7 +83,6 @@ function CreateExams() {
       filteredQuestions.push(question);
     }
   };
-
   return (
     <>
       <h1>Create New Exam</h1>
@@ -108,7 +112,6 @@ function CreateExams() {
         </div>
         <div>
           <h3>Add Exam Questions:</h3>
-
           <DualListBox
             options={filteredQuestions
               .map((question) => ({
@@ -211,15 +214,16 @@ function CreateExams() {
         <div className="col-md-6">
           <label for="maximumScore" className="form-label">
             {" "}
-            Maximum Mark :
+            Maximum Mark
           </label>
           <input
-            id="maximumScore"
-            name="maximumScore"
+            id="exam.maximumScore"
+            name="exam.maximumScore"
             type="number"
             className="form-control"
-            value={exam.maximumScore}
-            onChange={handleChange}
+            //value={exam.maximumScore}
+            value={examQuestions.length}
+            // onChange={handleChange}
           ></input>
         </div>
 
