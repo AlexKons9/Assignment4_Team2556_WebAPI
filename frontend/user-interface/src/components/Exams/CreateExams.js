@@ -79,6 +79,25 @@ function CreateExams() {
     }
   };
 
+  // create an object with topics as keys and arrays of questions as values
+  const groupedQuestions = filteredQuestions.reduce((acc, question) => {
+  const { topicDescription } = question.topic;
+  if (!acc[topicDescription]) {
+    acc[topicDescription] = [];
+  }
+  acc[topicDescription].push(question);
+  return acc;
+  }, {});
+
+  const options = Object.keys(groupedQuestions).map((topic) => {
+    const topicQuestions = groupedQuestions[topic];
+    const topicOptions = topicQuestions.map((question) => ({
+      value: question.questionId,
+      label: htmlParse(question.descriptionStem),
+    }));
+    return { label: topic, options: topicOptions };
+  });
+
   return (
     <>
       <h1>Create New Exam</h1>
@@ -110,13 +129,7 @@ function CreateExams() {
           <h3>Add Exam Questions:</h3>
 
           <DualListBox
-            options={filteredQuestions
-              .map((question) => ({
-                value: question.questionId,
-                label: `${question.topic.topicDescription} : ${htmlParse(
-                  question.descriptionStem
-                )}`,
-              }))}
+            options={options}
             selected={examQuestions}
             onChange={(value) => {
               setExamQuestions(value);
