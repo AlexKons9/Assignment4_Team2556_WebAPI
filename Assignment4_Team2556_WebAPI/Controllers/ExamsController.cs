@@ -28,7 +28,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Exams
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<IEnumerable<Exam>>> GetExams()
         {
             var exams = await _service.GetAllAsync();
@@ -37,7 +37,7 @@ namespace Assignment4_Team2556_WebAPI.Controllers
 
         // GET: api/Exams/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,QualityControl")]
         public async Task<ActionResult<Exam>> GetExam(int id)
         {
             //var exam = await _context.Exams.FindAsync(id);

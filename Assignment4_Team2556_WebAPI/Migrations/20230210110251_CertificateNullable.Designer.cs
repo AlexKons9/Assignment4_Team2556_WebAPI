@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4Team2556WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Assignment4_Team2556_WebAPI/Migrations/20230210110251_CertificateNullable.Designer.cs
     [Migration("20230210110251_CertificateNullable")]
     partial class CertificateNullable
+========
+    [Migration("20230210094203_init")]
+    partial class init
+>>>>>>>> qualitycontrol2:Assignment4_Team2556_WebAPI/Migrations/20230210094203_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1049,29 +1054,49 @@ namespace Assignment4Team2556WebAPI.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Assignment4_Team2556_WebAPI/Migrations/20230210110251_CertificateNullable.Designer.cs
                             Id = "766b0dfb-5ea9-43ae-973c-cfcf0b6047b8",
                             ConcurrencyStamp = "e618255c-113a-4eeb-9bbc-6521d96d1e1a",
+========
+                            Id = "b170deed-1f71-448a-919d-8ccb4fa6b1c9",
+                            ConcurrencyStamp = "7839be74-a700-4c7d-b993-91c83ff21143",
+>>>>>>>> qualitycontrol2:Assignment4_Team2556_WebAPI/Migrations/20230210094203_init.Designer.cs
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
+<<<<<<<< HEAD:Assignment4_Team2556_WebAPI/Migrations/20230210110251_CertificateNullable.Designer.cs
                             Id = "2ac2bb98-cd58-4e18-9908-fd5f4f2b9095",
                             ConcurrencyStamp = "39a63021-e9a1-4182-ac06-91e253b42c4f",
+========
+                            Id = "70cd9d25-35a7-44b5-9e28-885e0ec4633c",
+                            ConcurrencyStamp = "ff610dff-b0b2-4e4d-9e09-f319b546d09d",
+>>>>>>>> qualitycontrol2:Assignment4_Team2556_WebAPI/Migrations/20230210094203_init.Designer.cs
                             Name = "Candidate",
                             NormalizedName = "CANDIDATE"
                         },
                         new
                         {
+<<<<<<<< HEAD:Assignment4_Team2556_WebAPI/Migrations/20230210110251_CertificateNullable.Designer.cs
                             Id = "b8f13b83-ee27-4073-863f-47c13280e5c8",
                             ConcurrencyStamp = "f40a1a4f-c34e-405f-886b-9cb2ce0ed2ff",
+========
+                            Id = "9cf8df9b-ac9e-4613-bea7-9c9b59a2bb6b",
+                            ConcurrencyStamp = "151dad53-b933-410d-b020-e3238a796dc9",
+>>>>>>>> qualitycontrol2:Assignment4_Team2556_WebAPI/Migrations/20230210094203_init.Designer.cs
                             Name = "Marker",
                             NormalizedName = "MARKER"
                         },
                         new
                         {
+<<<<<<<< HEAD:Assignment4_Team2556_WebAPI/Migrations/20230210110251_CertificateNullable.Designer.cs
                             Id = "84c28756-fe3b-44ed-8c8b-0816b643a649",
                             ConcurrencyStamp = "e6d60bbe-25ba-4f7b-8a51-a842339fc162",
+========
+                            Id = "5a3c13af-2106-4514-87fa-bc58f5e3e399",
+                            ConcurrencyStamp = "33992766-eceb-42c0-aafb-023da93acf2a",
+>>>>>>>> qualitycontrol2:Assignment4_Team2556_WebAPI/Migrations/20230210094203_init.Designer.cs
                             Name = "QualityControl",
                             NormalizedName = "QUALITYCONTROL"
                         });

@@ -54,7 +54,7 @@ function QuestionsList() {
     try {
       const response = await axiosPrivate.get(`/api/Questions/${questionId}`);
       const questionDetails = response.data;
-      navigate("/AdminUI/DetailsQuestion", {
+      navigate("/DetailsQuestion", {
         state: { questionDetails: questionDetails },
       });
     } catch (error) {

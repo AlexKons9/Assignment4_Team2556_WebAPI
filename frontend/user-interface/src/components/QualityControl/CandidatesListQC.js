@@ -26,7 +26,7 @@ function CandidatesListQC() {
       console.log(candidateList[i]);
       const response = await axiosPrivate.get(`/api/Candidate/${candidateList[i].userName}`);
       const candidateDetails = response.data;
-      navigate("/AdminUI/Candidates/Details", {
+      navigate("/Candidates/Details", {
         state: { candidateDetails: candidateDetails },
       });
     } catch (error) {
@@ -39,12 +39,6 @@ function CandidatesListQC() {
   return (
     <div>
       <h1>Candidates List</h1>
-      <p>
-        {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="Register">
-          Create New Candidate
-        </Link>
-      </p>
       <table className="table">
         <thead>
           <tr>

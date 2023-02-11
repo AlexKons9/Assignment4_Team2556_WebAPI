@@ -37,11 +37,6 @@ import ExamsList from './components/Exams/ExamsList';
 import DetailsExam from './components/Exams/DetailsExam';
 import CreateExam from './components/Exams/CreateExams';
 import EditExam from './components/Exams/EditExams';
-import CertificatesList from './components/CertificateCRUD/CertificatesList';
-import CreateCertificate from './components/CertificateCRUD/CreateCertificates';
-import EditCertificate from './components/CertificateCRUD/EditCertificates';
-import CreateTopics from './components/Topics/CreateTopics';
-import EditTopics from './components/Topics/EditTopics';
 
 
 //Candidate components
@@ -57,6 +52,7 @@ import MarkedExamDetails from './components/Marker/MarkedExamDetails';
 //QualityControl components
 import CandidatesListQC from './components/QualityControl/CandidatesListQC';
 import CertificateListQC from './components/QualityControl/CertificateListQC'
+import ExamsListQC from './components/QualityControl/ExamListQC'
 
 //TESTing components
 import Users from './components/Security/Users';
@@ -86,18 +82,19 @@ function App() {
 
                     {/* ONLY Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                        <Route exact path="AdminUI" element={<AdminUI />} />
+                        <Route exact path="AdminUI/QuestionList" element={<QuestionList />} />
                         <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
                         <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm />} />
-                        <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} />
+                        {/* <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} /> */}
                         <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />
                         <Route exact path="AdminUI/EditOptionsForm" element={<EditOptionsForm />} />
                         <Route exact path="AdminUI/Candidates" element={<CandidateList />} />
                         <Route exact path="AdminUI/Candidates/Register" element={<Register />} />
+                        {/* <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} /> */}
                         <Route exact path="AdminUI/Candidates/Edit" element={<EditCandidate />} />
                         <Route exact path="AdminUI/Exams" element={<ExamsList />} />
                         <Route exact path="AdminUI/Exams/Create" element={<CreateExam />} />
-                        <Route exact path="AdminUI/Exams/Details" element={<DetailsExam />} />
+                        {/* <Route exact path="AdminUI/Exams/Details" element={<DetailsExam />} /> */}
                         <Route exact path="AdminUI/Exams/Edit" element={<EditExam />} />
                         <Route exact path="AdminUI/AssignMarkers" element={<AssignMarker />} />
                         <Route exact path="AdminUI/Certificates" element={<CertificatesList />} />
@@ -125,6 +122,10 @@ function App() {
                         <Route exact path="AdminUI/Candidates/Details" element={<DetailsCandidate />} />
                         <Route exact path="QualityControlUI/CertificateList" element={<CertificateListQC />} />
                         <Route exact path="Certificates/CertificateDetails" element={<CertificateCrudDetails />} />
+                        <Route exact path="Candidates/Details" element={<DetailsCandidate />} />
+                        <Route exact path="QualityControlUI/ExamList" element={<ExamsListQC />} />
+                        <Route exact path="Exams/Details" element={<DetailsExam />} />
+                        <Route exact path="DetailsQuestion" element={<DetailsQuestion />} />
                     </Route>         
 
 
