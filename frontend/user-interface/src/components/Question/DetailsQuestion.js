@@ -12,38 +12,61 @@ function DetailsQuestion() {
   //   console.log(question);
 
   return (
-    <div>
+    <div className="container">
       <h1>Details</h1>
 
       <div>
-        <h4>Question</h4>
-        <hr />
-        <dl className="row">
-          <dt className="col-sm-2">Description Stem</dt>
-          <dd className="col-sm-10">{htmlParse(question.descriptionStem)}</dd>
-          <dt className="col-sm-2">Topic</dt>
-          <dd className="col-sm-10">{question.topic.topicDescription}</dd>
-        </dl>
+        <h4 className="mt-5">Question</h4>
+        <table className="table table-bordered">
+          <tbody>
+            <tr>
+              <th>Description Stem</th>
+              <td>{htmlParse(question.descriptionStem)}</td>
+            </tr>
+            <tr>
+              <th>Topic</th>
+              <td>{question.topic.topicDescription}</td>
+            </tr>
+          </tbody>
+          {/* <dl className="row">
+            <dt className="col-sm-2">Description Stem</dt>
+            <dd className="col-sm-10">{htmlParse(question.descriptionStem)}</dd>
+            <dt className="col-sm-2">Topic</dt>
+            <dd className="col-sm-10">{question.topic.topicDescription}</dd>
+          </dl> */}
+        </table>
 
-        <hr />
-
-        {question.options.map((option) => (
-            <div key={option.optionId}>
-              <dt>Option {count++}</dt>
-              <dd>{htmlParse(option.description)}</dd>
-            </div>
-        ))}
-
-          <div>
-            <dt>Correct Answer</dt>
-            <dd>
+        <h4 className="mt-5">Options:</h4>
+        <table className="table table-bordered">
+          <tbody>
+            {question.options.map((option) => (
+              <tr key={option.optionId}>
+                <th>Option {count++}</th>
+                <td>{htmlParse(option.description)}</td>
+              </tr>
+            ))}
+            <tr>
+              <th>Correct Answer</th>
+              <td>
                 Option {correctAnswerIndex + 1}
-            </dd>
-          </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {/* <table className="table table-bordered">
+          <tbody>
+            <tr>
+              <th>Correct Answer</th>
+              <td>
+                Option {correctAnswerIndex + 1}
+              </td>
+            </tr>
+          </tbody>
+        </table> */}
 
-          <div>
-            <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/QuestionList" : "../QualityControlUI/ExamList"}>Back to List</Link>
-          </div>
+        <div>
+          <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/QuestionList" : "../QualityControlUI/ExamList"}>Back to List</Link>
+        </div>
 
       </div>
     </div>

@@ -1,7 +1,11 @@
 h1 {
     font-family: 'Comfortaa', cursive;
     font-weight: 700;
-    color: rgba(255,0,0,0.6);
+    color: rgba(20, 12, 12, 0.6);
     margin-top: 2rem;
     margin-left: 4rem;
 }
+
+/* body {
+    background-color:#F5F5F5
+} */

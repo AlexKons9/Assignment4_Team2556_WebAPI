@@ -74,7 +74,7 @@ function QuestionsList() {
   };
 
   return (
-    <div className="container">
+    <div className="container text-center">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
@@ -93,15 +93,15 @@ function QuestionsList() {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Description</th>
-            <th></th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody >
           {questions.map((question) => (
             <tr id="tableRow" key={question.questionId}>
-              <td id="description" >{htmlParse(question.descriptionStem)}</td>
-              <td>
+              <td scope="row" id="description" >{htmlParse(question.descriptionStem)}</td>
+              <td id="table-button">
                 <button
                   className="btn btn-outline-secondary"
                   onClick={() => handleEdit(question.questionId)}
