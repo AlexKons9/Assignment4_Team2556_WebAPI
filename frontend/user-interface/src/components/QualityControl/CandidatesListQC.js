@@ -37,28 +37,28 @@ function CandidatesListQC() {
 
 
   return (
-    <div>
-      <h1>Candidates List</h1>
-      <table className="table">
+    <div className="container-xl text-center">
+    <h1>Candidates List</h1>
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th></th>
+            <th scope="col">First Name</th>    
+            <th scope="col">Last Name</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          {candidateList.map((candidate, i) => (
+          {candidateList.map((candidate,i) => (
             <tr key={candidate.Id}>
-              <td>{candidate.firstName}</td>
-              <td>{candidate.lastName}</td>
-              <td>
+              <td scope="row"><h6>{candidate.firstName}</h6></td>
+              <td scope="row"><h6>{candidate.lastName}</h6></td>
+              <td>                
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(i)}
                 >
                   Details
-                </button>{""}
+                </button>{" "}
               </td>
             </tr>
           ))}

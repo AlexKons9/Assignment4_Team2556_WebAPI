@@ -27,7 +27,6 @@ function EditCertificate() {
         `/api/Certificates/${certificate.certificateId}`,
         certificate
       );
-      alert("Certificate created successfully!");
       const topics = await axiosPrivate.get(`api/Topics/CertificateTopics/${certificate.certificateId}`);
       navigate("/AdminUI/EditTopics", {
         state: { certificateId: certificate.certificateId, topics: topics.data },

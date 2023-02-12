@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function CreateTopics() {
   const location = useLocation();
@@ -9,6 +10,13 @@ function CreateTopics() {
   const [topics, setTopics] = useState([""]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate()
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
   const handleTopic = (event, index) => {
     const values = [...topics];
     values[index] = event.target.value;
@@ -26,14 +34,14 @@ function CreateTopics() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(topics);
-    console.log(certificateId);
     try {
       const response = await axiosPrivate.post(
         `/api/Topics/ListOfTopics?certificateId=${certificateId}`, topics
       );
-      alert("Certificate created successfully!");
-      navigate("/AdminUI/Certificates");
+      showConfirmPopupHandler();
+      setTimeout(() => { 
+        navigate("/AdminUI/Certificates");
+      }, 2000); 
     } catch (error) {
       console.error(error);
       alert("Error creating certificate");
@@ -41,6 +49,12 @@ function CreateTopics() {
   };
   return (
     <div className="container w-25">
+      <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Certificate created successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
       <form onSubmit={handleSubmit}>
         <h2>Create Certificate</h2>
         <h3 className="mb-4">Add Topics</h3>

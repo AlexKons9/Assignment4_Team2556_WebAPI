@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import MyCKEditor from '../MyCKEditor';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function EditOptionsForm() {
   const location = useLocation();
@@ -29,6 +30,13 @@ function EditOptionsForm() {
     description4: location.state.options[3].description,
     correctAnswer: correctAnswerIndex
   });
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,8 +68,10 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     try {
         const response = await axiosPrivate.put(`/api/Options`, optionDTO);
-        alert("Options edited successfully!");
-        navigate('/AdminUI/QuestionList');
+        showConfirmPopupHandler();
+        setTimeout(() => { 
+          navigate('/AdminUI/QuestionList');
+        }, 2000); 
     } 
     catch (error) {
         console.error(error);
@@ -71,6 +81,12 @@ const handleSubmit = async (event) => {
 
   return (
     <div className="container">
+       <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Question edited successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
       <h2>Edit Options</h2>
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={optionDTO.questionId} />

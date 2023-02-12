@@ -38,7 +38,7 @@ const MarkedExamsList = () => {
         <div className="container-lg">
         <h2 className="mb-5">Marked Exams</h2>
             {candidateExams.length === 0 ? <div>You do not have any marked exams.</div> :
-                <table className="table">
+                <table className="table table-striped">
                     <thead>
                         <tr>
                             <th>Candidate Exam ID</th>

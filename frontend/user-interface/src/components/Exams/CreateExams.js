@@ -6,6 +6,7 @@ import htmlParse from "html-react-parser";
 import "../GenericCss/Buttons.css";
 import "react-dual-listbox/lib/react-dual-listbox.css";
 import "react-dual-listbox/src/scss/react-dual-listbox.scss";
+import SuccessModal from "../SuccessModal";
 
 function CreateExams() {
   const [count, setCount] = useState(0);
@@ -19,6 +20,13 @@ function CreateExams() {
   const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +35,6 @@ function CreateExams() {
         setCertificates(response.data);
         const response2 = await axiosPrivate.get("/api/Questions");
         setQuestions(response2.data);
-        console.log(response.data);
-        console.log(questions);
       } catch (error) {
         console.error(error);
       }
@@ -65,9 +71,10 @@ function CreateExams() {
         `/api/ExamQuestions?examId=${examId}`,
         examQuestions
       );
-      alert("Exam created successfully!");
-      // console.log(questionId);
-      navigate("/AdminUI/Exams");
+      showConfirmPopupHandler();
+      setTimeout(() => { 
+        navigate("/AdminUI/Exams");
+      }, 2000); 
     } catch (error) {
       console.error(error);
       alert("Error creating Exam");
@@ -104,6 +111,12 @@ function CreateExams() {
 
   return (
     <div className="container-xl">
+      <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Exam created successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
       <h1>Create New Exam</h1>
       <form onSubmit={handleSubmit} className="row g-3 form-container">
         <div className="form-group  mt-4">

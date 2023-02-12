@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function EditTopics() {
 
@@ -10,6 +11,13 @@ function EditTopics() {
   const [topics, setTopics] = useState(location.state.topics ? location.state.topics : [{ topicDescription: "", certificateId: certificateId, certificate: null }]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
 
 
   const handleTopic = (event, index) => {
@@ -56,8 +64,10 @@ function EditTopics() {
         `api/Topics/UpdateTopics`,
         topics
       );
-      alert("Certificate updated successfully!");
-      navigate("/AdminUI/Certificates");
+      showConfirmPopupHandler();
+      setTimeout(() => { 
+        navigate("/AdminUI/Certificates");
+      }, 2000); 
     } catch (error) {
       console.error(error);
       alert("Error updating certificate");
@@ -65,6 +75,12 @@ function EditTopics() {
   };
   return (
     <div className="container w-25">
+      <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Certificate updated successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
       <form onSubmit={handleSubmit}>
         {" "}
         <h2  className="mb-5">Edit Certificate Topics</h2>{" "}
@@ -79,13 +95,13 @@ function EditTopics() {
               <div className="row">
                 <input
                   type="text"
-                  className="form-control mb-1"
+                  className="form-control"
                   value={topic.topicDescription}
                   onChange={(e) => handleTopic(e, index)}
                 />
-                <p className="btn btn-outline-danger" type="button" onClick={() => handleRemoveTopic(index)}>
+                <span className="btn btn-danger" type="button" onClick={() => handleRemoveTopic(index)}>
                   Remove Topic
-                </p>
+                </span>
               </div>
             </div>
           ))}
