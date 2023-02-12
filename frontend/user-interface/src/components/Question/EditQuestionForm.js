@@ -51,12 +51,10 @@ function EditQuestionForm() {
     event.preventDefault();
     try {
       await axiosPrivate.put(`/api/Questions/${question.questionId}`, question);
-      alert("Question edited successfully!");
       var response = await axiosPrivate.get(
         `/api/Options/${question.questionId}`
       );
       var options = response.data;
-      console.log(options);
       navigate("/AdminUI/EditOptionsForm", { state: { options: options } });
     } catch (error) {
       console.error(error);

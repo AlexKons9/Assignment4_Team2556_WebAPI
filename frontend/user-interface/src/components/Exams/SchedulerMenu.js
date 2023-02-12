@@ -38,9 +38,7 @@ function SchedulerMenu() {
 
             const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
             const voucher = answer.data;
-            console.log(JSON.stringify(voucher));
             const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}?examDate=${examDate.date}`, voucher);
-            console.log(response.data);
 
             const candidateExamId = response.data.candidateExamId;
             const questionsList = response.data.questions;

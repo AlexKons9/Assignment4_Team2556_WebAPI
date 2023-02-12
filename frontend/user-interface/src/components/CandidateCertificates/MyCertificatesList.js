@@ -17,7 +17,6 @@ function MyCertificatesList() {
       try {
         //const response = await axiosPrivate.get(`/api/CandidateExams/Certificates?userName=${userName}`);
         const response = await axiosPrivate.get(`/api/CandidateCertificates/ByUsername/${userName}`);
-        console.log(response.data);
         setCandidateCertificates(response.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +28,6 @@ function MyCertificatesList() {
 
   const handleDetails = async (examId, certificateTitle) => {
     try {
-        console.log(examId);
         //const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const examResults = response.data;

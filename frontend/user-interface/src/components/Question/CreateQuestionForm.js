@@ -49,7 +49,6 @@ function CreateQuestionForm() {
     event.preventDefault();
     try {
       const response = await axiosPrivate.post("/api/Questions", question);
-      alert("Question created successfully!");
       const questionId = response.data.questionId;
       navigate("/AdminUI/CreateOptionsForm", {
         state: { questionId: questionId },

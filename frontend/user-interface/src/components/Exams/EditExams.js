@@ -7,6 +7,7 @@ import DualListBox from "react-dual-listbox";
 import "../GenericCss/Buttons.css";
 import "react-dual-listbox/lib/react-dual-listbox.css";
 import "react-dual-listbox/src/scss/react-dual-listbox.scss";
+import SuccessModal from "../SuccessModal";
 
 function EditExams() {
   const location = useLocation();
@@ -19,6 +20,13 @@ function EditExams() {
   const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +58,10 @@ function EditExams() {
         `/api/ExamQuestions/Edit/${examId}`,
         examQuestions
       );
-      alert("Exam Edited successfully!");
-      // console.log(questionId);
-      navigate("/AdminUI/Exams");
+      showConfirmPopupHandler();
+      setTimeout(() => { 
+        navigate("/AdminUI/Exams");
+      }, 2000);
     } catch (error) {
       console.error(error);
       alert("Error editing Exam");
@@ -89,6 +98,12 @@ function EditExams() {
   console.log(examQuestions);
   return (
     <div className="container-xl">
+      <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Exam Edited successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
       <h1>Edit Exam</h1>
       <form onSubmit={handleSubmit} className="row g-3 form-container">
         <div className="form-group  mt-4">

@@ -9,6 +9,7 @@ function CreateCertificate() {
     title: "",
     isActive: (false),
   });
+
   const handleChange = (event) => {
     setCertificate({
         ...certificate,
@@ -26,19 +27,15 @@ function CreateCertificate() {
         "/api/Certificates",
         certificate
       );
-      alert("Certificate created successfully!");
-      console.log(response.data);
       const certificateId = response.data.certificateId;
-      // console.log(questionId);
-      navigate("/AdminUI/CreateTopics", {
-        state: { certificateId: certificateId },
-      });
+        navigate("/AdminUI/CreateTopics", {
+          state: { certificateId: certificateId },
+        });
     } catch (error) {
       console.error(error);
       alert("Error creating certificate");
     }
   };
-console.log(certificate)
    return (
     <div className="container">
         <h2>Create Certificate</h2>

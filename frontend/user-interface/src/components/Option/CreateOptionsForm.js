@@ -3,9 +3,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import MyCKEditor from "../MyCKEditor";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function CreateOptionsForm() {
   const axiosPrivate = useAxiosPrivate();
+  const [showModal, setShowModal] = useState(false);
 
   // function that takes questionId from CreateQuestionsForm and stores it
   // to the optionsDTO.questionId
@@ -26,7 +28,13 @@ function CreateOptionsForm() {
     const { name, value } = event.target;
     setOptionDTO({ ...optionDTO, [name]: value });
   };
-
+  
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
   const editorHandleChangeDesc1 = (event, editor) => {
     const data = editor.getData();
     setOptionDTO({ ...optionDTO, description1: data });
@@ -51,8 +59,8 @@ function CreateOptionsForm() {
     event.preventDefault();
     try {
       await axiosPrivate.post("/api/Options", optionDTO);
-      alert("Options created successfully!");
-      navigate("/AdminUI/QuestionList");
+      showConfirmPopupHandler();
+      setTimeout(() => {navigate("/AdminUI/QuestionList");}, 2000);
     } catch (error) {
       console.error(error);
       alert("Error creating options");
@@ -60,6 +68,14 @@ function CreateOptionsForm() {
   };
   return (
     <div className="container">
+      <div>     
+        <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Question created successfully"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
+     </div>
       <h2>Create Options</h2>
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={optionDTO.questionId} />
@@ -121,7 +137,8 @@ function CreateOptionsForm() {
           </select>
         </div>
         <div className="d-flex">
-          <button type="submit" className="btn btn-primary align-self-start">
+          <button type="submit"                    
+                  className="btn btn-primary align-self-start">
             Create
           </button>
         </div>

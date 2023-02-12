@@ -7,7 +7,6 @@ function CertificateDetails() {
 
   const examResults = location.state.results;
   const certificateTitle = location.state.certificateTitle;
-  console.log(examResults);
 
   return (
     <div className="container col-10">

@@ -1,10 +1,12 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import {  useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function EditCandidate() {
     const location = useLocation();
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
     // const [candidate, setCandidate] = useState({firstName: location.state.candidateDetails.firstName,middleName: location.state.candidateDetails.middleName,lastName: location.state.candidateDetails.lastName,
     //     gender: location.state.candidateDetails.gender,nativeLanguage: location.state.candidateDetails.nativeLanguage,birthDate: location.state.candidateDetails.birthDate,
     //     photoIdType: location.state.candidateDetails.photoIdType,photoIdNumber: location.state.candidateDetails.photoIdNumber,photoIssueDate: location.state.candidateDetails.photoIssueDate,
@@ -20,14 +22,20 @@ function EditCandidate() {
         setCandidate({ ...candidate, [name]: value });
         console.log(candidate);
     };
+    const closeConfirmPopupHandler = () => {
+        setShowModal(false);
+      };
+      const showConfirmPopupHandler = () => {
+        setShowModal(true);
+      };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             await axiosPrivate.put(`/api/Candidate/${candidate.userName}`,candidate);
-            alert("Candidate edited successfully!");
+            showConfirmPopupHandler();
 
-            navigate('/AdminUI/Candidates');
+            setTimeout(() => { navigate('/AdminUI/Candidates')}, 2000); 
         } 
         catch (error) {
             console.error(error);
@@ -37,6 +45,12 @@ function EditCandidate() {
 
     return (
         <div className="container">
+        <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Candidate edited successfully"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
         <h2 className="mb-3">Edit Candidate</h2>
             <form onSubmit={handleSubmit} className="row g-3 mt-3 form-container">
                     <h5>Personal Details</h5>
