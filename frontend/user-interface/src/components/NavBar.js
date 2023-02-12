@@ -69,7 +69,7 @@ function NavBar() {
                                         <Link className="nav-link text-light" to="/" >Home</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="EShopList" >E-Shop</Link>
+                                        <Link className="nav-link" to="EShopList" >Browse Certifications</Link>
                                     </li>
                                     {/* <li  className="nav-item">
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>

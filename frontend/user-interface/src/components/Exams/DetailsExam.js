@@ -51,7 +51,7 @@ function DetailsExam() {
           {examQuestions.map((examQuestion, index) => (
 
               <tr key={index} className="row">
-                <th className="col-6">Question {index + 1}</th>
+                <th className="col-6">Question {index + 1} </th>
                 <td className="col-6">
                   {htmlParse(examQuestion.question.descriptionStem)}
                 </td>
