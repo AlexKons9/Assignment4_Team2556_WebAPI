@@ -39,9 +39,9 @@ function EditCertificate() {
   };
 console.log(certificate)
    return (
-    <>
+    <div className="container">
+      <h2>Edit Certificate</h2>
        <form onSubmit={handleSubmit}>
-
          <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
@@ -55,16 +55,16 @@ console.log(certificate)
           />
         </div>
 
-        <div className="form-group">
-           <label htmlFor="isActive">IsActive : </label>
-            <input type="checkbox" id="isActive" name="isActive" value={certificate.isActive} checked={certificate.isActive} onChange={handleChange}/>
+        <div className="form-group  mt-3">
+           <label className="mx-2" htmlFor="isActive">Is Active</label>
+            <input type="checkbox" className="form-check-input" id="isActive" name="isActive" value={certificate.isActive} checked={certificate.isActive} onChange={handleChange}/>
         </div>
         
         <button type="submit" className="btn btn-primary">
           Edit
         </button>
       </form>
-     </>
+     </div>
   );
 }
 

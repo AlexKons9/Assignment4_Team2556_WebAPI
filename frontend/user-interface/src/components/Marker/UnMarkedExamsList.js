@@ -41,36 +41,38 @@ const UnMarkedExamsList = () => {
     }
 
     return (
-        <Container>
+        <div className="container-lg">
+            <h2 className="mb-5">Unmarked Exams</h2>
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
-                <Table>
+                <table className="table">
                     <thead>
                         <tr>
-                            <th style={{ whiteSpace: "nowrap" }}>Candidate Exam ID</th>
-                            <th style={{ whiteSpace: "nowrap" }}>Certificate Type</th>
-                            <th style={{ whiteSpace: "nowrap" }}>Candidate First Name</th>
-                            <th style={{ whiteSpace: "nowrap" }}>Candidate Last Name</th>
-                            <th style={{ whiteSpace: "nowrap" }}>Exam Date</th>
-                            <th style={{ whiteSpace: "nowrap" }}>Marked?</th>
+                            <th>Candidate Exam ID</th>
+                            <th>Certificate Type</th>
+                            <th>Candidate First Name</th>
+                            <th>Candidate Last Name</th>
+                            <th>Exam Date</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {candidateExams.map(candidateExam => (
                             <tr key={candidateExam.candidateExamId}>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidateExamId}</td>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.exam.certificate.title}</td>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidate.firstName}</td>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidate.lastName}</td>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.examDate.toLocaleString()}</td>
-                                <td style={{ whiteSpace: "nowrap" }}>{candidateExam.isMarked.toString()}</td>
-                                <td><Button
-                                    className="btn btn-secondary"
-                                    onClick={() => handleReview(candidateExam.candidateExamId)}>Review Exam</Button></td>
+                                <td>{candidateExam.candidateExamId}</td>
+                                <td>{candidateExam.exam.certificate.title}</td>
+                                <td>{candidateExam.candidate.firstName}</td>
+                                <td>{candidateExam.candidate.lastName}</td>
+                                <td>{new Date(candidateExam.examDate).toDateString()}</td>
+                                <td>{candidateExam.isMarked == true ? "Marked" : "Unmarked"}</td>
+                                <td><button
+                                    className="btn btn-outline-success"
+                                    onClick={() => handleReview(candidateExam.candidateExamId)}>Review Exam</button></td>
                             </tr>
                         ))}
                     </tbody>
-                </Table>}
-        </Container>
+                </table>}
+        </div>
     )
 }
 
