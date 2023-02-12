@@ -6,7 +6,7 @@ import image4 from '../img/undraw_online_test_re_kyfx.svg'
 import image5 from '../img/undraw_proud_coder_re_exuy (1).svg'
 import image6 from '../img/undraw_pair_programming_re_or4x.svg'
 
-const Frontpage = () => {
+const Homepage = () => {
     return (
         <div className="">
             {/* Main */}
@@ -85,4 +85,4 @@ const Frontpage = () => {
     )
 }
 
-export default Frontpage;
+export default Homepage;

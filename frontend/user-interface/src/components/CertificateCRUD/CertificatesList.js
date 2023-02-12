@@ -95,11 +95,10 @@ function CertificatesList() {
           Create Certificate
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Description</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

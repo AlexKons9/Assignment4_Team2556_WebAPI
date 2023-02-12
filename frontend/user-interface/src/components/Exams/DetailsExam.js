@@ -83,7 +83,7 @@ function DetailsExam() {
             to={
               auth?.roles == "Admin"
                 ? "../AdminUI/Exams"
-                : "../QualityControlUI/ExamList"
+                : "/QualityControlUI/ExamList"
             }
           >
             Back to List

@@ -63,7 +63,7 @@ const CandidateExamsList = () => {
             <h3>Unmarked Candidate Exams List</h3>
             <hr />
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
-                <table className="table table-centered">
+                <table className="table table-centered table-striped">
                     <thead className="align-middle">
                         <tr>
                             <th>Candidate Exam ID</th>

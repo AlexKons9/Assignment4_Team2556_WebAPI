@@ -44,7 +44,7 @@ const UnMarkedExamsList = () => {
         <div className="container-lg">
             <h2 className="mb-5">Unmarked Exams</h2>
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
-                <table className="table">
+                <table className="table table-striped">
                     <thead>
                         <tr>
                             <th>Candidate Exam ID</th>

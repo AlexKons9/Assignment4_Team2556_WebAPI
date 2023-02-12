@@ -40,13 +40,12 @@ function CertificatesListQC() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Certificates List</h1>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Description</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +54,7 @@ function CertificatesListQC() {
               <td>{htmlParse(certificate.title)}</td>
               <td>
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(certificate.certificateId)}
                 >
                   Details
