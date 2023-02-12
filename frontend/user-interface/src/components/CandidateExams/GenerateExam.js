@@ -73,8 +73,8 @@ function GenerateExam() {
                                     <div>
                                         <table className="table table-striped">
                                             <tbody>
-                                                <tr key={option.optionId} className="text-start">
-                                                    <td scope="row" >
+                                                <tr key={option.optionId} >
+                                                    <td className="text-start" scope="row" >
                                                         <input
                                                             className="form-check-input"
                                                             type="radio"

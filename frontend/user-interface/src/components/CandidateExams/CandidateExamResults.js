@@ -8,56 +8,60 @@ function CandidateExamResults() {
   console.log(examResults);
 
   return (
-    <div className="container col-10">
-      <h1>Exam Results</h1>
-      <hr />
+    <div className="container">
+      <h1 className="mt-4">Exam Results</h1>
 
-      <div>
-        <dl className="row">
-          <dt className="col-sm-2">Marks per topic</dt>
-          <dd className="col-sm-10">
-            {examResults.resultsPerTopic.map((result, index) => (
-              <div key={index}>
-                <h6>{result[0]}</h6>
-                <div>
-                  {result[1]}/{result[2]} Correct Answers
+      <table className="table table-bordered ">
+        <tbody>
+
+          <tr>
+            <th className="align-middle col-6">Marks per topic</th>
+            <td className="col-6">
+              {examResults.resultsPerTopic.map((result, index) => (
+                
+                <div className="align-middle" key={index}>
+                  <h6 >{result[0]}</h6>
+                  <div>
+                    {result[1]}/{result[2]} Correct Answers
+                  </div>
                 </div>
-              </div>
-            ))}
-          </dd>
+              ))}
+            </td>
+          </tr>
 
-          <hr />
+          <tr>
+            <th className="col-6">Exam Score</th>
+            <td className="col-6">{examResults.examScore}</td>
+          </tr>
 
-          <dt className="col-sm-2">Exam Score</dt>
-          <dd className="col-sm-10">{examResults.examScore}</dd>
+          <tr>
+            <th className="col-6">Percentage Score</th>
+            <td className="col-6">{examResults.percentageScore}</td>
+          </tr>
 
-          <hr />
+          <tr>
+            <th className="col-6">Test Result</th>
+            <td className="col-6">{examResults.testResult}</td>
+          </tr>
 
-          <dt className="col-sm-2">Percentage Score</dt>
-          <dd className="col-sm-10">{examResults.percentageScore}</dd>
+          <tr>
+            <th className="col-6">Number Of Awarded Marks</th>
+            <td className="col-6">{examResults.numberOfAwardedMarks}</td>
+          </tr>
 
-          <hr />
 
-          <dt className="col-sm-2">Test Result</dt>
-          <dd className="col-sm-10">{examResults.testResult}</dd>
+          <tr>
+            <th className="col-6">Number Of Possible Marks</th>
+            <td className="col-6">{examResults.numberOfPossibleMakrs}</td>
+          </tr>
 
-          <hr />
+          <tr>
+            <th className="col-6">Examination Date</th>
+            <td className="col-6">{new Date(examResults.examDate).toDateString()}</td>
+          </tr>
 
-          <dt className="col-sm-2">Number Of Awarded Marks</dt>
-          <dd className="col-sm-10">{examResults.numberOfAwardedMarks}</dd>
-
-          <hr />
-
-          <dt className="col-sm-2">Number Of Possible Marks</dt>
-          <dd className="col-sm-10">{examResults.numberOfPossibleMakrs}</dd>
-
-          <hr />
-
-          <dt className="col-sm-2">Examination Date</dt>
-          <dd className="col-sm-10">{examResults.examDate}</dd>
-        </dl>
-        <hr />
-      </div>
+        </tbody>
+      </table>
       <div>
         <Link className="btn btn-secondary" to="/">Back to Home</Link>
       </div>
