@@ -31,7 +31,8 @@ namespace Assignment4_Team2556_WebAPI.Data.Repositories
 
         public async Task<Exam?> GetAsync(int? id)
         {
-            var exam = await _context.Exams.FindAsync(id);
+            var exam = await _context.Exams.Where(x => x.ExamId == id)
+                                           .Include(v => v.Certificate).FirstAsync();
             return exam;
         }
 

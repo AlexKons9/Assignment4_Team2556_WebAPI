@@ -1,6 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import {  useEffect, useState } from "react";
-import axios from "axios";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import {  useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function EditCandidate() {
@@ -37,22 +36,9 @@ function EditCandidate() {
     };
 
     return (
-        <>
-        <h1>Edit Candidate</h1>
-            <form onSubmit={handleSubmit} className="row g-3 form-container">
-                {/* <input type="hidden" name="username" value={candidate.userName} /> */}
-                {/* <div classNameName="form-group">
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                        classNameName="form-control"
-                        id="firstName"
-                        name="firstName"
-                        value={candidate.firstName}
-                        onChange={handleChange}
-                        required>
-                        
-                    </input>
-                </div> */}
+        <div className="container">
+        <h2>Edit Candidate</h2>
+            <form onSubmit={handleSubmit} className="row g-3 mt-3 form-container">
                     <div className="col-md-4">
                         <label for="name" className="form-label">First Name:</label>
                         <input type="text" id="name" name="firstName" className="form-control"  value={candidate.firstName}
@@ -141,12 +127,13 @@ function EditCandidate() {
                         <input id="mobile_number" name="mobileNumber" type="tel" className="form-control" value={candidate.mobileNumber} onChange={handleChange}></input>
                     </div> 
                    
-                    <div className="mx-auto">
-                        <button type="submit" className="btn btn-primary col-md-1">Edit</button>
+                    <div className="d-flex">
+                        <button type="submit" className="btn btn-primary align-self-start">Edit</button>
+                        <Link id="backButton" className='btn btn-secondary align-self-start'  to={"../AdminUI/Candidates"}>Back to List</Link>
                     </div>
                 </form>
 
-        </>
+        </div>
     );
 }
 

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate, Link} from "react-router-dom";
+
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import htmlParse from "html-react-parser";
 import DualListBox from "react-dual-listbox";
+import "../GenericCss/Buttons.css";
 import "react-dual-listbox/lib/react-dual-listbox.css";
 import "react-dual-listbox/src/scss/react-dual-listbox.scss";
 
@@ -11,7 +12,9 @@ function EditExams() {
   const location = useLocation();
   const [count, setCount] = useState(0);
   const [exam, setExam] = useState(location.state.exam);
-  const [examQuestions, setExamQuestions] = useState(location.state.examQuestions); 
+  const [examQuestions, setExamQuestions] = useState(
+    location.state.examQuestions
+  );
   const [questions, setQuestions] = useState([]);
   const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
@@ -31,27 +34,10 @@ function EditExams() {
     fetchData();
   }, []);
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setExam({ ...exam, [name]: value });
   };
-
-
-  // const handleBoxChange = (event) => {
-  //   const { value, checked } = event.target;
-  //   if (checked) {
-  //     setExamQuestions((pre) => [...pre, value]);
-  //     setCount(count + 1);
-  //   } else {
-  //     setExamQuestions((pre) => {
-  //       return [...pre.filter((skill) => skill !== value)];
-  //     });
-  //     setCount(count - 1);
-  //   }
-  // };
-
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,7 +65,7 @@ function EditExams() {
     if (question.topic.certificateId === exam.certificateId) {
       filteredQuestions.push(question);
     }
-  };
+  }
 
   // create an object with topics as keys and arrays of questions as values
   const groupedQuestions = filteredQuestions.reduce((acc, question) => {
@@ -89,26 +75,26 @@ function EditExams() {
     }
     acc[topicDescription].push(question);
     return acc;
-    }, {});
-  
-    const options = Object.keys(groupedQuestions).map((topic) => {
-      const topicQuestions = groupedQuestions[topic];
-      const topicOptions = topicQuestions.map((question) => ({
-        value: question.questionId,
-        label: htmlParse(question.descriptionStem),
-      }));
-      return { label: topic, options: topicOptions };
-    });
-  
+  }, {});
 
+  const options = Object.keys(groupedQuestions).map((topic) => {
+    const topicQuestions = groupedQuestions[topic];
+    const topicOptions = topicQuestions.map((question) => ({
+      value: question.questionId,
+      label: htmlParse(question.descriptionStem),
+    }));
+    return { label: topic, options: topicOptions };
+  });
 
   console.log(examQuestions);
   return (
-    <>
+    <div className="container-xl">
       <h1>Edit Exam</h1>
       <form onSubmit={handleSubmit} className="row g-3 form-container">
-        <div className="form-group">
-          <label htmlFor="certificateId">Certificates</label>
+        <div className="form-group  mt-4">
+          <label className="pb-2" htmlFor="certificateId">
+            Certificates
+          </label>
           <select
             className="form-control"
             id="certificateId"
@@ -131,8 +117,10 @@ function EditExams() {
           </select>
         </div>
         <div className="form-group">
-          <h3>Please select exam questions again:</h3>
-          
+          <label className="form-label pb-2">
+            Edit Exam Questions
+          </label>
+
           <DualListBox
             options={options}
             selected={examQuestions}
@@ -213,7 +201,7 @@ function EditExams() {
           />
         </div>
         <div className="col-md-6">
-          <label for="passMark" className="form-label">
+          <label for="passMark" className="form-label pb-2">
             {" "}
             Pass Mark :
           </label>
@@ -227,7 +215,7 @@ function EditExams() {
           ></input>
         </div>
         <div className="col-md-6">
-          <label for="maximumScore" className="form-label">
+          <label for="maximumScore" className="form-label pb-2">
             {" "}
             Maximum Mark :
           </label>
@@ -241,11 +229,20 @@ function EditExams() {
           ></input>
         </div>
 
-        <button type="submit" className="btn btn-primary col-md-1 mx-auto">
-          Edit
-        </button>
+        <div className="d-flex">
+          <button type="submit" className="btn btn-primary align-self-start">
+            Edit
+          </button>
+          <Link
+            id="backButton"
+            className="btn btn-secondary align-self-start"
+            to={"../AdminUI/Exams"}
+          >
+            Back to List
+          </Link>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 export default EditExams;

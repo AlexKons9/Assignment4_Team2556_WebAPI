@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 //
@@ -22,43 +23,44 @@ function Register() {
     };
 
     return (
-        <>
             <div className="container">
-                <div className="row">
-                    <div className="col-md-4 col-md-offset-4">
+                <div>
+                    <div>
                         <form onSubmit={handleSubmit(onSubmit)} className="registrationForm">
                             <h2>Registration form</h2>
                             {auth?.roles == "Admin" ? <p></p> : <p>Sign up Today and get 100 credits FREE!</p>}
-                            <div className="form-group">
-                                <label htmlFor="firstname">First Name</label>
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="firstname">First Name</label>
                                 <input className="form-control" {...register("firstname")} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="lastname">Last Name</label>
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="lastname">Last Name</label>
                                 <input className="form-control" {...register("lastname")} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="username">User Name</label>
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="username">User Name</label>
                                 <input className="form-control" {...register("username")} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="password">Password</label>
                                 <input className="form-control" {...register("password")} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input className="form-control" {...register("email")} />
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="email">Email</label>
+                                <input className=" form-control" {...register("email")} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="phonenumber">Phone Number</label>
+                            <div className="form-group mt-3">
+                                <label className="pb-2" htmlFor="phonenumber">Phone Number</label>
                                 <input className="form-control" {...register("phonenumber")} />
                             </div>
+                            <div>
                             <input type="submit" className="btn btn-primary" />
+                            {auth?.roles == "Admin" ? <Link id="backButton" className='btn btn-secondary align-self-start'  to={"../AdminUI/Candidates"}>Back to List</Link> : <Link></Link>}
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </>
     );
 }
 

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
-import htmlParse from "html-react-parser";
 import DeleteQuestion from "../Question/DeleteQuestion";
+import "../Question/QuestionsList.css";
 
 
 function ExamsList() {
@@ -54,10 +53,11 @@ function ExamsList() {
     console.log(examId);
     try {
       const response = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
-      console.log(response.data);
       const examQuestionDetails = response.data;
+      const response2 = await axiosPrivate.get(`/api/Exams/${examId}`);
+      const exam = response2.data;
       navigate("/Exams/Details", {
-        state: { examQuestionDetails: examQuestionDetails },
+        state: { exam: exam, examQuestionDetails: examQuestionDetails },
       });
     } catch (error) {
       console.error(error);
@@ -67,7 +67,7 @@ function ExamsList() {
 
   const handleEdit = async (examId) => {
     try {
-     const response = await axiosPrivate.get(`/api/Exams/${examId}`);
+      const response = await axiosPrivate.get(`/api/Exams/${examId}`);
       const exam = response.data;
       const response2 = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
       
@@ -84,7 +84,7 @@ function ExamsList() {
   };
 
 return (
-    <div>
+    <div className="container-xl text-center">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
@@ -94,41 +94,40 @@ return (
         ></DeleteQuestion>
         <h1>Exams List</h1>
       <p>
-        {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="Create">
-          Create New Exam
+        <Link className="btn btn-outline-primary" to="Create">
+          Create New
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Certificate Title</th>
-            <th></th>
+            <th scope="col">Description</th>
+            <th scope="col">Certificate Title</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {exams.map((exam,i) => (
             <tr key={exam.examId}>
-              <td><h5>Exam {exam.examId}</h5></td>
-              <td>{exam.certificate.title}</td>
-              <td>
+              <td scope="row"><h6>Exam {exam.examId}</h6></td>
+              <td scope="row"><h6>{exam.certificate.title}</h6></td>
+              <td id="table-button">
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-outline-secondary"
                 onClick={() => handleEdit(exam.examId)}
                 >
                   Edit
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                 onClick={() => handleDetails(exam.examId)}
                 >
                   Details
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     showConfirmPopupHandler(exam.examId);
                   }}
