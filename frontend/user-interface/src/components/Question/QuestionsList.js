@@ -82,11 +82,9 @@ function QuestionsList() {
         closeConfirmPopupHandler={closeConfirmPopupHandler}
         deleteConfirmHandler={deleteConfirmHandler}
       ></DeleteQuestion>
-      <h1>Question List</h1>
-
+      <h1>Questions List</h1>
       <p>
-        {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-outline-primary" to="CreateQuestionForm">
+        <Link className="btn btn-outline-primary" to="../AdminUI/CreateQuestionForm">
           Create New
         </Link>
       </p>
@@ -99,7 +97,7 @@ function QuestionsList() {
         </thead>
         <tbody >
           {questions.map((question) => (
-            <tr id="tableRow" key={question.questionId}>
+            <tr key={question.questionId}>
               <td scope="row" id="description" >{htmlParse(question.descriptionStem)}</td>
               <td id="table-button">
                 <button

@@ -2,6 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import React from 'react';
 import htmlParse from 'html-react-parser';
 import useAuth from "../../hooks/useAuth";
+import './DetailsQuestion.css';
 
 function DetailsQuestion() {
   var count = 1;
@@ -16,8 +17,8 @@ function DetailsQuestion() {
       <h1>Details</h1>
 
       <div>
-        <h4 className="mt-5">Question</h4>
-        <table className="table table-bordered table-centered">
+        <h5 id="headers" className="mt-5">Question</h5>
+        <table className="table table-bordered ">
           <tbody>
             <tr>
               <th className="col-6">Description Stem</th>
@@ -28,16 +29,10 @@ function DetailsQuestion() {
               <td>{question.topic.topicDescription}</td>
             </tr>
           </tbody>
-          {/* <dl className="row">
-            <dt className="col-sm-2">Description Stem</dt>
-            <dd className="col-sm-10">{htmlParse(question.descriptionStem)}</dd>
-            <dt className="col-sm-2">Topic</dt>
-            <dd className="col-sm-10">{question.topic.topicDescription}</dd>
-          </dl> */}
         </table>
 
-        <h4 className="mt-5">Options:</h4>
-        <table className="table table-bordered table-centered">
+        <h5 id="headers" className="mt-5">Options</h5>
+        <table className="table table-bordered ">
           <tbody>
             {question.options.map((option) => (
               <tr key={option.optionId}>
@@ -53,16 +48,6 @@ function DetailsQuestion() {
             </tr>
           </tbody>
         </table>
-        {/* <table className="table table-bordered">
-          <tbody>
-            <tr>
-              <th>Correct Answer</th>
-              <td>
-                Option {correctAnswerIndex + 1}
-              </td>
-            </tr>
-          </tbody>
-        </table> */}
 
         <div>
           <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/QuestionList" : "../QualityControlUI/ExamList"}>Back to List</Link>

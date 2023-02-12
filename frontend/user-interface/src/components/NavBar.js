@@ -42,7 +42,7 @@ function NavBar() {
                             ?
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/" >Home</Link>
+                                    <Link className="nav-link text-light" to="/" >Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link text-light" to="AdminUI/QuestionList" >Questions</Link>
@@ -128,10 +128,11 @@ function NavBar() {
 
                 {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
                 {auth?.userName ? (
+                    // navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <p className="nav-link text-light">Welcome {auth.userName} (role:{auth.roles})</p>
+                                <span className="nav-link text-light">Welcome {auth.userName}</span> {/*(role:{auth.roles})*/}
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-light" onClick={() => logout()}>Logout</Link>

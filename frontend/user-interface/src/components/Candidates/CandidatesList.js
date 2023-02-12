@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
-import DeleteQuestion from "../Question/DeleteQuestion"
+import DeleteQuestion from "../Question/DeleteQuestion";
+import "../Question/DetailsQuestion.css";
 
 function CandidatesList() { 
     const [candidateList, setCandidateList] = useState([]);
@@ -70,7 +71,7 @@ function CandidatesList() {
       };    
 
     return(
-    <div>
+    <div className="container-xl text-center">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
@@ -80,46 +81,45 @@ function CandidatesList() {
       ></DeleteQuestion>
     <h1>Candidates List</h1>
     <p>
-        {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="Register">
-          Create New Candidate
+        <Link className="btn btn-outline-primary" to="Register">
+          Create New
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>First Name</th>    
-            <th>Last Name</th>
-            <th></th>
+            <th scope="col">First Name</th>    
+            <th scope="col">Last Name</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {candidateList.map((candidate,i) => (
             <tr key={candidate.Id}>
-              <td>{candidate.firstName}</td>
-              <td>{candidate.lastName}</td>
+              <td scope="row"><h6>{candidate.firstName}</h6></td>
+              <td scope="row"><h6>{candidate.lastName}</h6></td>
               <td>
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-outline-secondary"
                   onClick={() => handleEdit(i)}
                 >
                   Edit
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(i)}
                 >
                   Details
-                </button>{""}
-                |
+                </button>{" "}
+                
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     showConfirmPopupHandler(candidateList[i].userName)}}
                 >
                   Delete
-                </button>
+                </button>{" "}
               </td>
             </tr>
           ))}

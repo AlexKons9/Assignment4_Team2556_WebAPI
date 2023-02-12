@@ -5,8 +5,7 @@ import RequireAuth from './components/Security/RequireAuth';
 //Public components
 
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import CreateQuestionForm from './components/Question/CreateQuestionForm';
-import EditQuestionForm from './components/Question/EditQuestionForm';
+
 import DetailsQuestion from './components/Question/DetailsQuestion';
 import CreateOptionsForm from './components/Option/CreateOptionsForm';
 import EditOptionsForm from './components/Option/EditOptionsForm';
@@ -27,8 +26,8 @@ import Unauthorized from './components/Security/Unauthorized';
 import PersistLogin from './components/Security/PersistLogin';
 
 //Admin components
-//import CreateQuestionForm from './components/CreateQuestionForm';
-//import CreateOptionsForm from './components/CreateOptionsForm';
+import CreateQuestionForm from './components/Question/CreateQuestionForm';
+import EditQuestionForm from './components/Question/EditQuestionForm';
 import AdminUI from './components/AdminUI';
 import AssignMarker from './components/Admin/AssignMarker'
 import CandidateList from './components/Candidates/CandidatesList';

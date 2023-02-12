@@ -70,11 +70,12 @@ const handleSubmit = async (event) => {
 };
 
   return (
-    <>
+    <div className="container">
+      <h2>Edit Options</h2>
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="questionId" value={optionDTO.questionId} />
-        <div className="form-group">
-          <label>Option 1</label>
+        <div className="form-group mt-4">
+          <label className="pb-2">Option 1</label>
           <MyCKEditor
             className="form-control"
             type="text"
@@ -83,8 +84,8 @@ const handleSubmit = async (event) => {
             onChange={editorHandleChangeDesc1}
           />
         </div>
-        <div className="form-group">
-          <label>Option 2</label>
+        <div className="form-group mt-4">
+          <label className="pb-2">Option 2</label>
           <MyCKEditor
             className="form-control"
             type="text"
@@ -93,8 +94,8 @@ const handleSubmit = async (event) => {
             onChange={editorHandleChangeDesc2}
           />
         </div>
-        <div className="form-group">
-          <label>Option 3</label>
+        <div className="form-group mt-4">
+          <label className="pb-2">Option 3</label>
           <MyCKEditor
             className="form-control"
             type="text"
@@ -103,8 +104,8 @@ const handleSubmit = async (event) => {
             onChange={editorHandleChangeDesc3}
           />
         </div>
-        <div className="form-group">
-          <label>Option 4</label>
+        <div className="form-group mt-4">
+          <label className="pb-2">Option 4</label>
           <MyCKEditor
             className="form-control"
             type="text"
@@ -113,8 +114,8 @@ const handleSubmit = async (event) => {
             onChange={editorHandleChangeDesc4}
           />
         </div>
-        <div className="form-group">
-          <label>Correct Answer</label>
+        <div className="form-group mt-4">
+          <label className="pb-2">Correct Answer</label>
           <select
             className="form-control"
             name="correctAnswer"
@@ -130,11 +131,13 @@ const handleSubmit = async (event) => {
             <option value={4}>Option 4</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Edit
-        </button>
+        <div className="d-flex">
+          <button type="submit" className="btn btn-primary align-self-start">
+            Edit
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

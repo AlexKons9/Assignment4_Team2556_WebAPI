@@ -1,4 +1,4 @@
-button {
+.buttonSpace {
     margin-top: 2rem;
 }
 
@@ -6,16 +6,3 @@ button {
     text-align: center;
     vertical-align: middle;
 }
-
-#tableRow {
-    
-}
-
-/* #table-button {
-    text-align: right;
-    margin-right: 10%;
-}
-
-.btn {
-    vertical-align: middle;
-} */
