@@ -24,6 +24,7 @@ import Layout from './components/Layout'
 import Register from './components/Security/Register'
 import Unauthorized from './components/Security/Unauthorized';
 import PersistLogin from './components/Security/PersistLogin';
+import Frontpage from './components/Frontpage'
 
 //Admin components
 import CreateQuestionForm from './components/Question/CreateQuestionForm';
@@ -79,6 +80,7 @@ function App() {
                 {/* Public Routes */}
                 <Route path="Register" element={<Register />} />
                 {/* <Route path="Home" element={<Home />} /> */}
+                    <Route exact path="Frontpage" element={<Frontpage />} />
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
