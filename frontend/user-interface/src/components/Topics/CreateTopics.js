@@ -67,13 +67,13 @@ function CreateTopics() {
               </label>
               <div className="row">
                 <input type="text" className="form-control mb-1" value={topic} onChange={(e) => handleTopic(e, index)} />
-                <p type="button" className="btn btn-outline-danger" onClick={() => handleRemoveTopic(index)}>
+                <p type="button" className="btn btn-danger" onClick={() => handleRemoveTopic(index)}>
                   Remove Topic
                 </p>
               </div>
             </div>
           ))}
-          <p type="button" className="btn btn-outline-success" onClick={handleAddTopic}>
+          <p type="button" className="btn btn-success" onClick={handleAddTopic}>
             Add Topic
           </p>
         </div>

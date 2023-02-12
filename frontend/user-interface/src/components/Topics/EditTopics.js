@@ -107,7 +107,7 @@ function EditTopics() {
           ))}
           <button
             type="button"
-            className="btn btn-outline-success"
+            className="btn btn-success"
             onClick={handleAddTopic}
           >
             {" "}

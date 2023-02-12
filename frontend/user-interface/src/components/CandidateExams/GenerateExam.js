@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import "./GenerateExam.css";
+import htmlParse from 'html-react-parser';
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import SuccessModal from "../Modals/SuccessModal";
@@ -65,7 +66,7 @@ function GenerateExam() {
                         {examForm.questions.map((question, i) => (
 
                             <div className="mt-5"  key={question.questionId}>
-                                <h5 id="questionDesc">{i + 1}. {question.descriptionStem}</h5>
+                                <h5 id="questionDesc">{i + 1}. {htmlParse(question.descriptionStem)}</h5>
 
 
                                 <hr />
@@ -85,7 +86,7 @@ function GenerateExam() {
                                                         {" "}
                                                         {/* <span>&nbsp;</span> */}
                                                         <span>{arrayABCD[j]}{") "} &nbsp;</span>
-                                                        <span>{option.description}</span>
+                                                        <span>{htmlParse(option.description)}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
