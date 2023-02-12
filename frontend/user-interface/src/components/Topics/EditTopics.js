@@ -67,7 +67,7 @@ function EditTopics() {
     <div className="container w-25">
       <form onSubmit={handleSubmit}>
         {" "}
-        <h1>Edit Certificate Topics</h1>{" "}
+        <h2  className="mb-5">Edit Certificate Topics</h2>{" "}
         <input type="hidden" value={certificateId} />{" "}
         <div>
           {" "}

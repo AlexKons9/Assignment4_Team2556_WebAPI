@@ -58,22 +58,22 @@ const CandidateExamsList = () => {
 
 
     return (
-        <div className="container-xxl">
+        <div className="mx-5">
             <h1>Assign Markers</h1>
             <h3>Unmarked Candidate Exams List</h3>
             <hr />
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
-                <table className="table">
-                    <thead>
+                <table className="table table-centered">
+                    <thead className="align-middle">
                         <tr>
                             <th>Candidate Exam ID</th>
                             <th>Certificate Type</th>
                             <th>Candidate First Name</th>
                             <th>Candidate Last Name</th>
                             <th>Exam Date</th>
-                            <th>Marked?</th>
-                            <th>Assigned to marker</th>
+                            <th>Marker Id</th>
                             <th>Select/Change Marker</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,12 +83,11 @@ const CandidateExamsList = () => {
                                 <td className="col-1">{candidateExam.exam.certificate.title}</td>
                                 <td className="col-1">{candidateExam.candidate.firstName}</td>
                                 <td className="col-1">{candidateExam.candidate.lastName}</td>
-                                <td className="col-1">{candidateExam.examDate.toLocaleString()}</td>
-                                <td className="col-1">{candidateExam.isMarked.toString()}</td>
+                                <td className="col-1">{new Date(candidateExam.examDate).toDateString()}</td> 
                                 <td className="col-2">{candidateExam.markerId}</td>
                                 <td className="col-2">
                                     <select className="form-select" onChange={handleMarkerSelect}>
-                                        <option value="">Select a marker</option>
+                                        <option value="">Select/Change marker</option>
                                         {markers.map(marker => (
                                             <option key={marker.id} value={marker.id}>
                                                 {marker.firstName} {marker.lastName}

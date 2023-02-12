@@ -36,6 +36,7 @@ const MarkedExamsList = () => {
 
     return (
         <div className="container-lg">
+        <h2 className="mb-5">Marked Exams</h2>
             {candidateExams.length === 0 ? <div>You do not have any marked exams.</div> :
                 <table className="table">
                     <thead>
@@ -45,7 +46,7 @@ const MarkedExamsList = () => {
                             <th>Candidate First Name</th>
                             <th>Candidate Last Name</th>
                             <th>Exam Date</th>
-                            <th>Marked?</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,8 +57,8 @@ const MarkedExamsList = () => {
                                 <td>{candidateExam.exam.certificate.title}</td>
                                 <td>{candidateExam.candidate.firstName}</td>
                                 <td>{candidateExam.candidate.lastName}</td>
-                                <td>{candidateExam.examDate.toLocaleString()}</td>
-                                <td>{candidateExam.isMarked.toString()}</td>
+                                <td>{new Date(candidateExam.examDate).toDateString()}</td>
+                                <td>{candidateExam.isMarked == true ? "Marked" : "Unmarked"}</td>
                                 <td><button
                                     className="btn btn-outline-success"
                                     onClick={() => handleReview(candidateExam.candidateExamId)}>View Exam</button></td>

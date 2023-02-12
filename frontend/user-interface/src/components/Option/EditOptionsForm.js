@@ -61,7 +61,7 @@ const handleSubmit = async (event) => {
     try {
         const response = await axiosPrivate.put(`/api/Options`, optionDTO);
         alert("Options edited successfully!");
-        navigate('/AdminUI');
+        navigate('AdminUI');
     } 
     catch (error) {
         console.error(error);

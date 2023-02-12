@@ -42,7 +42,7 @@ function CreateTopics() {
   return (
     <div className="container w-25">
       <form onSubmit={handleSubmit}>
-        <h1>Create Certificate</h1>
+        <h2>Create Certificate</h2>
         <h3 className="mb-4">Add Topics</h3>
         <input type="hidden" value={certificateId} />
         <div>

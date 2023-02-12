@@ -42,6 +42,7 @@ const UnMarkedExamsList = () => {
 
     return (
         <div className="container-lg">
+            <h2 className="mb-5">Unmarked Exams</h2>
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
                 <table className="table">
                     <thead>
@@ -51,7 +52,7 @@ const UnMarkedExamsList = () => {
                             <th>Candidate First Name</th>
                             <th>Candidate Last Name</th>
                             <th>Exam Date</th>
-                            <th>Marked?</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -62,8 +63,8 @@ const UnMarkedExamsList = () => {
                                 <td>{candidateExam.exam.certificate.title}</td>
                                 <td>{candidateExam.candidate.firstName}</td>
                                 <td>{candidateExam.candidate.lastName}</td>
-                                <td>{candidateExam.examDate.toLocaleString()}</td>
-                                <td>{candidateExam.isMarked.toString()}</td>
+                                <td>{new Date(candidateExam.examDate).toDateString()}</td>
+                                <td>{candidateExam.isMarked == true ? "Marked" : "Unmarked"}</td>
                                 <td><button
                                     className="btn btn-outline-success"
                                     onClick={() => handleReview(candidateExam.candidateExamId)}>Review Exam</button></td>

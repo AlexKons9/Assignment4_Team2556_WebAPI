@@ -92,7 +92,7 @@ function CertificatesList() {
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
         <Link className="btn btn-outline-primary" to="Create">
-          Create New Certificate
+          Create Certificate
         </Link>
       </p>
       <table className="table">
