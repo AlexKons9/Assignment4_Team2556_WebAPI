@@ -90,7 +90,7 @@ function App() {
                     {/* ONLY Admin Routes */}
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route exact path="AdminUI/QuestionList" element={<QuestionsList />} />
-                        <Route exact path="AdminUI/CreateQuestionForm" element={<CreateQuestionForm />} />
+                        <Route exact path="AdminUI/QuestionList/Create" element={<CreateQuestionForm />} />
                         <Route exact path="AdminUI/EditQuestionForm" element={<EditQuestionForm />} />
                         {/* <Route exact path="AdminUI/DetailsQuestion" element={<DetailsQuestion />} /> */}
                         <Route exact path="AdminUI/CreateOptionsForm" element={<CreateOptionsForm />} />

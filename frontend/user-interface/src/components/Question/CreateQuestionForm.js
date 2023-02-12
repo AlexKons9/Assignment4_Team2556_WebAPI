@@ -40,10 +40,10 @@ function CreateQuestionForm() {
 
   };
 
-  const myCKEditorHandleChange = (event,editor) => {
-    const data = editor.getData();
-    setQuestion({ ...question, descriptionStem: data });
-  };
+  // const myCKEditorHandleChange = (event,editor) => {
+  //   const data = editor.getData();
+  //   setQuestion({ ...question, descriptionStem: data });
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,8 +64,7 @@ function CreateQuestionForm() {
       alert("Error creating question");
     }
   };
-  console.log(certificates);
-  console.log(topics);
+  console.log(question.descriptionStem);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -73,12 +72,12 @@ function CreateQuestionForm() {
         <div className="form-group">
           <label htmlFor="descriptionStem">Description Stem</label>
           <MyCKEditor
-            type="text"
+            //type="text"
             className="form-control"
             id="descriptionStem"
             name="descriptionStem"
-            value={question.descriptionStem}
-            onChange={myCKEditorHandleChange}
+            //value={question.descriptionStem}
+           // onChange={myCKEditorHandleChange}
             required
           />
         </div>

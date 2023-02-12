@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^36.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-react": "^5.0.6",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -12,6 +12,7 @@
     "axios": "^1.2.5",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
+    "ckeditor5-classic-plus": "^35.0.1",
     "html-react-parser": "^3.0.8",
     "install": "^0.13.0",
     "jwt-decode": "^3.1.2",

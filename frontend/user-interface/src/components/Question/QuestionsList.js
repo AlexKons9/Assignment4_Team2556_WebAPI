@@ -87,7 +87,7 @@ function QuestionsList() {
 
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="CreateQuestionForm">
+        <Link className="btn btn-primary" to="Create">
           Create New
         </Link>
       </p>
