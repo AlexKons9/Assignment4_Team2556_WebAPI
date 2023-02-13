@@ -20,7 +20,7 @@ function SchedulerMenu() {
     const onChangeHandlerVoucher = (event) => {
         const { name, value } = event.target;
         setVoucherDescription({ ...voucherDescription, [name]: value });
-      };
+    };
 
     const showModalHandler = () => {
         setModalSuccess(true);
@@ -36,52 +36,54 @@ function SchedulerMenu() {
         try {
             console.log(voucherDescription.voucher);
 
-          const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
-          const voucher = answer.data;
-          console.log(JSON.stringify(voucher));
-          const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}?examDate=${examDate.date}`, voucher);
-          console.log(response.data);
-    
-          const candidateExamId = response.data.candidateExamId;
-          const questionsList = response.data.questions;
-    
-          voucher.isClaimed = true;
-          await axiosPrivate.put(`/api/Vouchers/${voucher.voucherId}`, voucher);
-          showModalHandler();
+            const answer = await axiosPrivate.get(`/api/Vouchers/GetVoucher/${voucherDescription.voucher}`);
+            const voucher = answer.data;
+            const response = await axiosPrivate.post(`/api/CandidateExams/InsertVoucher/${userName}?examDate=${examDate.date}`, voucher);
+
+            const candidateExamId = response.data.candidateExamId;
+            const questionsList = response.data.questions;
+
+            voucher.isClaimed = true;
+            await axiosPrivate.put(`/api/Vouchers/${voucher.voucherId}`, voucher);
+            showModalHandler();
 
         } catch (error) {
-          console.error(error);
-          alert("Date or Voucher are incorrect!");
+            console.error(error);
+            alert("Date or Voucher are incorrect!");
         }
-      };
+    };
 
 
     return (
-        <div className="">
-            <h1>Exam Scheduler Menu</h1>
+        <div>
+            <h1 className="mb-5" >Exam Scheduler Menu</h1>
             <SuccessModal
-            show={modalSuccess}
-            body={`You have scheduled the exam successfully!! 
+                show={modalSuccess}
+                body={`You have scheduled the exam successfully!! 
                   Go to "Exams/Upcoming Exams" to view your booked examinations!`}
-            closeModalHandler={closeModalHandler}
+                closeModalHandler={closeModalHandler}
             ></SuccessModal>
-            <form onSubmit={handleSubmit}>
+            <div className="container w-25">
+                <form className="row g-3 form-container" onSubmit={handleSubmit}>
 
-                <div className="form-group ">
-                    <label>Insert Voucher Code</label>
-                    <input onChange={onChangeHandlerVoucher} type="text" id="voucher" name="voucher"></input>
-                </div>
+                    <div className="form-group mt-2">
+                        <label className="pb-2" >Insert Voucher Code</label>
+                        <input className="form-control text-center" onChange={onChangeHandlerVoucher} type="text" id="voucher" name="voucher"></input>
+                    </div>
 
-                <div className="form-group ">
-                    <label>Select Date</label>
-                    <input onChange={onChangeHandlerDate} type="date" id="date" name="date"></input>
-                </div>
+                    <div className="form-group mt-2 ">
+                        <label className="pb-2" >Select Date</label>
+                        <input className="form-control text-center" onChange={onChangeHandlerDate} type="date" id="date" name="date"></input>
+                    </div>
 
-                <button type="submit" className="btn btn-primary">
-                    Submit
-                </button>
+                    <div>
+                        <button type="submit" className="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
 
-            </form>
+                </form>
+            </div>
         </div>
     );
 }

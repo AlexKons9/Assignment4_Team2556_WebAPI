@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./QuestionsList.css";
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
 import htmlParse from "html-react-parser";
-
 import DeleteQuestion from "./DeleteQuestion";
+import "./QuestionsList.css";
 
 function QuestionsList() {
   const [questions, setQuestions] = useState([]);
@@ -30,7 +29,6 @@ function QuestionsList() {
   const showConfirmPopupHandler = (id) => {
     setShowModal(true);
     setItemToDelete(id);
-    console.log(id);
   };
   
   const closeConfirmPopupHandler = () => {
@@ -75,7 +73,7 @@ function QuestionsList() {
   };
 
   return (
-    <div>
+    <div className="container text-center">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
@@ -83,42 +81,40 @@ function QuestionsList() {
         closeConfirmPopupHandler={closeConfirmPopupHandler}
         deleteConfirmHandler={deleteConfirmHandler}
       ></DeleteQuestion>
-      <h1>Question List</h1>
-
+      <h1>Questions List</h1>
       <p>
-        {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="/AdminUI/CreateQuestionForm">
+        <Link className="btn btn-outline-primary" to="../AdminUI/CreateQuestionForm">
           Create New
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>Description</th>
-            <th></th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {questions.map((question) => (
             <tr key={question.questionId}>
-              <td>{htmlParse(question.descriptionStem)}</td>
-              <td>
+              <td scope="row" id="description" >{htmlParse(question.descriptionStem)}</td>
+              <td id="table-button">
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-outline-secondary"
                   onClick={() => handleEdit(question.questionId)}
                 >
                   Edit
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(question.questionId)}
                 >
                   Details
                 </button>{" "}
-                |
+                
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     showConfirmPopupHandler(question.questionId);
                   }}

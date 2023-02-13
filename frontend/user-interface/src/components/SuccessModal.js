@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function DeleteQuestion(props) 
+function SuccessModal(props) 
 {
     return (
     <>
@@ -10,17 +10,9 @@ function DeleteQuestion(props)
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{props.body}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={()=>{props.closeConfirmPopupHandler()}}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={()=>{props.deleteConfirmHandler()}}>  
-             Confirm Delete
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
     )
 }
 
-export default DeleteQuestion;
+export default SuccessModal;

@@ -57,25 +57,25 @@ function UpcomingExams () {
   }
 
   return(
-    <div>
-      <h1>Upcoming Exams</h1>
-      <table className="table">
+    <div className="container-xl text-center">
+      <h1 className="mb-5">Upcoming Exams</h1>
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>Certificate In</th>
-            <th>Exam Date</th>
-            <th>Days Remaining</th>
-            <th></th>
+            <th scope="col">Certificate In</th>
+            <th scope="col">Exam Date</th>
+            <th scope="col">Days Remaining</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
         {upcomingExams.map((upcomingExam) => (
           <tr key={upcomingExam.candidateExamId}>
-            <td>{upcomingExam.exam.certificate.title}</td>
-            <td>{new Date(upcomingExam.examDate).toDateString()}</td>
-            <td>{getRemainingDays(upcomingExam.examDate)}</td>
+            <td scope="row"><h6>{upcomingExam.exam.certificate.title}</h6></td>
+            <td scope="row"><h6>{new Date(upcomingExam.examDate).toDateString()}</h6></td>
+            <td scope="row"><h6>{getRemainingDays(upcomingExam.examDate)}</h6></td>
             <td>
-              <button className="btn btn-success" onClick={() => takeExamHandler(upcomingExam.candidateExamId)} disabled={getRemainingDays(upcomingExam.examDate) > 0}>Take the Exam!</button>
+              <button className="btn btn-outline-success" onClick={() => takeExamHandler(upcomingExam.candidateExamId)} disabled={getRemainingDays(upcomingExam.examDate) > 0}>Take the Exam!</button>
             </td>
           </tr>
         ))}

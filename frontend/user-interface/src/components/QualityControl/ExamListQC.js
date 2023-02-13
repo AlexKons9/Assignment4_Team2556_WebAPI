@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link, useNavigate } from "react-router-dom";
-import htmlParse from "html-react-parser";
 import DeleteQuestion from "../Question/DeleteQuestion";
+import "../Question/QuestionsList.css";
 
 
-function ExamsListQC() {
+function ExamsList() {
   const [exams, setExams] = useState([]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -32,10 +31,11 @@ function ExamsListQC() {
     console.log(examId);
     try {
       const response = await axiosPrivate.get(`/api/ExamQuestions/${examId}`);
-      console.log(response.data);
       const examQuestionDetails = response.data;
+      const response2 = await axiosPrivate.get(`/api/Exams/${examId}`);
+      const exam = response2.data;
       navigate("/Exams/Details", {
-        state: { examQuestionDetails: examQuestionDetails },
+        state: { exam: exam, examQuestionDetails: examQuestionDetails },
       });
     } catch (error) {
       console.error(error);
@@ -44,23 +44,28 @@ function ExamsListQC() {
   };
 
 return (
-    <div>
+    <div className="container-xl text-center">
         <h1>Exams List</h1>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Certificate Title</th>
-            <th></th>
+            <th scope="col">Description</th>
+            <th scope="col">Certificate Title</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {exams.map((exam,i) => (
             <tr key={exam.examId}>
-              <td><h5>Exam {exam.examId}</h5></td>
-              <td>{exam.certificate.title}</td>
-              <td>
-                <button className="btn btn-success" onClick={() => handleDetails(exam.examId)}>Details</button>
+              <td scope="row"><h6>Exam {exam.examId}</h6></td>
+              <td scope="row"><h6>{exam.certificate.title}</h6></td>
+              <td id="table-button">
+                <button
+                  className="btn btn-outline-success"
+                onClick={() => handleDetails(exam.examId)}
+                >
+                  Details
+                </button>{" "}
               </td>
             </tr>
           ))}
@@ -70,4 +75,4 @@ return (
   );
 }
 
-export default ExamsListQC;
+export default ExamsList;

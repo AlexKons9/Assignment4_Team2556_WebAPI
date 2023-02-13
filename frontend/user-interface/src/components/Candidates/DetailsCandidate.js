@@ -1,66 +1,132 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import React from 'react';
+import React from "react";
 function DetailsCandidate() {
-    const location = useLocation();
-    const candidate = location.state.candidateDetails;
-    const { auth } = useAuth();
-   
-  
-    return (
+  const location = useLocation();
+  const candidate = location.state.candidateDetails;
+  const { auth } = useAuth();
+
+  return (
+    <div className="container">
+      <h1>Details</h1>
+
       <div>
-        <h1>Details</h1>
+        <h5 className="mt-5">
+          {/* Details {candidate.firstName} {candidate.lastName} */}
+          Candidate
+        </h5>
+
+        <table className="table table-bordered ">
+          <tbody>
+
+            <tr>
+              <th className="col-6">First Name</th>
+              <td className="col-6">{candidate.firstName}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Middle Name</th>
+              <td className="col-6">{candidate.middleName}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Last Name</th>
+              <td className="col-6">{candidate.lastName}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Email</th>
+              <td className="col-6">{candidate.email}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Gender</th>
+              <td className="col-6">{candidate.gender}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Native Language</th>
+              <td className="col-6">{candidate.nativeLanguage}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Birth Date</th>
+              <td className="col-6">{candidate.birthDate}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">PhotoIdType</th>
+              <td className="col-6">{candidate.photoIdType}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">PhotoIdNumber</th>
+              <td className="col-6">{candidate.photoIdNumber}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">PhotoIssueDate</th>
+              <td className="col-6">{candidate.photoIssueDate}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Address Line</th>
+              <td className="col-6">{candidate.addressLine}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Address Line 2</th>
+              <td className="col-6">{candidate.addressLine2}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Country of Residence</th>
+              <td className="col-6">{candidate.countryOfResidence}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Province</th>
+              <td className="col-6">{candidate.province}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">City</th>
+              <td className="col-6">{candidate.city}</td>
+            </tr>
+              
+            <tr>
+              <th className="col-6">PostalCode</th>
+              <td className="col-6">{candidate.postalCode}</td>
+            </tr>
+              
+            <tr>
+              <th className="col-6">Landline Number</th>
+              <td className="col-6">{candidate.landlineNumber}</td>
+            </tr>
+
+            <tr>
+              <th className="col-6">Mobile Number</th>
+              <td className="col-6">{candidate.mobileNumber}</td>
+            </tr>
   
+          </tbody>
+        </table>
+        
         <div>
-          <h4>Details {candidate.firstName} {candidate.lastName}</h4>
-          <hr />
-          <dl className="row">
-            <dt className="col-sm-2">First Name:</dt>
-            <dd className="col-sm-10">{candidate.firstName}</dd>
-            <dt className="col-sm-2">Middle Name:</dt>
-            <dd className="col-sm-10">{candidate.middleName}</dd>
-            <dt className="col-sm-2">Last Name:</dt>
-            <dd className="col-sm-10">{candidate.lastName}</dd>
-            <dt className="col-sm-2">Email:</dt>
-            <dd className="col-sm-10">{candidate.email}</dd>
-            <dt className="col-sm-2">Gender:</dt>
-            <dd className="col-sm-10">{candidate.gender}</dd>
-            <dt className="col-sm-2">Native Language:</dt>
-            <dd className="col-sm-10">{candidate.nativeLanguage}</dd>
-            <dt className="col-sm-2">Birth Date:</dt>
-            <dd className="col-sm-10">{candidate.birthDate}</dd>
-            <dt className="col-sm-2">PhotoIdType:</dt>
-            <dd className="col-sm-10">{candidate.photoIdType}</dd>
-            <dt className="col-sm-2">PhotoIdNumber:</dt>
-            <dd className="col-sm-10">{candidate.photoIdNumber}</dd>
-            <dt className="col-sm-2">PhotoIssueDate:</dt>
-            <dd className="col-sm-10">{candidate.photoIssueDate}</dd>
-            <dt className="col-sm-2">Address Line:</dt>
-            <dd className="col-sm-10">{candidate.addressLine}</dd>
-            <dt className="col-sm-2">Address Line 2:</dt>
-            <dd className="col-sm-10">{candidate.addressLine2}</dd>
-            <dt className="col-sm-2">Country of Residence:</dt>
-            <dd className="col-sm-10">{candidate.countryOfResidence}</dd>
-            <dt className="col-sm-2">Province:</dt>
-            <dd className="col-sm-10">{candidate.province}</dd>
-            <dt className="col-sm-2">City:</dt>
-            <dd className="col-sm-10">{candidate.city}</dd>
-            <dt className="col-sm-2">PostalCode:</dt>
-            <dd className="col-sm-10">{candidate.postalCode}</dd>
-            <dt className="col-sm-2">Landline Number:</dt>
-            <dd className="col-sm-10">{candidate.landlineNumber}</dd>
-            <dt className="col-sm-2">Mobile Number:</dt>
-            <dd className="col-sm-10">{candidate.mobileNumber}</dd>
-          </dl>  
-          <hr />  
-            <div>
-              <Link className='btn btn-secondary' to={auth?.roles == "Admin" ? "../AdminUI/Candidates" : "../QualityControlUI/CandidateList"}>Back to List</Link>
-            </div>
-  
+          <Link
+            className="btn btn-secondary"
+            to={
+              auth?.roles == "Admin"
+                ? "../AdminUI/Candidates"
+                : "../QualityControlUI/CandidateList"
+            }
+          >
+            Back to List
+          </Link>
         </div>
       </div>
-    );
-  }
-  
-  export default DetailsCandidate;
-  
+    </div>
+  );
+}
+
+export default DetailsCandidate;

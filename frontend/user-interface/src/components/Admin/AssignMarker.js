@@ -58,52 +58,53 @@ const CandidateExamsList = () => {
 
 
     return (
-        <Container>
-                    <h1>Assign Markers</h1>
-                    <h3>Unmarked Candidate Exams List</h3>
+        <div className="mx-5">
+            <h1>Assign Markers</h1>
+            <h3>Unmarked Candidate Exams List</h3>
             <hr />
             {candidateExams.length === 0 ? <div>There are no pending exams for marking.</div> :
-            <Table>
-                <thead>
-                    <tr>
-                        <th style={{ whiteSpace: "nowrap" }}>Candidate Exam ID</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Certificate Type</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Candidate First Name</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Candidate Last Name</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Exam Date</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Marked?</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Assigned to marker</th>
-                        <th style={{ whiteSpace: "nowrap" }}>Select/Change Marker</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {candidateExams.map(candidateExam => (
-                        <tr key={candidateExam.candidateExamId}>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidateExamId}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.exam.certificate.title}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidate.firstName}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.candidate.lastName}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.examDate.toLocaleString()}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.isMarked.toString()}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>{candidateExam.markerId}</td>
-                            <td style={{ whiteSpace: "nowrap" }}>
-                                <select onChange={handleMarkerSelect}>
-                                    <option value="">Select a marker</option>
-                                    {markers.map(marker => (
-                                        <option key={marker.id} value={marker.id}>
-                                            {marker.firstName} {marker.lastName}
-                                        </option>
-                                    ))}
-                                </select>
-                                <button type="button" onClick={() => assignMarker(candidateExam)}>
-                                    Assign
-                                </button>
-                            </td>
+                <table className="table table-centered table-striped">
+                    <thead className="align-middle">
+                        <tr>
+                            <th>Candidate Exam ID</th>
+                            <th>Certificate Type</th>
+                            <th>Candidate First Name</th>
+                            <th>Candidate Last Name</th>
+                            <th>Exam Date</th>
+                            <th>Marker Id</th>
+                            <th>Select/Change Marker</th>
+                            <th></th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>}
-        </Container>
+                    </thead>
+                    <tbody>
+                        {candidateExams.map(candidateExam => (
+                            <tr key={candidateExam.candidateExamId}>
+                                <td className="col-1">{candidateExam.candidateExamId}</td>
+                                <td className="col-1">{candidateExam.exam.certificate.title}</td>
+                                <td className="col-1">{candidateExam.candidate.firstName}</td>
+                                <td className="col-1">{candidateExam.candidate.lastName}</td>
+                                <td className="col-1">{new Date(candidateExam.examDate).toDateString()}</td> 
+                                <td className="col-2">{candidateExam.markerId}</td>
+                                <td className="col-2">
+                                    <select className="form-select" onChange={handleMarkerSelect}>
+                                        <option value="">Select/Change marker</option>
+                                        {markers.map(marker => (
+                                            <option key={marker.id} value={marker.id}>
+                                                {marker.firstName} {marker.lastName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    </td>
+                                    <td className="col-1">
+                                    <button type="button" className="btn btn-outline-success mb-4" onClick={() => assignMarker(candidateExam)}>
+                                        Assign
+                                    </button>
+                                    </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>}
+        </div>
     );
 };
 

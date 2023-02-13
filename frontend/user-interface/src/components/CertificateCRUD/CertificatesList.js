@@ -78,7 +78,7 @@ function CertificatesList() {
   };
 
   return (
-    <div>
+    <div className="container-xxl">
       <DeleteCertificate
         showModal={showModal}
         title="Delete Confirmation!"
@@ -91,15 +91,14 @@ function CertificatesList() {
 
       <p>
         {/* <button className='btn btn-primary'>Create New</button> */}
-        <Link className="btn btn-primary" to="Create">
-          Create New Certificate
+        <Link className="btn btn-outline-primary" to="Create">
+          Create Certificate
         </Link>
       </p>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Description</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -108,21 +107,19 @@ function CertificatesList() {
               <td>{htmlParse(certificate.title)}</td>
               <td>
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-outline-secondary"
                   onClick={() => handleEdit(certificate.certificateId)}
                 >
                   Edit
                 </button>{" "}
-                |
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(certificate.certificateId)}
                 >
                   Details
                 </button>{" "}
-                |
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     showConfirmPopupHandler(certificate.certificateId);
                   }}

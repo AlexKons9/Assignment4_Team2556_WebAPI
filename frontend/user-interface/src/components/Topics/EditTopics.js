@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import SuccessModal from "../SuccessModal";
 
 function EditTopics() {
 
@@ -10,6 +11,13 @@ function EditTopics() {
   const [topics, setTopics] = useState(location.state.topics ? location.state.topics : [{ topicDescription: "", certificateId: certificateId, certificate: null }]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmPopupHandler = () => {
+    setShowModal(false);
+  };
+  const showConfirmPopupHandler = () => {
+    setShowModal(true);
+  };
 
 
   const handleTopic = (event, index) => {
@@ -36,7 +44,7 @@ function EditTopics() {
       alert("Error deleting topic");
     }
   };
-  
+
 
 
   const handleRemoveTopic = (index) => {
@@ -45,8 +53,8 @@ function EditTopics() {
     setTopics(values);
     handleDeleteTopic(index);
   };
-  
-  
+
+
 
 
   const handleSubmit = async (event) => {
@@ -56,52 +64,62 @@ function EditTopics() {
         `api/Topics/UpdateTopics`,
         topics
       );
-      alert("Certificate updated successfully!");
-      navigate("/AdminUI/Certificates");
+      showConfirmPopupHandler();
+      setTimeout(() => { 
+        navigate("/AdminUI/Certificates");
+      }, 2000); 
     } catch (error) {
       console.error(error);
       alert("Error updating certificate");
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      {" "}
-      <h1>Edit Topics of Certificate</h1>{" "}
-      <input type="hidden" value={certificateId} />{" "}
-      <div>
+    <div className="container w-25">
+      <SuccessModal
+          showModal={showModal}
+          title="Success"
+          body="Certificate updated successfully!"
+          closeConfirmPopupHandler={closeConfirmPopupHandler}
+     ></SuccessModal>
+      <form onSubmit={handleSubmit}>
         {" "}
-        {topics.map((topic, index) => (
-          <div key={index}>
-            {" "}
-            <label>
-              {" "}
-              Topic {index + 1}:
-              <input
-                type="text"
-                value={topic.topicDescription}
-                onChange={(e) => handleTopic(e, index)}
-              />{" "}
-            </label>{" "}
-            <button type="button" onClick={() => handleRemoveTopic(index)}>
-              {" "}
-              Remove Topic
-            </button>{" "}
-          </div>
-        ))}
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={handleAddTopic}
-        >
+        <h2  className="mb-5">Edit Certificate Topics</h2>{" "}
+        <input type="hidden" value={certificateId} />{" "}
+        <div>
           {" "}
-          Add Topic
+          {topics.map((topic, index) => (
+            <div className="input-group-sm mb-4" key={index}>
+              <label>
+                Topic {index + 1}:
+              </label>
+              <div className="row">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={topic.topicDescription}
+                  onChange={(e) => handleTopic(e, index)}
+                />
+                <span className="btn btn-danger" type="button" onClick={() => handleRemoveTopic(index)}>
+                  Remove Topic
+                </span>
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={handleAddTopic}
+          >
+            {" "}
+            Add Topic
+          </button>{" "}
+        </div>{" "}
+        <button type="submit" className="btn btn-primary">
+          {" "}
+          Update Certificate
         </button>{" "}
-      </div>{" "}
-      <button type="submit" className="btn btn-primary">
-        {" "}
-        Update Certificate
-      </button>{" "}
-    </form>
+      </form>
+    </div>
   );
 }
 export default EditTopics;

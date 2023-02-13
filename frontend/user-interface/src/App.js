@@ -3,9 +3,9 @@
 import RequireAuth from './components/Security/RequireAuth';
 
 //Public components
+
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import CreateQuestionForm from './components/Question/CreateQuestionForm';
-import EditQuestionForm from './components/Question/EditQuestionForm';
+
 import DetailsQuestion from './components/Question/DetailsQuestion';
 import CreateOptionsForm from './components/Option/CreateOptionsForm';
 import EditOptionsForm from './components/Option/EditOptionsForm';
@@ -24,10 +24,11 @@ import Layout from './components/Layout'
 import Register from './components/Security/Register'
 import Unauthorized from './components/Security/Unauthorized';
 import PersistLogin from './components/Security/PersistLogin';
+import Homepage from './components/Homepage'
 
 //Admin components
-//import CreateQuestionForm from './components/CreateQuestionForm';
-//import CreateOptionsForm from './components/CreateOptionsForm';
+import CreateQuestionForm from './components/Question/CreateQuestionForm';
+import EditQuestionForm from './components/Question/EditQuestionForm';
 import AdminUI from './components/AdminUI';
 import AssignMarker from './components/Admin/AssignMarker'
 import CandidateList from './components/Candidates/CandidatesList';
@@ -79,10 +80,11 @@ function App() {
                 {/* Public Routes */}
                 <Route path="Register" element={<Register />} />
                 {/* <Route path="Home" element={<Home />} /> */}
+                    {/* <Route exact path="Frontpage" element={<Frontpage />} /> */}
 
                 {/* PROTECTED Routes */}
                 <Route element={<PersistLogin />}>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Homepage />} />
                     <Route path="Login" element={<Login />} />
                     <Route path="unauthorized" element={<Unauthorized />} />
                     <Route exact path="EShopList" element={<EShopList />} />

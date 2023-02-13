@@ -1,10 +1,10 @@
-﻿import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavBar.css';
+﻿import './NavBar.css';
 import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout"
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from '../hooks/useAuth';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function NavBar() {
 
@@ -16,7 +16,7 @@ function NavBar() {
     return (
 
         <div id='main-nav'>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul className="navbar-nav me-auto">
 
@@ -24,11 +24,11 @@ function NavBar() {
                         {(!auth?.roles)
                             ?
                             <>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="Home" >Home</Link>
+                                <li className="nav-item text-light">
+                                    <Link className="nav-link text-light" to="/" >Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="EShopList" >EShop</Link>
+                                    <Link className="nav-link" to="EShopList" >Browse Certifications</Link>
                                 </li>
                             </>
                             :
@@ -42,21 +42,24 @@ function NavBar() {
                             ?
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="Home" >Home</Link>
+                                    <Link className="nav-link text-light" to="/" >Home</Link>
                                 </li>
+                                <NavDropdown title="Certification Manager" id="navbarScrollingDropdown">
+                                    <Link className="nav-link" to="AdminUI/Certificates" >
+                                        <div className='dropdown-item' >Certificates</div>
+                                    </Link>
+                                    <Link className="nav-link " to="AdminUI/Exams" >
+                                        <div className='dropdown-item'>Exams</div>
+                                    </Link>
+                                    <Link className="nav-link " to="AdminUI/QuestionList" >
+                                        <div className='dropdown-item'>Questions</div>
+                                    </Link>
+                                </NavDropdown>
                                 <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/QuestionList" >Questions</Link>
+                                    <Link className="nav-link" to="AdminUI/Candidates" >Candidates</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/Exams" >Exams</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/Candidates" >Candidates</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link text-light" to="AdminUI/Certificates" >Certificates</Link>
-                                </li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
+                              
+                                <li className="nav-item"><Link className="nav-link" to="AdminUI/AssignMarkers" >Assign Markers</Link></li>
                             </ul>
                             : <li></li>
                         }
@@ -66,10 +69,10 @@ function NavBar() {
                             ? <div className='navbar-collapse collapse w-100 order-3 dual-collapse2'>
                                 <ul className="navbar-nav ms-auto">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="Home" >Home</Link>
+                                        <Link className="nav-link text-light" to="/" >Home</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="EShopList" >E-Shop</Link>
+                                        <Link className="nav-link" to="EShopList" >Browse Certifications</Link>
                                     </li>
                                     {/* <li  className="nav-item">
                                     <Link className="nav-link text-light" to="CandidateUI" >Exams</Link>
@@ -100,9 +103,9 @@ function NavBar() {
                         {/* MARKER NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("Marker"))
                             ? <>
-                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/UnmarkedExamList" >Unmarked Exams</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="MarkerUI/MarkedExamsList" >Marked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="/" >Home</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="MarkerUI/UnmarkedExamList" >Unmarked Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="MarkerUI/MarkedExamsList" >Marked Exams</Link></li>
                             </>
                             : <li></li>
                         }
@@ -110,17 +113,17 @@ function NavBar() {
                         {/* QualityControl NAVBAR TABS*/}
                         {auth?.roles?.find(roles => roles?.includes("QualityControl"))
                             ? <>
-                                <li className="nav-item"><Link className="nav-link" to="Home" >Home</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CandidateList" >Candidates</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/ExamList" >Exams</Link></li>
-                                <li className="nav-item"><Link className="nav-link text-light" to="QualityControlUI/CertificateList" >Certificates</Link></li>
+                                <li className="nav-item"><Link className="nav-link text-light" to="/" >Home</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="QualityControlUI/CandidateList" >Candidates</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="QualityControlUI/ExamList" >Exams</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="QualityControlUI/CertificateList" >Certificates</Link></li>
                             </>
                             : <li></li>
                         }
                     </ul>
                 </div>
                 <div className="mx-auto order-0">
-                    <a className="navbar-brand mx-auto">Assignment_4A_Team2556</a>
+                    <a className="navbar-brand mx-auto">Certy</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -128,10 +131,11 @@ function NavBar() {
 
                 {/* LOGIN - LOGOUT TOGGLE NAVBAR*/}
                 {auth?.userName ? (
+                    // navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <p className="nav-link text-light">Welcome {auth.userName} (role:{auth.roles})</p>
+                                <span className="nav-link text-light">Welcome {auth.userName}</span> {/*(role:{auth.roles})*/}
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-light" onClick={() => logout()}>Logout</Link>

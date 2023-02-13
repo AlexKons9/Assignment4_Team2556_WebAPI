@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
 import copy from "copy-to-clipboard";
-import CopyToClipboard from "react-copy-to-clipboard";
+
 
 function VouchersList() {
     
@@ -34,26 +34,26 @@ function VouchersList() {
 
 
     return (
-        <div className='col-md-4 container-fluid justify-content-center'>
+        <div className='container-xl'>
             <h1>My Vouchers</h1>
-            <table className="table">
+            <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Voucher Id</th>
-                        <th>Description</th>
-                        <th>Exam</th>
-                        <th></th>
+                        <th scope="col">Voucher Id</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Exam</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                 {vouchers.map((voucher) => (
                     <tr key={voucher.voucherId}>
-                    <td>{voucher.voucherId}</td>
-                    <td>{voucher.description}</td>
-                    <td>{voucher.certificate.title}</td>
-                    <td>
-                        <button className="btn btn-success" onClick={() => copyToClipboard(voucher.description)}>Copy Voucher</button>
-                    </td>
+                        <td scope="row"><h6>{voucher.voucherId}</h6></td>
+                        <td scope="row"><h6>{voucher.description}</h6></td>
+                        <td scope="row"><h6>{voucher.certificate.title}</h6></td>
+                        <td >
+                            <button className="btn btn-outline-success" onClick={() => copyToClipboard(voucher.description)}>Copy Voucher</button>
+                        </td>
                     </tr>
                     ))}
                 </tbody>

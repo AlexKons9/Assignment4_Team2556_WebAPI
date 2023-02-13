@@ -17,7 +17,6 @@ function MyCertificatesList() {
       try {
         //const response = await axiosPrivate.get(`/api/CandidateExams/Certificates?userName=${userName}`);
         const response = await axiosPrivate.get(`/api/CandidateCertificates/ByUsername/${userName}`);
-        console.log(response.data);
         setCandidateCertificates(response.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +28,6 @@ function MyCertificatesList() {
 
   const handleDetails = async (examId, certificateTitle) => {
     try {
-        console.log(examId);
         //const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const response = await axiosPrivate.get(`/api/CandidateExams/ExamResults/${examId}`)
         const examResults = response.data;
@@ -47,28 +45,27 @@ function MyCertificatesList() {
 
 
   return (
-    <div className="container col-12">
+    <div className="container-lg">
       <h1>My Certificates</h1>
-      <hr />
 
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
-            <th className="col-sm-2">Certificate In</th>
-            <th className="col-sm-2">Assessment Test Code</th>
-            <th className="col-sm-2">Examination Date</th>
-            <th className="col-sm-2"></th>
+            <th scope="col">Certificate In</th>
+            <th scope="col">Assessment Test Code</th>
+            <th scope="col">Examination Date</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {candidateCertificates.map((candidateCertificate) => (
             <tr key={candidateCertificate.candidateCertificateId}>
-              <td>{candidateCertificate.candidateExam.exam.certificate.title}</td>
-              <td>{candidateCertificate.candidateExam.assessmentTestCode}</td>
-              <td>{getDate(new Date(candidateCertificate.candidateExam.examDate))}</td>
+              <td scope="row"><h6>{candidateCertificate.candidateExam.exam.certificate.title}</h6></td>
+              <td scope="row"><h6>{candidateCertificate.candidateExam.assessmentTestCode}</h6></td>
+              <td scope="row"><h6>{new Date(candidateCertificate.candidateExam.examDate).toDateString()}</h6></td>
               <td>
                 <button
-                  className="btn btn-success"
+                  className="btn btn-outline-success"
                   onClick={() => handleDetails(candidateCertificate.candidateExam.candidateExamId, candidateCertificate.candidateExam.exam.certificate.title)}
                 >
                   Details
