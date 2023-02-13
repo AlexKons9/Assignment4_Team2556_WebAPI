@@ -9,7 +9,7 @@ function CandidateExamResults() {
 
   return (
     <div className="container">
-      <h1 className="mt-4">Exam Results</h1>
+      <h1 className="mt-4">Preliminary Exam Results</h1>
 
       <table className="table table-bordered ">
         <tbody>
@@ -47,12 +47,6 @@ function CandidateExamResults() {
           <tr>
             <th className="col-6">Number Of Awarded Marks</th>
             <td className="col-6">{examResults.numberOfAwardedMarks}</td>
-          </tr>
-
-
-          <tr>
-            <th className="col-6">Number Of Possible Marks</th>
-            <td className="col-6">{examResults.numberOfPossibleMakrs}</td>
           </tr>
 
           <tr>
