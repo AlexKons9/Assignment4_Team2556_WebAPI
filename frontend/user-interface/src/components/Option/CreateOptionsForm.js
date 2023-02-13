@@ -46,7 +46,7 @@ function CreateOptionsForm()
         try {
             await axiosPrivate.post("/api/Options", optionDTO);
             alert("Options created successfully!");
-            navigate('/AdminUI/QuestionList');
+            navigate('/AdminUI');
         } catch (error) {
             console.error(error);
             alert("Error creating options");
