@@ -78,7 +78,7 @@ function CertificatesList() {
   };
 
   return (
-    <div className="container">
+    <div className="container-xxl">
       <DeleteCertificate
         showModal={showModal}
         title="Delete Confirmation!"
