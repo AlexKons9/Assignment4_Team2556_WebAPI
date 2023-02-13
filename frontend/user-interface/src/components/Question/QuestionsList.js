@@ -73,7 +73,7 @@ function QuestionsList() {
   };
 
   return (
-    <div className="container text-center">
+    <div className="container-xxl text-center">
       <DeleteQuestion
         showModal={showModal}
         title="Delete Confirmation!"
