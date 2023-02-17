@@ -1,15 +1,13 @@
-# Certification Provider Web App
+# Certification Provider System Web App
 
 ## Summary
-A role-based certification provider web application.  This application supports Admin, Marker, Candidate 
-and Quality Control roles.
+A web app certification provider system with multiple roles.
 
 
 ## Installation
 To run this project, complete the below steps:
 
-**Step 1:** In order to set the security password as a local environment variable, you have to
-run the command prompt as Administrator and run below command.
+**Step 1:** In order to set the security password as a local environment variable, run the below command in the command prompt as Administrator.
 ```
 setx SECRET "SuperServerPassword" /M
 ```
@@ -17,16 +15,16 @@ setx SECRET "SuperServerPassword" /M
 **Step 2:** Restart your computer.
 
 **Step 3:** Create and seed database locally,
-open package manager and run below command
+open package manager and run below command.
 
 ```
 Update-Database
 ```
 
-**Step 4:** Start backend application
+**Step 4:** Start backend application.
 
-**Step 5:** Manually enter Admin, Marker, Quality Control and Candidate roles using Postman.
-The necessary JSON files are included in ....???????!!!!!!!!!!!!!!
+**Step 5:** Manually register Admin, Marker, Quality Control and Candidate roles using Postman.
+Import the necessary JSON files, included in the Register_Users.postman_collection.json.
 
 **Step 6:** Install necessary React.js packages and run application
 
@@ -37,7 +35,7 @@ npm start
 ```
 ## Roles Explanation
 
-### Candidate Role:
+### Candidate:
 - Access to Certificate EShop
 - Purchase certificates with credit-based system
 - Schedule exams at their discretion with issused voucher after purchase
@@ -62,5 +60,15 @@ npm start
 - Quality Control --> username: qualitycontrol / password: qualitycontrol
 
 ## Technologies:
-- ASP.NET Core 6
+- .NET 6 / ASP.NET Core 6 Web API
+- Identity Authentication / JWT Token
+- EF Core 6
 - React.js
+- CKEditor
+- Axios
+- AutoMapper
+- Task (Asynchronous Model)
+- React-router-dom
+- Bootstrap
+- Bootswatch
+- DualListBox
