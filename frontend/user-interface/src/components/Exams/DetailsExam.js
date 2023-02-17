@@ -42,6 +42,10 @@ function DetailsExam() {
             <th>Certificate Title</th>
             <td>{exam.certificate.title}</td>
           </tr>
+          <tr>
+            <th className="col-6">Certificate Status</th>
+            { exam.certificate.isActive === true ? <td>Active</td> : <td>NOT Active</td> }
+          </tr>
           </tbody>
         </table>
 

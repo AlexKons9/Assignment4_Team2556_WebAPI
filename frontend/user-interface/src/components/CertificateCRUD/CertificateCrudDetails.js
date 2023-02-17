@@ -22,6 +22,10 @@ function CertificateDetails() {
                             <th className="col-6">Title</th>
                             <td className="col-6">{certificates.title}</td>
                         </tr>
+                        <tr>
+                            <th className="col-6">Certificate Status</th>
+                            { certificates.isActive === true ? <td>Active</td> : <td>NOT Active</td> }
+                        </tr>
                     </tbody>
                 </table>
                 <h4 className="mt-5 mb-3">Topics</h4>
