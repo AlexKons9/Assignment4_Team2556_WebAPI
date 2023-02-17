@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "50c810ee-5128-44ad-b194-b3a3c927625f",
+		"name": "Register Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25491928"
+	},
+	"item": [
+		{
+			"name": "Register 'Admin User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"admin\",\r\n    \"lastname\": \"admin\", \r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"phonenumber\": \"555-5555\",\r\n    \"roles\": [\r\n        \"Admin\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7015/api/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7015",
+					"path": [
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register 'Marker' User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"marker\",\r\n    \"lastname\": \"marker\", \r\n    \"username\": \"marker\",\r\n    \"password\": \"marker\",\r\n    \"email\": \"marker@gmail.com\",\r\n    \"phonenumber\": \"555-5555\",\r\n    \"roles\": [\r\n        \"Marker\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7015/api/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7015",
+					"path": [
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register 'Marker2' User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"marker\",\r\n    \"lastname\": \"marker2\", \r\n    \"username\": \"marker2\",\r\n    \"password\": \"marker2\",\r\n    \"email\": \"marker2@gmail.com\",\r\n    \"phonenumber\": \"555-5555\",\r\n    \"roles\": [\r\n        \"Marker\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7015/api/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7015",
+					"path": [
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register 'QC' User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"qualitycontrol\",\r\n    \"lastname\": \"qualitycontrol\", \r\n    \"username\": \"qualitycontrol\",\r\n    \"password\": \"qualitycontrol\",\r\n    \"email\": \"qualitycontrol@gmail.com\",\r\n    \"phonenumber\": \"555-5555\",\r\n    \"roles\": [\r\n        \"QualityControl\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7015/api/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7015",
+					"path": [
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register 'Candidate' User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"candidate\",\r\n    \"lastname\": \"candidate\", \r\n    \"username\": \"candidate\",\r\n    \"password\": \"candidate\",\r\n    \"email\": \"candidate@gmail.com\",\r\n    \"phonenumber\": \"555-5555\",\r\n    \"roles\": [\r\n        \"Candidate\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7015/api/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7015",
+					"path": [
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
